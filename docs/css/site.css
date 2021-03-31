@@ -17,7 +17,15 @@ h1 {
 #splatter {
   position: absolute;
   text-align: center;
+  z-index: -2;
+}
+#pen {
+  position: absolute;
+  text-align: center;
   z-index: -1;
+  transform: rotate(180deg);
+  margin-top: -400px;
+  filter: invert(97%) sepia(9%) saturate(1790%) hue-rotate(338deg) brightness(108%) contrast(102%);
 }
 
 body {
