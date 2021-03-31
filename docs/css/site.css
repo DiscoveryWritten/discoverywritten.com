@@ -3,14 +3,16 @@
     src: url('../fonts/artefak-typeface.clean-typeface.otf') format('opentype');
 }
 
-html, body {
-    background-color: #2F2933;
-}
-
 .brand-font {
     font-family: BrandFont;
     color: #29D9C2;
     text-shadow: 1px 3px #01A2A6;
+}
+
+h1 {
+  padding-top: 150px;
+  font-size: 8rem;
+  text-align: center;
 }
 
 body {
