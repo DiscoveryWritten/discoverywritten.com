@@ -1,6 +1,6 @@
 @font-face {
     font-family: BrandFont;
-    src: url('fonts/artefak-typeface.clean-typeface.otf') format('opentype');
+    src: url('../fonts/artefak-typeface.clean-typeface.otf') format('opentype');
 }
 
 html, body {
