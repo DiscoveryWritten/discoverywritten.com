@@ -33,15 +33,5 @@ body {
   height: 100vh;
   margin: 0;
   overflow: hidden;
-  background-image: radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
-  background: -moz-radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #27364f), color-stop(50%, #2F2933), color-stop(100%, #2F2933));
-  background: -webkit-radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
-  background: -o-radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
-  background: -ms-radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
-  filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr=' #27364f ', endColorstr=' #2F2933 ',GradientType=1 )';
-  background-position: 50% 0%;
-  background-size: 150vmax 150vmax;
-  background-repeat: no-repeat;
-  background-color: #2F2933;
+  background-color: #27364f; /* 2f2933 */
 }
