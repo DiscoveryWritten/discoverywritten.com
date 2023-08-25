@@ -48,10 +48,10 @@ h1 {
   font-weight: normal;
   text-align: center;
   text-shadow: 1px 1px #01A2A6, 2px 3px #2F2933;
-  background-image: url('../img/pen.png');
+/*   background-image: url('../img/pen.png');
   background-repeat: no-repeat;
   background-size: 1000px;
-  background-position: -400px 30px;
+  background-position: -400px 30px; */
   margin: 0;
   padding: 1em 0 100px 0;
 }
