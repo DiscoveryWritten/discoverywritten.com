@@ -151,3 +151,6 @@ a:hover {
   color: #E9D8F7;
   font-size: 0.8em;
 }
+#footer > div {
+  padding: 0.5em;
+}
