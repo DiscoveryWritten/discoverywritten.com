@@ -1,6 +1,6 @@
 @font-face {
     font-family: BrandFont;
-    src: url('../fonts/artefak-typeface.clean-typeface.otf') format('opentype');
+    src: url('../fonts/Angelic Serif.ttf') format('truetype');
 }
 
 .brand-font {
@@ -11,6 +11,14 @@
 p .brand-font {
   font-size: 2em;
   font-weight: bold;
+}
+
+
+#title-stack, #title, #content, #links {
+  z-index: 5;
+}
+#title-stroke {
+  z-index: 2;
 }
 
 body {
@@ -26,7 +34,7 @@ body {
   background: -o-radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
   background: -ms-radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
   filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr=' #27364f ', endColorstr=' #2F2933 ',GradientType=1 )';
-  background-position: 50% 0%;
+  background-position: 50% 80%;
   background-size: 150vmax 150vmax;
   background-repeat: no-repeat;
   background-color: #2F2933;
@@ -37,23 +45,45 @@ body {
   background-size: 1000px;
   background-position: 70% 0;
 }
-#title {
-  color: #29D9C2;
-  margin-bottom: 0;
-  font-size: 7rem;
-  text-shadow: 1px 3px #01A2A6, 3px 5px #2F2933;
+#title-stack {
+  padding-top: 12em;
+  padding-bottom: 15em;
+  transition: padding-bottom 0.5s ease-in-out;
+}
+@media (max-width: 1600px) {
+  #title-stack { padding-bottom: 11em; }
+  #title-stack h1 { font-size: 7em; }
+}
+@media (max-width: 950px) {
+  #title-stack { padding-bottom: 6.5em; }
+  #title-stack h1 { font-size: 4em; }
+}
+@media (max-width: 550px) {
+  #title-stack { padding-bottom: 5em; }
+  #title-stack h1 { font-size: 3em; }
+}
+#title, #title-stroke {
+  position: absolute;
+  width: 100%;
+  font-size: 10em;
+  text-shadow: none;
+  text-stroke: 21px transparent;
+  -webkit-text-stroke: 21px transparent;
+  transition: font-size 0.5s ease-in-out;
+}
+#title-stroke {
+  content: attr(data-stroke);
+  width: 100%;
+  left: 0;
+  mix-blend-mode: luminosity;
+  text-stroke-color: #282524;
+  -webkit-text-stroke-color: #282524;
 }
 h1 {
   font-size: 3em;
   font-weight: normal;
   text-align: center;
-  text-shadow: 1px 1px #01A2A6, 2px 3px #2F2933;
-/*   background-image: url('../img/pen.png');
-  background-repeat: no-repeat;
-  background-size: 1000px;
-  background-position: -400px 30px; */
   margin: 0;
-  padding: 1em 0 100px 0;
 }
 #pen {
   z-index: -1;
@@ -71,7 +101,6 @@ h1 {
   background-color: #27364fd5;
   text-align: center;
   padding: 3px 8px;
-  border-radius: 5px;
 }
 #links > div {
   display: inline-block;
