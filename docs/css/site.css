@@ -14,7 +14,7 @@ p .brand-font {
 }
 
 
-#title-stack, #title, #content, #links {
+#title-stack, #title, #content, .links {
   z-index: 5;
 }
 #title-stroke {
@@ -23,6 +23,7 @@ p .brand-font {
 
 body {
   font-family: Verdana;
+  /* font-size: 1.5em; */
   width: 100%;
   padding: 0;
   margin: 0;
@@ -49,6 +50,7 @@ body {
   padding-top: 12em;
   padding-bottom: 15em;
   transition: padding-bottom 0.5s ease-in-out;
+  white-space: nowrap;
 }
 @media (max-width: 1600px) {
   #title-stack { padding-bottom: 11em; }
@@ -61,6 +63,10 @@ body {
 @media (max-width: 550px) {
   #title-stack { padding-bottom: 5em; }
   #title-stack h1 { font-size: 3em; }
+}
+@media (max-width: 350px) {
+  #title-stack { padding-bottom: 4em; }
+  #title-stack h1 { font-size: 2em; }
 }
 #title, #title-stroke {
   position: absolute;
@@ -97,17 +103,24 @@ h1 {
   top: -100px;
   margin-left: 20%;
 }
-#links {
-  background-color: #27364fd5;
+.links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0 35px;
+  font-size: 1.2em;
   text-align: center;
   padding: 3px 8px;
 }
-#links > div {
+.links > div {
   display: inline-block;
 }
-#links a {
+.links a {
   display: flex;
   align-items: center;
+}
+.links span {
+  margin-left: 5px;
 }
 a {
   color: #E9D8F7;
@@ -116,6 +129,15 @@ a {
 a img {
   margin: 5px;
 }
+.links .group-label {
+  display: flex;
+}
+/* .links .group-label a:first-child img {
+  margin-left: 45px;
+}
+.links .group-label a:last-child img {
+  margin-right: 15px;
+} */
 a:hover {
   text-decoration: underline;
 }
@@ -153,4 +175,14 @@ a:hover {
 }
 #footer > div {
   padding: 0.5em;
+}
+
+#links-pro {
+  background-color: #27364fd5;
+}
+#links-media {
+  background-color: #4f274fd5;
+}
+#links-books {
+  background-color: #31274fd5;
 }

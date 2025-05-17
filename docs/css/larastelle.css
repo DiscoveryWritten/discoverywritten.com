@@ -1,0 +1,11 @@
+@font-face {
+    font-family: LarastelleFont;
+    src: url('../fonts/PICAHMS_.ttf') format('truetype');
+}
+
+.larastelle-font {
+    font-size: 1.5em;
+    font-family: LarastelleFont;
+    color: #E9D8F7;
+    text-shadow: 1px 3px #2F2933;
+}
