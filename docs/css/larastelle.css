@@ -1,21 +1,47 @@
-html, body, #bg {
+@font-face {
+    font-family: PenroseFont;
+    src: url('../fonts/PICHSIM_.ttf') format('truetype');
+}
+@font-face {
+    font-family: ChapterFont;
+    src: url('../fonts/PICAHMR_.ttf') format('truetype');
+}
+
+/* html, body, #bg {
     background-color: #24282B;
+} */
+body {
+    height: 3000px;
 }
 #bg {
     background-image: url('../img/larastelle-lg.webp');
     background-size: 3000px 3000px;
     background-position: 50% 0;
-    /* height: attr(width px); */
+    height: 3000px;
 }
 
-@font-face {
-    font-family: PenroseFont;
-    src: url('../fonts/PICHSIM_.ttf') format('truetype');
+.chapter-font {
+    font-family: ChapterFont;
 }
-
+.story h3 {
+    font-size: 2.2em;
+    color: #E9D8F7;
+    text-shadow: 1px 3px #2F2933;
+    font-family: BrandFont;
+}
 .penrose-font {
-    font-size: 3rem;
-    font-family: PenroseFont
+    opacity: 0.62;
+    position: absolute;
+    width: 100%;
+    margin-top: -1em;
+    height: 3000px;
+    font-family: PenroseFont;
+    font-size: 48px;
+    line-height: 33px;
+    text-align: center;
+    color: #00d0ff;
+    mix-blend-mode: difference;
+    pointer-events: none;
 }
 
 h2.larastelle-font {
