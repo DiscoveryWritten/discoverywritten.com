@@ -1,11 +1,64 @@
-@font-face {
-    font-family: LarastelleFont;
-    src: url('../fonts/PICAHMS_.ttf') format('truetype');
+html, body, #bg {
+    background-color: #24282B;
+}
+#bg {
+    background-image: url('../img/larastelle-lg.webp');
+    background-size: 3000px 3000px;
+    background-position: 50% 0;
+    /* height: attr(width px); */
 }
 
-.larastelle-font {
-    font-size: 1.5em;
-    font-family: LarastelleFont;
-    color: #E9D8F7;
-    text-shadow: 1px 3px #2F2933;
+@font-face {
+    font-family: PenroseFont;
+    src: url('../fonts/PICHSIM_.ttf') format('truetype');
+}
+
+.penrose-font {
+    font-size: 3rem;
+    font-family: PenroseFont
+}
+
+h2.larastelle-font {
+    font-size: 4em;
+}
+h3 {
+    text-align: center;
+}
+
+#home-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 4em;
+    font-size: 2em;
+    margin-top: -4rem;
+    background-image: url('../img/splatter.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 54% 0;
+    /* filter: grayscale(100%) contrast(200%); */
+}
+#home-link a {
+    color: white;
+    text-decoration: none;
+    text-shadow: 0 0 2px #2F2933;
+}
+
+.feature .key {
+    width: 368px;
+}
+
+.links a {
+    cursor: pointer;
+}
+.links img {
+    filter: drop-shadow(0 2px 0px #000000);
+}
+.tabs > a.active {
+  text-decoration: underline;
+  font-family: LarastelleFont;
+}
+.tabs > a.active:not(:first-child):not(:last-child) {
+  font-size: 1.3em;
 }

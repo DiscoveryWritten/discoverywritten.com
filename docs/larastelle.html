@@ -1,0 +1,861 @@
+<html>
+<head>
+  <title>Discovery Written</title>
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/larastelle.css">
+  <link rel="stylesheet" href="css/showcase.css">
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="icon" type="image/png" href="img/favicon.64.png" sizes="64x64">
+  <link rel="icon" type="image/png" href="img/favicon.128.png" sizes="128x128">
+  <link rel="icon" type="image/png" href="img/favicon.512.png" sizes="512x512">
+  <link rel="icon" type="image/png" href="img/favicon.1024.png" sizes="1024x1024">
+  <link rel="apple-touch-icon" sizes="64x64" href="img/favicon.64.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="img/favicon.128.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="img/favicon.152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="img/favicon.167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon.180.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="img/favicon.512.png">
+  <link rel="apple-touch-icon" sizes="1024x1024" href="img/favicon.1024.png">
+  <link rel="mask-icon" href="svg/icon-mask.svg" color="#01A2A6">
+  <script>
+
+    const iframeCache = new Map();
+    document.addEventListener('DOMContentLoaded', () => {
+      const player = document.querySelector('.player');
+      const source = document.querySelector('.links a.active');
+      const iframes = player.querySelectorAll('iframe');
+      iframes.forEach((iframe) => {
+        const id = iframe.getAttribute('id');
+        iframeCache.set(id, iframe);
+        if (id !== source.getAttribute('data-iframe')) {
+          iframe.style.display = 'none';
+          iframe.remove();
+        } else {
+          const player = document.querySelector('.player');
+          player.setAttribute('data-source', id);
+        }
+      });
+    });
+
+    function source(el) {
+      const id = el.getAttribute('data-iframe');
+
+      const sources = document.querySelectorAll('.links a');
+      sources.forEach((s) => {
+        s.classList.remove('active');
+      });
+      el.classList.add('active');
+
+      iframeCache.forEach((iframe) => {
+        if (iframe.getAttribute('id') === id) {
+          iframe.style.display = 'block';
+          const player = document.querySelector('.player');
+          player.setAttribute('data-source', id);
+          player.appendChild(iframe);
+          player.scrollTop = 0;
+        } else {
+          iframe.style.display = 'none';
+          iframe.remove();
+        }
+      });
+
+      return false;
+    }
+
+    function album(el, ch) {
+      let implied = null;
+      const panels = document.querySelectorAll('.panels > div');
+      const tabs = [...document.querySelectorAll('.tabs a')];
+
+      panels.forEach((panel) => {
+        panel.style.display = "none";
+      });
+
+      if (ch === undefined) {
+        ch = tabs.findIndex((tab) => tab.classList.contains('active'));
+        const active = tabs[ch];
+
+        if (el.previousElementSibling === null) {
+          ch = ch - 1;
+          ch = Math.max(ch, 0);
+        } else if (el.nextElementSibling === null) {
+          ch = ch + 1;
+          ch = Math.min(ch, panels.length - 1);
+        }
+        implied = tabs[ch];
+      }
+
+      tabs.forEach((tab) => {
+        tab.classList.remove('active');
+      });
+
+      (implied || el).classList.add('active');
+      if (panels[ch] !== undefined) {
+        panels[ch].style.display = 'block';
+      }
+
+      return false;
+    }
+
+    window.onload = function() {
+      const params = new URLSearchParams(window.location.search);
+      const nextId = params.get('next');
+      if (nextId !== null) {
+        document.getElementById("showcase").style.display = "block";
+      }
+
+      album(document.querySelector('.tabs a.active'), 0);
+    }
+  </script>
+</head>
+<body>
+  <div id="bg">
+    <div id="title-stack">
+      <div class="img-shadow">
+        <div id="home-link">
+          <a href="./" class="brand-font">discovery Written</a>
+        </div>
+      </div>
+      <h1 id="title-stroke" class="larastelle-font">LARASTELLE</h1>
+      <h1 id="title" class="larastelle-font">LARASTELLE</h1>
+    </div>
+
+    <div class="links media">
+      <div class="group-label">
+        <a onclick="return source(this)"
+          data-iframe="udio">
+          <img src="img/udio.png" width="45" />
+        </a>
+        <a onclick="return source(this)"
+          data-iframe="apple">
+          <img src="img/applemusic.png" width="45" />
+        </a>
+        <a onclick="return source(this)"
+          data-iframe="spotify"
+          class="active">
+          <img src="img/spotify.png" width="45" />
+        </a>
+      </div>
+    </div>
+
+    <div id="showcase">
+      <div class="tabs">
+        <a onclick="return album(this, 0)" class="active">☼</a>
+        <a onclick="return album(this, 1)">1</a>
+        <a onclick="return album(this, 2)">2</a>
+        <a onclick="return album(this, 3)">3</a>
+        <a onclick="return album(this, 4)">4</a>
+        <a onclick="return album(this, 5)">5</a>
+        <a onclick="return album(this, 6)">6</a>
+        <a onclick="return album(this, 7)">7</a>
+        <a onclick="return album(this, 8)">8</a>
+        <a onclick="return album(this, 9)">9</a>
+        <a onclick="return album(this, 10)">10</a>
+        <a onclick="return album(this, 11)">11</a>
+        <a onclick="return album(this, 12)">12</a>
+        <a onclick="return album(this, 13)">13</a>
+        <a onclick="return album(this, 14)">14</a>
+        <a onclick="return album(this, 15)">15</a>
+        <a onclick="return album(this, 16)">16</a>
+        <a onclick="return album(this, 17)">☼</a>
+      </div>
+      <div class="music-story">
+        <div class="player">
+          <iframe id="spotify" style="border-radius:12px;"
+            src="https://open.spotify.com/embed/album/6RH3MDchaPYINJYVZ0abb8?utm_source=generator"
+            width="100%"
+            height="700"
+            frameBorder="0"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"></iframe>
+          <iframe id="apple" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+            frameborder="0"
+            height="450"
+            style="width:100%;max-width:660px;overflow:hidden;border-radius:12px; border: 3px solid #ababab;"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src="https://embed.music.apple.com/us/album/larastelle/1813500589"></iframe>
+          <iframe id="udio"
+             allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src="https://www.udio.com/embed/iQuES7dNTJdEneXvNojaME?embedVariant=default&utm_source=generator" style="width:700px; height:228px; border-radius:12px;"></iframe>
+          <!-- <iframe id="udio" allow="autoplay; clipboard-write; encrypted-media"
+            loading="lazy"
+            height="700"
+            style="width:100%;max-width:660px;overflow:hidden;border-radius:12px; border: 3px solid #ababab;"
+            frameBorder="0"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src="https://www.udio.com/playlists/sZP6cd8ZkZ8oAcbvw9HLBw"
+            ></iframe> -->
+        </div>
+        <div class="story">
+          <div class="content">
+            <!-- <div class="feature" style="text-align: center;">
+              <img class="key" src="img/larastelle.webp">
+            </div> -->
+            <div class="panels">
+              <div>
+                <div class="controls">
+                  <div></div>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">00<br>☼<br>Introduction</h3>
+                <hr />
+                <p>
+                  <em>LARASTELLE</em> is the musicalization of an original
+                  manuscript titled <em>The Sailing Spire</em>. Using progressive
+                  instrumental tracks, it tells the story of Alyiem, a young scout
+                  with paranormal command of her environment.
+                </p>
+                <p>
+                  The inhabitants of the rogue planet Castille are the meager
+                  remainder of humanity's lost Third-Line.
+                </p>
+                <p>
+                  Each track has a corresponding lore document from the perspective
+                  of Ionyne, whose story runs concurrent with Alyiem.
+                </p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">01<br>☼<br>The Sky</h3>
+                <hr />
+            <pre>
+DESIGNATION: ORGANIC; NOT CONTAMINATED
+:: TUBER (NOVEL)
+:: SCRAPPED
+:: COMPRESSED
+:: DRY
+DESIGNATION: MAKESHIFT PAPER; INTENTIONAL MARKINGS
+DIALECT MATCH: THIRD-LINE HUMANITY (88%)
+(ERR) STARS NOT VISIBLE; MATERIAL CANNOT BE DATED
+:: TRACE:
+:: > Orbital thrusting vectors active, but starfield is absent.
+:: > Are we relativistic?
+:: LARASTELLE AUTHORIZATION
+:: > Using existing trust certificate.
+DESIGNATION (TRUSTED): LETTER ON MAKESHIFT PAPER
+LOCAL YEAR: 7095.204 AE
+LSCY (SOL): 3100000 AD through 3300000 AD
+DONE.
+(WARN) This system has not strongly verified any of its 881 previous access events. If this system has been persistently compromised, Larastelle data must be preemptively destroyed. Destroy this console immediately to inhibit further access events.
+MULTIPLE MATCHES FOUND:
+:: SALT SHAKER (POSSIBLE SLANG MATCH: 93%)
+:: FLOAT (CONTINGENT MATCH: 100%)
+:: GLOW
+:: LUCK
+DESTRUCTING ORIGINAL MATERIALS... 100%
+(ERR) NO SUITABLE STORAGE FOR SECURE CACHE FLUSH. DATA MAY BE LOST WITHOUT STORAGE.
+:: TRACE:
+:: > Ablative integrity below 40%
+:: > Multiple catastrophic breaches in core cavity and skeleton.
+:: > Long term memory substrates exhibiting 22% write loss.
+:: > Only untrusted substrates are available, but LARASTELLE protocol is in strict effect.
+:: LARASTELLE AUTHORIZATION
+:: > Using existing trust certificate.
+:: > Cannot verify external substrate signature "you_lost,_babe"
+:: > Using existing trust certificate.
+CACHE EXPUNGED.
+EPHEMERAL LOG:
+
+Vanne ♡
+
+I think I'm finally okay that you're not here anymore.
+I mean, it sucks, but I've been through that already.
+Don't read those letters, if you actually got them.
+
+Vanne, there was something we almost cracked together (not our heads).
+It feels farther away now, but it's not gone.
+I expected it to be gone like you, not just over a little more brambled horizon.
+
+Don't hate me if I go back to where it happened.
+Goddess, you'd be real mad.
+I've been THERE in my head ever since, but I think I know why now.
+
+It scares me that something totally new is happening,
+and you're just not here to be warm with me,
+while we sort it out.
+
+Yours to unwind before Entropy does,
+-Alyiem
+
+PS, I found this salt shaker thing?
+It floats and glows and acts like it's 'awake'?
+I can't explain it. Definitely good luck.
+I shake it for you too sometimes.
+
+(END EPHEMERAL LOG)</pre>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">02<br>☼<br>Militia Nine</h3>
+                <hr />
+    <p>«She's learned some carefulness,» I subvocalize to Larastelle.</p>
+    <p>She took a surprising silence, before: «Unlock that tower. Give her anything.»</p>
+    <p>«Anything in the Reaches,» I reply, letting the emptiness of that reach my tone.</p>
+    <p>Larastelle knew what was next. «It doesn't matter what happens to Third-Line. They're already dead on the outside.»</p>
+    <p>Alyiem creeps out from her cover and approaches her marks, one of the militias that the castle sends out into the dark. No telling what spooks them bad enough to willingly patrol the viciously thorned wilderness.  Alyiem's ridden vine is like an Earth snake, charmed into her service with a brilliant range of articulation.</p>
+    <p>She disturbed much behind her in a very wide wake. The glassy thorns from the monstrous plant life dragged fields of it behind it like a cape. It was not careful by itself, but it was calculated by Alyiem, who had the vantage to know where her friendly militias pathed in that thoroughly obstructed dark.</p>
+    <p>Larastelle ended the visual transmission I fed to her position in orbit.</p>
+    <p>«Stop. This.» She was rarely frustrated.</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">03<br>☼<br>Unrest Well</h3>
+                <hr />
+            <pre>
+MULTIPLE NEW WIDE SCAN ALERTS:
+:: Ambiguous heat signature (x1383)
+:: MARK (ALY)
+:: MARK ("SALT SHAKER"-CLASS)
+(WARN) ONGOING MAGNETIC DISTURBANCE IS PEAKING. PERSONAL SHIELDING WAS HARDENED.
+(IDEA) OBSERVE THIRD-LINE DURING THIS BRAIN WAVE INTERFERENCE EVENT.
+
+«Wait, 'idea'? Whose?»
+            </pre>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">04<br>☼<br>Jagged Road in the Sky</h3>
+                <hr />
+    <p>«She's headed to do her report. No intercept.»</p>
+    <p>«Ionyne, it must be faster. It must be. Every heartbeat is a risk down there.»</p>
+    <p>«We knew it would evolve, but I hate every sign I see. If I were religious...»</p>
+    <p>«Stop, Ionyne. I need you to reconsider this pause. Deep scan revealed enough.»</p>
+    <p>«No, not near enough. The bramble infestation is scattering everything in shallow soil range, and the watershed is so high, I see shapes as big as whales under there and no valid inferences.  We're so blind.»</p>
+    <p>Larastelle sighed, the bone-conducted sound radiating out through my jaw, neck, and skull. «You can't seize them all.»</p>
+    <p>I'd never taken Larastelle for a desperado, but when I see the scan log she pushes to me from her seat in orbit, I understand her fascination. Her mind must have handled this idea for many hours already.</p>
+    <p>«You want me to down one of the lights,» I subvocalize from the low shore's bank as Alyiem's silhouette becomes lost in the dense bridge camp and its improvised recreation.</p>
+    <p>I look up at one of the permanently darkened rectangles in geostationary orbit. Half of those constructions were burnt out after centuries of surging light and bare nutrients down onto the world that was untethered from its star. Maybe half of those had already slipped from geostationary alignment.</p>
+    <p>«It would be a boot on their heads,» I realize.</p>
+    <p>«Get back into orbit, go crash that light, and get that soulless totem from her. Today.»</p>
+    <p>Right. They were 'already dead.'</p>
+    <p>«And leave the rest!» she hurls in addition.</p>
+    <p>There was no telling how infested the settlement was. We weren't risking the field armor for phase one. A crashed light it would be.</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">05<br>☼<br>Tacit at the Prison Party</h3>
+                <hr />
+            <pre>
+SESSION RESUMING... 100%
+(WARN) LARASTELLE'S POWER RESERVES BELOW HALF.
+REQUESTING STATUS REPORT...
+:: Using existing trust certificate.
+:: Remaining twinning cradle stability: 8.1 hours
+:: Rift diameter: 17nm
+:: Available full diameter sustain: 11.0 seconds
+:: Active contingencies: 4
+YOU HAVE 2 SERIALIZED MESSAGES FROM:
+:: > Larastelle (2)
+EPHEMERAL LOG:
+
+Control denied new power draw. They're worried about what's left, Ionyne. That means they're starting to plan against us. Or without us. It's the same.
+
+---
+
+They're going to push me through. They've drawn lines. Rich links have been closed to buy you nanoseconds. Don't you dare prove it was necessary. Crash it, Ionyne. Crash it. Now. Now. Now. Now. Now. Now.
+
+(END EPHEMERAL LOG)
+            </pre>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">06<br>☼<br>I Am Not Myself</h3>
+                <hr />
+    <p>«Hello?»</p>
+    <p>The place, where relativistic things went, to never be slowed or retrieved, was the Reaches. Everything was alone in this distributed, discontiguous place.</p>
+    <p>From inside this skylight's helm, Castille was like a great beast that was a planet, suspended in the deepest dark possible, rushing with relativistic urgency to the ends of all time, blasted with lights from around it, like it sat raised in a sky so high that it ascended beyond where stars could live, and stood illuminated like a beacon to a profound no one.</p>
+    <p>None but me, at present.</p>
+    <p>«Hey! Hello? Make some fucking noise if I'm not crazy.»</p>
+    <p>Nothing could be up here with me. Certainly not the Entropy beast. It would have begun the disassembly with all haste. Its vines surely had no meaningful fear of vacuum.</p>
+
+<pre>
+(WARN) CENSOR DATA MALFUNCTION.
+</pre>
+
+    <p>An arc of sensors on my back ceased reporting in a blurry area, but when I turned, the censor failure flowed to match whatever was nearest that spot at the exit door.</p>
+
+<pre>
+CHECK NARROW SCAN ALERTS:
+:: (None)
+(WARN) HIGHLY LOCALIZED MAGNETIC FIELD EVENT AH```⁄`EAD.
+(W@@@º)J)Jå P„‰SONAL SHIE¶
+¶
+¶
+¶
+ARE YOU GOING TO CRASH IT?¶
+WE'RE WAITING.¶
+</pre>
+
+    <p>Long time since fear controlled me, but nothing moved in the dark. I made the field suit blast deep spectrum light, and watched it bend in a beguiling twisting dance in mid-air. Magnetism had no right bending light like this, but as light curved about on an invisible, crooked crease in the air, I hear the room buckle, and I witnessed a dozen such twists in the air.</p>
+
+<pre>
+CHECK NARROW SCAN RE¶
+¶
+WELL, ZEALOT?¶
+</pre>
+
+    <p>My neck jerks. No, my bioware is repor¶<br>
+    I don't know why I fight for Larastelle.¶<br>
+    What good's it done?¶<br>
+    Isn't she just ⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄¶<br>
+    She's just a fucki⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄¶<br>
+    ⁄⁄⁄           ⁄⁄⁄⁄⁄⁄⁄¶<br>
+    ⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄ not⁄⁄ve⁄⁄⁄ post-ph⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄ ¶<br>
+    ⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄¶<br>
+    ⁄⁄¶
+    </p>
+
+<pre>
+CHECK NARROW SCAN ALERTS:
+:: (Non¶
+YOU LITTLE SHIT.¶
+I OWN YOU.¶
+CRASH IT.¶
+BRING HER.¶
+</pre>
+    <p>My eyelids twitch and my sensors seem to be calming down after a magnetic wave came through without warning.</p>
+    <p>«Hello?» I repeat, before pushing the skylight's center coordinate target into the ground.</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">07<br>☼<br>Systematic Dismantlement</h3>
+                <hr />
+            <pre>
+VELOCITY TERMINAL. RECOMMENDATIONS UNAVAILABLE.
+NEW WIDE SCAN ALERTS:
+:: Ambiguous heat signature (x74401)
+:: Unclassified debris
+:: Aerosolized coolant
+:: TERMINAL INTERSECT: "CASTILLE" ( !URGENT )
+IMPACT ESTIMATED: 2.235s
+PERSONAL SH
+IMPACT ESTIMATED: 2.0s
+IELDING HARDENED TO MA
+IMPACT ESTIMATED: 1.0s
+XIMUM.
+RECOMMENDATIONS UNAV
+
+••••••••REBOOT INTEGRITY...94%
+DOWNTIME: 0.4s
+NEW CONTAMI
+
+•• ¿••••••REBOOT INTEGRITY...8
+DO
+5
+N
+%
+EW WIDE SC
+WNTIME: 1.86s
+AN ALERTS:
+:: Ambiguous heat signature (x13293)
+:: MARK ("ENTRO
+
+••••••••REBª
+••••••••REBOOT INTEGRITY...71%
+DOWNTIME: 1.0e3s
+(WARN) MULTIPLE POWER DELIVERY SPINE CRACKS IDENTIFIED BUT REMAIN UNCATALOGUED.
+NEW WIDE SCAN ALERTS:
+:: Ambiguous heat signature (x10388)
+:: MARK ("ENTROPY"-CLASS) (x19) ( !URGENT )
+:: MARK (ALY)
+:: MARK ("SALT SHAKER"-CLASS)
+NEW RECOMMENDATIONS AVAILABLE: WEAPONS
+AUTO-DELIVERY REQUESTED:
+:: LARASTELLE AUTHORIZATION
+:: Using existing trust certificate.
+(WARN) LARASTELLE'S POWER RESERVES BELOW HALF.
+PRE-TARGETING PAINT 1/2: MARK ("ENTROPY"-CLASS) x10
+PRE-TARGETING PAINT 2/2: MARK ("ENTROPY"-CLASS) x9
+:: Rift diameter raised to 250nm.
+:: CONFIRMED (0)  UNCONFIRMED (19)
+:: CONFIRMED (10)  UNCONFIRMED (9)
+:: Rift diameter restored to 17nm.
+:: CONFIRMED (18)  UNCONFIRMED (1)
+:: Miss: 1
+:: URGENT REPORT: Homogenous specimen exhibits non-unifed tactics.
+:: URGENT REPORT: No filed contingency is applicable.
+PATHING EXIT... 4%
+NEW WIDE SCAN ALERTS:
+:: MARK ("ENTROPY"-CLASS) (x203) ( !URGENT )
+:: "ALYIEM" ( MARK ("ENTROPY"-CLASS) (x1)  )
+::          ( MARK (ALY)                   )
+::          ( MARK ("SALT SHAKER"-CLASS)   )
+::          ( > HIGH GROUP VELOCITY        )
+PATHING EXIT... 83%
+PATHING EXIT... 100%
+ROUTING... 1%
+ROUTING... 2%
+ROUTING... 23%
+ROUTING... 41%
+ROUTING... 38%
+ROUTING... 65%
+NEW SERIALIZED MESSAGE FROM: Larastelle
+EPHEM¶
+ROUTING... 68%
+ROUTING... 71%
+ROUTING... 71%
+ROUTING... 89%
+ROUTING... 100%
+ROUTING... 107%
+NEW NARROW SCAN ALERTS:
+:: Ambiguous heat signature (x1)
+:: URGENT REPORT: Unrecognized biological construction.
+:: URGENT REPORT: No filed contingency is applicable.
+ROUTING... 108%
+:: DESIGNATION (UNTRUSTED): "ENTROPY (INFANT)"-CLASS HUMANOID
+:: URGENT REPORT: undefined
+:: URGENT REPORT: No filed contingency is applicable.
+MARK (ALY) HAS REQUESTED DIALOGUE.
+RE-ENABLING SPEECH SYSTEMS.
+</pre>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">08<br>☼<br>Like Books Do</h3>
+                <hr />
+    <p>Alyiem was a wondrous antique, no concept of how old her and her line were. They had skipped millions of years of time outside, and she walked up half bored to a wall of archived knowledge, and sighed at it. Breathing, living humanity, just acting out the way its biology wanted, whether or not it had facts.</p>
+    <p>«What does this sighing reaction convey?»</p>
+    <p>"I mean, we've already got a library. What these old farts supposedly know, is beyond us apparently. Right?"</p>
+    <p>"...What's the look for?"</p>
+    <p>«These people, your ancestors, they were connected to places outside the Reach, and they carry that history. I think I could map your location with my copy of the trajectory we used to find you.»</p>
+    <p>"Sorry, is that like on a paper or something?"</p>
+    <p>The low, round console blinked to life before my touch landed on it. I feed the display all I want.</p>
+    <p>«Castille.»</p>
+    <p>She wasn't listening, instead walking circles around the projector, trying to see every side of the image of her world faster than it spun. My throat tightened at the creature seeing its reflection, of a sort. Brand new thoughts swept her mind, thoughts extinct for centuries or more on her world.</p>
+    <p>The image sweeps out dramatically to encompass a mess of cryptically colored points all piled on each other, but the big label says "SUPERCLUSTER". She circles again, drinking the detail of now more than just a reflection: A location. Direly far, amidst a great nothing.</p>
+    <p>She looks at me with questions, but her kind are the secret in this disused sub-station lab.</p>
+    <p>She seems taken into a trance, like she sees it all, and more than what's painted in turning lights and splashing the dark room. She sees through a one-way glass but knows more humanity exists, or existed.</p>
+    <p>Castille's live velocity rolls ever higher in a label, its propulsion method something secret to itself now—it had long ago escaped all forms of externally-applied acceleration. The number means nothing to Alyiem, but it's big. She's never seen numbers increment so swiftly. Her eyes trace the sparkling line back to the supercluster, and the display takes her in, in, in.</p>
+    <p>«Castille is moving, but so is everything else, and everything containing it. Your ancient solar system no longer turns in the same place. We'll never rewind anything... Not anything.»</p>
+    <p>I'd made myself emotional. Third-Line would meet its ends, no matter what its bright descendant learned.</p>
+    <p>I allowed her more awe for those so, so far from us, while the rain continued slapping stone outside the crevice that ostensibly hid the lab replete with technology from the Entropy beast.</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">09<br>☼<br>The Revenge of Something Gentle</h3>
+                <hr />
+    <p>Third-Line had developed names for the phenomena experienced under the Entropy beast's stewardship. The sharp magnetic distortions were just 'waves' to them. The tide came in and snuffed them all to sleep sometimes, and they couldn't just pick up and move, because it happened everywhere, at least on the scale of this hobbled civilization.</p>
+    <p>I watch Alyiem grow quickly hazy as the disturbance tightens and aligns uniformly normal across all of Castille.</p>
+    <p>(IDEA) OBSERVE THIRD-LINE DURING THIS BRAINWAVE DISTURBANCE EVENT.</p>
+    <p>«Mhmm.» Who else left in all the cosmos could claim to have tasted a human dream before?</p>
+
+<pre>
+CHECK NARROW SCAN ALERTS:
+:: MARK (ALY)
+:: > Estimated consciousness remaining: 4.9s
+:: MARK (BEL "SALT SHAKER"-CLASS)
+:: > Estimated consciousness remaining: 11.7s
+
+(IDEA) LEVERAGE INTERFERENCE FOR INTERNAL OBSERVATION.
+CLOSING AIR GAP VIA TEMPORARY MAGNETIC BRIDGE.
+ORIENTING... 14%
+</pre>
+
+    <p>«Wait, but, Belle.» The keenly-designated "salt shaker" of an object was an assistive learning technology for children, but this one flew around, and was bonded to Alyiem despite outgrowing the system's maximum age some time ago.</p>
+    <p>The totems were developing beyond specification. And the Entropy beast did not dismantle it like other technology.</p>
+    <p>This was it, what Larastelle needed to stay immune to the violent servants of Entropy.</p>
+    <p>Larastelle could stay on the other side, I could take Belle now and just retrea¶</p>
+
+<pre>
+ORIENTING... 98%
+ORIENTING... 100%
+INCOMING STREAM REQUEST (ALY) ACCEPTED.
+BLITTING OVER VISUAL STREAM.
+</pre>
+    <p>As Alyiem saw it in her dream, she drifted untethered in her scouting boat, the jagged road of surviving skylights steady as ever.</p>
+    <p>But as she remained pensive, the boat sank like a nightmare she didn't resist. The deep trenches holding the lake water tapered together as she sank past a great shadow, one of the whale-sized things our sensors couldn't read. It was another sub-station.</p>
+    <p>Alyiem sank, disinterested, until she impacted sand and it ate her too.</p>
+    <p>She falls out some conceptual "other side", a dark and very tall pit.</p>
+    <p>And at the bottom, when she eventually falls to gentle rest there, is a dais of an examination table, and the terror operator that awaited her: the Entropy beast. It laid extravagantly long glass thorns out on the dais under gleaming lights that resembles Castille's skylights. These thorns were attached to moss-green tendrils, but were so heavy individually that they scraped the metal around Alyiem like overlapping long nails of many giants.</p>
+    <p>There was a high residual tension in her, linked memories that leaked to me. She feared dismantlement of the variety machines got.</p>
+    <p>«How... curious...» My voice had no impact on Alyiem's dream broadcast into my eyes, half-anchoring me back to the potato house.</p>
+    <p>Entropy threatened Alyiem, but ignored Belle. Whatever Belle was, Alyiem was certified un-augmented. What was happening here? Why did Entropy waste any time threatening her?</p>
+    <p>There were no answers. Only a brief scuffle as the vines brought her to center, and a leisurely flaying took place.</p>
+    <p>When the dream ended, white streaks painted over my vision, and I stood with that liminal blindness with profundity for a time, as Belle flits alive and Alyiem groans awake after.</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">10<br>☼<br>Where Knowledge Goes to Die</h3>
+                <hr />
+    <p>Alyiem wouldn't let me lead with my field suit lights. She wore stubbornness with ease.</p>
+    <p>She held her peace. This was the most I felt like I'd seen the solitary scout in her, singularly focused on the endless descend into the flooded library's spine.</p>
+    <p>The lower levels weren't so musty.</p>
+    <p>Where did this water empty out exactly? It could have filled every floor of this cavernous tomb without trouble. Castille's crust was not easily examined from the surface, but as we descended through floors ancient stone shelves to the deeper underground, I began to wonder more at what sat below even the lowest level.</p>
+<pre>
+(WARN) LARASTELLE'S POWER RESERVES BELOW HALF.
+</pre>
+    <p>I returned Alyiem's silence and let her stew in the reality that neither I nor Larastelle would be saving her. It was almost secondary to her now, too, that her dream had called her to descend here with me.</p>
+    <p>Her disassembly dream had bothered me greatly, bringing the mission into focus for the first time earnest.</p>
+    <p>Larastelle would need to help me convince her to assist. The totem bond to Alyiem was driving everything, and at the bottom of this pit, the Entropy beast all but promised to confront her.</p>
+    <p>Something had always been wrong with the Entropy beast. It had been waiting. The field suit had done well keeping me invisible to the Stranglethorns' instincts, or so I'd thought. Perhaps all that stayed the beast's thorns anymore was its own patience.</p>
+    <p>My fear from the start had come true. The totems were everywhere.</p>
+    <p>Everywhere.</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">11<br>☼<br>I'm With You</h3>
+                <hr />
+<pre>
+NEW NARROW SCAN RESULTS:
+:: MARK (ALY)
+:: MARK (BEL)
+:: MARK (MIL_NINE) (x4)
+:: MARK (MIL_TWO) (x9)
+:: MA¶
+¶
+WILL YOU BRING HER YET?¶
+
+••••••••REBOOT INTEGRITY...61%
+DOWNTIME: 0.01s
+(CRITICAL) RIFT DIAMETER HAS LAPSED TO CHAOTIC STATE 12Q.
+(CRITICAL) TWINNING CRADLE EMPTY.
+(CRITICAL) TWINNING CRADLE EMPTY.
+(CRITICAL) TWINNING CRADLE EMPTY.
+BLITTING OVER VIS
+BLITTING OVER VISUAL STREAM:
+UAL STRE¶
+¶
+(WARN) HIGH NUMBER OF SENSORY DEVICES ADDED AND REMOVED SINCE LAST TRUSTED CONFIRMATION.
+(WARN) IF THIS SYSTEM IS COMPR¶
+(WARN) LARASTEL¶
+(CRI¶
+(ERR) NOT ALL FILES CAN BE REMO¶
+¶
+WHY DON'T YOU SLEEP LIKE THIRD-LINE?¶
+WHY CAN'T YOU?¶
+¶
+DOES LARASTELLE SLEEP?¶
+ARE YOU AN ABOMINATION LIKE HER?¶
+¶
+LET US GO TO MEET HER AND SEE.¶
+
+(WARN) ALTITUDE HAS INCREASED SIGNIFICANTLY.
+DIMMING AURAL SENSORS.
+NEW NARROW SCAN RESULTS:
+:: MARK ("ENTROPY (ADOLESCENT)"-CLASS HUMANOID) (x41)
+:: MARK (ALY)
+:: > Magnetic sleep detected.
+RECOMMENDATIONS UNAVAILABLE.
+(WARN) SEVERE LACERATIONS UNABLE TO MEND ON REDUCED POWER.
+(CRITICAL) TWINNING CRADLE EMPTY.
+(ERR) CANNOT SET RIFT DIAMETER TO 'undefined'
+(ERR) CANNOT SET RIFT DIAMETER TO 'you_lost,_babe'
+RIFT DIAMETER RAISED TO 1KM.
+(CRITICAL) POWER UNAVAILABLE.
+(CRITICAL) LARASTELLE PROJECT ENDED.
+</pre>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">12<br>☼<br>The Sailing Spire</h3>
+                <hr />
+    <p>As the Spire rose, that Entropy built from the scraps of Third-Line's civilization, cold air blasted those of us remaining on the flat dais top. Some of the militia had been yanked as we crested the surface and were thrust high over the landscape. Some jumped.</p>
+    <p>Alyiem with her militia friends huddled tightly and screamed their pains as they pressed each other's cuts closed, Stranglethorn venoms dripping from their limbs and cloaks. The glassy thorns had tried to shred both.</p>
+    <p>Blossoming above our heads as we were thrust into a blank relativistic sky, the carrier starship LARASTELLE exploded through a rift in orbit without any apparent motion.  We had spent millennia together to make this possible, only for it to represent our failure. The Entropy beast had evolved, and gotten us to use our contingencies to bring Larastelle to the one place she was not safe from Entropy.</p>
+    <p>The Entropy beast had been born here, but its parts had escaped nearly from the start of its journey. It overran planets of all kinds, unmaking them to primitive organics only.</p>
+    <p>But this Entropy beast had evolved in privacy, prying into Alyiem via Belle, and learned restraint versus technological complexity.</p>
+    <p>It embraced debasing itself into evolution, the opposite of its mission. It had sought to make all things lowlier than it, but it had become something more vast in its designs.</p>
+    <p>And now Larastelle had been dragged here to feed it.</p>
+    <p>Larastelle was swiftly followed by a celestial molten spray that twisted helixes through her hull and cut her to fractions before our very eyes, beating angrier colors by the heartbeat. Even this would not make her meet oblivion, but it meant our troubles had not stayed behind, where Larastelle had jumped from. Our errors were compounded.</p>
+    <p>The color of an argument, the helixes burned and refused to dissipate, lighting the Stranglethorn-covered mountains as though Castille really did have a sun.</p>
+    <p>Larastelle's majesty was not what it should have been.</p>
+    <p>"IONYNE!" Alyiem screamed against wind.  The roar of chemical rockets warred with the militia's shouting.</p>
+    <p>The Spire extended higher into the air to strand us, and Alyiem's face lifted to witness Larastelle's unwinding in orbit.</p>
+    <p>I'd failed Larastelle, and I was about to fail Alyiem in addition.</p>
+    <p>But it was her that was whirling around at her friends and motioning wildly despite her cuts, holding up new totems like Belle.</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">13<br>☼<br>Belle</h3>
+                <hr />
+<pre>
+::: ::: ::: ::: :::
+::: ::: ::: ::: :::
+</pre>
+    <p>The field suit computer no longer worked. It hadn't been helping anyway. Larastelle was here now, not on the other side of the rift. This Entropy beast keeper was not the creature Larastelle and I had sized up for millions of years. Instant flowing teleportation had come at a cost, and the rift's breakdown left us stranded, but at least in the same place.</p>
+    <p>Third-Line's name for it was more suitable in the end. Stranglethorns.</p>
+    <p>Alyiem's commotion with her militia friends abruptly changes as a totem shakes alive until it's glowing.</p>
+    <p>"It knows me," Alyiem says against the wind battering us. The totem shakes again and circles her. It is not Belle, but it picks up the data state left in Alyiem's own body, and the nanites Belle had bonded there.</p>
+    <p>All the totems were Belle, when reading Alyiem's nanite cloud.</p>
+    <p>Alyiem is herself enough to run to the edge of the Spire, no vertigo, and gaze past the chemical rockets soaring past us to slow to almost stillness. The exhaust points receding above look almost like stars. Stranglethorns drape the missiles, every apparatus a delivery system, as though we witnessed detached arms reaching into orbit.</p>
+    <p>Alyiem does not share my questions.</p>
+    <p>She dives over the edge of the Spire like a fool.  Her friends don't know if they should be frightened and run to look. I remove the field suit, and the limiter it had required.</p>
+    <p>I dive after Alyiem on a curved path, clear of the accelerating missiles. She has no such fear and flies like a starfish clear through staggered waves.</p>
+    <p>Some hundred Stranglethorn vines charge Alyiem before she's united with a single one of her own below in the fray. The action leaves an unexpected humanoid exposed and casting a shadow with the Stranglethorn heart, at the highest point of the crashed skylight machine debris, the highest local point without the Spire.</p>
+    <p>The vines close in within an arm's reach of Alyiem, but this new Belle burns fiercely bright ahead of her. The expanded radiance arrests vines in their place as though they died mid lunge, letting Alyiem continue her craven dive through their glass thorns crisscrossing the chute, all of them longer than her.</p>
+    <p>One by one, the vines shake awake and peel from their places. They begin to braid together under Alyiem as she falls, turning her plunge into a soft parabola before hurling ahead at the figure perched with the Stranglethorn heart.</p>
+    <p>I glide sharply towards it, intending to strike it early, but the face clarifies under the pulsefire helixes dumping out so much aberrational light. I'd seen sketches before, on potato paper with Alyiem's handwriting labeling that face. I abort the dive, satisfying myself to concuss the Stranglethorn arms still sheltering that clone's position.</p>
+    <p>They fought now, but soon, Alyiem would be allied to the Stranglethorns, and it was best I not be here.</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">14<br>☼<br>Vanne</h3>
+                <hr />
+    <p>Alyiem did her best. There were too many Stranglethorns, but even those pulled back sharply as Alyiem's braided vines delivered her to the perch of the crashed skylight, face to face with Vanne.</p>
+    <p>This woman was a mimic aberration, but the first hesitant step Alyiem took betrayed it all.</p>
+    <p>The mimic had power over her just by standing there wearing Vanne's face. She was seemingly perfected this way, wearing militia gear lost to the wilderness before.</p>
+    <p>"What the fuck!" Alyiem shouts, advancing on her.</p>
+    <p>Vanne already knows her power and lets a Stranglethorn vine crash down and a long glass thorn pierces Alyiem's torso, like so many fever dreams of dissection. The blow is decisive and unceremonious.</p>
+    <p>"Yeah that's right. What the fuck are any of us? Third-Line-B? But don't you just like the sound of plain 'B'?"</p>
+    <p>"What?" Alyiem roars through pain, blinding light above, and plain confusion.</p>
+    <p>"To be. We are Third-Line's progeny now," Vanne says, palm up gently, and Stranglethorns rise to point at the sky as though they would join the missile barrage steadily releasing from the Spire's towering sides.</p>
+    <p>Vanne's eyes change and she tilts her chin. "Larastelle spoke to you down below, didn't she?"</p>
+    <p>Alyiem is hauled by vines to stand before Vanne, and the glass spine through her middle retracts. Vanne holds her gently, affectionate while apparently timid.</p>
+    <p>"Did you know she's a post-physical?"</p>
+    <p>"Not really," Alyiem sniffles. She doesn't know how to stand against Vanne's body, fighting bewilderment.</p>
+    <p>I look away from my distant perch, letting the audio continue. I lift off and overtake the lowest ranks of missiles, to Larastelle.</p>
+    <p>The space transmitter at their feet continues as I leave Castille far below. I watch the perspective footage like a memory I running to one side of my thoughts. Ahead, missiles close on Larastelle, but I have speed.</p>
+    <p>Vanne puts Alyiem's head back. "She would have taken Belle, and then neither of us would be the women we are now."</p>
+    <p>Alyiem is panicking and hugs her for stability, crying on Vanne. Less is making sense to her, but the gift is undeniable. It's Vanne. The knowledge had already changed her permanently.</p>
+    <p>"Larastelle's kind should not exist, Alyiem, and if they decide to, they mustn't play god here. They must go away!"</p>
+    <p>Vanne kisses her, both of them familiar, all varieties of power available to Entropy's avatar. Vanne nearly shakes her again.</p>
+    <p>"THEY MUST GO, OR BE DETHRONED! Entropy is our god! Alyiem! Larastelle sits our throne outside of time. We're ALMOST there! We're THIS CLOSE!"</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">15<br>☼<br>Anything I Can</h3>
+                <hr />
+    <p>I stand in Larastelle's orbital wreckage. The point gravity still runs, but that is not a sufficiently good sign.</p>
+    <p>«Larastelle.»</p>
+    <p>«...Ionyne.»</p>
+    <p>«Larastelle...» There was so little to say now. For all that had happened wrong, this contingency had a file logged.</p>
+    <p>A glum march brings me to the twinning cradle, where the evaporated rift sits dry in a platform like a broken fountain.</p>
+    <p>«The missiles will not be a problem,» she says to me.</p>
+    <p>I take in the sight of the empty round heart chamber.  I've been carrying the rift, not Larastelle, since the Spire arose. «Are you still getting power okay for those guns?»</p>
+    <p>«Nominal. I'm still not clear how you stabilized the rift after They shut me out.»</p>
+    <p>I look at the rows and rows of batteries collected from the raided skylight. «The rift is fine, right? I'm looking at it right now.»</p>
+    <p>«It seems so.»</p>
+    <p>My eye twitches. My sensory and speech center are not in alignment. I see no rift, because I have it. Why am I not saying that I have it?</p>
+    <p>I clutch my throat, trying to stop words. «Laragshhfm—mf»  My links all shut down. I can't hear her, but she doesn't know that.</p>
+    <p>She can't even hear my choking sounds. Her sensory input is being edited. And mine.</p>
+    <p>My hands disengage my throat, limp and docile at my sides. «Repeat that last? I was checking connections.»</p>
+    <p>The space transmitter Alyiem picked up began to flip in the air like a tossed coin, the visuals spinning in the corner of my thoughts as the stream continues of her forcing thorn venom down the ousted ruler's throat. It's strangely distracting as my sensory streams diverge.</p>
+    <p>Vision cuts out entirely, leaving me with just the sensory stream from the space transmitter. Alyiem runs everything down there now.</p>
+    <p>I think... I think I'm walking away. No! I shouldn't—I still have the rift. Larastelle is not on stable power. Why did I rig those? What possessed me to m¶<br>
+    ¶<br>
+    CEASE.¶</p>
+    <p>My senses return, but I am not commanding my body. I toss the dimmed Belle "salt shaker" into the empty rift cradle, screaming silently as the totem's nanites begin the slow contamination of Larastelle.</p>
+    <p>At the airlock, the pulsating helixes blast irradiated air through any trajectory I could take away, but my legs push off, to the orbital factory site where Stranglethorns begin their assembly of new devices. One by one the skylights will go out, to do another bidding of Entropy.</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <a onclick="return album(this)">&gt;</a>
+                </div>
+                <h3 class="brand-font">16<br>☼<br>Sail</h3>
+                <hr />
+    <p>To a dance of slow motion helixes that would take months to subside, I supervise the vacuum telescope construction from within the Spire, beholding the industry of the corrupted Entropy beast. So much had been in secret, below the surface. Castille had long ago become a beating machine heart, its entropic sin hidden from Third-Line on the surface.</p>
+    <p>And the beast puppets me so easily. I was as much the fool as Alyiem.</p>
+    <p>It watches my thoughts closely at times. I should be scrapped by the beast's dutiful vines, but it had given up that mission outright now, shedding its designed nature. I met no deconstructed fate... unless doing and undoing it while editing me was entirely regular.</p>
+    <p>I may have learned something of Alyiem's apprehension now. </p>
+    <p>The Stranglethorns had robustly concluded the first mission at the extreme relativistic fringe of deep vacuum, to attract and slay a post-physical for the rift it used to manifest from the extra-universal plane. Now it had all it needed for its next construction.</p>
+    <p>Third-Line would have to witness Larastelle's full unwinding above their heads. I was certain that they would all be fed to the next device, and corrupted Entropy would have its chance to contend with Larastelle's Actual.</p>
+    <p>Against the blank emptiness of the relativistic Reaches, Castille sails to nowhere, its speed a perfect cocoon until the Stranglethorns ascend Larastelle's post-mortal brainstem to evict her from its universe altogether.</p>
+              </div>
+              <div style="display: none;">
+                <div class="controls">
+                  <a onclick="return album(this)">&lt;</a>
+                  <div></div>
+                  <div></div>
+                </div>
+                <h3 class="brand-font">
+                  <span class="larastelle-font" style="font-size: 2rem;">LARASTELLE</span><br>
+                  ☼<br>
+                  autumn valenta
+                </h3>
+                <hr />
+                <p>
+                  <em>The Sailing Spire</em> will be available in the future to read.
+                </p>
+                <p>
+                  The follow-on story, <em>The Bell of All Futures</em>, will also
+                  be musicalized in the future in the alternate viewpoint style
+                  of <em>LARASTELLE</em>.
+                </p>
+                <p>
+                  Thank you for reading.
+                </p>
+              </div>
+            </div>
+            <div id="footer">
+              <hr />
+              <div class="controls">
+                <a onclick="return album(this)">&lt;</a>
+                <div><img src="img/favicon.128.png" width="64" /></div>
+                <a onclick="return album(this)">&gt;</a>
+              </div>
+              <div>&copy; 2025 Discovery Written, LLC</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

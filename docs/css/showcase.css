@@ -1,0 +1,147 @@
+h2 {
+  font-weight: normal;
+  margin: 0;
+}
+
+#showcase .tabs {
+  padding-top: 0.6em;
+}
+
+#showcase .content {
+  margin: 20px;
+}
+#showcase hr {
+  height: 0;
+  border: none;
+  border-bottom: 2px solid #fff;
+  mix-blend-mode: difference;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 2em;
+  background-color: #2F2933a5;
+  /* mix-blend-mode: ; */
+}
+.tabs > a {
+  display: flex;
+  margin: 0 5px;
+  cursor: pointer;
+  text-shadow: 0 2px #000;
+}
+.panels p {
+  margin-bottom: 0;
+}
+
+.music-story {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  place-items: 0 center;
+  background-color: #2F2933a5;
+}
+.music-story .player {
+  top: 0;
+  position: sticky;
+}
+.music-story .player {
+  z-index: 5;
+  width: 50%;
+  display: flex;
+  justify-content: end;
+  /* mix-blend-mode: soft-light; */
+  /* filter: contrast(5); */
+}
+.music-story .story {
+  display: flex;
+  width: 50%;
+  flex-direction: row;
+  justify-content: start;
+}
+.player iframe {
+  margin: 20px;
+  min-width: 225px;
+  max-width: 500px;
+  /* opacity: 0.9; */
+}
+.story .content {
+  width: 100%;
+  min-width: 225px;
+  max-width: 500px;
+}
+.story .panels .controls {
+  position: relative;
+  height: 0;
+  top: 2.3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-top: -4.5rem; */
+  font-family: LarastelleFont;
+  font-size: 2.5em;
+  text-shadow: 1px 3px #2F2933;
+}
+.story #footer .controls {
+  position: relative;
+  /* height: 0; */
+  /* top: 2.3em; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-top: -4.5rem; */
+  font-family: LarastelleFont;
+  font-size: 2.5em;
+  text-shadow: 1px 3px #2F2933;
+}
+.story .controls a {
+  cursor: pointer;
+}
+
+@media (max-width: 645px) {
+  #showcase .content {
+    padding: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+  #showcase .content > * {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .music-story {
+    flex-direction: column;
+    align-items: center;
+  }
+  .music-story .story {
+    width: auto;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+  .music-story .player {
+    width: 100%;
+    max-width: none;
+  }
+  .music-story .player iframe {
+    width: 100%;
+  }
+  .music-story .player[data-source="spotify"] {
+    height: 170px;
+    overflow-y: hidden;
+  }
+  .music-story .player[data-source="apple"] {
+    height: 170px;
+    overflow-y: scroll;
+  }
+  .music-story .player iframe#spotify {
+    height: 300px;
+  }
+}
+
+#footer {
+  margin-top: 1em;
+}
