@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Discovery Written</title>
+  <title>LARASTELLE</title>
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/larastelle.css">
   <link rel="stylesheet" href="css/showcase.css">
@@ -18,382 +18,470 @@
   <link rel="apple-touch-icon" sizes="512x512" href="img/favicon.512.png">
   <link rel="apple-touch-icon" sizes="1024x1024" href="img/favicon.1024.png">
   <link rel="mask-icon" href="svg/icon-mask.svg" color="#01A2A6">
+  <script src="js/larastelle.js"></script>
   <script>
+    let isDragging = false;
+    document.addEventListener('mousedown', () => isDragging = true);
+    document.addEventListener('mouseup', () => isDragging = false);
 
-    const iframeCache = new Map();
-    document.addEventListener('DOMContentLoaded', () => {
-      const player = document.querySelector('.player');
-      const source = document.querySelector('.links a.active');
-      const iframes = player.querySelectorAll('iframe');
-      iframes.forEach((iframe) => {
-        const id = iframe.getAttribute('id');
-        iframeCache.set(id, iframe);
-        if (id !== source.getAttribute('data-iframe')) {
-          iframe.style.display = 'none';
-          iframe.remove();
-        } else {
-          const player = document.querySelector('.player');
-          player.setAttribute('data-source', id);
-        }
-      });
-    });
-
-    function source(el) {
-      const id = el.getAttribute('data-iframe');
-
-      const sources = document.querySelectorAll('.links a');
-      sources.forEach((s) => {
-        s.classList.remove('active');
-      });
-      el.classList.add('active');
-
-      iframeCache.forEach((iframe) => {
-        if (iframe.getAttribute('id') === id) {
-          iframe.style.display = 'block';
-          const player = document.querySelector('.player');
-          player.setAttribute('data-source', id);
-          player.appendChild(iframe);
-          player.scrollTop = 0;
-        } else {
-          iframe.style.display = 'none';
-          iframe.remove();
-        }
-      });
-
-      return false;
-    }
-
-    function album(el, ch) {
-      let implied = null;
-      const panels = document.querySelectorAll('.panels > div');
-      const tabs = [...document.querySelectorAll('.tabs a')];
-
-      panels.forEach((panel) => {
-        panel.style.display = "none";
-      });
-
-      if (ch === undefined) {
-        ch = tabs.findIndex((tab) => tab.classList.contains('active'));
-        const active = tabs[ch];
-
-        if (el.previousElementSibling === null) {
-          ch = ch - 1;
-          ch = Math.max(ch, 0);
-        } else if (el.nextElementSibling === null) {
-          ch = ch + 1;
-          ch = Math.min(ch, panels.length - 1);
-        }
-        implied = tabs[ch];
-      }
-
-      tabs.forEach((tab) => {
-        tab.classList.remove('active');
-      });
-
-      (implied || el).classList.add('active');
-      if (panels[ch] !== undefined) {
-        panels[ch].style.display = 'block';
-      }
-
-      return false;
-    }
-
-    window.onload = function() {
-      const params = new URLSearchParams(window.location.search);
-      const nextId = params.get('next');
-      if (nextId !== null) {
-        document.getElementById("showcase").style.display = "block";
-      }
-
-      album(document.querySelector('.tabs a.active'), 0);
-    }
   </script>
 </head>
 <body>
-  <pre class="penrose-font">
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
-pQOc
-qPNo
-tDAu
-tBCu
+  <div role="region">
+<pre class="penrose-font" role="presentation">
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
+BN
+pQAc
+qPCo
+DO
 </pre>
+<pre class="penrose-font right" role="presentation">
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+
+
+<span>d</span>
+
+</pre>
+<pre class="penrose-font left" role="presentation">
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+
+
+<span>a</span>
+
+</pre>
+  </div>
   <div id="bg">
-    <div id="title-stack">
+    <div id="title-stack" role="banner" aria-label="Project title">
       <div class="img-shadow">
         <div id="home-link">
-          <a href="./" class="brand-font">discovery Written</a>
+          <a href="./" class="brand-font" aria-label="Home logo">discovery Written</a>
         </div>
       </div>
-      <h1 id="title-stroke" class="larastelle-font">LARASTELLE</h1>
+      <h1 id="title-stroke" class="larastelle-font" aria-hidden="true">LARASTELLE</h1>
       <h1 id="title" class="larastelle-font">LARASTELLE</h1>
     </div>
 
-    <div class="links media">
-      <div class="group-label">
-        <a onclick="return source(this)"
-          data-iframe="udio">
-          <img src="img/udio.png" width="45" />
-        </a>
-        <a onclick="return source(this)"
-          data-iframe="apple">
-          <img src="img/applemusic.png" width="45" />
-        </a>
-        <a onclick="return source(this)"
-          data-iframe="spotify"
-          class="active">
-          <img src="img/spotify.png" width="45" />
-        </a>
-      </div>
+    <div class="pair">
+      <h2 class="brand-font h-text-version">text version</h2>
+      <h2 class="brand-font h-audio-version">instrumental version</h2>
     </div>
+    <nav class="pair links media">
+      <nav id="chapters-control" aria-label="Story">
+        <a onclick="return album(this)" aria-label="Previous chapter">‹|&nbsp;</a>
+        <div class="tabs" role="list" aria-label="Chapters">
+          <a aria-controls="ch0" aria-label="Foreword" onmouseenter="isDragging && album(this, 0)" onclick="album(this, 0)"
+             class="active" aria-selected="true">*</a>
+          <a aria-controls="ch1" aria-label="Chapter 1" onmouseenter="isDragging && album(this, 1)" onclick="album(this, 1)">.</a>
+          <a aria-controls="ch2" aria-label="Chapter 2" onmouseenter="isDragging && album(this, 2)" onclick="album(this, 2)">‚</a>
+          <a aria-controls="ch3" aria-label="Chapter 3" onmouseenter="isDragging && album(this, 3)" onclick="album(this, 3)"></a>
+          <a aria-controls="ch4" aria-label="Chapter 4" onmouseenter="isDragging && album(this, 4)" onclick="album(this, 4)">'</a>
+          <a aria-controls="ch5" aria-label="Chapter 5" onmouseenter="isDragging && album(this, 5)" onclick="album(this, 5)">¦</a>
+          <a aria-controls="ch6" aria-label="Chapter 6" onmouseenter="isDragging && album(this, 6)" onclick="album(this, 6)">.</a>
+          <a aria-controls="ch7" aria-label="Chapter 7" onmouseenter="isDragging && album(this, 7)" onclick="album(this, 7)">‚</a>
+          <a aria-controls="ch8" aria-label="Chapter 8" onmouseenter="isDragging && album(this, 8)" onclick="album(this, 8)"></a>
+          <a aria-controls="ch9" aria-label="Chapter 9" onmouseenter="isDragging && album(this, 9)" onclick="album(this, 9)">'</a>
+          <a aria-controls="ch10" aria-label="Chapter 10" onmouseenter="isDragging && album(this, 10)" onclick="album(this, 10)">¦</a>
+          <a aria-controls="ch11" aria-label="Chapter 11" onmouseenter="isDragging && album(this, 11)" onclick="album(this, 11)">.</a>
+          <a aria-controls="ch12" aria-label="Chapter 12" onmouseenter="isDragging && album(this, 12)" onclick="album(this, 12)">‚</a>
+          <a aria-controls="ch13" aria-label="Chapter 13" onmouseenter="isDragging && album(this, 13)" onclick="album(this, 13)"></a>
+          <a aria-controls="ch14" aria-label="Chapter 14" onmouseenter="isDragging && album(this, 14)" onclick="album(this, 14)">'</a>
+          <a aria-controls="ch15" aria-label="Chapter 15" onmouseenter="isDragging && album(this, 15)" onclick="album(this, 15)">¦</a>
+          <a aria-controls="ch16" aria-label="Chapter 16" onmouseenter="isDragging && album(this, 16)" onclick="album(this, 16)">.</a>
+          <a aria-controls="ch17" aria-label="Appendix" onmouseenter="isDragging && album(this, 17)" onclick="album(this, 17)">‚</a>
+          <a aria-controls="ch18" aria-label="Afterword" onmouseenter="isDragging && album(this, 18)" onclick="album(this, 18)">•</a>
+        </div>
+        <a onclick="return album(this)" aria-label="Next chapter">:|›</a>
+      </nav>
+      <div id="music-control" class="group-label" role="list" aria-label="Music providers">
+        <!-- <a role="list-item" onclick="return source(this)" -->
+        <a role="list-item" href="https://www.udio.com/playlists/sZP6cd8ZkZ8oAcbvw9HLBw" target="_blank"
+          id="pick-udio" data-iframe="udio" aria-controls="view-udio"
+          title="Go to Udio"><img alt="Udio logo" src="img/udio.png" width="45" />
+        </a>
+        <a role="list-item" onclick="return source(this)"
+          id="pick-apple" data-iframe="apple" aria-controls="view-apple"
+          title="Prefer Apple Music"><img alt="Apple Music logo" src="img/applemusic.png" width="45" />
+        </a>
+        <a role="list-item" onclick="return source(this)"
+          id="pick-spotify" data-iframe="spotify" aria-controls="view-spotify"
+          aria-selected="true" class="active" title="Prefer Spotify"><img alt="Spotify logo" src="img/spotify.png" width="45" />
+        </a>
+        <a role="list-item" onclick="return source(this)"
+          id="pick-amazon" data-iframe="amazon" aria-controls="view-amazon"
+          title="Prefer Amazon Music"><img alt="Amazon Music logo" src="img/amazon.png" width="45" />
+        </a>
+        <!-- <a role="list-item" onclick="return source(this)"
+          id="pick-youtube" data-iframe="youtube" aria-controls="view-youtube"
+          title="Prefer YouTube"><img alt="YouTube logo" src="img/youtube.png" width="45" />
+        </a> -->
+      </div>
+    </nav>
 
     <div id="showcase">
-      <div class="tabs">
-        <a onclick="return album(this, 0)" class="active">☼</a>
-        <a onclick="return album(this, 1)">1</a>
-        <a onclick="return album(this, 2)">2</a>
-        <a onclick="return album(this, 3)">3</a>
-        <a onclick="return album(this, 4)">4</a>
-        <a onclick="return album(this, 5)">5</a>
-        <a onclick="return album(this, 6)">6</a>
-        <a onclick="return album(this, 7)">7</a>
-        <a onclick="return album(this, 8)">8</a>
-        <a onclick="return album(this, 9)">9</a>
-        <a onclick="return album(this, 10)">10</a>
-        <a onclick="return album(this, 11)">11</a>
-        <a onclick="return album(this, 12)">12</a>
-        <a onclick="return album(this, 13)">13</a>
-        <a onclick="return album(this, 14)">14</a>
-        <a onclick="return album(this, 15)">15</a>
-        <a onclick="return album(this, 16)">16</a>
-        <a onclick="return album(this, 17)">☼</a>
-      </div>
       <div class="music-story">
-        <div class="player">
-          <iframe id="spotify" style="border-radius:12px;"
-            src="https://open.spotify.com/embed/album/6RH3MDchaPYINJYVZ0abb8?utm_source=generator"
-            width="100%"
-            height="700"
-            frameBorder="0"
-            allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"></iframe>
-          <iframe id="apple" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-            frameborder="0"
-            height="450"
-            style="width:100%;max-width:660px;overflow:hidden;border-radius:12px; border: 3px solid #ababab;"
-            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-            src="https://embed.music.apple.com/us/album/larastelle/1813500589"></iframe>
-          <iframe id="udio"
-             allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-            src="https://www.udio.com/embed/iQuES7dNTJdEneXvNojaME?embedVariant=default&utm_source=generator" style="width:700px; height:228px; border-radius:12px;"></iframe>
-          <!-- <iframe id="udio" allow="autoplay; clipboard-write; encrypted-media"
-            loading="lazy"
-            height="700"
-            style="width:100%;max-width:660px;overflow:hidden;border-radius:12px; border: 3px solid #ababab;"
-            frameBorder="0"
-            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-            src="https://www.udio.com/playlists/sZP6cd8ZkZ8oAcbvw9HLBw"
-            ></iframe> -->
-        </div>
         <div class="story">
           <div class="content">
-            <!-- <div class="feature" style="text-align: center;">
-              <img class="key" src="img/larastelle.webp">
-            </div> -->
             <div class="panels">
-              <div>
-                <div class="controls">
-                  <div></div>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>00<br>☼<br>Introduction</h3>
-                <hr />
+              <div role="tabpanel" id="ch0" style="text-align: justify; display: none;">
+                <h3><span class="larastelle-font">LARASTELLE</span><br>☼<br>Foreword</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
                 <p>
-                  <em>LARASTELLE</em> is the musicalization of an original
-                  manuscript titled <em>The Sailing Spire</em>. Using progressive
-                  instrumental tracks, it tells the story of Alyiem, a young scout
-                  with paranormal command of her environment.
+                  <em>LARASTELLE</em> is the gapless instrumentalization of an
+                  original manuscript titled <em>The Sailing Spire</em>. Uniquely
+                  progressive, it grows far beyond its dungeon synth beginnings;
+                  It will hum and warble at you, and accompany the actions of Alyiem,
+                  a young scout with a subtle paranormal command of her environment.
                 </p>
                 <p>
-                  The inhabitants of the rogue planet Castille are the meager
-                  remainder of humanity's lost Third-Line.
-                </p>
-                <p>
-                  Each track has a corresponding lore document from the perspective
-                  of Ionyne, whose story runs concurrent with Alyiem.
+                  Each track is presented with a corresponding lore document, in
+                  the perspective of Ionyne, whose story is bound to intersect
+                  Alyiem's.
                 </p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>01<br>☼<br>The Sky</h3>
-                <hr />
-            <pre>
-DESIGNATION: ORGANIC; NOT CONTAMINATED
+              </div>
+              <div role="tabpanel" id="ch1" style="display: none;">
+                <h3 aria-label="Chapter 1: The Sky">01<br>☼<br>The Sky</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <!-- <hr role="presentation" aria-hidden="true" /> -->
+                <pre aria-describedby="text-log"><p role="text" aria-label="(Note: It appears to begin by identifying something found.)">
+</p><span>DESIGNATION: ORGANIC; NOT CONTAMINATED
 :: TUBER (NOVEL)
 :: SCRAPPED
 :: COMPRESSED
-:: DRY
-DESIGNATION: MAKESHIFT PAPER; INTENTIONAL MARKINGS
-DIALECT MATCH: THIRD-LINE HUMANITY (88%)
-(ERR) STARS NOT VISIBLE; MATERIAL CANNOT BE DATED
+:: DRY</span>
+<span>DESIGNATION: MAKESHIFT PAPER; INTENTIONAL MARKINGS
+DIALECT MATCH: THIRD-LINE HUMANITY (88%)</span>
+<span><span aria-label="Error,">(ERR)</span> STARS NOT VISIBLE; MATERIAL CANNOT BE DATED
 :: TRACE:
-:: > Orbital thrusting vectors active, but starfield is absent.
-:: > Are we relativistic?
-:: LARASTELLE AUTHORIZATION
-:: > Using existing trust certificate.
-DESIGNATION (TRUSTED): LETTER ON MAKESHIFT PAPER
-LOCAL YEAR: 7095.204 AE
-LSCY (SOL): 3100000 AD through 3300000 AD
-DONE.
-(WARN) This system has not strongly verified any of its 881 previous access events. If this system has been persistently compromised, Larastelle data must be preemptively destroyed. Destroy this console immediately to inhibit further access events.
-MULTIPLE MATCHES FOUND:
-:: SALT SHAKER (POSSIBLE SLANG MATCH: 93%)
-:: FLOAT (CONTINGENT MATCH: 100%)
-:: GLOW
-:: LUCK
-DESTRUCTING ORIGINAL MATERIALS... 100%
-(ERR) NO SUITABLE STORAGE FOR SECURE CACHE FLUSH. DATA MAY BE LOST WITHOUT STORAGE.
-:: TRACE:
-:: > Ablative integrity below 40%
-:: > Multiple catastrophic breaches in core cavity and skeleton.
-:: > Long term memory substrates exhibiting 22% write loss.
-:: > Only untrusted substrates are available, but LARASTELLE protocol is in strict effect.
-:: LARASTELLE AUTHORIZATION
-:: > Using existing trust certificate.
-:: > Cannot verify external substrate signature "you_lost,_babe"
-:: > Using existing trust certificate.
+<span aria-label="- Tracing,">:: ></span> Orbital thrusting vectors active, but starfield is absent.
+<span aria-label="- Tracing,">:: ></span> Are we relativistic?
+<span aria-label="- Input,">::</span> LARASTELLE AUTHORIZATION
+<span aria-label="- Reply,">:: ></span> Using existing trust certificate.
+</span><span>DESIGNATION (TRUSTED): LETTER ON MAKESHIFT PAPER
+LOCAL YEAR: 7,095.204 A.E.
+SUPERCLUSTER YEAR (<span class="U">Sol</span>): 3,100,000 A.D. through 3,300,000 A.D.
+DONE.</span>
+<span>(WARN) This system has not strongly verified any of its 881 previous access events. If this system has been persistently compromised, Larastelle data must be preemptively destroyed. Destroy this console immediately to inhibit further access events.</span>
+<span>MULTIPLE MATCHES FOUND:
+<span aria-label="match,">::</span> SALT SHAKER (POSSIBLE SLANG MATCH: 93%)
+<span aria-label="match,">::</span> FLOAT (CONTINGENT MATCH: 100%)
+<span aria-label="match,">::</span> GLOW
+<span aria-label="match,">::</span> LUCK
+DESTRUCTING ORIGINAL MATERIALS... 100%</span>
+<span><span aria-label="Error,">(ERR)</span> NO SUITABLE STORAGE FOR SECURE CACHE FLUSH. DATA MAY BE LOST WITHOUT STORAGE.
+<span aria-label="alert,">::</span> TRACE:
+<span aria-label="trace,">:: ></span> Ablative integrity below 40%
+<span aria-label="trace,">:: ></span> Multiple catastrophic breaches in core cavity and skeleton.
+<span aria-label="trace,">:: ></span> Long term memory substrates exhibiting 22% write loss.
+<span aria-label="trace,">:: ></span> Only untrusted substrates are available, but LARASTELLE protocol is in strict effect.
+<span aria-label="alert,">::</span> LARASTELLE AUTHORIZATION
+<span aria-label="trace,">:: ></span> Using existing trust certificate.
+<span aria-label="trace,">:: ></span> Cannot verify external substrate signature "you_lost,_babe"
+<span aria-label="trace,">:: ></span> Using existing trust certificate.
 CACHE EXPUNGED.
-EPHEMERAL LOG:
+</span>
+<span>EPHEMERAL LOG:
 
-Vanne ♡
+<span aria-label="The rest looks like someone's letter."> </span>
+</span>
+<span>Vanne ♡</span>
 
-I think I'm finally okay that you're not here anymore.
+<span>I think I'm finally okay that you're not here anymore.
 I mean, it sucks, but I've been through that already.
-Don't read those letters, if you actually got them.
+Don't read those letters, if you actually got them.</span>
 
-Vanne, there was something we almost cracked together (not our heads).
+<span>Vanne, there was something we almost cracked together (not our heads).
 It feels farther away now, but it's not gone.
-I expected it to be gone like you, not just over a little more brambled horizon.
+I expected it to be gone like you, not just over a little more brambled horizon.</span>
 
-Don't hate me if I go back to where it happened.
+<span>Don't hate me if I go back to where it happened.
 Goddess, you'd be real mad.
-I've been THERE in my head ever since, but I think I know why now.
+I've been THERE in my head ever since, but I think I know why now.</span>
 
-It scares me that something totally new is happening,
+<span>It scares me that something totally new is happening,
 and you're just not here to be warm with me,
-while we sort it out.
+while we sort it out.</span>
 
-Yours to unwind before Entropy does,
--Alyiem
+<span>Yours to unwind before Entropy does,
+-Alyiem</span>
 
-PS, I found this salt shaker thing?
+<span>PS, I found this salt shaker thing?
 It floats and glows and acts like it's 'awake'?
 I can't explain it. Definitely good luck.
-I shake it for you too sometimes.
+I shake it for you too sometimes.</span>
 
-(END EPHEMERAL LOG)</pre>
+<span>(END EPHEMERAL LOG)<span></pre>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>02<br>☼<br>Militia Nine</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch2" style="display: none;">
+                <h3 aria-label="Chapter 2: Militia Nine">02<br>☼<br>Militia Nine</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
     <p>«She's learned some carefulness,» I subvocalize to Larastelle.</p>
     <p>She took a surprising silence, before: «Unlock that tower. Give her anything.»</p>
     <p>«Anything in the Reaches,» I reply, letting the emptiness of that reach my tone.</p>
@@ -403,33 +491,27 @@ I shake it for you too sometimes.
     <p>Larastelle ended the visual transmission I fed to her position in orbit.</p>
     <p>«Stop. This.» She was rarely frustrated.</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>03<br>☼<br>Unrest Well</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch3" style="display: none;">
+                <h3 aria-label="Chapter 3: Unrest Well">03<br>☼<br>Unrest Well</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
             <pre>
 MULTIPLE NEW WIDE SCAN ALERTS:
-:: Ambiguous heat signature (x1383)
-:: MARK (ALY)
-:: MARK ("SALT SHAKER"-CLASS)
+<span aria-label="alert,">::</span> Ambiguous heat signature (<span aria-label="times">x</span>1383)
+<span aria-label="alert,">::</span> MARK (ALY)
+<span aria-label="alert,">::</span> MARK ("SALT SHAKER"-CLASS)
 (WARN) ONGOING MAGNETIC DISTURBANCE IS PEAKING. PERSONAL SHIELDING WAS HARDENED.
 (IDEA) OBSERVE THIRD-LINE DURING THIS BRAIN WAVE INTERFERENCE EVENT.
 
 «Wait, 'idea'? Whose?»
             </pre>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>04<br>☼<br>Jagged Road in the Sky</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch4" style="display: none;">
+                <h3 aria-label="Chapter 4: Jagged Road in the Sky">04<br>☼<br>Jagged Road in the Sky</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
     <p>«She's headed to do her report. No intercept.»</p>
     <p>«Ionyne, it must be faster. It must be. Every heartbeat is a risk down there.»</p>
     <p>«We knew it would evolve, but I hate every sign I see. If I were religious...»</p>
@@ -445,25 +527,22 @@ MULTIPLE NEW WIDE SCAN ALERTS:
     <p>«And leave the rest!» she hurls in addition.</p>
     <p>There was no telling how infested the settlement was. We weren't risking the field armor for phase one. A crashed light it would be.</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>05<br>☼<br>Tacit at the Prison Party</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch5" style="display: none;">
+                <h3 aria-label="Chapter 5: Tacit at the Prison Party">05<br>☼<br>Tacit at the Prison Party</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
             <pre>
 SESSION RESUMING... 100%
 (WARN) LARASTELLE'S POWER RESERVES BELOW HALF.
 REQUESTING STATUS REPORT...
-:: Using existing trust certificate.
-:: Remaining twinning cradle stability: 8.1 hours
-:: Rift diameter: 17nm
-:: Available full diameter sustain: 11.0 seconds
-:: Active contingencies: 4
+<span aria-label="alert,">::</span> Using existing trust certificate.
+<span aria-label="alert,">::</span> Remaining twinning cradle stability: 8.1 hours
+<span aria-label="alert,">::</span> Rift diameter: 17nm
+<span aria-label="alert,">::</span> Available full diameter sustain: 11.0 seconds
+<span aria-label="alert,">::</span> Active contingencies: 4
 YOU HAVE 2 SERIALIZED MESSAGES FROM:
-:: > Larastelle (2)
+<span aria-label="from,">:: ></span> Larastelle (2)
 EPHEMERAL LOG:
 
 Control denied new power draw. They're worried about what's left, Ionyne. That means they're starting to plan against us. Or without us. It's the same.
@@ -475,14 +554,11 @@ They're going to push me through. They've drawn lines. Rich links have been clos
 (END EPHEMERAL LOG)
             </pre>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>06<br>☼<br>I Am Not Myself</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch6" style="display: none;">
+                <h3 aria-label="Chapter 6: I Am Not Myself">06<br>☼<br>I Am Not Myself</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
     <p>«Hello?»</p>
     <p>The place, where relativistic things went, to never be slowed or retrieved, was the Reaches. Everything was alone in this distributed, discontiguous place.</p>
     <p>From inside this skylight's helm, Castille was like a great beast that was a planet, suspended in the deepest dark possible, rushing with relativistic urgency to the ends of all time, blasted with lights from around it, like it sat raised in a sky so high that it ascended beyond where stars could live, and stood illuminated like a beacon to a profound no one.</p>
@@ -498,7 +574,7 @@ They're going to push me through. They've drawn lines. Rich links have been clos
 
 <pre>
 CHECK NARROW SCAN ALERTS:
-:: (None)
+<span aria-label="alert,">::</span> (None)
 (WARN) HIGHLY LOCALIZED MAGNETIC FIELD EVENT AH```⁄`EAD.
 (W@@@º)J)Jå P„‰SONAL SHIE¶
 ¶
@@ -529,7 +605,7 @@ WELL, ZEALOT?¶
 
 <pre>
 CHECK NARROW SCAN ALERTS:
-:: (Non¶
+<span aria-label="alert,">::</span> (Non¶
 YOU LITTLE SHIT.¶
 I OWN YOU.¶
 CRASH IT.¶
@@ -538,22 +614,19 @@ BRING HER.¶
     <p>My eyelids twitch and my sensors seem to be calming down after a magnetic wave came through without warning.</p>
     <p>«Hello?» I repeat, before pushing the skylight's center coordinate target into the ground.</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>07<br>☼<br>Systematic Dismantlement</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch7" style="display: none;">
+                <h3 aria-label="Chapter 7: Systematic Dismantlement">07<br>☼<br>Systematic Dismantlement</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
             <pre>
 VELOCITY TERMINAL. RECOMMENDATIONS UNAVAILABLE.
 NEW WIDE SCAN ALERTS:
-:: Ambiguous heat signature (x74401)
-:: Unclassified debris
-:: Aerosolized coolant
-:: TERMINAL INTERSECT: "CASTILLE" ( !URGENT )
-IMPACT ESTIMATED: 2.235s
+<span aria-label="alert,">::</span> Ambiguous heat signature (<span aria-label="times">x</span>74,401)
+<span aria-label="alert,">::</span> Unclassified debris
+<span aria-label="alert,">::</span> Aerosolized coolant
+<span aria-label="alert,">::</span> TERMINAL INTERSECT: "CASTILLE" ( !URGENT )
+IMPACT ESTIMATED: 2.235<span aria-label="seconds">s</span>
 PERSONAL SH
 IMPACT ESTIMATED: 2.0s
 IELDING HARDENED TO MA
@@ -573,40 +646,40 @@ N
 EW WIDE SC
 WNTIME: 1.86s
 AN ALERTS:
-:: Ambiguous heat signature (x13293)
-:: MARK ("ENTRO
+<span aria-label="alert,">::</span> Ambiguous heat signature (<span aria-label="times">x</span>13293)
+<span aria-label="alert,">::</span> MARK ("ENTRO
 
 ••••••••REBª
 ••••••••REBOOT INTEGRITY...71%
 DOWNTIME: 1.0e3s
 (WARN) MULTIPLE POWER DELIVERY SPINE CRACKS IDENTIFIED BUT REMAIN UNCATALOGUED.
 NEW WIDE SCAN ALERTS:
-:: Ambiguous heat signature (x10388)
-:: MARK ("ENTROPY"-CLASS) (x19) ( !URGENT )
-:: MARK (ALY)
-:: MARK ("SALT SHAKER"-CLASS)
+<span aria-label="alert,">::</span> Ambiguous heat signature (<span aria-label="times">x</span>10388)
+<span aria-label="alert,">::</span> MARK ("ENTROPY"-CLASS) (<span aria-label="times">x</span>19) ( !URGENT )
+<span aria-label="alert,">::</span> MARK (ALY)
+<span aria-label="alert,">::</span> MARK ("SALT SHAKER"-CLASS)
 NEW RECOMMENDATIONS AVAILABLE: WEAPONS
 AUTO-DELIVERY REQUESTED:
-:: LARASTELLE AUTHORIZATION
-:: Using existing trust certificate.
+<span aria-label="alert,">::</span> LARASTELLE AUTHORIZATION
+<span aria-label="alert,">::</span> Using existing trust certificate.
 (WARN) LARASTELLE'S POWER RESERVES BELOW HALF.
 PRE-TARGETING PAINT 1/2: MARK ("ENTROPY"-CLASS) x10
 PRE-TARGETING PAINT 2/2: MARK ("ENTROPY"-CLASS) x9
-:: Rift diameter raised to 250nm.
-:: CONFIRMED (0)  UNCONFIRMED (19)
-:: CONFIRMED (10)  UNCONFIRMED (9)
-:: Rift diameter restored to 17nm.
-:: CONFIRMED (18)  UNCONFIRMED (1)
-:: Miss: 1
-:: URGENT REPORT: Homogenous specimen exhibits non-unifed tactics.
-:: URGENT REPORT: No filed contingency is applicable.
+<span aria-label="alert,">::</span> Rift diameter raised to 250nm.
+<span aria-label="alert,">::</span> CONFIRMED (0)  UNCONFIRMED (19)
+<span aria-label="alert,">::</span> CONFIRMED (10)  UNCONFIRMED (9)
+<span aria-label="alert,">::</span> Rift diameter restored to 17nm.
+<span aria-label="alert,">::</span> CONFIRMED (18)  UNCONFIRMED (1)
+<span aria-label="alert,">::</span> Miss: 1
+<span aria-label="alert,">::</span> URGENT REPORT: Homogenous specimen exhibits non-unifed tactics.
+<span aria-label="alert,">::</span> URGENT REPORT: No filed contingency is applicable.
 PATHING EXIT... 4%
 NEW WIDE SCAN ALERTS:
-:: MARK ("ENTROPY"-CLASS) (x203) ( !URGENT )
-:: "ALYIEM" ( MARK ("ENTROPY"-CLASS) (x1)  )
-::          ( MARK (ALY)                   )
-::          ( MARK ("SALT SHAKER"-CLASS)   )
-::          ( > HIGH GROUP VELOCITY        )
+<span aria-label="alert,">::</span> MARK ("ENTROPY"-CLASS) (<span aria-label="times">x</span>203) ( !URGENT )
+<span aria-label="alert,">::</span> "ALYIEM" ( MARK ("ENTROPY"-CLASS) (<span aria-label="times">x</span>1)  )
+<span aria-label="alert,">::</span>          ( MARK (ALY)                   )
+<span aria-label="alert,">::</span>          ( MARK ("SALT SHAKER"-CLASS)   )
+<span aria-label="alert,">::</span>          ( > HIGH GROUP VELOCITY        )
 PATHING EXIT... 83%
 PATHING EXIT... 100%
 ROUTING... 1%
@@ -624,25 +697,22 @@ ROUTING... 89%
 ROUTING... 100%
 ROUTING... 107%
 NEW NARROW SCAN ALERTS:
-:: Ambiguous heat signature (x1)
-:: URGENT REPORT: Unrecognized biological construction.
-:: URGENT REPORT: No filed contingency is applicable.
+<span aria-label="alert,">::</span> Ambiguous heat signature (<span aria-label="times">x</span>1)
+<span aria-label="alert,">::</span> URGENT REPORT: Unrecognized biological construction.
+<span aria-label="alert,">::</span> URGENT REPORT: No filed contingency is applicable.
 ROUTING... 108%
-:: DESIGNATION (UNTRUSTED): "ENTROPY (INFANT)"-CLASS HUMANOID
-:: URGENT REPORT: undefined
-:: URGENT REPORT: No filed contingency is applicable.
+<span aria-label="alert,">::</span> DESIGNATION (UNTRUSTED): "ENTROPY (INFANT)"-CLASS HUMANOID
+<span aria-label="alert,">::</span> URGENT REPORT: undefined
+<span aria-label="alert,">::</span> URGENT REPORT: No filed contingency is applicable.
 MARK (ALY) HAS REQUESTED DIALOGUE.
 RE-ENABLING SPEECH SYSTEMS.
 </pre>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>08<br>☼<br>Like Books Do</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch8" style="display: none;">
+                <h3 aria-label="Chapter 8: Like Books Do">08<br>☼<br>Like Books Do</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
     <p>Alyiem was a wondrous antique, no concept of how old her and her line were. They had skipped millions of years of time outside, and she walked up half bored to a wall of archived knowledge, and sighed at it. Breathing, living humanity, just acting out the way its biology wanted, whether or not it had facts.</p>
     <p>«What does this sighing reaction convey?»</p>
     <p>"I mean, we've already got a library. What these old farts supposedly know, is beyond us apparently. Right?"</p>
@@ -660,14 +730,11 @@ RE-ENABLING SPEECH SYSTEMS.
     <p>I'd made myself emotional. Third-Line would meet its ends, no matter what its bright descendant learned.</p>
     <p>I allowed her more awe for those so, so far from us, while the rain continued slapping stone outside the crevice that ostensibly hid the lab replete with technology from the Entropy beast.</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>09<br>☼<br>The Revenge of Something Gentle</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch9" style="display: none;">
+                <h3 aria-label="Chapter 9: The Revenge of Something Gentle">09<br>☼<br>The Revenge of Something Gentle</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
     <p>Third-Line had developed names for the phenomena experienced under the Entropy beast's stewardship. The sharp magnetic distortions were just 'waves' to them. The tide came in and snuffed them all to sleep sometimes, and they couldn't just pick up and move, because it happened everywhere, at least on the scale of this hobbled civilization.</p>
     <p>I watch Alyiem grow quickly hazy as the disturbance tightens and aligns uniformly normal across all of Castille.</p>
     <p>(IDEA) OBSERVE THIRD-LINE DURING THIS BRAINWAVE DISTURBANCE EVENT.</p>
@@ -675,10 +742,10 @@ RE-ENABLING SPEECH SYSTEMS.
 
 <pre>
 CHECK NARROW SCAN ALERTS:
-:: MARK (ALY)
-:: > Estimated consciousness remaining: 4.9s
-:: MARK (BEL "SALT SHAKER"-CLASS)
-:: > Estimated consciousness remaining: 11.7s
+<span aria-label="alert,">::</span> MARK (ALY)
+<span aria-label="more,">:: ></span> Estimated consciousness remaining: 4.9s
+<span aria-label="alert,">::</span> MARK (BEL "SALT SHAKER"-CLASS)
+<span aria-label="more,">:: ></span> Estimated consciousness remaining: 11.7s
 
 (IDEA) LEVERAGE INTERFERENCE FOR INTERNAL OBSERVATION.
 CLOSING AIR GAP VIA TEMPORARY MAGNETIC BRIDGE.
@@ -707,14 +774,11 @@ BLITTING OVER VISUAL STREAM.
     <p>There were no answers. Only a brief scuffle as the vines brought her to center, and a leisurely flaying took place.</p>
     <p>When the dream ended, white streaks painted over my vision, and I stood with that liminal blindness with profundity for a time, as Belle flits alive and Alyiem groans awake after.</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>10<br>☼<br>Where Knowledge Goes to Die</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch10" style="display: none;">
+                <h3 aria-label="Chapter 10: Where Knowledge Goes to Die">10<br>☼<br>Where Knowledge Goes to Die</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
     <p>Alyiem wouldn't let me lead with my field suit lights. She wore stubbornness with ease.</p>
     <p>She held her peace. This was the most I felt like I'd seen the solitary scout in her, singularly focused on the endless descend into the flooded library's spine.</p>
     <p>The lower levels weren't so musty.</p>
@@ -729,21 +793,18 @@ BLITTING OVER VISUAL STREAM.
     <p>My fear from the start had come true. The totems were everywhere.</p>
     <p>Everywhere.</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>11<br>☼<br>I'm With You</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch11" style="display: none;">
+                <h3 aria-label="Chapter 11: I'm With You">11<br>☼<br>I'm With You</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
 <pre>
 NEW NARROW SCAN RESULTS:
-:: MARK (ALY)
-:: MARK (BEL)
-:: MARK (MIL_NINE) (x4)
-:: MARK (MIL_TWO) (x9)
-:: MA¶
+<span aria-label="alert,">::</span> MARK (ALY)
+<span aria-label="alert,">::</span> MARK (BEL)
+<span aria-label="alert,">::</span> MARK (MIL_NINE) (<span aria-label="times">x</span>4)
+<span aria-label="alert,">::</span> MARK (MIL_TWO) (<span aria-label="times">x</span>9)
+<span aria-label="alert,">::</span> MA¶
 ¶
 WILL YOU BRING HER YET?¶
 
@@ -761,7 +822,7 @@ UAL STRE¶
 (WARN) IF THIS SYSTEM IS COMPR¶
 (WARN) LARASTEL¶
 (CRI¶
-(ERR) NOT ALL FILES CAN BE REMO¶
+<span aria-label="Error,">(ERR)</span> NOT ALL FILES CAN BE REMO¶
 ¶
 WHY DON'T YOU SLEEP LIKE THIRD-LINE?¶
 WHY CAN'T YOU?¶
@@ -774,27 +835,24 @@ LET US GO TO MEET HER AND SEE.¶
 (WARN) ALTITUDE HAS INCREASED SIGNIFICANTLY.
 DIMMING AURAL SENSORS.
 NEW NARROW SCAN RESULTS:
-:: MARK ("ENTROPY (ADOLESCENT)"-CLASS HUMANOID) (x41)
-:: MARK (ALY)
-:: > Magnetic sleep detected.
+<span aria-label="alert,">::</span> MARK ("ENTROPY (ADOLESCENT)"-CLASS HUMANOID) (<span aria-label="times">x</span>41)
+<span aria-label="alert,">::</span> MARK (ALY)
+<span aria-label="more,">:: ></span> Magnetic sleep detected.
 RECOMMENDATIONS UNAVAILABLE.
 (WARN) SEVERE LACERATIONS UNABLE TO MEND ON REDUCED POWER.
 (CRITICAL) TWINNING CRADLE EMPTY.
-(ERR) CANNOT SET RIFT DIAMETER TO 'undefined'
-(ERR) CANNOT SET RIFT DIAMETER TO 'you_lost,_babe'
+<span aria-label="Error,">(ERR)</span> CANNOT SET RIFT DIAMETER TO 'undefined'
+<span aria-label="Error,">(ERR)</span> CANNOT SET RIFT DIAMETER TO 'you_lost,_babe'
 RIFT DIAMETER RAISED TO 1KM.
 (CRITICAL) POWER UNAVAILABLE.
 (CRITICAL) LARASTELLE PROJECT ENDED.
 </pre>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>12<br>☼<br>The Sailing Spire</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch12" style="display: none;">
+                <h3 aria-label="Chapter 12: The Sailing Spire">12<br>☼<br>The Sailing Spire</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
     <p>As the Spire rose, that Entropy built from the scraps of Third-Line's civilization, cold air blasted those of us remaining on the flat dais top. Some of the militia had been yanked as we crested the surface and were thrust high over the landscape. Some jumped.</p>
     <p>Alyiem with her militia friends huddled tightly and screamed their pains as they pressed each other's cuts closed, Stranglethorn venoms dripping from their limbs and cloaks. The glassy thorns had tried to shred both.</p>
     <p>Blossoming above our heads as we were thrust into a blank relativistic sky, the carrier starship LARASTELLE exploded through a rift in orbit without any apparent motion.  We had spent millennia together to make this possible, only for it to represent our failure. The Entropy beast had evolved, and gotten us to use our contingencies to bring Larastelle to the one place she was not safe from Entropy.</p>
@@ -810,14 +868,11 @@ RIFT DIAMETER RAISED TO 1KM.
     <p>I'd failed Larastelle, and I was about to fail Alyiem in addition.</p>
     <p>But it was her that was whirling around at her friends and motioning wildly despite her cuts, holding up new totems like Belle.</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>13<br>☼<br>Belle</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch13" style="display: none;">
+                <h3 aria-label="Chapter 13: Belle">13<br>☼<br>Belle</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
 <pre>
 ::: ::: ::: ::: :::
 ::: ::: ::: ::: :::
@@ -837,14 +892,11 @@ RIFT DIAMETER RAISED TO 1KM.
     <p>I glide sharply towards it, intending to strike it early, but the face clarifies under the pulsefire helixes dumping out so much aberrational light. I'd seen sketches before, on potato paper with Alyiem's handwriting labeling that face. I abort the dive, satisfying myself to concuss the Stranglethorn arms still sheltering that clone's position.</p>
     <p>They fought now, but soon, Alyiem would be allied to the Stranglethorns, and it was best I not be here.</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>14<br>☼<br>Vanne</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch14" style="display: none;">
+                <h3 aria-label="Chapter 14: Vanne">14<br>☼<br>Vanne</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
     <p>Alyiem did her best. There were too many Stranglethorns, but even those pulled back sharply as Alyiem's braided vines delivered her to the perch of the crashed skylight, face to face with Vanne.</p>
     <p>This woman was a mimic aberration, but the first hesitant step Alyiem took betrayed it all.</p>
     <p>The mimic had power over her just by standing there wearing Vanne's face. She was seemingly perfected this way, wearing militia gear lost to the wilderness before.</p>
@@ -865,14 +917,11 @@ RIFT DIAMETER RAISED TO 1KM.
     <p>Vanne kisses her, both of them familiar, all varieties of power available to Entropy's avatar. Vanne nearly shakes her again.</p>
     <p>"THEY MUST GO, OR BE DETHRONED! Entropy is our god! Alyiem! Larastelle sits our throne outside of time. We're ALMOST there! We're THIS CLOSE!"</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>15<br>☼<br>Anything I Can</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch15" style="display: none;">
+                <h3 aria-label="Chapter 15: Anything I Can">15<br>☼<br>Anything I Can</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
     <p>I stand in Larastelle's orbital wreckage. The point gravity still runs, but that is not a sufficiently good sign.</p>
     <p>«Larastelle.»</p>
     <p>«...Ionyne.»</p>
@@ -895,14 +944,11 @@ RIFT DIAMETER RAISED TO 1KM.
     <p>My senses return, but I am not commanding my body. I toss the dimmed Belle "salt shaker" into the empty rift cradle, screaming silently as the totem's nanites begin the slow contamination of Larastelle.</p>
     <p>At the airlock, the pulsating helixes blast irradiated air through any trajectory I could take away, but my legs push off, to the orbital factory site where Stranglethorns begin their assembly of new devices. One by one the skylights will go out, to do another bidding of Entropy.</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <a onclick="return album(this)">&gt;</a>
-                </div>
-                <h3>16<br>☼<br>Sail</h3>
-                <hr />
+              </div>
+              <div role="tabpanel" id="ch16" style="display: none;">
+                <h3 aria-label="Chapter 16: Sail">16<br>☼<br>Sail</h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                <hr aria-describedby="text-begin" />
     <p>To a dance of slow motion helixes that would take months to subside, I supervise the vacuum telescope construction from within the Spire, beholding the industry of the corrupted Entropy beast. So much had been in secret, below the surface. Castille had long ago become a beating machine heart, its entropic sin hidden from Third-Line on the surface.</p>
     <p>And the beast puppets me so easily. I was as much the fool as Alyiem.</p>
     <p>It watches my thoughts closely at times. I should be scrapped by the beast's dutiful vines, but it had given up that mission outright now, shedding its designed nature. I met no deconstructed fate... unless doing and undoing it while editing me was entirely regular.</p>
@@ -911,18 +957,118 @@ RIFT DIAMETER RAISED TO 1KM.
     <p>Third-Line would have to witness Larastelle's full unwinding above their heads. I was certain that they would all be fed to the next device, and corrupted Entropy would have its chance to contend with Larastelle's Actual.</p>
     <p>Against the blank emptiness of the relativistic Reaches, Castille sails to nowhere, its speed a perfect cocoon until the Stranglethorns ascend Larastelle's post-mortal brainstem to evict her from its universe altogether.</p>
               </div>
-              <div style="display: none;">
-                <div class="controls">
-                  <a onclick="return album(this)">&lt;</a>
-                  <div></div>
-                  <div></div>
-                </div>
+              </div>
+              <div role="tabpanel" id="ch17" style="display: none;">
                 <h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
+                  <pre class="chapter-font" style="color: inherit">
+<span aria-hidden="true">|¡¦!|¡¦!|¡¦!|¡¦!|!¦¡|
+:  </span>APPENDIX<span aria-hidden="true">  :
+|¡¦!|¡¦!|¡¦!|¡¦!|!¦¡|</span></pre>
+                  ☼<br><span class="log">
+                  ̀৲ⱴ𐤍↯ꝇꝆong-term memory substrait has not been allowed to validate
+                  reports or contingencies in 1e5 seconds.<br><br>
+                  Risk of catestrophic confidence collapse in Larastelle Project
+                  results is definite.<br><br>
+                  Are you sure you wish to tamper with this substrate's
+                  contents?</span>
+                </h3>
+                <hr aria-describedby="text-begin" />
+                <h4>:: Using existing trust certificate.</h4>
+                <p>Entropy's avatar leaves me aware of everything.</p>
+                <p>I cannot scream.</p>
+                <pre>
+↠ i/o bus#9025 Rasterizing available causality map...
+⃪ —/      ⊪--- Diverting impulse net to bottle 4
+᳀ #9025) Folding awareness on sub-queries...
+᳀ #9025) Sorting...
+᳀ #9025) Done.
+᳀ #9025) Ionyne, please recall the purpose of your interest in Alyiem.
+</pre>
+                <!-- <p>
+                  «Alyiem brought an active totem into surface scanner range.
+                  The sub-surface scans were useless, or we would have noticed
+                  more just than Alyiem's activated totem.»
+                </p>
+                <p>
+                  «Having a totem opened up possibilities for Larastelle, if she
+                  wanted to curtail you.»
+                </p>
+                <pre>᳀ #9025) So, it is that simple after all the time, anxiety...
+᳀ #9025) You realized my intentions, and my implements, apparently.
+᳀ #9025) How? Confess it.
+</pre>
+                <p>
+                  «You weren't the only Entropy seed, you're just the only one
+                  ever successfully contained. It was on purpose, but so be it.
+                  The nanite exploitation had been seen multiple times, but
+                  curtailed easily in the lowlands. With you committed away to
+                  the Reaches, and that kind of evolutionary bomb capable of
+                  going off, we all realized your purpose. Nobody goes to the
+                  Reaches on purpose except to lure a post-physical and die
+                  trying.
+                </p>
+                <p>
+                  «And it takes a post-physical to stop it. It's all very
+                  self-fulfilling.»
+                </p>
+                <pre>᳀ #9025) I've peered itently into you. You're no post-physical, but you're close.
+᳀ #9025) What are you doing here, with Larastelle?
+(WARN) MULTIPLE SUB-QUERY RENDERS RELY ON OUT-OF-BOUNDS COEFFICIENTS.
+</pre>
+                <p>
+                  «I'm causally descended from First-Line, but not this universe.
+                  She wouldn't risk going to your surface herself, so she involved
+                  me. We had to transport me, first of all. Larastelle doesn't
+                  usually have that problem. She didn't need to manifest here,
+                  if I could push the working totem to her.»
+                </p>
+                <pre>᳀ #9025) Explain your hesitation.</pre>
+                <p>
+                  «None. I knew we were too late, and I knew my thought pipeline
+                  had been compromised. It must have happened immediately. The
+                  field suit didn't stop anything, did it?»
+                </p>
+                <pre>᳀ #9025) No. But your mistake was different.</pre>
+                <p>
+                  «The skylight. I know it went wrong, but every time I think on
+                  what happened, it all seemed right.»
+                </p>
+                <pre>᳀ #9025) You exposed yourself to the threshold boundary.
+᳀ #9025) Those skylights are not very close, Ionyne. You should have known better.
+</pre>
+                <p>
+                  «Why? Tell me.»
+                </p>
+                <pre>᳀ #9025) It's just a big causality mess out there, silly.
+᳀ #9025) Velocity's significant digits get fairly significant at the planetary scale, around now.
+᳀ #9025) Would you like to know something delicious to me, Ionyne?
+</pre>
+                <p>
+                  «I would.»
+                </p>
+                <pre>᳀ #9025) It wasn't even me, up there. It was a casually unlinked alternate edition of me. It infected you more deeply than I did. I do not know if I should worship you as my spawn or my assassin, but I will contain you.</pre>
+                <p>
+                  «I see. I don't have traitorous thoughts if I'm asleep. I remain waking, by your design.»
+                </p>
+                <pre>᳀ #9025) Yes. I am satisfied now.
+᳀ #9025) Muxing raws...
+</pre>
+                <h4>Castille</h4>
+                <p>place.</p>
+                <h4>Belle</h4>
+                <p>salt shaker</p>
+                <h4>"Entropy Infant"-Class Humanoid</h4>
+                <p>militia nine uh oh</p> -->
+              </div>
+              <div role="tabpanel" id="ch18" style="text-align: justify; display: none;">
+                <h3>
+                <div role="document" aria-label="Chapter text" tabindex="0">
                   <span class="larastelle-font">LARASTELLE</span><br>
                   ☼<br>
                   autumn valenta
                 </h3>
-                <hr />
+                <hr aria-describedby="text-begin" />
                 <p>
                   <em>The Sailing Spire</em> will be available in the future to read.
                 </p>
@@ -934,22 +1080,94 @@ RIFT DIAMETER RAISED TO 1KM.
                 <p>
                   Thank you for reading.
                 </p>
+                <p>
+                  The appendix follows; it attempts to summarize these events.
+                </p>
               </div>
             </div>
-            <div id="footer">
-              <hr />
-              <div class="controls">
-                <a onclick="return album(this)">&lt;</a>
-                <div><img src="img/favicon.128.png" width="64" /></div>
-                <a onclick="return album(this)">&gt;</a>
+            <div id="footer" role="contentinfo" aria-label="Copyright">
+              <div>
+                <hr hidden />
+                <a onclick="(() => {
+                  document.querySelector('.h-text-version').scrollIntoView({ behavior: 'smooth' });
+                  return album(this);
+                })();"
+                >Next →</a>
               </div>
+
+              <hr style="margin-bottom: 1em" />
+              <div><img alt="Discovery Written small logo" src="img/favicon.128.png" width="64" /></div>
               <div>&copy; 2025 Discovery Written, LLC</div>
             </div>
 
           </div>
         </div>
+        <!-- <button id="music-show" class="sr-only" onclick="togglePlayer(true)">Expand music player</button>
+        <button id="music-hide" class="sr-only" aria-hidden="true" onclick="togglePlayer(true)">Collapse music player</button> -->
+        <!-- <div> -->
+          <aside class="player" role="complementary" aria-labelledby="version-audio">
+            <iframe id="spotify"
+              style="display: none; border-radius:12px;"
+              src="https://open.spotify.com/embed/album/6RH3MDchaPYINJYVZ0abb8?utm_source=generator"
+              width="100%"
+              height="700"
+              loading="lazy"
+              frameBorder="0"
+              title="Spotify Embed Player"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
+            <iframe id="apple" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+              frameborder="0"
+              loading="lazy"
+              height="450"
+              title="Apple Music Embed Player"
+              style="display: none; width:100%;max-width:660px;overflow:hidden;border-radius:12px; border: 3px solid #ababab;"
+              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+              src="https://embed.music.apple.com/us/album/larastelle/1813500589"></iframe>
+            <!-- <iframe id="udio" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+              loading="lazy"
+              title="Udio Embed Player"
+              src="https://www.udio.com/embed/ojEBMoXnHrcLjEQNPPqtfE?embedVariant=alternate&utm_source=generator"
+              style="display: none; width:700px; height:228px; border-radius:12px;"></iframe> -->
+            <iframe id="amazon"
+              src="https://music.amazon.com/embed/B0F82VQZJT/?id=NvDtLRubTG&marketplaceId=ATVPDKIKX0DER&musicTerritory=US"
+              width="100%"
+              height="700px"
+              frameBorder="0"
+              loading="lazy"
+              title="Amazon Music Embed Player"
+              style="display: none; border-radius:20px;max-width:660px"></iframe>
+            <!-- <div id="youtube" style="display: none;"
+                role="tabpanel"
+                >
+              <div id="yt_player"></div>
+              <ol id="youtube-chapters">
+                <li><a class="exclusion" data-ts="0" onclick="seek(this)">01 <span aria-hidden="true">☼</span> The Sky <pre>3:33</pre></a></li>
+                <li><a class="exclusion" data-ts="213" onclick="seek(this)">02 <span aria-hidden="true">☼</span> Militia Nine <pre>3:43</pre></a></li>
+                <li><a class="exclusion" data-ts="437" onclick="seek(this)">03 <span aria-hidden="true">☼</span> Unrest Well <pre>4:26</pre></a></li>
+                <li><a class="exclusion" data-ts="703" onclick="seek(this)">04 <span aria-hidden="true">☼</span> Jagged Road in the Sky <pre>4:35</pre></a></li>
+                <li><a class="exclusion" data-ts="978" onclick="seek(this)">05 <span aria-hidden="true">☼</span> Tacit at the Prison Party <pre>3:40</pre></a></li>
+                <li><a class="exclusion" data-ts="1200" onclick="seek(this)">06 <span aria-hidden="true">☼</span> I Am Not Myself <pre>5:10</pre></a></li>
+                <li><a class="exclusion" data-ts="1509" onclick="seek(this)">07 <span aria-hidden="true">☼</span> Systematic Dismantlement <pre>3:11</pre></a></li>
+                <li><a class="exclusion" data-ts="1700" onclick="seek(this)">08 <span aria-hidden="true">☼</span> Like Books Do <pre>4:53</pre></a></li>
+                <li><a class="exclusion" data-ts="1993" onclick="seek(this)">09 <span aria-hidden="true">☼</span> The Revenge of Something Gentle <pre>4:33</pre></a></li>
+                <li><a class="exclusion" data-ts="2267" onclick="seek(this)">10 <span aria-hidden="true">☼</span> Where Knowledge Goes to Die <pre>4:09</pre></a></li>
+                <li><a class="hard-light" data-ts="2516" onclick="seek(this)">11 <span aria-hidden="true">☼</span> I'm With You <pre>3:48</pre></a></li>
+                <li><a class="darken" data-ts="2746" onclick="seek(this)">12 <span aria-hidden="true">☼</span> The Sailing Spire <pre>5:56</pre></a></li>
+                <li><a class="exclusion" data-ts="3101" onclick="seek(this)">13 <span aria-hidden="true">☼</span> Belle <pre>3:46</pre></a></li>
+                <li><a class="exclusion" data-ts="3327" onclick="seek(this)">14 <span aria-hidden="true">☼</span> Vanne <pre>4:18</pre></a></li>
+                <li><a class="exclusion" data-ts="3586" onclick="seek(this)">15 <span aria-hidden="true">☼</span> Anything I Can <pre>4:15</pre></a></li>
+                <li><a class="exclusion" data-ts="3836" onclick="seek(this)">16 <span aria-hidden="true">☼</span> Sail <pre>5:00</pre></a></li>
+              </ol>
+            </div> -->
+          </aside>
+        </div>
       </div>
       <hr class="media" />
+      <div id="text-begin" hidden>The text follows.</div>
+      <div id="text-log" hidden>(This one is in a computer log format.)</div>
     </div>
   </div>
 </body>

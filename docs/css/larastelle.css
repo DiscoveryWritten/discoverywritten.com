@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: PenroseFont;
     src: url('../fonts/PICHSIM_.ttf') format('truetype');
@@ -7,9 +8,21 @@
     src: url('../fonts/PICAHMR_.ttf') format('truetype');
 }
 
-/* html, body, #bg {
-    background-color: #24282B;
-} */
+
+@keyframes flicker {
+  0%, 100% { color: #00d0ff; }
+  15%      { color: #00b7ff; }
+  20%      { color: #00e1ff; }
+  25%      { color: #00b7ff; }
+  30%      { color: #00d0ff; }
+  42%      { color: #00e1ff; }
+  50%      { color: #00b7ff; }
+  70%      { color: #00ccff; }
+  75%      { color: #00d0ff; }
+  80%      { color: #00fffb; }
+  92%      { color: #ff8c00; }
+}
+
 body {
     height: 3000px;
 }
@@ -20,28 +33,61 @@ body {
     height: 3000px;
 }
 
-.chapter-font {
+pre.chapter-font {
     font-family: ChapterFont;
+    margin: 0;
 }
 .story h3 {
     font-size: 2.2em;
     color: #E9D8F7;
     text-shadow: 1px 3px #2F2933;
     font-family: BrandFont;
+    margin: 0 0 1rem;
+}
+.story h3 span.long {
+    text-align: left;
+}
+.story h3 span.larastelle-font {
+    display: inline-block;
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+.story h4 {
+    font-size: 1.5em;
+    color: #E9D8F7;
+    text-shadow: 1px 3px #2F2933;
+    font-family: monospace;
 }
 .penrose-font {
     opacity: 0.62;
     position: absolute;
     width: 100%;
-    margin-top: -1em;
+    margin: 0;
     height: 3000px;
     font-family: PenroseFont;
     font-size: 48px;
-    line-height: 33px;
+    line-height: 32px;
     text-align: center;
     color: #00d0ff;
     mix-blend-mode: difference;
     pointer-events: none;
+    overflow: hidden;
+    animation: flicker 60s cubic-bezier(0.7, -1, 0.3, 2) infinite;
+}
+.penrose-font span {
+    display: inline-block;
+}
+.penrose-font.left {
+    transform: translateX(-0.85em) translateY(0.37em);
+}
+.penrose-font.right {
+    transform: translateX(0.85em) translateY(0.37em);
+}
+.penrose-font.right span {
+    transform: rotate(45deg);
+}
+.penrose-font.left span {
+    transform: rotate(-45deg);
 }
 
 h2.larastelle-font {
@@ -76,15 +122,124 @@ h3 {
 }
 
 .links a {
+    user-select: none;
     cursor: pointer;
 }
 .links img {
     filter: drop-shadow(0 2px 0px #000000);
 }
-.tabs > a.active {
-  text-decoration: underline;
-  font-family: LarastelleFont;
+
+.repeat {
+    margin-top: 10px;
 }
-.tabs > a.active:not(:first-child):not(:last-child) {
-  font-size: 1.3em;
+#chapters-control {
+    font-family: LarastelleFont;
+    font-size: 2em;
 }
+#chapters-control > * {
+    color: #E9D8F7;
+    text-shadow: 0 2px #000;
+}
+#chapters-control .tabs {
+    gap: 0;
+    /* background-color: none !important; */
+    /* background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); */
+}
+#chapters-control .tabs a {
+    margin: 0;
+    background: none;
+}
+#chapters-control .tabs a.active {
+    background-repeat: no-repeat;
+    background-image: linear-gradient(to right
+    ,
+    hsl(270, 60%, 70%),
+    hsl(289, 60%, 70%),
+    hsl(308, 60%, 70%),
+    hsl(327, 60%, 70%),
+    hsl(346, 60%, 70%),
+    hsl(5, 60%, 70%),
+    hsl(24, 60%, 70%),
+    hsl(43, 60%, 70%),
+    hsl(62, 60%, 70%),
+    hsl(81, 60%, 70%),
+    hsl(100, 60%, 70%),
+    hsl(119, 60%, 70%),
+    hsl(138, 60%, 70%),
+    hsl(157, 60%, 70%),
+    hsl(176, 60%, 70%),
+    hsl(195, 60%, 70%),
+    hsl(214, 60%, 70%),
+    hsl(233, 60%, 70%),
+    hsl(252, 60%, 70%)
+    );
+    mix-blend-mode: initial;
+    text-decoration: underline;
+    color: #2F2933;
+    text-shadow: 0 2px #E9D8F7d5;
+    outline: 1px solid #E9D8F750;
+    outline-offset: -1px;
+    /* border: 1px solid #2F2933; */
+    border-radius: 1px;
+    filter: drop-shadow(0 2px 0px #2F2933);
+    /* background-color: #E9D8F7; */
+}
+.pair.links > * {
+    justify-content: center;
+}
+
+/* .distance-0, .distance-1, .distance-2, .distance-3, .distance-4, .distance-5, .distance-6,
+.distance-7, .distance-8, .distance-9, .distance-10, .distance-11, .distance-12, .distance-13, .distance-14, .distance-15, .distance-16,
+.distance-17, .distance-18, .distance-19, .distance-20 {
+    display: flex;
+} */
+
+@media (max-width: 1200px) { /* 3 */
+    .distance-4,
+    .distance-5, .distance-6, .distance-7, .distance-8, .distance-9,
+    .distance-10, .distance-11, .distance-12, .distance-13, .distance-14,
+    .distance-15, .distance-16, .distance-17, .distance-18, .distance-19,
+    .distance-20
+    { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+}
+@media (max-width: 1000px) { /* 2 */
+    .distance-3, .distance-4,
+    .distance-5, .distance-6, .distance-7, .distance-8, .distance-9,
+    .distance-10, .distance-11, .distance-12, .distance-13, .distance-14,
+    .distance-15, .distance-16, .distance-17, .distance-18, .distance-19,
+    .distance-20
+    { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+}
+@media (max-width: 800px) { /* 1 */
+    .distance-2, .distance-3, .distance-4,
+    .distance-5, .distance-6, .distance-7, .distance-8, .distance-9,
+    .distance-10, .distance-11, .distance-12, .distance-13, .distance-14,
+    .distance-15, .distance-16, .distance-17, .distance-18, .distance-19,
+    .distance-20
+    { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+}
+@media (max-width: 400px) { /* 0 */
+    .distance-1, .distance-2, .distance-3, .distance-4,
+    .distance-5, .distance-6, .distance-7, .distance-8, .distance-9,
+    .distance-10, .distance-11, .distance-12, .distance-13, .distance-14,
+    .distance-15, .distance-16, .distance-17, .distance-18, .distance-19,
+    .distance-20
+    { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+}
+
+#youtube-chapters li:nth-child(1) { background-image: url(../img/larastelle-1-yt.webp) }
+#youtube-chapters li:nth-child(2) { background-image: url(../img/larastelle-2-yt.webp) }
+#youtube-chapters li:nth-child(3) { background-image: url(../img/larastelle-3-yt.webp) }
+#youtube-chapters li:nth-child(4) { background-image: url(../img/larastelle-4-yt.webp) }
+#youtube-chapters li:nth-child(5) { background-image: url(../img/larastelle-5-yt.webp) }
+#youtube-chapters li:nth-child(6) { background-image: url(../img/larastelle-6-yt.webp) }
+#youtube-chapters li:nth-child(7) { background-image: url(../img/larastelle-7-yt.webp) }
+#youtube-chapters li:nth-child(8) { background-image: url(../img/larastelle-8-yt.webp) }
+#youtube-chapters li:nth-child(9) { background-image: url(../img/larastelle-9-yt.webp) }
+#youtube-chapters li:nth-child(10) { background-image: url(../img/larastelle-10-yt.webp) }
+#youtube-chapters li:nth-child(11) { background-image: url(../img/larastelle-11-yt.webp) }
+#youtube-chapters li:nth-child(12) { background-image: url(../img/larastelle-12-yt.webp) }
+#youtube-chapters li:nth-child(13) { background-image: url(../img/larastelle-13-yt.webp) }
+#youtube-chapters li:nth-child(14) { background-image: url(../img/larastelle-14-yt.webp) }
+#youtube-chapters li:nth-child(15) { background-image: url(../img/larastelle-15-yt.webp) }
+#youtube-chapters li:nth-child(16) { background-image: url(../img/larastelle-16-yt.webp) }
