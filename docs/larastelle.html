@@ -24,11 +24,14 @@
     document.addEventListener('mousedown', () => isDragging = true);
     document.addEventListener('mouseup', () => isDragging = false);
 
+    let presentDividers = true;
+    let presentFocus = false;
+    // let
   </script>
 </head>
 <body>
-  <div role="region">
-<pre class="penrose-font" role="presentation">
+  <div id="desc-penrose" role="region">
+<pre class="penrose-font" role="presentation" aria-hidden="true">
 pQAc
 qPCo
 DO
@@ -125,7 +128,7 @@ pQAc
 qPCo
 DO
 </pre>
-<pre class="penrose-font right" role="presentation">
+<pre class="penrose-font right" role="presentation" aria-hidden="true">
 
 
 <span>d</span>
@@ -219,7 +222,7 @@ DO
 <span>d</span>
 
 </pre>
-<pre class="penrose-font left" role="presentation">
+<pre class="penrose-font left" role="presentation" aria-hidden="true">
 
 
 <span>a</span>
@@ -326,35 +329,49 @@ DO
     </div>
 
     <div class="pair">
-      <h2 class="brand-font h-text-version">text version</h2>
-      <h2 class="brand-font h-audio-version">instrumental version</h2>
+      <h2 class="brand-font h-text-version" role="form" aria-label="Text version settings">
+        text version
+        <!-- <label id="present-dividers-label" for="present-dividers" aria-label="Present chapter group dividers" style="font-family: LarastelleFont; color: white; text-shadow: none;">
+          |<input checked type="checkbox" id="present-dividers" aria-labelledby="present-dividers-label"
+            onclick="presentDividers = this.checked; document.querySelectorAll('.tabs span').forEach(div => div.style.display = presentDividers ? 'flex' : 'none');"
+          /></label>
+        <label id="present-focus-label" for="present-focus" aria-label="Present new chapter text with focus" style="font-family: sans-serif; text-shadow: none;">
+          ⃣<input checked type="checkbox" id="present-focus" aria-labelledby="present-focus-label"
+            onclick="presentFocus = this.checked; this.checked && document.querySelector(`[role='document']`).focus();"
+          />
+        </label> -->
+      </h2>
+      <h2 class="brand-font h-audio-version" role="presentation">instrumental version</h2>
     </div>
-    <nav class="pair links media">
+    <div class="pair links media">
       <nav id="chapters-control" aria-label="Story">
-        <a onclick="return album(this)" aria-label="Previous chapter">‹|&nbsp;</a>
+        <a class="nav-previous" onclick="return album(this)" aria-label="Previous chapter"></a>
         <div class="tabs" role="list" aria-label="Chapters">
-          <a aria-controls="ch0" aria-label="Foreword" onmouseenter="isDragging && album(this, 0)" onclick="album(this, 0)"
-             class="active" aria-selected="true">*</a>
-          <a aria-controls="ch1" aria-label="Chapter 1" onmouseenter="isDragging && album(this, 1)" onclick="album(this, 1)">.</a>
-          <a aria-controls="ch2" aria-label="Chapter 2" onmouseenter="isDragging && album(this, 2)" onclick="album(this, 2)">‚</a>
-          <a aria-controls="ch3" aria-label="Chapter 3" onmouseenter="isDragging && album(this, 3)" onclick="album(this, 3)"></a>
-          <a aria-controls="ch4" aria-label="Chapter 4" onmouseenter="isDragging && album(this, 4)" onclick="album(this, 4)">'</a>
-          <a aria-controls="ch5" aria-label="Chapter 5" onmouseenter="isDragging && album(this, 5)" onclick="album(this, 5)">¦</a>
-          <a aria-controls="ch6" aria-label="Chapter 6" onmouseenter="isDragging && album(this, 6)" onclick="album(this, 6)">.</a>
-          <a aria-controls="ch7" aria-label="Chapter 7" onmouseenter="isDragging && album(this, 7)" onclick="album(this, 7)">‚</a>
-          <a aria-controls="ch8" aria-label="Chapter 8" onmouseenter="isDragging && album(this, 8)" onclick="album(this, 8)"></a>
-          <a aria-controls="ch9" aria-label="Chapter 9" onmouseenter="isDragging && album(this, 9)" onclick="album(this, 9)">'</a>
-          <a aria-controls="ch10" aria-label="Chapter 10" onmouseenter="isDragging && album(this, 10)" onclick="album(this, 10)">¦</a>
-          <a aria-controls="ch11" aria-label="Chapter 11" onmouseenter="isDragging && album(this, 11)" onclick="album(this, 11)">.</a>
-          <a aria-controls="ch12" aria-label="Chapter 12" onmouseenter="isDragging && album(this, 12)" onclick="album(this, 12)">‚</a>
-          <a aria-controls="ch13" aria-label="Chapter 13" onmouseenter="isDragging && album(this, 13)" onclick="album(this, 13)"></a>
-          <a aria-controls="ch14" aria-label="Chapter 14" onmouseenter="isDragging && album(this, 14)" onclick="album(this, 14)">'</a>
-          <a aria-controls="ch15" aria-label="Chapter 15" onmouseenter="isDragging && album(this, 15)" onclick="album(this, 15)">¦</a>
-          <a aria-controls="ch16" aria-label="Chapter 16" onmouseenter="isDragging && album(this, 16)" onclick="album(this, 16)">.</a>
-          <a aria-controls="ch17" aria-label="Appendix" onmouseenter="isDragging && album(this, 17)" onclick="album(this, 17)">‚</a>
-          <a aria-controls="ch18" aria-label="Afterword" onmouseenter="isDragging && album(this, 18)" onclick="album(this, 18)">•</a>
+          <a aria-controls="ch0" aria-label="Foreword" onmouseenter="isDragging && album(this, 0)" onclick="album(this, 0)" class="active" aria-selected="true"></a>
+          <span role="presentation" class="distance-20">&</span>
+          <a aria-controls="ch1" aria-label="Chapter 1" onmouseenter="isDragging && album(this, 1)" onclick="album(this, 1)"></a>
+          <a aria-controls="ch2" aria-label="Chapter 2" onmouseenter="isDragging && album(this, 2)" onclick="album(this, 2)"></a>
+          <a aria-controls="ch3" aria-label="Chapter 3" onmouseenter="isDragging && album(this, 3)" onclick="album(this, 3)"></a>
+          <a aria-controls="ch4" aria-label="Chapter 4" onmouseenter="isDragging && album(this, 4)" onclick="album(this, 4)"></a>
+          <span role="presentation">|</span>
+          <a aria-controls="ch5" aria-label="Chapter 5" onmouseenter="isDragging && album(this, 5)" onclick="album(this, 5)"></a>
+          <a aria-controls="ch6" aria-label="Chapter 6" onmouseenter="isDragging && album(this, 6)" onclick="album(this, 6)"></a>
+          <a aria-controls="ch7" aria-label="Chapter 7" onmouseenter="isDragging && album(this, 7)" onclick="album(this, 7)"></a>
+          <a aria-controls="ch8" aria-label="Chapter 8" onmouseenter="isDragging && album(this, 8)" onclick="album(this, 8)"></a>
+          <span role="presentation">|</span>
+          <a aria-controls="ch9" aria-label="Chapter 9" onmouseenter="isDragging && album(this, 9)" onclick="album(this, 9)"></a>
+          <a aria-controls="ch10" aria-label="Chapter 10" onmouseenter="isDragging && album(this, 10)" onclick="album(this, 10)"></a>
+          <a aria-controls="ch11" aria-label="Chapter 11" onmouseenter="isDragging && album(this, 11)" onclick="album(this, 11)"></a>
+          <a aria-controls="ch12" aria-label="Chapter 12" onmouseenter="isDragging && album(this, 12)" onclick="album(this, 12)"></a>
+          <span role="presentation">|</span>
+          <a aria-controls="ch13" aria-label="Chapter 13" onmouseenter="isDragging && album(this, 13)" onclick="album(this, 13)"></a>
+          <a aria-controls="ch14" aria-label="Chapter 14" onmouseenter="isDragging && album(this, 14)" onclick="album(this, 14)"></a>
+          <a aria-controls="ch15" aria-label="Chapter 15" onmouseenter="isDragging && album(this, 15)" onclick="album(this, 15)"></a>
+          <a aria-controls="ch16" aria-label="Chapter 16" onmouseenter="isDragging && album(this, 16)" onclick="album(this, 16)"></a>
+          <a aria-controls="ch17" aria-label="Afterword" onmouseenter="isDragging && album(this, 17)" onclick="album(this, 17)"></a>
         </div>
-        <a onclick="return album(this)" aria-label="Next chapter">:|›</a>
+        <!-- <a aria-controls="ch17" aria-label="Appendix" onmouseenter="isDragging && album(this, 17)" onclick="album(this, 17)"></a> -->
+        <a class="nav-next" onclick="return album(this)" aria-label="Next chapter"></a>
       </nav>
       <div id="music-control" class="group-label" role="list" aria-label="Music providers">
         <!-- <a role="list-item" onclick="return source(this)" -->
@@ -362,24 +379,24 @@ DO
           id="pick-udio" data-iframe="udio" aria-controls="view-udio"
           title="Go to Udio"><img alt="Udio logo" src="img/udio.png" width="45" />
         </a>
-        <a role="list-item" onclick="return source(this)"
+        <button role="list-item" onclick="return source(this)"
           id="pick-apple" data-iframe="apple" aria-controls="view-apple"
           title="Prefer Apple Music"><img alt="Apple Music logo" src="img/applemusic.png" width="45" />
-        </a>
-        <a role="list-item" onclick="return source(this)"
+        </button>
+        <button role="list-item" onclick="return source(this)"
           id="pick-spotify" data-iframe="spotify" aria-controls="view-spotify"
           aria-selected="true" class="active" title="Prefer Spotify"><img alt="Spotify logo" src="img/spotify.png" width="45" />
-        </a>
-        <a role="list-item" onclick="return source(this)"
+        </button>
+        <button role="list-item" onclick="return source(this)"
           id="pick-amazon" data-iframe="amazon" aria-controls="view-amazon"
           title="Prefer Amazon Music"><img alt="Amazon Music logo" src="img/amazon.png" width="45" />
-        </a>
+        </button>
         <!-- <a role="list-item" onclick="return source(this)"
           id="pick-youtube" data-iframe="youtube" aria-controls="view-youtube"
           title="Prefer YouTube"><img alt="YouTube logo" src="img/youtube.png" width="45" />
         </a> -->
       </div>
-    </nav>
+    </div>
 
     <div id="showcase">
       <div class="music-story">
@@ -387,25 +404,29 @@ DO
           <div class="content">
             <div class="panels">
               <div role="tabpanel" id="ch0" style="text-align: justify; display: none;">
-                <h3><span class="larastelle-font">LARASTELLE</span><br>☼<br>Foreword</h3>
+                <h3><span class="larastelle-font">LARASTELLE</span> Foreword</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
                 <p>
                   <em>LARASTELLE</em> is the gapless instrumentalization of an
                   original manuscript titled <em>The Sailing Spire</em>. Uniquely
-                  progressive, it grows far beyond its dungeon synth beginnings;
-                  It will hum and warble at you, and accompany the actions of Alyiem,
-                  a young scout with a subtle paranormal command of her environment.
+                  progressive, it evolves beyond dungeon synth beginnings to
+                  warble and bend its style around a sci-fi fantasy narrative
                 </p>
                 <p>
-                  Each track is presented with a corresponding lore document, in
-                  the perspective of Ionyne, whose story is bound to intersect
-                  Alyiem's.
+                  Each track is presented with a corresponding lore document in
+                  the perspective of Ionyne, whose story is bound to Alyiem's
+                  on the rogue planet Castille.
+                </p>
+                <p>
+                  While you will read of Alyiem here, the text presentation is
+                  thoroughly Ionyne's. Please enjoy these glimpses into fragments
+                  of <em>The Sailing Spire</em> through another's eyes and logs.
                 </p>
               </div>
               </div>
               <div role="tabpanel" id="ch1" style="display: none;">
-                <h3 aria-label="Chapter 1: The Sky">01<br>☼<br>The Sky</h3>
+                <h3 aria-label="Chapter 1: The Sky">The Sky</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <!-- <hr role="presentation" aria-hidden="true" /> -->
                 <pre aria-describedby="text-log"><p role="text" aria-label="(Note: It appears to begin by identifying something found.)">
@@ -479,7 +500,7 @@ I shake it for you too sometimes.</span>
               </div>
               </div>
               <div role="tabpanel" id="ch2" style="display: none;">
-                <h3 aria-label="Chapter 2: Militia Nine">02<br>☼<br>Militia Nine</h3>
+                <h3 aria-label="Chapter 2: Militia Nine">Militia Nine</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
     <p>«She's learned some carefulness,» I subvocalize to Larastelle.</p>
@@ -493,7 +514,7 @@ I shake it for you too sometimes.</span>
               </div>
               </div>
               <div role="tabpanel" id="ch3" style="display: none;">
-                <h3 aria-label="Chapter 3: Unrest Well">03<br>☼<br>Unrest Well</h3>
+                <h3 aria-label="Chapter 3: Unrest Well">Unrest Well</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
             <pre>
@@ -509,7 +530,7 @@ MULTIPLE NEW WIDE SCAN ALERTS:
               </div>
               </div>
               <div role="tabpanel" id="ch4" style="display: none;">
-                <h3 aria-label="Chapter 4: Jagged Road in the Sky">04<br>☼<br>Jagged Road in the Sky</h3>
+                <h3 aria-label="Chapter 4: Jagged Road in the Sky">Jagged Road in the Sky</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
     <p>«She's headed to do her report. No intercept.»</p>
@@ -529,7 +550,7 @@ MULTIPLE NEW WIDE SCAN ALERTS:
               </div>
               </div>
               <div role="tabpanel" id="ch5" style="display: none;">
-                <h3 aria-label="Chapter 5: Tacit at the Prison Party">05<br>☼<br>Tacit at the Prison Party</h3>
+                <h3 aria-label="Chapter 5: Tacit at the Prison Party">Tacit at the Prison Party</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
             <pre>
@@ -556,7 +577,7 @@ They're going to push me through. They've drawn lines. Rich links have been clos
               </div>
               </div>
               <div role="tabpanel" id="ch6" style="display: none;">
-                <h3 aria-label="Chapter 6: I Am Not Myself">06<br>☼<br>I Am Not Myself</h3>
+                <h3 aria-label="Chapter 6: I Am Not Myself">I Am Not Myself</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
     <p>«Hello?»</p>
@@ -616,7 +637,7 @@ BRING HER.¶
               </div>
               </div>
               <div role="tabpanel" id="ch7" style="display: none;">
-                <h3 aria-label="Chapter 7: Systematic Dismantlement">07<br>☼<br>Systematic Dismantlement</h3>
+                <h3 aria-label="7: Systematic Dismantlement">Systematic Dismantlement</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
             <pre>
@@ -710,7 +731,7 @@ RE-ENABLING SPEECH SYSTEMS.
               </div>
               </div>
               <div role="tabpanel" id="ch8" style="display: none;">
-                <h3 aria-label="Chapter 8: Like Books Do">08<br>☼<br>Like Books Do</h3>
+                <h3 aria-label="Chapter 8: Like Books Do">Like Books Do</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
     <p>Alyiem was a wondrous antique, no concept of how old her and her line were. They had skipped millions of years of time outside, and she walked up half bored to a wall of archived knowledge, and sighed at it. Breathing, living humanity, just acting out the way its biology wanted, whether or not it had facts.</p>
@@ -732,7 +753,7 @@ RE-ENABLING SPEECH SYSTEMS.
               </div>
               </div>
               <div role="tabpanel" id="ch9" style="display: none;">
-                <h3 aria-label="Chapter 9: The Revenge of Something Gentle">09<br>☼<br>The Revenge of Something Gentle</h3>
+                <h3 aria-label="Chapter 9: The Revenge of Something Gentle">The Revenge of Something Gentle</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
     <p>Third-Line had developed names for the phenomena experienced under the Entropy beast's stewardship. The sharp magnetic distortions were just 'waves' to them. The tide came in and snuffed them all to sleep sometimes, and they couldn't just pick up and move, because it happened everywhere, at least on the scale of this hobbled civilization.</p>
@@ -776,7 +797,7 @@ BLITTING OVER VISUAL STREAM.
               </div>
               </div>
               <div role="tabpanel" id="ch10" style="display: none;">
-                <h3 aria-label="Chapter 10: Where Knowledge Goes to Die">10<br>☼<br>Where Knowledge Goes to Die</h3>
+                <h3 aria-label="Chapter 10: Where Knowledge Goes to Die">Where Knowledge Goes to Die</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
     <p>Alyiem wouldn't let me lead with my field suit lights. She wore stubbornness with ease.</p>
@@ -795,7 +816,7 @@ BLITTING OVER VISUAL STREAM.
               </div>
               </div>
               <div role="tabpanel" id="ch11" style="display: none;">
-                <h3 aria-label="Chapter 11: I'm With You">11<br>☼<br>I'm With You</h3>
+                <h3 aria-label="Chapter 11: I'm With You">I'm With You</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
 <pre>
@@ -850,7 +871,7 @@ RIFT DIAMETER RAISED TO 1KM.
               </div>
               </div>
               <div role="tabpanel" id="ch12" style="display: none;">
-                <h3 aria-label="Chapter 12: The Sailing Spire">12<br>☼<br>The Sailing Spire</h3>
+                <h3 aria-label="Chapter 12: The Sailing Spire">The Sailing Spire</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
     <p>As the Spire rose, that Entropy built from the scraps of Third-Line's civilization, cold air blasted those of us remaining on the flat dais top. Some of the militia had been yanked as we crested the surface and were thrust high over the landscape. Some jumped.</p>
@@ -870,7 +891,7 @@ RIFT DIAMETER RAISED TO 1KM.
               </div>
               </div>
               <div role="tabpanel" id="ch13" style="display: none;">
-                <h3 aria-label="Chapter 13: Belle">13<br>☼<br>Belle</h3>
+                <h3 aria-label="Chapter 13: Belle">Belle</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
 <pre>
@@ -894,7 +915,7 @@ RIFT DIAMETER RAISED TO 1KM.
               </div>
               </div>
               <div role="tabpanel" id="ch14" style="display: none;">
-                <h3 aria-label="Chapter 14: Vanne">14<br>☼<br>Vanne</h3>
+                <h3 aria-label="Chapter 14: Vanne">Vanne</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
     <p>Alyiem did her best. There were too many Stranglethorns, but even those pulled back sharply as Alyiem's braided vines delivered her to the perch of the crashed skylight, face to face with Vanne.</p>
@@ -919,7 +940,7 @@ RIFT DIAMETER RAISED TO 1KM.
               </div>
               </div>
               <div role="tabpanel" id="ch15" style="display: none;">
-                <h3 aria-label="Chapter 15: Anything I Can">15<br>☼<br>Anything I Can</h3>
+                <h3 aria-label="Chapter 15: Anything I Can">Anything I Can</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
     <p>I stand in Larastelle's orbital wreckage. The point gravity still runs, but that is not a sufficiently good sign.</p>
@@ -946,7 +967,7 @@ RIFT DIAMETER RAISED TO 1KM.
               </div>
               </div>
               <div role="tabpanel" id="ch16" style="display: none;">
-                <h3 aria-label="Chapter 16: Sail">16<br>☼<br>Sail</h3>
+                <h3 aria-label="Chapter 16: Sail">Sail</h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                 <hr aria-describedby="text-begin" />
     <p>To a dance of slow motion helixes that would take months to subside, I supervise the vacuum telescope construction from within the Spire, beholding the industry of the corrupted Entropy beast. So much had been in secret, below the surface. Castille had long ago become a beating machine heart, its entropic sin hidden from Third-Line on the surface.</p>
@@ -958,7 +979,7 @@ RIFT DIAMETER RAISED TO 1KM.
     <p>Against the blank emptiness of the relativistic Reaches, Castille sails to nowhere, its speed a perfect cocoon until the Stranglethorns ascend Larastelle's post-mortal brainstem to evict her from its universe altogether.</p>
               </div>
               </div>
-              <div role="tabpanel" id="ch17" style="display: none;">
+              <!-- <div role="tabpanel" id="ch17" style="display: none;">
                 <h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                   <pre class="chapter-font" style="color: inherit">
@@ -985,7 +1006,7 @@ RIFT DIAMETER RAISED TO 1KM.
 ᳀ #9025) Done.
 ᳀ #9025) Ionyne, please recall the purpose of your interest in Alyiem.
 </pre>
-                <!-- <p>
+                <p>
                   «Alyiem brought an active totem into surface scanner range.
                   The sub-surface scans were useless, or we would have noticed
                   more just than Alyiem's activated totem.»
@@ -1059,14 +1080,14 @@ RIFT DIAMETER RAISED TO 1KM.
                 <h4>Belle</h4>
                 <p>salt shaker</p>
                 <h4>"Entropy Infant"-Class Humanoid</h4>
-                <p>militia nine uh oh</p> -->
-              </div>
-              <div role="tabpanel" id="ch18" style="text-align: justify; display: none;">
+                <p>militia nine uh oh</p>
+              </div> -->
+              <div role="tabpanel" id="ch17" style="text-align: justify; display: none;">
                 <h3>
                 <div role="document" aria-label="Chapter text" tabindex="0">
                   <span class="larastelle-font">LARASTELLE</span><br>
                   ☼<br>
-                  autumn valenta
+                  Afterword
                 </h3>
                 <hr aria-describedby="text-begin" />
                 <p>
@@ -1078,6 +1099,9 @@ RIFT DIAMETER RAISED TO 1KM.
                 </p>
                 <p>
                   Thank you for reading.
+                </p>
+                <p class="brand-font">
+                  autumn valenta
                 </p>
               </div>
             </div>
@@ -1101,7 +1125,7 @@ RIFT DIAMETER RAISED TO 1KM.
         <!-- <button id="music-show" class="sr-only" onclick="togglePlayer(true)">Expand music player</button>
         <button id="music-hide" class="sr-only" aria-hidden="true" onclick="togglePlayer(true)">Collapse music player</button> -->
         <!-- <div> -->
-          <aside class="player" role="complementary" aria-labelledby="version-audio">
+          <aside class="player" role="complementary" aria-label="Media service frame">
             <iframe id="spotify"
               style="display: none; border-radius:12px;"
               src="https://open.spotify.com/embed/album/6RH3MDchaPYINJYVZ0abb8?utm_source=generator"

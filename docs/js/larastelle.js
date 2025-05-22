@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Set active Source
   const player = document.querySelector('.player');
-  const active = document.querySelector('#music-control a.active');
+  const active = document.querySelector('#music-control .active');
   const iframes = player.querySelectorAll(':scope > [id]');
   iframes.forEach((iframe) => {
     const id = iframe.getAttribute('id');
@@ -82,7 +82,7 @@ function seek(el) {
 function source(el, soft = false) {
   const id = el.getAttribute('data-iframe');
 
-  const sources = document.querySelectorAll('.links a');
+  const sources = document.querySelectorAll('#music-control > *');
   sources.forEach((s) => {
     s.classList.remove('active');
     s.setAttribute('aria-selected', 'false');

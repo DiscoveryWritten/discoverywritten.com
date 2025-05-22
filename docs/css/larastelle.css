@@ -12,10 +12,13 @@
 @keyframes flicker {
   0%, 100% { color: #00d0ff; }
   15%      { color: #00b7ff; }
+  18%      { color: #00d0ff; }
   20%      { color: #00e1ff; }
-  25%      { color: #00b7ff; }
-  30%      { color: #00d0ff; }
+  23%      { color: #00b7ff; }
+  25%      { color: #00d0ff; }
+  30%      { color: #00b7ff; }
   42%      { color: #00e1ff; }
+  48%      { color: #00b7ff; }
   50%      { color: #00b7ff; }
   70%      { color: #00ccff; }
   75%      { color: #00d0ff; }
@@ -58,6 +61,12 @@ pre.chapter-font {
     text-shadow: 1px 3px #2F2933;
     font-family: monospace;
 }
+#desc-penrose {
+    position: absolute;
+    width: 100%;
+    height: 3000px;
+    overflow: hidden;
+}
 .penrose-font {
     opacity: 0.62;
     position: absolute;
@@ -72,6 +81,7 @@ pre.chapter-font {
     mix-blend-mode: difference;
     pointer-events: none;
     overflow: hidden;
+    /* margin-top: -0.4em; */ /* misses bottom edge render */
     animation: flicker 60s cubic-bezier(0.7, -1, 0.3, 2) infinite;
 }
 .penrose-font span {
@@ -117,13 +127,15 @@ h3 {
     text-shadow: 0 0 2px #2F2933;
 }
 
-.feature .key {
-    width: 368px;
-}
-
+.links button,
 .links a {
     user-select: none;
     cursor: pointer;
+    align-items: center;
+}
+.links span {
+    margin: 0;
+    color: #bfb4c8;
 }
 .links img {
     filter: drop-shadow(0 2px 0px #000000);
@@ -149,10 +161,15 @@ h3 {
     margin: 0;
     background: none;
 }
+#chapters-control .tabs span {
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    user-select: none;
+}
 #chapters-control .tabs a.active {
     background-repeat: no-repeat;
-    background-image: linear-gradient(to right
-    ,
+    background-image: linear-gradient(to right,
     hsl(270, 60%, 70%),
     hsl(289, 60%, 70%),
     hsl(308, 60%, 70%),
@@ -173,15 +190,14 @@ h3 {
     hsl(233, 60%, 70%),
     hsl(252, 60%, 70%)
     );
-    mix-blend-mode: initial;
-    text-decoration: underline;
-    color: #2F2933;
-    text-shadow: 0 2px #E9D8F7d5;
+    color: #54455d;
+    /* text-shadow: 0 2px #52485a; */
+    text-shadow: none;
     outline: 1px solid #E9D8F750;
     outline-offset: -1px;
     /* border: 1px solid #2F2933; */
     border-radius: 1px;
-    filter: drop-shadow(0 2px 0px #2F2933);
+    filter: /* drop-shadow(0 2px 3px #2F2933) */ drop-shadow(0 2px black);
     /* background-color: #E9D8F7; */
 }
 .pair.links > * {
@@ -243,3 +259,54 @@ h3 {
 #youtube-chapters li:nth-child(14) { background-image: url(../img/larastelle-14-yt.webp) }
 #youtube-chapters li:nth-child(15) { background-image: url(../img/larastelle-15-yt.webp) }
 #youtube-chapters li:nth-child(16) { background-image: url(../img/larastelle-16-yt.webp) }
+
+#chapters-control > a {
+    filter: hue-rotate(120deg) brightness(1);
+    mix-blend-mode: luminance;
+    animation: flicker 60s cubic-bezier(0.7, -1, 0.3, 2) infinite;
+    text-decoration: underline;
+    text-underline-offset: 0.06em;
+    transition: text-underline-offset 0.1s ease-out, filter 0.1s ease-in;
+}
+#chapters-control > a:hover {
+    text-underline-offset: 0.16em;
+    filter: hue-rotate(120deg) brightness(1.5);
+}
+#chapters-control .tabs a:hover {
+    text-decoration: underline;
+}
+.nav-previous::before { content: "«" }
+.nav-next::before { content: "»" }
+.nav-previous:hover::before { content: "‹\00A0" }
+.nav-next:hover::before { content: "\00A0›" }
+@media (max-width: 350px) {
+    #chapters-control { font-size: 1.4em; }
+    .nav-previous::before { content: "‹" }
+    .nav-next::before { content: "›" }
+    .nav-previous:hover::before { content: "‹" }
+    .nav-next:hover::before { content: "›" }
+}
+
+
+
+#chapters-control .tabs > .active::before {
+    mix-blend-mode: multiply;
+}
+[aria-controls="ch0"]::before { content: "|:"; }
+[aria-controls="ch1"]::before,
+[aria-controls="ch5"]::before,
+[aria-controls="ch9"]::before,
+[aria-controls="ch13"]::before  { content: "."; }
+[aria-controls="ch2"]::before,
+[aria-controls="ch6"]::before,
+[aria-controls="ch10"]::before,
+[aria-controls="ch14"]::before { content: "‚"; }
+[aria-controls="ch3"]::before,
+[aria-controls="ch7"]::before,
+[aria-controls="ch11"]::before,
+[aria-controls="ch15"]::before { content: "¨"; width: .4em; clip-path: inset(-10% 0% -50% -5%); }
+[aria-controls="ch4"]::before,
+[aria-controls="ch8"]::before,
+[aria-controls="ch12"]::before,
+[aria-controls="ch16"]::before { content: "'"; }
+[aria-controls="ch17"]::before { content: ":|"; }

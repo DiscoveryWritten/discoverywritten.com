@@ -42,9 +42,10 @@ h2 {
   flex-wrap: wrap;
   gap: 5px;
 }
-.tabs > a {
-  /* display: flex; */
-  margin: 0 5px;
+.links button,
+.links a {
+  padding: 0;
+  margin: 0;
   cursor: pointer;
   text-shadow: 0 2px #000;
 }
@@ -101,15 +102,6 @@ h2 {
   font-size: 2.5em;
   text-shadow: 1px 3px #2F2933;
 }
-.story #footer .controls {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: LarastelleFont;
-  font-size: 2.5em;
-  text-shadow: 1px 3px #2F2933;
-}
 .story .controls a {
   cursor: pointer;
 }
@@ -118,45 +110,10 @@ h2 {
   margin-top: 1em;
 }
 
-.links a.active {
+.links .active {
   background-color: #2F2933;
   mix-blend-mode: hard-light;
   border-radius: 5px;
-}
-
-ol#youtube-chapters {
-  background-color: #000;
-  list-style: none;
-  padding: 10px 0;
-  margin: 0 80px 0 20px;
-  /* text-shadow: 1px 2px #000000; */
-  font-size: 1em;
-  /* font-family: ChapterFont; */
-}
-#youtube-chapters li a {
-  display: flex;
-  justify-content: start;
-  justify-items: center;
-  place-items: center;
-  padding: 0 10px;
-  cursor: pointer;
-}
-#youtube-chapters li span {
-  display: inline-block;
-  margin: 0 10px;
-}
-#youtube-chapters li pre {
-  display: inline-block;
-  margin-left: auto;
-}
-#youtube-chapters li a::before {
-  content: "";
-  margin-right: 10px;
-}
-#youtube-chapters li a.active::before {
-  content: "⧐";
-  color: white;
-  /* font-size: 1.5em; */
 }
 
 @media (max-width: 645px) {
@@ -218,34 +175,13 @@ ol#youtube-chapters {
   }
 }
 
-#youtube-chapters li {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-#youtube-chapters li a {
-  mix-blend-mode: normal;
-  filter: drop-shadow(1px 2px 0 #000000) drop-shadow(0 -1px .5px #000000);
-  font-weight: bold;
-}
-#youtube-chapters li a.darken {
-  color: black;
-  mix-blend-mode: darken;
-  filter: none;
-}
-#youtube-chapters li a.hard-light {
-  mix-blend-mode: hard-light;
-}
-#youtube-chapters li a.exclusion {
-  mix-blend-mode: exclusion;
-}
-[aria-label] button {
+/* [aria-label] button {
   height: 0;
   width: 0;
   padding: 0;
   margin: 0;
   border: none;
-}
+} */
 
 .pair {
   display: flex;
