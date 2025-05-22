@@ -201,6 +201,11 @@ h2 {
 }
 #bg > .pair:not(.links) {
   mix-blend-mode: difference;
+  pointer-events: none;
+  user-select: none;
+}
+#bg > .pair h2 {
+  text-shadow: none;
 }
 #chapters-control {
   display: flex;

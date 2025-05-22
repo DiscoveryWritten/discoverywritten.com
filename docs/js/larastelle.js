@@ -1,7 +1,21 @@
 let useFocus = false;
 // let gradient;
+let storyScroller = null;
 const iframeCache = new Map();
+let navNext = null;
+let navPrevious = null;
+
+document.addEventListener('keydown', (e) => {
+  const doc = document.querySelector('.panels > div[aria-hidden="false"]');
+});
+
 document.addEventListener('DOMContentLoaded', () => {
+  navNext = document.querySelector('.nav-next')
+  navPrevious = document.querySelector('.nav-previous')
+  // Bind scroll events for chapter timeline
+  // storyScroller = document.getElementById('chapters-control');
+  // storyScroller.addEventListener('wheel', onScroll, { passive: false });
+
   // Build chapter gradient positions
   const row = document.querySelector('#chapters-control .tabs');
   const links = row.querySelectorAll(':scope > a');
@@ -117,12 +131,18 @@ function album(el, ch, softFocus = null) {
   const panels = document.querySelectorAll('.panels > div');
   const tabs = [...document.querySelectorAll('.tabs a')];
 
+
   panels.forEach((panel) => {
     panel.style.display = "none";
-    panel.setAttribute('aria-hidden', 'true');
+    panel.setAttribute('inert', true);
+    unbake(panel);
   });
 
-  if (ch === undefined) {
+  if (el?.hasAttribute('data-last')) {
+    ch = 1;
+    implied = tabs[ch];
+    console.log(el, ch, implied);
+  } else if (ch === undefined) {
     ch = tabs.findIndex((tab) => tab.classList.contains('active'));
 
     if (el.previousElementSibling === null) {
@@ -135,11 +155,12 @@ function album(el, ch, softFocus = null) {
     implied = tabs[ch];
   }
 
-  // const maxRadius = Math.floor(tabs.length / 2);
+  // Annotate each chapter segment with its absolute value distance
+  // from the current selection. @media queries decide which distance
+  // is allowed to display.
   tabs.forEach((tab, i) => {
     const distance = Math.abs(i - ch);
     const clamped = Math.min(distance, tabs.length);
-    // console.log(i, ch, distance, clamped, tab);
     for (const cls of [...tab.classList]) {
       if (/^distance-\d+$/.test(cls)) {
         tab.classList.remove(cls);
@@ -147,7 +168,8 @@ function album(el, ch, softFocus = null) {
     }
     tab.classList.remove('active');
     tab.classList.add(`distance-${clamped}`);
-    tab.setAttribute('aria-selected', 'false');
+    tab.removeAttribute('aria-selected');
+    tab.removeAttribute('innert');
   });
 
   if (el === null && implied === null) {
@@ -158,16 +180,84 @@ function album(el, ch, softFocus = null) {
   const finalEl = implied || el;
   finalEl.classList.add('active');
   finalEl.setAttribute('aria-selected', 'true');
-
+  document.querySelector('.h-text-version').textContent = finalEl.getAttribute('aria-label');
+  if (finalEl.nextElementSibling) {
+    const preview = (
+      finalEl.nextElementSibling.getAttribute('aria-label')
+      || finalEl.nextElementSibling.nextElementSibling.getAttribute('aria-label')
+    );
+    document.querySelector('#next').removeAttribute('data-last');
+    document.querySelector('#next').textContent = `Next: ${preview}`;
+  } else {
+    document.querySelector('#next').setAttribute('data-last', true);
+    document.querySelector('#next').textContent = 'Repeat';
+  }
   if (panels[ch] !== undefined) {
     panels[ch].style.display = 'block';
-    panels[ch].setAttribute('aria-hidden', 'false');
+    panels[ch].removeAttribute('inert');
+    // panels[ch].setAttribute('aria-hidden', 'false');
     if (!soft) {
       panels[ch].querySelector('[role=document]').focus();
     }
   }
 
+  rebake(panels[ch]);
+
   return false;
+}
+
+let carousel = null;
+let startX = 0;
+let startTime = 0;
+function throttle(fn, delay = 50) {
+  let blocked = false;
+  return function(e) {
+    if (blocked) return;
+    blocked = true;
+    fn(e);
+    setTimeout(() => blocked = false, delay);
+  };
+}
+function pageStart(e) {
+  if (e.deltaX && !e.deltaY) {
+    startX = e.deltaX;
+    e.preventDefault();
+    e.stopPropagation();
+    pageEnd(e);
+  } else {
+    startX = (e.touches?.[0] || e).clientX;
+  }
+  startTime = Date.now();
+}
+const pageEnd = throttle(function pageEnd(e) {
+  const endX = e.deltaX || (e.changedTouches?.[0] || e).clientX;
+  const deltaX = endX - startX;
+  // const deltaT = Date.now() - startTime;
+  startTime = 0;
+
+  if (deltaX > 0 || startX > 0) {
+    album(navNext);
+  } else if (deltaX < 0 || startX < 0) {
+    album(navPrevious);
+  }
+});
+function unbake(doc) {
+  if (doc === null) {
+    return;
+  }
+  doc.removeEventListener('wheel', pageStart);
+  doc.removeEventListener('touchstart', pageStart);
+  doc.removeEventListener('touchend', pageEnd);
+  // doc.removeEventListener('mousedown', pageStart);
+  // doc.removeEventListener('mouseup', pageEnd);
+
+}
+function rebake(doc) {
+  doc.addEventListener('wheel', pageStart);
+  doc.addEventListener('touchstart', pageStart);
+  doc.addEventListener('touchend', pageEnd);
+  // doc.addEventListener('mousedown', pageStart);
+  // doc.addEventListener('mouseup', pageEnd);
 }
 
 // // screen-reader function for busy iframes
@@ -175,4 +265,46 @@ function album(el, ch, softFocus = null) {
 //   document.querySelector('player').setAttribute('aria-hidden', !on);
 //   document.getElementById('music-show').hidden = on;
 //   document.getElementById('music-hide').hidden = !on;
+// }
+
+
+// const scrollUnit = 10; // tune this later
+// let scrollX = 0;
+// let targetStep = 0;
+// let lastEmittedStep = 0;
+let stopTimer = null;
+// let maxAbsDelta = 1;
+// let sensitivity = .25;
+
+// function onScroll(e) {
+//   e.preventDefault();
+//   e.stopPropagation();
+//   const itemCount = storyScroller.querySelectorAll('.tabs > a').length;
+
+//   const delta = e.deltaY || e.deltaX;
+//   maxAbsDelta = Math.max(maxAbsDelta, Math.abs(delta));
+//   const normalized = delta / maxAbsDelta;
+//   scrollX += normalized;
+
+//   const maxScroll = (itemCount - 1) * scrollUnit;
+//   scrollX = Math.max(0, Math.min(scrollX, maxScroll));
+//   console.log(maxAbsDelta, scrollX);
+
+//   if (Math.abs(scrollX) >= sensitivity) {
+//     const stepDirection = Math.sign(scrollX);
+//     scrollX = 0; // reset after emit
+//     handleStepChange(stepDirection);
+//   }
+
+//   clearTimeout(stopTimer);
+//   stopTimer = setTimeout(() => {
+//     targetStep = Math.round(scrollX / scrollUnit);
+//     scrollX = targetStep * scrollUnit;
+//     handleStepChange(targetStep); // optional: emit again if rounding changed
+//   }, 100); // short pause = scroll stopped
+// }
+
+// function handleStepChange(step) {
+//   console.log('Moved to step:', step);
+//   // Move carousel, highlight, etc.
 // }

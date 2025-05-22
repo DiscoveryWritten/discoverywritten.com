@@ -50,8 +50,9 @@ pre.chapter-font {
 .story h3 span.long {
     text-align: left;
 }
-.story h3 span.larastelle-font {
-    display: inline-block;
+.story h3.larastelle-font {
+    font-family: LarastelleFont;
+    /* display: inline-block; */
     font-size: 2.5rem;
     line-height: 1.2;
 }
@@ -310,3 +311,23 @@ h3 {
 [aria-controls="ch12"]::before,
 [aria-controls="ch16"]::before { content: "'"; }
 [aria-controls="ch17"]::before { content: ":|"; }
+
+#next {
+    display: flex;
+    font-size: 1.4em;
+    justify-content: center;
+    align-items: center;
+}
+#next::after {
+    content: "\00a0→";
+}
+#next[data-last]::after {
+    content: "\00a0𝄇";
+    font-size: 1.8em;
+    text-decoration: none;
+}
+#next[data-last]:hover::after {
+    text-decoration: none;
+    text-decoration: 1px underline;
+    text-underline-offset: -0.1em;
+}
