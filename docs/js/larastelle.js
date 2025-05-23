@@ -161,8 +161,8 @@ function source(el, soft = false) {
   return false;
 }
 
-function album(el, ch, softFocus = null) {
-  const soft = softFocus || !useFocus;
+function album(el, ch, softFocus = null, noRing = false) {
+  const soft = softFocus === null ? !useFocus : softFocus;
   let implied = null;
   const panels = document.querySelectorAll('.panels > div');
   const tabs = [...document.querySelectorAll('.tabs a')];
@@ -232,7 +232,9 @@ function album(el, ch, softFocus = null) {
     panels[ch].removeAttribute('inert');
     // panels[ch].setAttribute('aria-hidden', 'false');
     if (!soft) {
-      panels[ch].querySelector('[role=document]').focus({ preventScroll: true });
+      if (!noRing) {
+        panels[ch].querySelector('[role=document]').focus({ preventScroll: true });
+      }
       document.querySelector('.h-text-version').scrollIntoView({ behavior: 'smooth' });
     }
   }
