@@ -1,5 +1,8 @@
 let useFocus = false;
 let useColorAnimation = true;
+let useSwiping = true;
+let useDark = true;
+
 // let gradient;
 // let storyScroller = null;
 const iframeCache = new Map();
@@ -11,11 +14,35 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  navNext = document.querySelector('.nav-next')
-  navPrevious = document.querySelector('.nav-previous')
+  navNext = document.querySelector('.nav-next');
+  navPrevious = document.querySelector('.nav-previous');
   // Bind scroll events for chapter timeline
   // storyScroller = document.getElementById('chapters-control');
   // storyScroller.addEventListener('wheel', onScroll, { passive: false });
+  accessFocus(useFocus);
+  accessAnimation(useColorAnimation);
+  accessDark(useDark);
+
+  // Bind keys
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') {
+      navNext.click();
+    } else if (e.key === 'ArrowLeft') {
+      navPrevious.click();
+    }
+  });
+
+  // Configure accessibility pop-up
+  const accessBtn = document.getElementById('filter-toggle');
+  accessBtn.addEventListener('click', () => {
+    const expanded = accessBtn.getAttribute('aria-expanded') === 'true';
+    const form = document.getElementById('filter-panel');
+    accessBtn.setAttribute('aria-expanded', String(!expanded));
+    form.hidden = expanded;
+    if (useFocus) {
+      form.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 
   // Build chapter gradient positions
   const row = document.querySelector('#chapters-control .tabs');
@@ -27,6 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
     link.style.backgroundSize = `${totalWidth}px 100%`;
     link.style.backgroundPosition = `-${relativeLeft}px 0%`;
   });
+
+  // Enable wheel scroller
+  rebake(document.querySelector('#chapters-control .tabs'));
 
   // Set active chapter
   const params = new URLSearchParams(window.location.search);
@@ -136,7 +166,6 @@ function album(el, ch, softFocus = null) {
   const panels = document.querySelectorAll('.panels > div');
   const tabs = [...document.querySelectorAll('.tabs a')];
 
-
   panels.forEach((panel) => {
     panel.style.display = "none";
     panel.setAttribute('inert', true);
@@ -202,7 +231,8 @@ function album(el, ch, softFocus = null) {
     panels[ch].removeAttribute('inert');
     // panels[ch].setAttribute('aria-hidden', 'false');
     if (!soft) {
-      panels[ch].querySelector('[role=document]').focus();
+      panels[ch].querySelector('[role=document]').focus({ preventScroll: true });
+      document.querySelector('.h-text-version').scrollIntoView({ behavior: 'smooth' });
     }
   }
 
@@ -269,6 +299,9 @@ function unbake(doc) {
 
 }
 function rebake(doc) {
+  if (!useSwiping) {
+    return;
+  }
   doc.addEventListener('wheel', pageStart);
   doc.addEventListener('touchmove', prevent, { passive: false });
   doc.addEventListener('touchstart', pageStart, { passive: false });
@@ -285,16 +318,38 @@ function rebake(doc) {
 // }
 function accessFocus(on=true) {
   useFocus = on || false;
+  return true;
 }
-function accessColorAnimation(on=true) {
+function accessSwiping(on=true) {
+  useSwiping = on || false;
+  const doc = document.getElementById(
+    document
+      .querySelector('#chapters-control .tabs .active')
+      .getAttribute('aria-controls')
+  );
+  if (on) {
+    rebake(doc);
+    rebake(document.querySelector('#chapters-control .tabs'));
+  } else {
+    unbake(doc);
+    unbake(document.querySelector('#chapters-control .tabs'));
+  }
+}
+function accessAnimation(on=true) {
   useColorAnimation = on;
-  document.querySelectorAll(".penrose-font").forEach((el) => {
-    if (on && !el.classList.contains('no-animation')) {
+  document.querySelectorAll(".penrose-font, #chapters-control > a").forEach((el) => {
+    if (!on && !el.classList.contains('no-animation')) {
       el.classList.add('no-animation');
     } else {
       el.classList.remove('no-animation');
     }
   });
+  return true;
+}
+function accessDark(on=true) {
+  useDark= on;
+  document.querySelector("body").classList.toggle('dark', on);
+  return true;
 }
 
 

@@ -25,7 +25,6 @@
   80%      { color: #00fffb; }
   92%      { color: #ff8c00; }
 }
-
 body {
     height: 3000px;
 }
@@ -34,6 +33,26 @@ body {
     background-size: 3000px 3000px;
     background-position: 50% 0;
     height: 3000px;
+}
+body.dark #bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center 330px,
+    #284b3fb4 0%,
+    #000000e0 4%,
+    #51a186b4 10%,
+    #85008520 11%,
+    #00808050 14%,
+    #96960050 14.5%,
+    #8b250050 15%,
+    #00000050 16%,
+    #000000d5 35%,
+    transparent 48%);
+  pointer-events: none;
+  height: 3000px;
+  /* mix-blend-mode: luminosity; */
+  /* mix-blend-mode: hard-light; */
 }
 #bg > .pair {
     z-index: 5;
@@ -47,19 +66,20 @@ pre.chapter-font {
     font-family: ChapterFont;
     margin: 0;
 }
+/* .story .drop {
+} */
 .story h3 {
-    font-size: 2.2em;
-    color: #E9D8F7;
-    text-shadow: 1px 3px #2F2933;
+    font-size: 2em;
     font-family: BrandFont;
-    margin: .5rem 0 1rem;
+    padding: .5rem 0 1rem;
+    margin: 0;
 }
 .story h3 span.long {
     text-align: left;
 }
 .story h3.larastelle-font {
     font-family: LarastelleFont;
-    /* display: inline-block; */
+    text-shadow: none;
     font-size: 2.5rem;
     line-height: 1.2;
 }
@@ -221,7 +241,14 @@ h3 {
     display: flex;
 } */
 
-@media (max-width: 1200px) { /* 3 */
+@media (max-width: 1200px) { /* 5 */
+    .distance-6, .distance-7, .distance-8, .distance-9,
+    .distance-10, .distance-11, .distance-12, .distance-13, .distance-14,
+    .distance-15, .distance-16, .distance-17, .distance-18, .distance-19,
+    .distance-20
+    { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+}
+@media (max-width: 1000px) { /* 3 */
     .distance-4,
     .distance-5, .distance-6, .distance-7, .distance-8, .distance-9,
     .distance-10, .distance-11, .distance-12, .distance-13, .distance-14,
@@ -229,16 +256,8 @@ h3 {
     .distance-20
     { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
 }
-@media (max-width: 1000px) { /* 2 */
+@media (max-width: 800px) { /* 2 */
     .distance-3, .distance-4,
-    .distance-5, .distance-6, .distance-7, .distance-8, .distance-9,
-    .distance-10, .distance-11, .distance-12, .distance-13, .distance-14,
-    .distance-15, .distance-16, .distance-17, .distance-18, .distance-19,
-    .distance-20
-    { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
-}
-@media (max-width: 800px) { /* 1 */
-    .distance-2, .distance-3, .distance-4,
     .distance-5, .distance-6, .distance-7, .distance-8, .distance-9,
     .distance-10, .distance-11, .distance-12, .distance-13, .distance-14,
     .distance-15, .distance-16, .distance-17, .distance-18, .distance-19,
@@ -273,7 +292,6 @@ h3 {
 
 #chapters-control > a {
     filter: hue-rotate(120deg) brightness(1);
-    mix-blend-mode: luminance;
     animation: flicker 60s cubic-bezier(0.7, -1, 0.3, 2) infinite;
     text-decoration: underline;
     text-underline-offset: 0.06em;
@@ -341,3 +359,74 @@ h3 {
     text-decoration: 1px underline;
     text-underline-offset: -0.1em;
 }
+
+.story .drop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.story .drop h3 {
+    padding-left: .2em;
+    padding-right: .2em;
+}
+#ch4 h3, #ch13 h3 {
+    padding-left: .7em;
+    padding-right: .7em;
+}
+#ch8 h3 {
+    padding-left: .3em;
+    padding-right: .3em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#ch0 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(270, 60%, 70%) 65%, hsl(289, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch1 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(289, 60%, 70%) 65%, hsl(308, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch2 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(308, 60%, 70%) 65%, hsl(327, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch3 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(327, 60%, 70%) 65%, hsl(346, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch4 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(346, 60%, 70%) 65%, hsl(5, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch5 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(5, 60%, 70%) 65%, hsl(24, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch6 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(24, 60%, 70%) 65%, hsl(43, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch7 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(43, 60%, 70%) 65%, hsl(62, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch8 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(62, 60%, 70%) 65%, hsl(81, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch9 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(81, 60%, 70%) 65%, hsl(100, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch10 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(100, 60%, 70%) 65%, hsl(119, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch11 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(119, 60%, 70%) 65%, hsl(138, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch12 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(138, 60%, 70%) 65%, hsl(157, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch13 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(157, 60%, 70%) 65%, hsl(176, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch14 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(176, 60%, 70%) 65%, hsl(195, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch15 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(195, 60%, 70%) 65%, hsl(214, 60%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch16 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(214, 60%, 70%) 65%, hsl(260, 59%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#ch17 h3 { background: linear-gradient(75deg, #E9D8F7 0%, hsl(266, 59%, 70%) 65%, hsl(299, 59%, 70%) 90%);     -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+/* #ch0 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch1 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch2 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch3 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch4 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch5 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch6 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch7 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch8 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch9 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch10 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch11 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch12 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch13 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch14 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch15 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch16 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); }
+#ch17 h3 { background: linear-gradient(4deg, #ef84ff 0%, #E9D8F7 73%); } */
