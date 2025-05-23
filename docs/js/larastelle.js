@@ -1,6 +1,7 @@
 let useFocus = false;
+let useColorAnimation = true;
 // let gradient;
-let storyScroller = null;
+// let storyScroller = null;
 const iframeCache = new Map();
 let navNext = null;
 let navPrevious = null;
@@ -103,6 +104,10 @@ function source(el, soft = false) {
   });
   el.classList.add('active');
   el.setAttribute('aria-selected', 'true');
+  // if el is a button, we want to kthe aria-label
+  if (el.tagName === 'BUTTON') {
+    document.querySelector('.h-audio-version').textContent = el.title.split(' ', 2)[1];
+  }
 
   iframeCache.forEach((iframe) => {
     const thisId = iframe.getAttribute('id');
@@ -206,7 +211,6 @@ function album(el, ch, softFocus = null) {
   return false;
 }
 
-let carousel = null;
 let startX = 0;
 let startTime = 0;
 function throttle(fn, delay = 50) {
@@ -219,10 +223,20 @@ function throttle(fn, delay = 50) {
   };
 }
 function pageStart(e) {
+  if (e.deltaY && !e.deltaX) {
+    return;
+  }
+  e.preventDefault();
+  e.stopPropagation();
+  if (stopTimer) {
+    clearTimeout(stopTimer);
+  }
+  document.querySelector('.story').classList.add('gesture-feedback');
+  setTimeout(() => {
+    document.querySelector('.story').classList.remove('gesture-feedback');
+  }, 1000);
   if (e.deltaX && !e.deltaY) {
     startX = e.deltaX;
-    e.preventDefault();
-    e.stopPropagation();
     pageEnd(e);
   } else {
     startX = (e.touches?.[0] || e).clientX;
@@ -241,12 +255,14 @@ const pageEnd = throttle(function pageEnd(e) {
     album(navPrevious);
   }
 });
+function prevent(e) { e.preventDefault(); }
 function unbake(doc) {
   if (doc === null) {
     return;
   }
   doc.removeEventListener('wheel', pageStart);
-  doc.removeEventListener('touchstart', pageStart);
+  doc.removeEventListener('touchmove', prevent, { passive: false });
+  doc.removeEventListener('touchstart', pageStart, { passive: false });
   doc.removeEventListener('touchend', pageEnd);
   // doc.removeEventListener('mousedown', pageStart);
   // doc.removeEventListener('mouseup', pageEnd);
@@ -254,18 +270,32 @@ function unbake(doc) {
 }
 function rebake(doc) {
   doc.addEventListener('wheel', pageStart);
-  doc.addEventListener('touchstart', pageStart);
+  doc.addEventListener('touchmove', prevent, { passive: false });
+  doc.addEventListener('touchstart', pageStart, { passive: false });
   doc.addEventListener('touchend', pageEnd);
   // doc.addEventListener('mousedown', pageStart);
   // doc.addEventListener('mouseup', pageEnd);
 }
 
-// // screen-reader function for busy iframes
+// screen-reader function for busy iframes
 // function togglePlayer(on=true) {
 //   document.querySelector('player').setAttribute('aria-hidden', !on);
 //   document.getElementById('music-show').hidden = on;
 //   document.getElementById('music-hide').hidden = !on;
 // }
+function accessFocus(on=true) {
+  useFocus = on || false;
+}
+function accessColorAnimation(on=true) {
+  useColorAnimation = on;
+  document.querySelectorAll(".penrose-font").forEach((el) => {
+    if (on && !el.classList.contains('no-animation')) {
+      el.classList.add('no-animation');
+    } else {
+      el.classList.remove('no-animation');
+    }
+  });
+}
 
 
 // const scrollUnit = 10; // tune this later

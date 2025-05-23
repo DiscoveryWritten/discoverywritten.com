@@ -35,7 +35,14 @@ body {
     background-position: 50% 0;
     height: 3000px;
 }
+#bg > .pair {
+    z-index: 5;
+}
 
+/* [role="document"] pre span {
+    padding-left: 3ch;
+    text-indent: 3ch;
+} */
 pre.chapter-font {
     font-family: ChapterFont;
     margin: 0;
@@ -45,7 +52,7 @@ pre.chapter-font {
     color: #E9D8F7;
     text-shadow: 1px 3px #2F2933;
     font-family: BrandFont;
-    margin: 0 0 1rem;
+    margin: .5rem 0 1rem;
 }
 .story h3 span.long {
     text-align: left;
@@ -84,6 +91,9 @@ pre.chapter-font {
     overflow: hidden;
     /* margin-top: -0.4em; */ /* misses bottom edge render */
     animation: flicker 60s cubic-bezier(0.7, -1, 0.3, 2) infinite;
+}
+.penrose-font.no-animation {
+    animation: none;
 }
 .penrose-font span {
     display: inline-block;
