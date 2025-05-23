@@ -112,8 +112,8 @@ pre.chapter-font {
     /* margin-top: -0.4em; */ /* misses bottom edge render */
     animation: flicker 60s cubic-bezier(0.7, -1, 0.3, 2) infinite;
 }
-.penrose-font.no-animation {
-    animation: none;
+.no-animation {
+    animation: none !important;
 }
 .penrose-font span {
     display: inline-block;
