@@ -1,7 +1,7 @@
 let useFocus = false;
 let useColorAnimation = true;
 let useSwiping = true;
-let useDark = true;
+let useDark = false;
 
 // let gradient;
 // let storyScroller = null;
