@@ -153,6 +153,9 @@ h3 {
 .links span {
   margin-left: 5px;
 }
+.links img {
+    filter: drop-shadow(0 2px 0px #000000);
+}
 a {
   color: #E9D8F7;
   text-decoration: none;
@@ -207,6 +210,9 @@ a:hover {
 #footer > div, #footer > nav {
   padding: 0.5em;
 }
+#footer img {
+  border-radius: 5px;
+}
 
 .pro {
   border: 0;
@@ -225,9 +231,6 @@ a:hover {
   border-bottom: 2px solid #31274f;
   border-top: 2px solid #31274f40;
   background-color: #31274fd5;
-}
-.img-shadow {
-  filter: drop-shadow(0 1px 0px #000000);
 }
 
 .sr-only {

@@ -111,7 +111,7 @@ h2 {
   text-shadow: 0 2px #000;
 }
 .panels p {
-  margin-bottom: 0;
+  margin-bottom: 1em;
 }
 
 .music-story {
@@ -168,7 +168,7 @@ h2 {
 }
 
 #footer {
-  margin-top: 1em;
+  padding-top: 1em;
 }
 
 .links [role="list-item"]:hover {

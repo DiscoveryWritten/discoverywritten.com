@@ -1,3 +1,4 @@
+let usePlayer = true;
 let useFocus = false;
 let useColorAnimation = true;
 let useSwiping = true;
@@ -221,7 +222,7 @@ function album(el, ch, softFocus = null) {
       || finalEl.nextElementSibling.nextElementSibling.getAttribute('aria-label')
     );
     document.querySelector('#next').removeAttribute('data-last');
-    document.querySelector('#next').textContent = `Next: ${preview}`;
+    document.querySelector('#next').textContent = preview;
   } else {
     document.querySelector('#next').setAttribute('data-last', true);
     document.querySelector('#next').textContent = 'Repeat';
@@ -311,11 +312,10 @@ function rebake(doc) {
 }
 
 // screen-reader function for busy iframes
-// function togglePlayer(on=true) {
-//   document.querySelector('player').setAttribute('aria-hidden', !on);
-//   document.getElementById('music-show').hidden = on;
-//   document.getElementById('music-hide').hidden = !on;
-// }
+function accessPlayer(on=true) {
+  usePlayer = on || false;
+  document.querySelector('player').setAttribute('aria-hidden', !on);
+}
 function accessFocus(on=true) {
   useFocus = on || false;
   return true;
