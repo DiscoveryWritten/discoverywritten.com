@@ -40,12 +40,11 @@ function lightshow(selector, prop, options={}) {
   for (const el of document.querySelectorAll(selector)) {
     el.style.willChange = prop;
     const anim = el.animate(keyframes[prop], { ...opts, ...options });
-    anim.startTime = _.startTime;
+    // anim.startTime = _.opts.startTime;
     anim.play();
     // console.log("Starting animation", anim, active.length, el);
     active.push(anim);
     added.push(anim);
-    console.log(active.length);
   }
   return added;
 }
@@ -57,7 +56,6 @@ function leaveshow(...anims) {
     anim.cancel();
     // console.log("Canceling animation", anim, active.length, active.indexOf(anim));
     active.splice(active.indexOf(anim), 1);
-    console.log(active.length);
   }
   anims.forEach(cancel);
   return Array.from({ length: anims.length }, () => null);
