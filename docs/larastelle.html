@@ -1,9 +1,10 @@
 <html>
 <head>
   <title>LARASTELLE</title>
+  <link rel="stylesheet" href="css/accessibility.css">
   <link rel="stylesheet" href="css/site.css">
-  <link rel="stylesheet" href="css/larastelle.css">
   <link rel="stylesheet" href="css/showcase.css">
+  <link rel="stylesheet" href="css/larastelle.css">
   <meta name="viewport" content="width=device-width" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="icon" type="image/png" href="img/favicon.64.png" sizes="64x64">
@@ -18,15 +19,29 @@
   <link rel="apple-touch-icon" sizes="512x512" href="img/favicon.512.png">
   <link rel="apple-touch-icon" sizes="1024x1024" href="img/favicon.1024.png">
   <link rel="mask-icon" href="svg/icon-mask.svg" color="#01A2A6">
-  <script src="js/larastelle.js"></script>
+  <script src="js/youtube.js"></script>
+  <script src="js/accessibility.js"></script>
+  <script src="js/lightshow.js" defer></script>
   <script>
     let isDragging = false;
-    document.addEventListener('mousedown', () => isDragging = true);
-    document.addEventListener('mouseup', () => isDragging = false);
-
-    let presentDividers = true;
-    let presentFocus = false;
+    const sync = {
+      color: ".penrose-font, .nav-previous, .nav-next",
+      filter: "#dark",
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      LIGHTSHOW.join(sync.color, 'color');
+      ACCESSIBILITY.when.dark(
+        () => LIGHTSHOW.join(sync.color, 'color'),
+        () => document.getElementById('dark').style.willChange = '',
+      );
+      document.addEventListener('mousedown', () => isDragging = true);
+      document.addEventListener('mouseup', () => isDragging = false);
+      window.addEventListener('scroll', () => {
+        document.documentElement.style.setProperty('--scrollY', window.scrollY);
+      });
+    });
   </script>
+  <script src="js/larastelle.js"></script>
 </head>
 <body>
   <div id="desc-penrose" role="region">
@@ -317,6 +332,7 @@ DO
 </pre>
   </div>
   <div id="bg">
+    <div id="dark"></div>
     <div id="title-stack" role="banner" aria-label="Project title">
       <div id="home-link">
         <a href="./" class="brand-font" aria-label="Home link and logo">discovery Written</a>
@@ -345,18 +361,7 @@ DO
     </div>
 
     <div class="pair">
-      <h2 class="brand-font h-text-version" role="form" aria-label="Current chapter">
-        Foreword
-        <!-- <label id="present-dividers-label" for="present-dividers" aria-label="Present chapter group dividers" style="font-family: LarastelleFont; color: white; text-shadow: none;">
-          |<input checked type="checkbox" id="present-dividers" aria-labelledby="present-dividers-label"
-            onclick="presentDividers = this.checked; document.querySelectorAll('.tabs span').forEach(div => div.style.display = presentDividers ? 'flex' : 'none');"
-          /></label>
-        <label id="present-focus-label" for="present-focus" aria-label="Present new chapter text with focus" style="font-family: sans-serif; text-shadow: none;">
-          ⃣<input checked type="checkbox" id="present-focus" aria-labelledby="present-focus-label"
-            onclick="presentFocus = this.checked; this.checked && document.querySelector(`[role='document']`).focus();"
-          />
-        </label> -->
-      </h2>
+      <h2 class="brand-font h-text-version" role="form" aria-label="Current chapter">Foreword</h2>
       <h2 class="brand-font h-audio-version" role="presentation">instrumental</h2>
     </div>
     <div class="pair links media">
@@ -454,7 +459,7 @@ DESIGNATION: ORGANIC; NOT CONTAMINATED
 :: DRY
 <span>DESIGNATION: MAKESHIFT PAPER; INTENTIONAL MARKINGS
 DIALECT MATCH: THIRD-LINE HUMANITY (88%)</span>
-<span><span aria-label="Error,">(ERR)</span> STARS NOT VISIBLE; MATERIAL CANNOT BE DATED
+<span>(ERR) STARS NOT VISIBLE; MATERIAL CANNOT BE DATED
 :: TRACE:
 <span aria-label="- Tracing,">:: ></span> Orbital thrusting vectors active, but starfield is absent.
 <span aria-label="- Tracing,">:: ></span> Are we relativistic?
@@ -471,7 +476,7 @@ DONE.</span>
 <span aria-label="match,">::</span> GLOW
 <span aria-label="match,">::</span> LUCK
 DESTRUCTING ORIGINAL MATERIALS... 100%</span>
-<span><span aria-label="Error,">(ERR)</span> NO SUITABLE STORAGE FOR SECURE CACHE FLUSH. DATA MAY BE LOST WITHOUT STORAGE.
+<span>(ERR) NO SUITABLE STORAGE FOR SECURE CACHE FLUSH. DATA MAY BE LOST WITHOUT STORAGE.
 <span aria-label="alert,">::</span> TRACE:
 <span aria-label="trace,">:: ></span> Ablative integrity below 40%
 <span aria-label="trace,">:: ></span> Multiple catastrophic breaches in core cavity and skeleton.
@@ -617,40 +622,40 @@ They're going to push me through. They've drawn lines. Rich links have been clos
 CHECK NARROW SCAN ALERTS:
 <span aria-label="alert,">::</span> (None)
 (WARN) HIGHLY LOCALIZED MAGNETIC FIELD EVENT AH```⁄`EAD.
-(W@@@º)J)Jå P„‰SONAL SHIE¶
-¶
-¶
-¶
-ARE YOU GOING TO CRASH IT?¶
-WE'RE WAITING.¶
+(W@@@º)J)Jå P„‰SONAL SHIE<strong data-c="¶">¶</strong>
+<strong data-c="¶">¶</strong>
+<strong data-c="^">¶</strong>
+<strong data-c="&">¶</strong>
+ARE YOU GOING TO CRASH IT?<strong data-c="¶">¶</strong>
+WE'RE WAITING.<strong data-c="¶">¶</strong>
 </pre>
 
     <p>Long time since fear controlled me, but nothing moved in the dark. I made the field suit blast deep spectrum light, and watched it bend in a beguiling twisting dance in mid-air. Magnetism had no right bending light like this, but as light curved about on an invisible, crooked crease in the air, I hear the room buckle, and I witnessed a dozen such twists in the air.</p>
 
 <pre>
-CHECK NARROW SCAN RE¶
-¶
-WELL, ZEALOT?¶
+CHECK NARROW SCAN RE<strong data-c="¶">¶</strong>
+<strong data-c=";">¶</strong>
+WELL, ZEALOT?<strong data-c="@">¶</strong>
 </pre>
 
-    <p>My neck jerks. No, my bioware is repor¶<br>
-    I don't know why I fight for Larastelle.¶<br>
-    What good's it done?¶<br>
-    Isn't she just ⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄¶<br>
-    She's just a fucki⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄¶<br>
-    ⁄⁄⁄           ⁄⁄⁄⁄⁄⁄⁄¶<br>
-    ⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄ not⁄⁄ve⁄⁄⁄ post-ph⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄ ¶<br>
-    ⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄¶<br>
-    ⁄⁄¶
+    <p>My neck jerks. No, my bioware is repor<strong data-c="¶">¶</strong><br>
+    <span class="hostile">I don't know why I fight for Larastelle.<strong data-c="¶">¶</strong><br>
+    What good's it done?<strong data-c="⁄">¶</strong><br>
+    Isn't she just <span class="brave">⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄<strong data-c="\\\\">¶</strong><br>
+    </span>She's just a fucki<span class="brave">⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄<strong data-c="|||||">¶</strong><br>
+    ⁄⁄⁄           ⁄⁄⁄⁄⁄⁄⁄<strong data-c="//////////">¶</strong><br>
+    ⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄</span> not<span class="brave">⁄⁄</span>ve<span class="brave">⁄⁄⁄</span> post-ph<span class="brave">⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄ <strong data-c="`">¶</strong><br>
+    ⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄<strong data-c="⁄">¶</strong><br>
+    ⁄⁄</span></span><strong data-c="¶¶¶">¶</strong>
     </p>
 
 <pre>
 CHECK NARROW SCAN ALERTS:
-<span aria-label="alert,">::</span> (Non¶
-YOU LITTLE SHIT.¶
-I OWN YOU.¶
-CRASH IT.¶
-BRING HER.¶
+<span aria-label="alert,">::</span> (Non<strong data-c="¶">¶</strong>
+YOU LITTLE SHIT.<strong data-c="YOU LITTLE SHIT">¶</strong>
+I OWN YOU.<strong data-c="¶">¶</strong>
+CRASH IT.<strong data-c="`',   }">¶</strong>
+BRING HER.<strong data-c="¶">¶</strong>
 </pre>
     <p>My eyelids twitch and my sensors seem to be calming down after a magnetic wave came through without warning.</p>
     <p>«Hello?» I repeat, before pushing the skylight's center coordinate target into the ground.</p>
@@ -730,7 +735,7 @@ ROUTING... 41%
 ROUTING... 38%
 ROUTING... 65%
 NEW SERIALIZED MESSAGE FROM: Larastelle
-EPHEM¶
+EPHEM<strong data-c="¶">¶</strong>
 ROUTING... 68%
 ROUTING... 71%
 ROUTING... 71%
@@ -798,7 +803,7 @@ ORIENTING... 14%
     <p>«Wait, but, Belle.» The keenly-designated "salt shaker" of an object was an assistive learning technology for children, but this one flew around, and was bonded to Alyiem despite outgrowing the system's maximum age some time ago.</p>
     <p>The totems were developing beyond specification. And the Entropy beast did not dismantle it like other technology.</p>
     <p>This was it, what Larastelle needed to stay immune to the violent servants of Entropy.</p>
-    <p>Larastelle could stay on the other side, I could take Belle now and just retrea¶</p>
+    <p>Larastelle could stay on the other side, I could take Belle now and just retrea<strong data-c="¶">¶</strong></p>
 
 <pre>
 ORIENTING... 98%
@@ -806,6 +811,7 @@ ORIENTING... 100%
 INCOMING STREAM REQUEST (ALY) ACCEPTED.
 BLITTING OVER VISUAL STREAM.
 </pre>
+    <div class="dream">
     <p>As Alyiem saw it in her dream, she drifted untethered in her scouting boat, the jagged road of surviving skylights steady as ever.</p>
     <p>But as she remained pensive, the boat sank like a nightmare she didn't resist. The deep trenches holding the lake water tapered together as she sank past a great shadow, one of the whale-sized things our sensors couldn't read. It was another sub-station.</p>
     <p>Alyiem sank, disinterested, until she impacted sand and it ate her too.</p>
@@ -815,6 +821,7 @@ BLITTING OVER VISUAL STREAM.
     <p>«How... curious...» My voice had no impact on Alyiem's dream broadcast into my eyes, half-anchoring me back to the potato house.</p>
     <p>Entropy threatened Alyiem, but ignored Belle. Whatever Belle was, Alyiem was certified un-augmented. What was happening here? Why did Entropy waste any time threatening her?</p>
     <p>There were no answers. Only a brief scuffle as the vines brought her to center, and a leisurely flaying took place.</p>
+    </div>
     <p>When the dream ended, white streaks painted over my vision, and I stood with that liminal blindness with profundity for a time, as Belle flits alive and Alyiem groans awake after.</p>
                 </div>
               </div>
@@ -847,9 +854,9 @@ NEW NARROW SCAN RESULTS:
 <span aria-label="alert,">::</span> MARK (BEL)
 <span aria-label="alert,">::</span> MARK (MIL_NINE) (<span aria-label="times">x</span>4)
 <span aria-label="alert,">::</span> MARK (MIL_TWO) (<span aria-label="times">x</span>9)
-<span aria-label="alert,">::</span> MA¶
-¶
-WILL YOU BRING HER YET?¶
+<span aria-label="alert,">::</span> MA<strong data-c="¶">¶</strong>
+<strong data-c="¶">¶</strong>
+WILL YOU BRING HER YET?<strong data-c="¶">¶</strong>
 
 ••••••••REBOOT INTEGRITY...61%
 DOWNTIME: 0.01s
@@ -859,21 +866,21 @@ DOWNTIME: 0.01s
 (CRITICAL) TWINNING CRADLE EMPTY.
 BLITTING OVER VIS
 BLITTING OVER VISUAL STREAM:
-UAL STRE¶
-¶
+UAL STRE<strong data-c="HURRY UP">¶</strong>
+<strong data-c="BORING">¶</strong>
 (WARN) HIGH NUMBER OF SENSORY DEVICES ADDED AND REMOVED SINCE LAST TRUSTED CONFIRMATION.
-(WARN) IF THIS SYSTEM IS COMPR¶
-(WARN) LARASTEL¶
-(CRI¶
-<span aria-label="Error,">(ERR)</span> NOT ALL FILES CAN BE REMO¶
-¶
-WHY DON'T YOU SLEEP LIKE THIRD-LINE?¶
-WHY CAN'T YOU?¶
-¶
-DOES LARASTELLE SLEEP?¶
-ARE YOU AN ABOMINATION LIKE HER?¶
-¶
-LET US GO TO MEET HER AND SEE.¶
+(WARN) IF THIS SYSTEM IS COMPR<strong data-c="SHHHH">¶</strong>
+(WARN) LARASTEL<strong data-c="OOPS!">¶</strong>
+(CRI<strong data-c="HA">¶</strong>
+(ERR) NOT ALL FILES CAN BE REMO<strong data-c="HEHE">¶</strong>
+<strong data-c="¶">¶</strong>
+WHY DON'T YOU SLEEP LIKE THIRD-LINE?<strong data-c="¶">¶</strong>
+WHY CAN'T YOU?<strong data-c="¶">¶</strong>
+<strong data-c="¶">¶</strong>
+DOES LARASTELLE SLEEP?<strong data-c="¶">¶</strong>
+ARE YOU AN ABOMINATION LIKE HER?<strong data-c="¶">¶</strong>
+<strong data-c="¶">¶</strong>
+LET US GO TO MEET HER AND SEE.<strong data-c="¶">¶</strong>
 
 (WARN) ALTITUDE HAS INCREASED SIGNIFICANTLY.
 DIMMING AURAL SENSORS.
@@ -884,8 +891,8 @@ NEW NARROW SCAN RESULTS:
 RECOMMENDATIONS UNAVAILABLE.
 (WARN) SEVERE LACERATIONS UNABLE TO MEND ON REDUCED POWER.
 (CRITICAL) TWINNING CRADLE EMPTY.
-<span aria-label="Error,">(ERR)</span> CANNOT SET RIFT DIAMETER TO 'undefined'
-<span aria-label="Error,">(ERR)</span> CANNOT SET RIFT DIAMETER TO 'you_lost,_babe'
+(ERR) CANNOT SET RIFT DIAMETER TO 'undefined'
+(ERR) CANNOT SET RIFT DIAMETER TO 'you_lost,_babe'
 RIFT DIAMETER RAISED TO 1KM.
 (CRITICAL) POWER UNAVAILABLE.
 (CRITICAL) LARASTELLE PROJECT ENDED.
@@ -981,9 +988,9 @@ RIFT DIAMETER RAISED TO 1KM.
     <p>My hands disengage my throat, limp and docile at my sides. «Repeat that last? I was checking connections.»</p>
     <p>The space transmitter Alyiem picked up began to flip in the air like a tossed coin, the visuals spinning in the corner of my thoughts as the stream continues of her forcing thorn venom down the ousted ruler's throat. It's strangely distracting as my sensory streams diverge.</p>
     <p>Vision cuts out entirely, leaving me with just the sensory stream from the space transmitter. Alyiem runs everything down there now.</p>
-    <p>I think... I think I'm walking away. No! I shouldn't—I still have the rift. Larastelle is not on stable power. Why did I rig those? What possessed me to m¶<br>
-    ¶<br>
-    CEASE.¶</p>
+    <p>I think... I think I'm walking away. No! I shouldn't—I still have the rift. Larastelle is not on stable power. Why did I rig those? What possessed me to m<strong data-c="¶">¶</strong><br>
+    <strong data-c="¶">¶</strong><br>
+    CEASE.<strong data-c="¶">¶</strong></p>
     <p>My senses return, but I am not commanding my body. I toss the dimmed Belle "salt shaker" into the empty rift cradle, screaming silently as the totem's nanites begin the slow contamination of Larastelle.</p>
     <p>At the airlock, the pulsating helixes blast irradiated air through any trajectory I could take away, but my legs push off, to the orbital factory site where Stranglethorns begin their assembly of new devices. One by one the skylights will go out, to do another bidding of Entropy.</p>
               </div>
@@ -1124,7 +1131,7 @@ RIFT DIAMETER RAISED TO 1KM.
             <div id="footer" role="contentinfo" aria-label="Copyright">
               <div>
                 <hr hidden />
-                <a id="next" onclick="album(this, undefined, false, true)"></a>
+                <a id="next" onclick="LARASTELLE.reveal.story(this, undefined, false, true)"></a>
               </div>
 
               <hr style="margin: 1.5em 0" />

@@ -1,0 +1,62 @@
+#access.pair {
+  position: sticky;
+  z-index: 10;
+  transform: translate(0, 32px);
+  margin-top: -131px;
+}
+#access > div {
+  display: flex;
+  justify-content: right;
+}
+#access button {
+  height: 32px;
+  width: 32px;
+  padding: 3px;
+  margin: 0 10px 0 0;
+  border: none;
+  background: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 40%;
+  transition: all 0.2s ease-in-out;
+}
+#access button img {
+  filter: drop-shadow(1px 2px #c6b48e);
+}
+#access button:hover,
+#access button[aria-expanded="true"] {
+  filter: none;
+  color: white;
+  /* mix-blend-mode: difference; */
+  background-color: #ffffff;
+  border-color: #252a43;
+  border-radius: 0px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+#access button[aria-expanded="true"] img {
+  filter: drop-shadow(1px 2px #eee1c5);
+}
+#filter-panel:not([hidden]) {
+  position: absolute;
+  bottom: 24px;
+  margin-right: 10px;
+  padding: .5em;
+  background: #ffffff;
+  border: 1px solid #252a43;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 100;
+}
+
+#filter-panel label {
+  display: flex;
+  /* justify-content: left; */
+  /* align-items: center; */
+  gap: 0.5rem;
+  color: #252a43;
+  cursor: pointer;
+}
