@@ -71,31 +71,26 @@ body {
 @media (max-width: 1600px) {
   #title-stack { padding-bottom: 11em; }
   #title-stack h1 { font-size: 7em; }
-  #showcase .feature .key { width: 256px; }
+  #access { margin-top: -109px !important; };
 }
 @media (max-width: 950px) {
   #title-stack { padding-bottom: 6.5em; }
   #title-stack h1 { font-size: 4em; }
   .links img, .feature img { width: 40px; }
   /* .tabs a { font-size: 1.5rem; } */
-  #showcase .feature .key { width: 228px; }
-}
-@media (max-width: 645px) {
-  .tabs.sm-only a { font-size: 1.2rem; }
+  #access { margin-top: -72px !important; };
 }
 @media (max-width: 550px) {
   #title-stack { padding-bottom: 5em; }
   #title-stack h1 { font-size: 3em; }
   .links img, .feature img { width: 28px; }
-  .tabs.sm-only a { font-size: 1rem; }
-  #showcase .feature .key { width: 196px; }
+  #access { margin-top: -64px !important; };
 }
 @media (max-width: 350px) {
   #title-stack { padding-bottom: 4em; }
   #title-stack h1 { font-size: 2em; }
   .links img, .feature img { width: 18px; }
-  .tabs.sm-only a { font-size: .9rem; }
-  #showcase .feature .key { width: 128px; }
+  #access { margin-top: -62px !important; };
 }
 #title, #title-stroke {
   position: absolute;

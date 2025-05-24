@@ -65,10 +65,9 @@ body {
 .music-story .player {
   top: 0;
   position: sticky;
-}
-.music-story .player {
   z-index: 5;
   width: 50%;
+  max-height: 700px;
   display: flex;
   justify-content: end;
   /* mix-blend-mode: soft-light; */
