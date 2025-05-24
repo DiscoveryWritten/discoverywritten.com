@@ -1,7 +1,7 @@
 // Switches
 let usePlayer = true;
 let useFocus = false;
-let useColorAnimation = true;
+let useAnimation = true;
 let useSwiping = true;
 let useDark = false;
 let gestureFeedbackTimeout = null;
@@ -34,7 +34,7 @@ const ACCESSIBILITY = {
 
   document.addEventListener('DOMContentLoaded', () => {
     accessFocus(useFocus);
-    accessAnimation(useColorAnimation);
+    accessAnimation(useAnimation);
     accessDark(useDark);
 
     _.swiping.hook(document.querySelector(_.swiping.timelineSelector));
@@ -80,14 +80,15 @@ function accessSwiping(on=true) {
   }
 }
 function accessAnimation(on=true) {
-  useColorAnimation = on;
-  document.querySelectorAll(".penrose-font, #chapters-control > a").forEach((el) => {
-    if (!on && !el.classList.contains('no-animation')) {
-      el.classList.add('no-animation');
-    } else {
-      el.classList.remove('no-animation');
-    }
-  });
+  useAnimation = on;
+  document.querySelector('body').classList.toggle('no-animation', !on);
+  // document.querySelectorAll(".penrose-font, #chapters-control > a").forEach((el) => {
+  //   if (!on && !el.classList.contains('no-animation')) {
+  //     el.classList.add('no-animation');
+  //   } else {
+  //     el.classList.remove('no-animation');
+  //   }
+  // });
 }
 function accessDark(on=true) {
   useDark = on;

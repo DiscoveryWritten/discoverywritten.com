@@ -8,19 +8,19 @@
 }
 
 @keyframes glitchA {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(-6px, 6px); }
-  50%  { transform: translate(23px, -6px); }
-  75%  { transform: translate(-6px, 0); }
+  0%   { transform: translate(0, 0) rotateX(0deg); }
+  25%  { transform: translate(-6px, 6px) rotateX(4deg); }
+  50%  { transform: translate(23px, -6px) rotateX(-6deg); }
+  75%  { transform: translate(-6px, 0) rotateX(-2deg); }
   /* 100% { transform: translate(0, 0); } */
 }
 
 @keyframes glitchB {
-  0%   { transform: translate(0, 0) rotate(0deg); }
-  20%  { transform: translate(6px, 0) rotate(4deg); }
-  40%  { transform: translate(0, -6px) rotate(-6deg); }
-  60%  { transform: translate(-23px, 23px) rotate(0deg); }
-  80%  { transform: translate(6px, -6px) rotate(2deg); }
+  0%   { transform: translate(0, 0) rotateZ(0deg); }
+  20%  { transform: translate(6px, 0) rotateZ(4deg); }
+  40%  { transform: translate(0, -6px) rotateZ(-6deg); }
+  60%  { transform: translate(-23px, 23px) rotateZ(-2deg); }
+  80%  { transform: translate(6px, -6px) rotateZ(2deg); }
   /* 100% { transform: translate(0, 0); } */
 }
 .story [role="document"] strong {
@@ -28,7 +28,7 @@
     color: #ff0066;
     mix-blend-mode: color-dodge;
     will-change: transform;
-    animation: flickerHue 60s cubic-bezier(0.7, -1, 0.3, 2) infinite;
+    animation: flickerHue 10s cubic-bezier(0.7, -1, 0.3, 2) infinite;
 }
 .story [role="document"] strong::before {
     position: absolute;
@@ -44,7 +44,7 @@
         -6px -16px hsl(51, 97%, 30%);
     mix-blend-mode: color-dodge;
     will-change: transform;
-    animation: glitchA 0.4s infinite steps(1);
+    animation: glitchA 10s infinite steps(1);
 }
 .story [role="document"] strong::after {
     position: absolute;
@@ -342,23 +342,6 @@ h3 {
     { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
 }
 
-#youtube-chapters li:nth-child(1) { background-image: url(../img/larastelle-1-yt.webp) }
-#youtube-chapters li:nth-child(2) { background-image: url(../img/larastelle-2-yt.webp) }
-#youtube-chapters li:nth-child(3) { background-image: url(../img/larastelle-3-yt.webp) }
-#youtube-chapters li:nth-child(4) { background-image: url(../img/larastelle-4-yt.webp) }
-#youtube-chapters li:nth-child(5) { background-image: url(../img/larastelle-5-yt.webp) }
-#youtube-chapters li:nth-child(6) { background-image: url(../img/larastelle-6-yt.webp) }
-#youtube-chapters li:nth-child(7) { background-image: url(../img/larastelle-7-yt.webp) }
-#youtube-chapters li:nth-child(8) { background-image: url(../img/larastelle-8-yt.webp) }
-#youtube-chapters li:nth-child(9) { background-image: url(../img/larastelle-9-yt.webp) }
-#youtube-chapters li:nth-child(10) { background-image: url(../img/larastelle-10-yt.webp) }
-#youtube-chapters li:nth-child(11) { background-image: url(../img/larastelle-11-yt.webp) }
-#youtube-chapters li:nth-child(12) { background-image: url(../img/larastelle-12-yt.webp) }
-#youtube-chapters li:nth-child(13) { background-image: url(../img/larastelle-13-yt.webp) }
-#youtube-chapters li:nth-child(14) { background-image: url(../img/larastelle-14-yt.webp) }
-#youtube-chapters li:nth-child(15) { background-image: url(../img/larastelle-15-yt.webp) }
-#youtube-chapters li:nth-child(16) { background-image: url(../img/larastelle-16-yt.webp) }
-
 #chapters-control > a {
     filter: hue-rotate(120deg) brightness(1);
     /* animation: flicker 60s cubic-bezier(0.7, -1, 0.3, 2) infinite; */
@@ -613,3 +596,29 @@ h3 {
     text-shadow: -5em 0 0 #20fbc890;
     transform: rotate(-11deg);
 }
+
+body.no-animation #chapters-control > a,
+body.no-animation .penrose-font,
+body.no-animation strong::before,
+body.no-animation strong::after {
+    animation: none !important;
+}
+
+
+
+#youtube-chapters li:nth-child(1) { background-image: url(../img/larastelle-1-yt.webp) }
+#youtube-chapters li:nth-child(2) { background-image: url(../img/larastelle-2-yt.webp) }
+#youtube-chapters li:nth-child(3) { background-image: url(../img/larastelle-3-yt.webp) }
+#youtube-chapters li:nth-child(4) { background-image: url(../img/larastelle-4-yt.webp) }
+#youtube-chapters li:nth-child(5) { background-image: url(../img/larastelle-5-yt.webp) }
+#youtube-chapters li:nth-child(6) { background-image: url(../img/larastelle-6-yt.webp) }
+#youtube-chapters li:nth-child(7) { background-image: url(../img/larastelle-7-yt.webp) }
+#youtube-chapters li:nth-child(8) { background-image: url(../img/larastelle-8-yt.webp) }
+#youtube-chapters li:nth-child(9) { background-image: url(../img/larastelle-9-yt.webp) }
+#youtube-chapters li:nth-child(10) { background-image: url(../img/larastelle-10-yt.webp) }
+#youtube-chapters li:nth-child(11) { background-image: url(../img/larastelle-11-yt.webp) }
+#youtube-chapters li:nth-child(12) { background-image: url(../img/larastelle-12-yt.webp) }
+#youtube-chapters li:nth-child(13) { background-image: url(../img/larastelle-13-yt.webp) }
+#youtube-chapters li:nth-child(14) { background-image: url(../img/larastelle-14-yt.webp) }
+#youtube-chapters li:nth-child(15) { background-image: url(../img/larastelle-15-yt.webp) }
+#youtube-chapters li:nth-child(16) { background-image: url(../img/larastelle-16-yt.webp) }
