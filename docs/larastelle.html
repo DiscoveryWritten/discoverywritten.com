@@ -1,10 +1,10 @@
 <html>
 <head>
   <title>LARASTELLE</title>
-  <link rel="stylesheet" href="css/accessibility.css">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/showcase.css">
   <link rel="stylesheet" href="css/larastelle.css">
+  <link rel="stylesheet" href="css/accessibility.css">
   <meta name="viewport" content="width=device-width" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="icon" type="image/png" href="img/favicon.64.png" sizes="64x64">
@@ -28,17 +28,27 @@
       color: ".penrose-font, .nav-previous, .nav-next",
       filter: "#dark",
     }
+
     document.addEventListener("DOMContentLoaded", () => {
-      LIGHTSHOW.join(sync.color, 'color');
-      ACCESSIBILITY.when.dark(
-        () => LIGHTSHOW.join(sync.color, 'color'),
-        () => document.getElementById('dark').style.willChange = '',
-      );
+      // Global hints
       document.addEventListener('mousedown', () => isDragging = true);
       document.addEventListener('mouseup', () => isDragging = false);
-      window.addEventListener('scroll', () => {
-        document.documentElement.style.setProperty('--scrollY', window.scrollY);
-      });
+
+      // Animation & Dark support
+      let darkAnim = null;
+      function addDarkAnimation() {
+        [darkAnim] = LIGHTSHOW.join(sync.filter, 'filter');
+      }
+
+      const dark = ACCESSIBILITY.when.dark(
+        () => animation.test() && addDarkAnimation(),
+        () => [darkAnim] = LIGHTSHOW.leave(darkAnim)
+      );
+
+      const animation = ACCESSIBILITY.when.animation(() => {
+        LIGHTSHOW.join(sync.color, 'color');
+        dark.test() && addDarkAnimation();
+      }, () => LIGHTSHOW.end());
     });
   </script>
   <script src="js/larastelle.js"></script>
@@ -639,14 +649,14 @@ WELL, ZEALOT?<strong data-c="@">¶</strong>
 </pre>
 
     <p>My neck jerks. No, my bioware is repor<strong data-c="¶">¶</strong><br>
-    <span class="hostile">I don't know why I fight for Larastelle.<strong data-c="¶">¶</strong><br>
-    What good's it done?<strong data-c="::&nbsp;>">¶</strong><br>
-    Isn't she just <span class="brave">⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄<strong data-c="\\\\">¶</strong><br>
-    </span>She's just a fucki<span class="brave">⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄<strong data-c="|||||">¶</strong><br>
-    ⁄⁄⁄           ⁄⁄⁄⁄⁄⁄⁄<strong data-c="//////////">¶</strong><br>
-    ⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄</span> not<span class="brave">⁄⁄</span>ve<span class="brave">⁄⁄⁄</span> post-ph<span class="brave">⁄\⁄\⁄\⁄\⁄⁄⁄⁄⁄ <strong data-c="`˚">¶</strong><br>
-    ⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄<strong data-c="⁄">¶</strong><br>
-    ⁄⁄</span></span><strong data-c="¶¶¶">¶</strong>
+    <span class="hostile" data-c="I don't know why I f_">I don't know why I fight for Larastelle.</span><strong data-c="¶">¶</strong><br>
+    <span class="hostile" data-c="What good's _">What good's it done?</span><strong data-c="::&nbsp;>">¶</strong><br>
+    <span class="hostile" data-c="Isn't she just interl_">Isn't she just </span><span class="brave">⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄<strong data-c="\\\\">¶</strong></span><br>
+    <span class="hostile" data-c="She's just a fucking BLIGHT in our v_">She's just a fucki<span class="brave">⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄<strong data-c="|||||">¶</strong><br>
+    ⁄⁄⁄&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⁄⁄⁄⁄⁄⁄⁄<strong data-c="//////////">¶</strong><br>
+    <span class="hostile" data-c="They _&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l"></span>⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄ not<span class="brave">⁄⁄</span>ve<span class="brave">⁄⁄⁄</span> post-ph<span class="brave">⁄\⁄\⁄\⁄\⁄⁄⁄⁄⁄ <strong data-c="`">¶</strong><br>
+    <span class="hostile" data-c="ive what ৲ⱴ𐤍↯ꝇꝆarastelle ܈܇will f_"></span>⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄⁄<strong data-c="⁄">¶</strong><br>
+    ⁄⁄</span><strong data-c="¶¶¶">¶</strong>
     </p>
 
 <pre>
@@ -654,7 +664,7 @@ CHECK NARROW SCAN ALERTS:
 <span aria-label="alert,">::</span> (Non<strong data-c="¶">¶</strong>
 YOU LITTLE SHIT.<strong data-c="YOU&nbsp;LITTLE&nbsp;SHIT">¶</strong>
 I OWN YOU.<strong data-c="¶">¶</strong>
-CRASH IT.<strong data-c="`',&nbsp;&nbsp;&nbsp;}">¶</strong>
+CRASH IT.<strong data-c="`">¶</strong>
 BRING HER.<strong data-c="¶">¶</strong>
 </pre>
     <p>My eyelids twitch and my sensors seem to be calming down after a magnetic wave came through without warning.</p>

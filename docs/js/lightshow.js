@@ -27,12 +27,38 @@ const LIGHTSHOW = {
     color: frames.map(({ filter, ...frame }) => frame),
     filter: frames.map(({ color, ...frame }) => frame),
   },
+  active: [],
   join: lightshow,
+  leave: leaveshow,
+  end: () => leaveshow(...LIGHTSHOW.active),
 }
 
 function lightshow(selector, prop, options={}) {
+  const { keyframes, active, options: opts } = LIGHTSHOW;
+
+  const added = [];
   for (const el of document.querySelectorAll(selector)) {
     el.style.willChange = prop;
-    el.animate(LIGHTSHOW.keyframes[prop], { ...LIGHTSHOW.options, ...options });
+    const anim = el.animate(keyframes[prop], { ...opts, ...options });
+    anim.startTime = _.startTime;
+    anim.play();
+    // console.log("Starting animation", anim, active.length, el);
+    active.push(anim);
+    added.push(anim);
+    console.log(active.length);
   }
+  return added;
+}
+
+function leaveshow(...anims) {
+  const { active } = LIGHTSHOW;
+
+  function cancel(anim) {
+    anim.cancel();
+    // console.log("Canceling animation", anim, active.length, active.indexOf(anim));
+    active.splice(active.indexOf(anim), 1);
+    console.log(active.length);
+  }
+  anims.forEach(cancel);
+  return Array.from({ length: anims.length }, () => null);
 }

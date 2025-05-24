@@ -6,6 +6,40 @@ let useSwiping = true;
 let useDark = false;
 let gestureFeedbackTimeout = null;
 
+// General toggling observer fires one callback per state
+function when(el, test, t = (() => {}), f = (() => {})) {
+  const context = {
+    observer: null,
+    test: () => test(el),
+  }
+  function flip(o) {
+    t();
+    if (o) {
+      o.disconnect();
+    }
+    const { observer } = when(el, (el) => !test(el), f, t);
+    return observer;
+  }
+
+  if (test(el)) {
+    context.observer = flip(context.observer);
+    return context;
+  }
+
+  context.observer = new MutationObserver(mutations => {
+    for (const m of mutations) {
+      if (m.attributeName === 'class' && test(el)) {
+        context.observer = flip(context.observer);
+      }
+    }
+  });
+  context.observer.observe(el, {
+      attributes: true,
+      attributeFilter: ['class'],
+  });
+  return context;
+}
+
 const ACCESSIBILITY = {
   buttonId: 'filter-toggle',
   panelId: 'filter-panel',
@@ -17,10 +51,14 @@ const ACCESSIBILITY = {
     dark: accessDark,
   },
   when: {
-    dark: (on, off) => whenDark(
+    animation: (on, off) => when(
       document.querySelector('body'),
-      on, off,
-      (el) => el.classList.contains('dark')),
+      (el) => !el.classList.contains('no-animation'),
+      on, off),
+    dark: (on, off) => when(
+      document.querySelector('body'),
+      (el) => el.classList.contains('dark'),
+      on, off),
   },
   swiping: {
     hook: rebake,
@@ -93,23 +131,6 @@ function accessAnimation(on=true) {
 function accessDark(on=true) {
   useDark = on;
   document.querySelector('body').classList.toggle('dark', on);
-}
-
-// Accessibility: Dark
-function whenDark(el, on, off, test) {
-  const observer = new MutationObserver(mutations => {
-    for (const m of mutations) {
-      if (m.attributeName === 'class' && test(el)) {
-        on();
-        observer.disconnect();
-        whenDark(el, off, on, (el) => !test(el));
-      }
-    }
-  });
-  observer.observe(el, {
-      attributes: true,
-      attributeFilter: ['class'],
-  });
 }
 
 // Accessibility: Horizontal swiping gestures

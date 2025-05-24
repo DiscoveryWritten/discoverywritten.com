@@ -60,3 +60,100 @@
   color: #252a43;
   cursor: pointer;
 }
+
+/* Dark */
+body #dark { display: none; }
+body.dark #dark {
+    display: block;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center 330px,
+        #284b3fb4 0%,
+        #000000e0 4%,
+        #51a186b4 10%,
+        #85008520 11%,
+        #00808050 14%,
+        #96960050 14.5%,
+        #8b250050 15%,
+        #00000050 16%,
+        #000000d5 35%,
+        transparent 48%);
+    pointer-events: none;
+    height: 3000px;
+    /* filter: hue-rotate(0deg); */
+    /* animation: flickerHue 60s cubic-bezier(0.7, -1, 0.3, 2) infinite; */
+}
+
+
+/* Movement */
+@keyframes glitchA {
+  0%   { transform: translate(0, 0) rotateX(0deg); }
+  25%  { transform: translate(-6px, 6px) rotateX(4deg); }
+  50%  { transform: translate(23px, -6px) rotateX(-6deg); }
+  75%  { transform: translate(-6px, 0) rotateX(-2deg); }
+  /* 100% { transform: translate(0, 0); } */
+}
+
+@keyframes glitchB {
+  0%   { transform: translate(0, 0) rotateZ(0deg); }
+  20%  { transform: translate(6px, 0) rotateZ(4deg); }
+  40%  { transform: translate(0, -6px) rotateZ(-6deg); }
+  60%  { transform: translate(-23px, 23px) rotateZ(-2deg); }
+  80%  { transform: translate(6px, -6px) rotateZ(2deg); }
+  /* 100% { transform: translate(0, 0); } */
+}
+
+@keyframes flicker {
+  0%, 100% { color: #00d0ff; }
+  15%      { color: #00b7ff; }
+  18%      { color: #00d0ff; }
+  20%      { color: #00e1ff; }
+  23%      { color: #00b7ff; }
+  25%      { color: #00d0ff; }
+  30%      { color: #00b7ff; }
+  42%      { color: #00e1ff; }
+  48%      { color: #00fffb; }
+  50%      { color: #00b7ff; }
+  70%      { color: #00ccff; }
+  75%      { color: #00d0ff; }
+  80%      { color: #00fffb; }
+  92%      { color: #ff8c00; }
+}
+@keyframes flickerHue {
+  0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+  15%      { filter: hue-rotate(10deg) brightness(1); }
+  18%      { filter: hue-rotate(0deg) brightness(1); }
+  20%      { filter: hue-rotate(20deg) brightness(1); }
+  23%      { filter: hue-rotate(10deg) brightness(1); }
+  25%      { filter: hue-rotate(0deg) brightness(1); }
+  30%      { filter: hue-rotate(10deg) brightness(1); }
+  42%      { filter: hue-rotate(20deg) brightness(1); }
+  48%      { filter: hue-rotate(60deg) brightness(1); }
+  50%      { filter: hue-rotate(10deg) brightness(1); }
+  70%      { filter: hue-rotate(30deg) brightness(1); }
+  75%      { filter: hue-rotate(0deg) brightness(1); }
+  80%      { filter: hue-rotate(60deg) brightness(1); }
+  92%      { filter: hue-rotate(180deg) brightness(1); }
+}
+
+/* .story [role="document"] strong {
+    will-change: transform;
+    animation: flickerHue 10s cubic-bezier(0.7, -1, 0.3, 2) infinite;
+} */
+.story [role="document"] strong::before {
+  will-change: transform;
+  animation: glitchA 1s infinite steps(1);
+}
+.story [role="document"] strong::after {
+  will-change: transform;
+  animation: glitchB 0.3s infinite steps(1);
+}
+body.no-animation .story [role="document"] strong::before {
+  will-change: auto;
+  animation: none;
+}
+body.no-animation .story [role="document"] strong::after {
+  will-change: auto;
+  animation: none;
+}
