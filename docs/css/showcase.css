@@ -264,6 +264,7 @@ body.dark #bg > .pair h2 {
 #scroll-top {
   position: absolute;
   height: 1px;
+  top: 219px;
 }
 .float h3 {
   transition: font-size 0.2s ease-in-out;
