@@ -40,8 +40,7 @@ function lightshow(selector, prop, options={}) {
   for (const el of document.querySelectorAll(selector)) {
     el.style.willChange = prop;
     const anim = el.animate(keyframes[prop], { ...opts, ...options });
-    // anim.startTime = _.opts.startTime;
-    anim.play();
+    anim.startTime = opts.startTime;
     // console.log("Starting animation", anim, active.length, el);
     active.push(anim);
     added.push(anim);

@@ -71,26 +71,26 @@ body {
 @media (max-width: 1600px) {
   #title-stack { padding-bottom: 11em; }
   #title-stack h1 { font-size: 7em; }
-  #access { margin-top: -109px !important; };
+  #access { margin-top: -77px !important; };
 }
 @media (max-width: 950px) {
   #title-stack { padding-bottom: 6.5em; }
   #title-stack h1 { font-size: 4em; }
   .links img, .feature img { width: 40px; }
   /* .tabs a { font-size: 1.5rem; } */
-  #access { margin-top: -72px !important; };
+  #access { margin-top: -40px !important; };
 }
 @media (max-width: 550px) {
   #title-stack { padding-bottom: 5em; }
   #title-stack h1 { font-size: 3em; }
   .links img, .feature img { width: 28px; }
-  #access { margin-top: -64px !important; };
+  #access { margin-top: -32px !important; };
 }
 @media (max-width: 350px) {
   #title-stack { padding-bottom: 4em; }
   #title-stack h1 { font-size: 2em; }
   .links img, .feature img { width: 18px; }
-  #access { margin-top: -62px !important; };
+  #access { margin-top: -30px !important; };
 }
 #title, #title-stroke {
   position: absolute;

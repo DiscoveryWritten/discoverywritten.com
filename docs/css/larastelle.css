@@ -37,7 +37,7 @@ pre.chapter-font {
 .story h3.larastelle-font {
     font-family: LarastelleFont;
     text-shadow: none;
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1.2;
 }
 .story h4 {
@@ -376,9 +376,6 @@ h3 {
     padding: 0;
     border: none;
     max-width: 500px !important;
-}
-.story [role="document"] {
-    padding-top: 0.8em;
 }
 .story [role="document"] pre,
 .story [role="document"] p {

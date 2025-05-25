@@ -2,7 +2,7 @@
 let usePlayer = true;
 let useFocus = false;
 let useAnimation = true;
-let useSwiping = true;
+let useSwiping = false;
 let useDark = false;
 let gestureFeedbackTimeout = null;
 
@@ -79,6 +79,14 @@ const ACCESSIBILITY = {
 
     const button = document.getElementById(_.buttonId);
     button.addEventListener('click', showAccessibility(button));
+
+    // Sticky header conditions detector.
+    // Would love to use :in-view for CSS4 spec, but it doesn't exist yet.
+    const sentinel = document.querySelector('#scroll-top');
+    const body = document.querySelector('body');
+    new IntersectionObserver(([entry]) => {
+      body.classList.toggle('is-floating', !entry.isIntersecting);
+    }).observe(sentinel);
   });
 
   function showAccessibility(button) {
@@ -87,9 +95,6 @@ const ACCESSIBILITY = {
       const form = document.getElementById(_.panelId);
       button.setAttribute('aria-expanded', String(!expanded));
       form.hidden = expanded;
-      if (useFocus) {
-        form.scrollIntoView({ behavior: 'smooth' });
-      }
     }
   }
 })();

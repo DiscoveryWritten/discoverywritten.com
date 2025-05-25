@@ -1,16 +1,40 @@
 #access.pair {
-  top: 0;
+  top: 137px;
   position: sticky;
   z-index: 10;
-  transform: translate(0, 32px);
-  margin-top: -131px;
+  /* transform: translate(0, 32px); */
+  margin-top: -100px;
   transition: margin-top 0.5s ease-in-out;
+}
+@media(max-width: 645px) {
+  #access.pair {
+    /* top: 181px; */
+    top: 226px;
+    margin-right: 1em;
+  }
+  body.is-floating #access {
+    width: 50%;
+    left: 50%;
+  }
+  body.is-floating #access button {
+    /* margin-right: 30px; */
+  }
 }
 #access > div {
   display: flex;
   justify-content: right;
 }
+body.is-floating #access button img {
+  filter: invert(1) brightness(2);
+  transition: filter 0.2s ease-in-out;
+}
+body.is-floating #access button:hover img,
+body.is-floating #access button[aria-expanded="true"] img {
+  filter: invert(0) brightness(1);
+  transition: filter 0.2s ease-in-out;
+}
 #access button {
+  position: absolute;
   height: 32px;
   width: 32px;
   padding: 3px;
@@ -42,7 +66,7 @@
 }
 #filter-panel:not([hidden]) {
   position: absolute;
-  bottom: 24px;
+  top: 32px;
   margin-right: 10px;
   padding: .5em;
   background: #ffffff;
