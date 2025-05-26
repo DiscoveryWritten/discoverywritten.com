@@ -65,6 +65,9 @@ const ACCESSIBILITY = {
     unhook: unbake,
     timelineSelector: '#chapters-control .tabs',
   },
+  focus: {
+    text: focusText,
+  }
 };
 
 (() => {
@@ -80,8 +83,7 @@ const ACCESSIBILITY = {
     const button = document.getElementById(_.buttonId);
     button.addEventListener('click', showAccessibility(button));
 
-    // Sticky header conditions detector.
-    // Would love to use :in-view for CSS4 spec, but it doesn't exist yet.
+    // Sticky header conditions detector
     const sentinel = document.querySelector('#scroll-top');
     const body = document.querySelector('body');
     new IntersectionObserver(([entry]) => {
@@ -208,4 +210,16 @@ function rebake(doc) {
   doc.addEventListener('touchend', pageEnd);
   // doc.addEventListener('mousedown', pageStart);
   // doc.addEventListener('mouseup', pageEnd);
+}
+
+
+// focus
+function focusText() {
+  const tab = document.querySelector('.tabs a[aria-selected="true"]');
+  const panel = document.getElementById(tab.getAttribute('aria-controls'));
+
+  if (useFocus) {
+    panel.querySelector('[role=document]').focus({ preventScroll: true });
+  }
+  document.querySelector('.h-text-version').scrollIntoView({ behavior: 'smooth' });
 }

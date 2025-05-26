@@ -107,8 +107,7 @@ function source(el, soft = false) {
   return false;
 }
 
-function album(el, ch, softFocus = null, noRing = false) {
-  const soft = softFocus === null ? !useFocus : softFocus;
+function album(el, ch, init=false) {
   let implied = null;
   const panels = document.querySelectorAll('.panels > div');
   const tabs = [...document.querySelectorAll('.tabs a')];
@@ -176,11 +175,8 @@ function album(el, ch, softFocus = null, noRing = false) {
     panels[ch].style.display = 'block';
     panels[ch].removeAttribute('inert');
     // panels[ch].setAttribute('aria-hidden', 'false');
-    if (!soft) {
-      if (!noRing) {
-        panels[ch].querySelector('[role=document]').focus({ preventScroll: true });
-      }
-      document.querySelector('.h-text-version').scrollIntoView({ behavior: 'smooth' });
+    if (!init && useFocus) {
+      ACCESSIBILITY.focus.text();
     }
   }
 
