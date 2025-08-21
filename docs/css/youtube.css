@@ -1,0 +1,57 @@
+
+ol#youtube-chapters {
+  background-color: #000;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0 80px 0 20px;
+  /* text-shadow: 1px 2px #000000; */
+  font-size: 1em;
+  /* font-family: ChapterFont; */
+}
+#youtube-chapters li a {
+  display: flex;
+  justify-content: start;
+  justify-items: center;
+  place-items: center;
+  padding: 0 10px;
+  cursor: pointer;
+}
+#youtube-chapters li span {
+  display: inline-block;
+  margin: 0 10px;
+}
+#youtube-chapters li pre {
+  display: inline-block;
+  margin-left: auto;
+}
+#youtube-chapters li a::before {
+  content: "";
+  margin-right: 10px;
+}
+#youtube-chapters li a.active::before {
+  content: "⧐";
+  color: white;
+  /* font-size: 1.5em; */
+}
+
+#youtube-chapters li {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#youtube-chapters li a {
+  mix-blend-mode: normal;
+  filter: drop-shadow(1px 2px 0 #000000) drop-shadow(0 -1px .5px #000000);
+  font-weight: bold;
+}
+#youtube-chapters li a.darken {
+  color: black;
+  mix-blend-mode: darken;
+  filter: none;
+}
+#youtube-chapters li a.hard-light {
+  mix-blend-mode: hard-light;
+}
+#youtube-chapters li a.exclusion {
+  mix-blend-mode: exclusion;
+}
