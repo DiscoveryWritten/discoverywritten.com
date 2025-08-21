@@ -60,3 +60,30 @@ function leaveshow(...anims) {
   anims.forEach(cancel);
   return Array.from({ length: anims.length }, () => null);
 }
+
+const heatmap = new Map();
+let tickCount = 0;
+function recordLag(lag, size = 2) {
+  const bucket = Math.floor(lag / size) * size;
+  heatmap.set(bucket, (heatmap.get(bucket) || 0) + 1);
+  tickCount++;
+  if (tickCount % 20 === 0) {
+    sampleLag();
+  }
+}
+function sampleLag(threshold=10, amount=10) {
+  for (let [key, val] of [...heatmap.entries()].sort((a, b) => b[0] - a[0])) {
+    if (key >= threshold && val >= amount) {
+      ACCESSIBILITY.access.animation(false, { soft: true });
+      break;
+    }
+  }
+}
+setInterval(() => {
+  const t0 = performance.now();
+  requestAnimationFrame(() => {
+    const t1 = performance.now();
+    const lag = t1 - t0;
+    recordLag(lag);
+  });
+}, 200);
