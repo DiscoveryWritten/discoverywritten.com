@@ -1,22 +1,22 @@
 @font-face {
-    font-family: BrandFont;
-    src: url('../fonts/Angelic Serif.ttf') format('truetype');
+  font-family: BrandFont;
+  src: url('../fonts/Angelic Serif.ttf') format('truetype');
 }
 @font-face {
-    font-family: LarastelleFont;
-    src: url('../fonts/PICAHMS_.ttf') format('truetype');
+  font-family: LarastelleFont;
+  src: url('../fonts/PICAHMS_.ttf') format('truetype');
 }
 
 .brand-font {
-    font-family: BrandFont;
-    color: #E9D8F7;
-    text-shadow: 1px 3px #2F2933;
+  font-family: BrandFont;
+  color: #E9D8F7;
+  text-shadow: 1px 3px #2F2933;
 }
 .larastelle-font {
-    font-size: 1.5em;
-    font-family: LarastelleFont;
-    color: #E9D8F7;
-    text-shadow: 1px 3px #2F2933;
+  font-size: 1.5em;
+  font-family: LarastelleFont;
+  color: #E9D8F7;
+  text-shadow: 1px 3px #2F2933;
 }
 
 p .brand-font {
@@ -149,7 +149,7 @@ h3 {
   margin-left: 5px;
 }
 .links img {
-    filter: drop-shadow(0 2px 0px #000000);
+  filter: drop-shadow(0 2px 0px #000000);
 }
 a {
   color: #E9D8F7;
