@@ -39,6 +39,7 @@ function when(el, test, t = (() => {}), f = (() => {})) {
   });
   return context;
 }
+// _.swiping.hook(document.querySelector(_.swiping.timelineSelector));
 
 const ACCESSIBILITY = {
   buttonId: 'filter-toggle',
@@ -61,8 +62,10 @@ const ACCESSIBILITY = {
       on, off),
   },
   swiping: {
-    hook: rebake,
-    unhook: unbake,
+    start: swipeStart,
+    end: swipeEnd,
+    hook: swipeEnable,
+    unhook: swipeDisable,
     timelineSelector: '#chapters-control .tabs',
   },
   focus: {
@@ -74,11 +77,12 @@ const ACCESSIBILITY = {
   const _ = ACCESSIBILITY;
 
   document.addEventListener('DOMContentLoaded', () => {
-    accessFocus(useFocus);
-    accessAnimation(useAnimation);
-    accessDark(useDark);
-
-    _.swiping.hook(document.querySelector(_.swiping.timelineSelector));
+    const load = LARASTELLE.retrieve;
+    accessPlayer(load('usePlayer', usePlayer));
+    accessFocus(load('useFocus', useFocus));
+    accessAnimation(load('useAnimation', useAnimation));
+    accessDark(load('useDark', useDark));
+    accessSwiping(load('useSwiping', useSwiping));
 
     const button = document.getElementById(_.buttonId);
     button.addEventListener('click', showAccessibility(button));
@@ -103,46 +107,48 @@ const ACCESSIBILITY = {
 
 // Accessibility: Mutations
 function accessPlayer(on=true) {
-  usePlayer = on || false;
-  document.querySelector('player').setAttribute('inert', !on);
+  usePlayer = LARASTELLE.retain('usePlayer', on);;
+  document.querySelector('.player').setAttribute('inert', !on);
 }
 function accessFocus(on=true) {
-  useFocus = on || false;
+  useFocus = LARASTELLE.retain('useFocus', on);
 }
 function accessSwiping(on=true) {
-  useSwiping = on || false;
+  useSwiping = LARASTELLE.retain('useSwiping', on);
   const doc = document.getElementById(
     document
-      .querySelector('#chapters-control .tabs .active')
+      .querySelector(`${ACCESSIBILITY.swiping.timelineSelector} .active`)
       .getAttribute('aria-controls')
   );
-  if (on) {
-    rebake(doc);
-    rebake(document.querySelector('#chapters-control .tabs'));
-  } else {
-    unbake(doc);
-    unbake(document.querySelector('#chapters-control .tabs'));
-  }
+  let op = on ? swipeEnable : swipeDisable;
+  op(doc);
+  op(document.querySelector(ACCESSIBILITY.swiping.timelineSelector));
 }
-function accessAnimation(on=true) {
-  useAnimation = on;
+function accessAnimation(on=true, { soft=false }={}) {
+  useAnimation = soft ? on : LARASTELLE.retain('useAnimation', on);
   document.querySelector('body').classList.toggle('no-animation', !on);
-  // document.querySelectorAll(".penrose-font, #chapters-control > a").forEach((el) => {
-  //   if (!on && !el.classList.contains('no-animation')) {
-  //     el.classList.add('no-animation');
-  //   } else {
-  //     el.classList.remove('no-animation');
-  //   }
-  // });
 }
 function accessDark(on=true) {
-  useDark = on;
+  useDark = LARASTELLE.retain('useDark', on);
   document.querySelector('body').classList.toggle('dark', on);
+}
+
+function checkSwipe(e) {
+  const endX = e.deltaX || (e.changedTouches?.[0] || e).clientX;
+  const deltaX = endX - startX;
+  // const deltaT = Date.now() - startTime;
+  // startTime = 0;  // reset
+
+  if (deltaX > 0 || startX > 0) {
+    LARASTELLE.reveal.story(navNext);
+  } else if (deltaX < 0 || startX < 0) {
+    LARASTELLE.reveal.story(navPrevious);
+  }
 }
 
 // Accessibility: Horizontal swiping gestures
 let startX = 0;
-let startTime = 0;
+// let startTime = 0;
 function throttle(fn, delay = 50) {
   let blocked = false;
   return function(e) {
@@ -152,7 +158,7 @@ function throttle(fn, delay = 50) {
     setTimeout(() => blocked = false, delay);
   };
 }
-function pageStart(e) {
+function swipeStart(e, gestureFeedback = 1000) {
   if (e.deltaY && !e.deltaX) {
     return;
   }
@@ -164,54 +170,45 @@ function pageStart(e) {
   document.querySelector('.story').classList.add('gesture-feedback');
   setTimeout(() => {
     document.querySelector('.story').classList.remove('gesture-feedback');
-  }, 1000);
+  }, gestureFeedback);
   if (e.deltaX && !e.deltaY) {
     startX = e.deltaX;
-    pageEnd(e);
+    ACCESSIBILITY.swiping.end(e);
   } else {
     startX = (e.touches?.[0] || e).clientX;
   }
-  startTime = Date.now();
+  // startTime = Date.now();
 }
-const pageEnd = throttle(function pageEnd(e) {
-  const endX = e.deltaX || (e.changedTouches?.[0] || e).clientX;
-  const deltaX = endX - startX;
-  // const deltaT = Date.now() - startTime;
-  startTime = 0;
+function swipeEnd(...args) {
+  return throttle(checkSwipe)(...args);
+}
 
-  if (deltaX > 0 || startX > 0) {
-    LARASTELLE.reveal.story(navNext);
-  } else if (deltaX < 0 || startX < 0) {
-    LARASTELLE.reveal.story(navPrevious);
-  }
-});
+function swipePreventDefault(e) { e.preventDefault(); }
 
-function pagePrevent(e) { e.preventDefault(); }
-
-function unbake(doc) {
+function swipeDisable(doc) {
   if (doc === null) {
     return;
   }
-  doc.removeEventListener('wheel', pageStart);
-  doc.removeEventListener('touchmove', pagePrevent, { passive: false });
-  doc.removeEventListener('touchstart', pageStart, { passive: false });
-  doc.removeEventListener('touchend', pageEnd);
-  // doc.removeEventListener('mousedown', pageStart);
-  // doc.removeEventListener('mouseup', pageEnd);
+  doc.removeEventListener('wheel', ACCESSIBILITY.swiping.start);
+  doc.removeEventListener('touchmove', swipePreventDefault, { passive: false });
+  doc.removeEventListener('touchstart', ACCESSIBILITY.swiping.start, { passive: false });
+  doc.removeEventListener('touchend', ACCESSIBILITY.swiping.end);
+  // doc.removeEventListener('mousedown', ACCESSIBILITY.swiping.start);
+  // doc.removeEventListener('mouseup', ACCESSIBILITY.swiping.end);
 
 }
-function rebake(doc) {
+function swipeEnable(doc) {
   if (!useSwiping) {
     return;
   }
-  doc.addEventListener('wheel', pageStart);
-  doc.addEventListener('touchmove', pagePrevent, { passive: false });
-  doc.addEventListener('touchstart', pageStart, { passive: false });
-  doc.addEventListener('touchend', pageEnd);
-  // doc.addEventListener('mousedown', pageStart);
-  // doc.addEventListener('mouseup', pageEnd);
+  // _.swiping.hook(document.querySelector(_.swiping.timelineSelector));
+  doc.addEventListener('wheel', ACCESSIBILITY.swiping.start);
+  doc.addEventListener('touchmove', swipePreventDefault, { passive: false });
+  doc.addEventListener('touchstart', ACCESSIBILITY.swiping.start, { passive: false });
+  doc.addEventListener('touchend', ACCESSIBILITY.swiping.end);
+  // doc.addEventListener('mousedown', ACCESSIBILITY.swiping.start);
+  // doc.addEventListener('mouseup', ACCESSIBILITY.swiping.end);
 }
-
 
 // focus
 function focusText() {

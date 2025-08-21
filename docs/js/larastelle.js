@@ -19,6 +19,16 @@ const LARASTELLE = {
     music: 's',
   },
   init,
+  retain: (name, value) => localStorage[name] ??
+    (localStorage[name] = JSON.stringify(value)),
+  retrieve: (name, defaultValue) => {
+    // try {
+      return JSON.parse(localStorage[name] ?? JSON.stringify(defaultValue));
+    // } catch (e) {
+    //   localStorage[defaultValue] = JSON.stringify(defaultValue);
+    //   return defaultValue;
+    // }
+  },
   reveal: {
     music: source,
     story: album,
@@ -174,7 +184,6 @@ function album(el, ch, init=false) {
   if (panels[ch] !== undefined) {
     panels[ch].style.display = 'block';
     panels[ch].removeAttribute('inert');
-    // panels[ch].setAttribute('aria-hidden', 'false');
     if (!init && useFocus) {
       ACCESSIBILITY.focus.text();
     }
