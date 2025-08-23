@@ -54,7 +54,7 @@ button.close.mac {
 button.close.mac::after {
   content: "×";
   font: 600 calc(var(--size)*0.65)/1 system-ui, -apple-system, sans-serif;
-  color: white;
+  color: black;
   position: absolute;
   opacity: 0;
   transition: opacity .15s ease;

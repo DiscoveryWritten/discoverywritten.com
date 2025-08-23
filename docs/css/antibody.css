@@ -79,6 +79,10 @@ body {
   [right];
   column-gap: 1.5rem;
 }
+#by-line {
+  color: #e9d8f7;
+  text-align: center;
+}
 article.content {
   margin-top: 0;
   grid-column: 1 / -1;
@@ -91,7 +95,8 @@ article > *:not(.side) {
   grid-column: content-start / content-end;
   /* margin: 0; */
 }
-article > p .journal-font {
+article > p > span {
+  font-family: JournalFont, "Georgia", serif;
   font-size: 1.8em;
 }
 article > p::before,
