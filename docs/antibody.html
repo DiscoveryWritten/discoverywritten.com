@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/sub-pages.css">
   <link rel="stylesheet" href="css/antibody.css">
+  <link rel="stylesheet" href="css/dialog.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -16,6 +17,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="img/favicon.180.png">
   <link rel="mask-icon" href="svg/icon-mask.svg" color="#01A2A6">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/dialog.js"></script>
 </head>
 <body>
   <div id="bg">
@@ -90,5 +92,14 @@
       <div>Site and design &copy; 2025 Discovery Written, LLC</div>
     </div>
   </div>
+  <dialog id="full-image" class="content journal">
+    <form method="dialog">
+      <nav>
+        <button class="close mac" aria-label="Close"></button>
+        <h1>Figure 1</h1>
+        <button class="close win" aria-label="Close"></button>
+      </nav>
+    </form>
+  </dialog>
 </body>
 </html>
