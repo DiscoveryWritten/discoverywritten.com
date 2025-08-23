@@ -6,10 +6,8 @@ dialog::backdrop {
   background: #000000a0;
 }
 dialog.content {
-  width: 90vw;
-
-  /* undo likely .content conflicts from the page */
   margin: auto;
+  width: 90vw;
   max-width: max-content;
 }
 dialog nav {
@@ -29,10 +27,10 @@ dialog nav > * {
 }
 dialog form {
   width: min-content;
+  overflow: auto;
 }
 dialog img {
-  max-width: 90vw;
-  max-height: 90vh;
+  /* max-width: 90vw; */
   display: block;
   margin: auto;
 }

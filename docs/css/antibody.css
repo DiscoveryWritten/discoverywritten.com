@@ -87,23 +87,27 @@ article.content {
   grid-auto-flow: row;
   row-gap: 0;
 }
-article > p {
+article > p,
+article > figure:not(.side) {
   grid-column: content-start / content-end;
   /* margin: 0; */
+}
+article > p .journal-font {
+  font-size: 1.8em;
 }
 article > p::before,
 article > p::after { content:""; }
 article > p::before { grid-column: left / content-start; }
 article > p::after { grid-column: content-end / right; }
 
-figure.side {
+.side {
   margin:0;
   align-self: start;
   grid-row: auto / span 5;
   width:min(24ch, 100%);
 }
-figure.side.left { grid-column: left / content-start; justify-self: end; }
-figure.side.right { grid-column: content-end / right; justify-self: start; }
+.side.left { grid-column: left / content-start; justify-self: end; }
+.side.right { grid-column: content-end / right; justify-self: start; }
 figure img { display: block; max-width: 100%; height: auto; }
 figcaption {
   color: #E9D8F7;
@@ -141,4 +145,8 @@ figure img {
     max-height: 40vh;
     margin: 0 auto;
   }
+}
+
+dialog.content {
+  background-color: #273e4f;
 }
