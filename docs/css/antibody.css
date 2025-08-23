@@ -87,8 +87,7 @@ article.content {
   grid-auto-flow: row;
   row-gap: 0;
 }
-article > p,
-article > figure:not(.side) {
+article > *:not(.side) {
   grid-column: content-start / content-end;
   /* margin: 0; */
 }
