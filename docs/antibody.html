@@ -21,7 +21,7 @@
   <script src="js/dialog.js"></script>
   <script>
     const preferences = PREFERENCES("antibody");
-    const prefer = { dark: true };  // Defaults, will update with setter use
+    const prefer = { dark: false };  // Defaults, will update with setter use
     const use = Object.fromEntries( // Map of preference setters
       Object.entries(prefer).map(([k, v]) => {
         prefer[k] = preferences.retain(k, v, { force: false });  // init
@@ -39,7 +39,7 @@
     ><img
       src="img/access.png" width="24" title="Accessibility options icon"
     /></button>
-    <form data-scope="antibody" id="preferences" role="region" aria-labelledby="preferences-toggle">
+    <form hidden data-scope="antibody" id="preferences" role="region" aria-labelledby="preferences-toggle">
       <label for="prefer-dark"><input id="prefer-dark" type="checkbox" name="dark" onchange="use.dark(this.checked)">Darken</label>
     </form>
   </div>

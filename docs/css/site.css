@@ -1,3 +1,14 @@
+:root,
+:root[data-dark="true"] {
+  --bg1: oklch(0.2916 0.0197 311.86);
+  --bg2: oklch(0.3317 0.0488 260.32);
+  --fg1: oklch(0.9037 0 0);
+  --fg2: oklch(0.9054 0.0455 309.91);
+  --fg-inverse: oklch(0.1076 0 0);
+  --sh: oklch(0.2916 0.0197 311.86);
+  --stroke: oklch(0.2674 0.0049 39.4);
+}
+
 @font-face {
   font-family: BrandFont;
   src: url('../fonts/Angelic Serif.ttf') format('truetype');
@@ -9,14 +20,14 @@
 
 .brand-font {
   font-family: BrandFont;
-  color: #E9D8F7;
-  text-shadow: 1px 3px #2F2933;
+  color: var(--fg2);
+  text-shadow: 1px 3px var(--sh);
 }
 .larastelle-font {
   font-size: 1.5em;
   font-family: LarastelleFont;
-  color: #E9D8F7;
-  text-shadow: 1px 3px #2F2933;
+  color: var(--fg2);
+  text-shadow: 1px 3px var(--sh);
 }
 
 p .brand-font {
@@ -39,22 +50,20 @@ hr {
 
 body {
   font-family: Verdana;
-  /* font-size: 1.5em; */
   width: 100%;
   padding: 0;
   margin: 0;
-  background-color: #2f2933; /* 27364f */
-  background-image: radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
-  background: -moz-radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #27364f), color-stop(50%, #2F2933), color-stop(100%, #2F2933));
-  background: -webkit-radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
-  background: -o-radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
-  background: -ms-radial-gradient(center, ellipse cover, #27364f 0%, #2F2933 50%, #2F2933 100%);
-  filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr=' #27364f ', endColorstr=' #2F2933 ',GradientType=1 )';
+  background-image: radial-gradient(center, ellipse cover, var(--bg2) 0%, var(--bg1) 50%, var(--bg1) 100%);
+  background: -ms-radial-gradient(center, ellipse cover, var(--bg2) 0%, var(--bg1) 50%, var(--bg1) 100%);
+  background: -o-radial-gradient(center, ellipse cover, var(--bg2) 0%, var(--bg1) 50%, var(--bg1) 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, var(--bg2)), color-stop(50%, var(--bg1)), color-stop(100%, var(--bg1)));
+  background: -moz-radial-gradient(center, ellipse cover, var(--bg2) 0%, var(--bg1) 50%, var(--bg1) 100%);
+  background: -webkit-radial-gradient(center, ellipse cover, var(--bg2) 0%, var(--bg1) 50%, var(--bg1) 100%);
+  filter: 'progid:DXImageTransform.Microsoft.gradient( startColorstr=' var(--bg2) ', endColorstr=' var(--bg1) ',GradientType=1 )';
   background-position: 50% 80%;
   background-size: 150vmax 150vmax;
   background-repeat: no-repeat;
-  background-color: #2F2933;
+  background-color: var(--bg1);
 }
 #bg {
   background-image: url('../img/splatter.png');
@@ -105,8 +114,8 @@ body {
   width: 100%;
   left: 0;
   mix-blend-mode: luminosity;
-  text-stroke-color: #282524;
-  -webkit-text-stroke-color: #282524;
+  text-stroke-color: var(--stroke);
+  -webkit-text-stroke-color: var(--stroke);
 }
 h1 {
   font-size: 3em;
@@ -128,7 +137,7 @@ h3 {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background-color: #2F2933a5;
+  background-color: var(--sh)a5;
   gap: 0 35px;
   font-size: 1.2em;
   text-align: center;
@@ -152,7 +161,7 @@ h3 {
   filter: drop-shadow(0 2px 0px #000000);
 }
 a {
-  color: #E9D8F7;
+  color: var(--fg1);
   text-decoration: none;
 }
 .links img,
@@ -185,7 +194,7 @@ a:hover {
 }
 
 .content p {
-  color: #dfdfdf;
+  color: var(--fg2);
   line-height: 1.8em;
   margin-bottom: 2em;
 }
@@ -193,13 +202,13 @@ a:hover {
   color: #dfdfdf;
   white-space: pre-wrap;
 }
-#content p a {
+.content a {
   text-decoration: underline;
 }
 
 #footer {
   text-align: center;
-  color: #E9D8F7;
+  color: var(--fg2);
   font-size: 0.8em;
 }
 #footer > div, #footer > nav {
@@ -223,9 +232,15 @@ a:hover {
 }
 .journal {
   border: 0;
-  border-bottom: 2px solid #273e4f;
-  border-top: 2px solid #273e4f40;
-  background-color: #273e4fd5;
+  border-bottom: 2px solid oklch(0.3526 0.0414 241.4);
+  border-top: 2px solid oklch(0.3526 0.0414 241.4 / 25%);
+  background-color: oklch(0.3526 0.0414 241.4 / 83.53%);
+}
+:root[data-dark="false"] .journal {
+  border: 0;
+  border-bottom: 2px solid oklch(71.583% 0.04787 313.133);
+  border-top: 2px solid oklch(71.583% 0.04787 313.133 / 25%);
+  background-color: oklch(71.583% 0.04787 313.133 / 65%);
 }
 .transparent {
   border: 0;
@@ -240,7 +255,4 @@ a:hover {
   clip: rect(0,0,0,0);
   white-space: nowrap;
   border: 0;
-}
-input[type="checkbox"] {
-  /* mix-blend-mode: revert-layer; */
 }
