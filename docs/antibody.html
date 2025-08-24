@@ -17,9 +17,32 @@
   <link rel="apple-touch-icon" sizes="180x180" href="img/favicon.180.png">
   <link rel="mask-icon" href="svg/icon-mask.svg" color="#01A2A6">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/preferences.js"></script>
   <script src="js/dialog.js"></script>
+  <script>
+    const preferences = PREFERENCES("antibody");
+    const prefer = { dark: true };  // Defaults, will update with setter use
+    const use = Object.fromEntries( // Map of preference setters
+      Object.entries(prefer).map(([k, v]) => {
+        prefer[k] = preferences.retain(k, v, { force: false });  // init
+        return [k, on => prefer[k] = preferences.use(k)(on)];  // updates
+      }));
+  </script>
 </head>
 <body>
+  <div id="scroll-top">
+    <button
+      id="preferences-toggle"
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-controls="preferences"
+    ><img
+      src="img/access.png" width="24" title="Accessibility options icon"
+    /></button>
+    <form data-scope="antibody" id="preferences" role="region" aria-labelledby="preferences-toggle">
+      <label for="prefer-dark"><input id="prefer-dark" type="checkbox" name="dark" onchange="use.dark(this.checked)">Darken</label>
+    </form>
+  </div>
   <div id="bg">
     <div id="title-stack" role="banner" aria-label="Project title">
       <div id="home-link">

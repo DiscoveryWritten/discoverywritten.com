@@ -13,6 +13,20 @@
   text-shadow: 1px 3px #2F2933;
 }
 
+#scroll-top {
+  z-index: 5;
+  position: sticky;
+  top: 0;
+}
+#preferences-toggle {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#preferences {
+  color: #E9D8F7;
+}
+
 #title-stack, #footer {
   background-color: #23222440;
 }
