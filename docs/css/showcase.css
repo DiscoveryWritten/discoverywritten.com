@@ -10,7 +10,7 @@ h2 {
   position: relative;
   z-index: 1;
 }
-body {
+body.showcase {
   background: #2F2933;
 }
 #bg, #showcase {
