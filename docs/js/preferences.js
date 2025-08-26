@@ -5,7 +5,7 @@ const PREFERENCES = (() => {
 
   function retain(scope, name, value, { force=true }={}) {
     const k = key(scope, name);
-    if (force || (localStorage[k] ?? "true|false")) {
+    if (force || !(localStorage[k] ?? null)) {
       localStorage[k] = JSON.stringify(value)
     }
     document.documentElement.dataset[name] = localStorage[k];
