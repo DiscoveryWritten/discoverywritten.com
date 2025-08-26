@@ -15,7 +15,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 54% 0;
-  filter: drop-shadow(0 1px 0px #000000);
+  filter: drop-shadow(0 1px 0px black);
 }
 
 #home-link a {
