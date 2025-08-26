@@ -27,6 +27,7 @@
 #title-stroke {
   text-stroke-color: var(--stroke);
   -webkit-text-stroke-color: var(--stroke);
+  mix-blend-mode: saturation;
 }
 .journal-font {
   font-family: JournalFont, "Georgia", serif;

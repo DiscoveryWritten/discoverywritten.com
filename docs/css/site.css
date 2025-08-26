@@ -101,6 +101,9 @@ body {
   .links img, .feature img { width: 18px; }
   #access { margin-top: -30px !important; };
 }
+#title-stack.luminosity {
+  mix-blend-mode: luminosity;
+}
 #title, #title-stroke {
   position: absolute;
   width: 100%;
