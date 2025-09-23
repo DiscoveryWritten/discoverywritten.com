@@ -159,7 +159,7 @@ function album(el, ch, init=false) {
     tab.classList.remove('active');
     tab.classList.add(`distance-${clamped}`);
     tab.removeAttribute('aria-selected');
-    tab.removeAttribute('innert');
+    tab.removeAttribute('inert');
   });
 
   if (el === null && implied === null) {
