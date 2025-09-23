@@ -45,7 +45,7 @@ const ACCESSIBILITY = {
   buttonId: 'filter-toggle',
   panelId: 'filter-panel',
   access: {
-    player: accessPlayer,
+    // player: accessPlayer,
     focus: accessFocus,
     swiping: accessSwiping,
     animation: accessAnimation,
@@ -78,7 +78,7 @@ const ACCESSIBILITY = {
 
   document.addEventListener('DOMContentLoaded', () => {
     const load = LARASTELLE.retrieve;
-    accessPlayer(load('usePlayer', usePlayer));
+    // accessPlayer(load('usePlayer', usePlayer));
     accessFocus(load('useFocus', useFocus));
     accessAnimation(load('useAnimation', useAnimation));
     accessDark(load('useDark', useDark));
@@ -106,12 +106,12 @@ const ACCESSIBILITY = {
 })();
 
 // Accessibility: Mutations
-function accessPlayer(on=true) {
-  usePlayer = LARASTELLE.retain('usePlayer', on);
-  const player = document.querySelector('.player');
-  if (on) player.setAttribute('inert', true);
-  else player.removeAttribute('inert');
-}
+// function accessPlayer(on=true) {
+//   usePlayer = LARASTELLE.retain('usePlayer', on);
+//   const player = document.querySelector('.player');
+//   if (on) player.setAttribute('inert', true);
+//   else player.removeAttribute('inert');
+// }
 function accessFocus(on=true) {
   useFocus = LARASTELLE.retain('useFocus', on);
 }
