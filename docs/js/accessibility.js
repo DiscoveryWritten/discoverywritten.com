@@ -109,8 +109,8 @@ const ACCESSIBILITY = {
 function accessPlayer(on=true) {
   usePlayer = LARASTELLE.retain('usePlayer', on);
   const player = document.querySelector('.player');
-  if (on) player.removeAttribute('inert');
-  else player.setAttribute('inert', true);
+  if (on) player.setAttribute('inert', true);
+  else player.removeAttribute('inert');
 }
 function accessFocus(on=true) {
   useFocus = LARASTELLE.retain('useFocus', on);
