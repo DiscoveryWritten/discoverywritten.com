@@ -74,16 +74,16 @@ function recordLag(lag, size = 2) {
 function sampleLag(threshold=10, amount=10) {
   for (let [key, val] of [...heatmap.entries()].sort((a, b) => b[0] - a[0])) {
     if (key >= threshold && val >= amount) {
-      // ACCESSIBILITY.access.animation(false, { soft: true });
+      ACCESSIBILITY.access.animation(false, { soft: true });
       break;
     }
   }
 }
-setInterval(() => {
-  const t0 = performance.now();
-  requestAnimationFrame(() => {
-    const t1 = performance.now();
-    const lag = t1 - t0;
-    recordLag(lag);
-  });
-}, 200);
+// setInterval(() => {
+//   const t0 = performance.now();
+//   requestAnimationFrame(() => {
+//     const t1 = performance.now();
+//     const lag = t1 - t0;
+//     recordLag(lag);
+//   });
+// }, 200);
