@@ -1,3 +1,7 @@
+body {
+  --stroke: #30280fe3;
+}
+
 @font-face {
   font-family: PenroseFont;
   src: url('../fonts/PICHSIM_.ttf') format('truetype');
