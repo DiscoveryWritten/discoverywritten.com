@@ -47,6 +47,9 @@ hr {
 #title-stroke {
   z-index: 2;
 }
+#ANECDOTE {
+  background-color: white;
+}
 
 body {
   font-family: Verdana;
@@ -188,6 +191,9 @@ a:hover {
   border-top: 2px solid #27364f40;
   padding: 8px 20px;
   border-radius: 5px;
+}
+.feature {
+   text-align: center;
 }
 .feature .key {
   width: 128px;
