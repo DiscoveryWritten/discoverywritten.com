@@ -10,8 +10,15 @@
     default-src 'self';
     object-src 'none';
     base-uri 'none';
-    connect-src 'self' https://anecdote.discoverywritten.com;
-    img-src 'self' data: https://gravatar.com https://anecdote.discoverywritten.com;
+    connect-src 'self'
+      https://anecdote.discoverywritten.com
+      ;
+    img-src 'self' data:
+      https://gravatar.com
+      https://antibody.discoverywritten.com
+      https://anecdote.discoverywritten.com
+      https://atlas.discoverywritten.com
+      ;
     script-src 'self' 'nonce-__ANECDOTE__'">
 
   <link rel="icon" type="image/png" href="img/favicon.64.png" sizes="64x64">
@@ -57,7 +64,7 @@
     <div class="links journal"> -->
       <div>
         <a href="//antibody.discoverywritten.com" rel="noopener">
-          <img src="img/antibody.png" width="45" />
+          <img src="https://antibody.discoverywritten.com/img/favicon.512.png" width="45" />
           <span>Antibody</span>
         </a>
       </div>
@@ -70,7 +77,7 @@
       </div>
       <div>
         <a href="//atlas.discoverywritten.com" rel="noopener">
-          <img src="" width="45" />
+          <img src="https://atlas.discoverywritten.com/img/favicon.512.png" width="45" />
           <span>Atlas</span>
         </a>
       </div>
