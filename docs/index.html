@@ -6,7 +6,13 @@
   <meta name="viewport" content="width=device-width" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; object-src 'none'; base-uri 'none'; img-src 'self' data: https://gravatar.com https://anecdote.discoverywritten.com; script-src 'self' 'nonce-__ANECDOTE__'">
+    content="
+    default-src 'self';
+    object-src 'none';
+    base-uri 'none';
+    connect-src 'self' https://anecdote.discoverywritten.com;
+    img-src 'self' data: https://gravatar.com https://anecdote.discoverywritten.com;
+    script-src 'self' 'nonce-__ANECDOTE__'">
 
   <link rel="icon" type="image/png" href="img/favicon.64.png" sizes="64x64">
   <link rel="icon" type="image/png" href="img/favicon.128.png" sizes="128x128">
