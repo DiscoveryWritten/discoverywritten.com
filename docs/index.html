@@ -9,15 +9,12 @@
     content="
     default-src 'self';
     base-uri 'none';
-    connect-src 'self'
-      https://anecdote.discoverywritten.com
-      ;
-    img-src 'self' data:
+    connect-src 'self';
+    img-src 'self'
       https://gravatar.com
       https://antibody.discoverywritten.com
-      https://anecdote.discoverywritten.com
       ;
-    script-src 'self' 'nonce-__ANECDOTE__'">
+    script-src 'self'">
 
   <link rel="icon" type="image/png" href="img/favicon.128.png" sizes="128x128">
   <link rel="apple-touch-icon" href="img/favicon.128.png" sizes="128x128">
@@ -57,9 +54,8 @@
         </a>
       </div>
       <div>
-        <a id="ANECDOTE-href" href="" rel="noopener"
-          title="Hey you, try opening it incognito" >
-          <img id="ANECDOTE-img" src="" width="45" />
+        <a href="https://anecdote.channel" rel="noopener">
+          <img src="img/anecdote.png" width="45" />
           <span>Anecdote</span>
         </a>
       </div>
@@ -109,28 +105,5 @@
       </div>
     </div>
   </div>
-  <script nonce="__ANECDOTE__">
-    (async function ANECDOTE() {
-      // Live data:chamber
-      const res = await fetch("https://anecdote.discoverywritten.com/.url");
-      const datachamber = await res.text();
-      document.getElementById("ANECDOTE-href").href = datachamber.trim();
-
-      // Live byte tile
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.src = "https://anecdote.discoverywritten.com/aztec.png";
-      await img.decode();
-
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
-
-      const tile = document.getElementById("ANECDOTE-img");
-      return tile.src = canvas.toDataURL();
-    })();
-  </script>
 </body>
 </html>
