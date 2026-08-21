@@ -11,6 +11,7 @@ h2 {
   z-index: 1;
 }
 body.showcase {
+  padding-top: env(safe-area-inset-top, 0px);
   background: #2F2933;
 }
 #bg, #showcase {
@@ -63,7 +64,7 @@ body.showcase {
   place-items: 0 center;
 }
 .music-story .player {
-  top: 60px;
+  top: calc(60px + env(safe-area-inset-top, 0px));
   position: sticky;
   width: 50%;
   max-height: 700px;
@@ -191,7 +192,7 @@ body.showcase {
     margin: 0 !important;
   }
   .story .float {
-    top: 170px !important;
+    top: calc(170px + env(safe-area-inset-top, 0px)) !important;
   }
   body.is-floating .float h3 {
     font-size: 1.3rem;
@@ -237,7 +238,7 @@ body.dark #bg > .pair h2 {
 }
 .pair.links {
   position: sticky;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   z-index: 2;
   gap: 0;
 }
@@ -256,7 +257,7 @@ body.dark #bg > .pair h2 {
   padding-top: 0.5em;
   position: sticky;
   z-index: 5;
-  top: 65px;
+  top: calc(65px + env(safe-area-inset-top, 0px));
   background: #27364fd5;
   border-bottom: 2px solid #27364f;
   filter: drop-shadow(0 3px 3px #00000080);
@@ -264,7 +265,7 @@ body.dark #bg > .pair h2 {
 #scroll-top {
   position: absolute;
   height: 1px;
-  top: 219px;
+  top: calc(219px + env(safe-area-inset-top, 0px));
 }
 .float h3 {
   transition: font-size 0.2s ease-in-out;

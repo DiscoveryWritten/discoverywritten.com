@@ -1,5 +1,5 @@
 #access.pair {
-  top: 137px;
+  top: calc(137px + env(safe-area-inset-top, 0px));
   position: sticky;
   z-index: 10;
   /* transform: translate(0, 32px); */
@@ -9,7 +9,7 @@
 @media(max-width: 645px) {
   #access.pair {
     /* top: 181px; */
-    top: 226px;
+    top: calc(226px + env(safe-area-inset-top, 0px));
     margin-right: 1em;
   }
   body.is-floating #access {
