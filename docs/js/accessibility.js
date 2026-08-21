@@ -82,7 +82,11 @@ const ACCESSIBILITY = {
     accessFocus(load('useFocus', useFocus));
     accessAnimation(load('useAnimation', useAnimation));
     accessDark(load('useDark', useDark));
-    accessSwiping(load('useSwiping', useSwiping));
+    // Left off deliberately: the touchmove handler calls preventDefault, which
+    // makes the page very hard to scroll on touch, and the toggle that turned it
+    // back off is commented out in larastelle.html. Loading the stored value here
+    // could re-enable it from an old localStorage entry with no way back.
+    // accessSwiping(load('useSwiping', useSwiping));
 
     const button = document.getElementById(_.buttonId);
     button.addEventListener('click', showAccessibility(button));
