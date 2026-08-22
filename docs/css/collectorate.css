@@ -521,3 +521,113 @@ body.album.no-video .no-video-note { display: block; }
   body.album #title,
   body.album #title-stroke { -webkit-text-stroke-width: 7px; }
 }
+
+/* ------------------------------------------------------- series index -- */
+
+/* A series landing page: sparse onboarding, then a library of episodes to
+   pick from. It exists because a grid does not need a canonical order the
+   way prev/next does — you arrive, you browse, you enter. Thumbnails are
+   bigger than the menu minis on purpose: you already declined the small
+   version to get here. */
+body.abridged {
+  --bg1: oklch(0.17 0.02 300);
+  --bg2: oklch(0.26 0.06 300);
+  --stroke: #17121e;
+  --art: url('../img/abridged-wide.webp');
+  --art-size: 1920px 1080px;
+  --panel: #171320cc;
+  --panel-line: #362e46;
+  --veil: #0d0a128c;
+  --ink: #f0ecf5;
+  --ink-soft: #b3a8c2;
+  --accent: #b98cf0;
+  --accent-2: #6fd0e8;
+  --rail: #ffffff26;
+}
+
+body.album .onboarding {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
+  padding: 1.2rem 1.4rem;
+  background-color: var(--panel);
+  border: 2px solid var(--panel-line);
+  border-radius: 5px;
+  color: var(--ink);
+  line-height: 1.65;
+}
+body.album .onboarding p { margin: 0 0 0.9rem; }
+body.album .onboarding p:last-child { margin-bottom: 0; }
+body.album .onboarding .lede {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+}
+
+body.album .shelf {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto 2.5rem;
+  padding: 0 1.25rem;
+}
+body.album .shelf > h2 {
+  margin: 0 0 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: normal;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-shadow: 0 1px 2px var(--stroke), 0 0 8px var(--stroke);
+}
+
+body.album .library {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.album .library a {
+  display: block;
+  border-radius: 5px;
+  border: 2px solid var(--panel-line);
+  background-color: var(--panel);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, transform 0.15s;
+}
+body.album .library a:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+body.album .library img {
+  display: block;
+  width: 100%;
+  /* the width/height attributes are presentational hints, and aspect-ratio is
+     ignored while both dimensions are specified — height:auto hands it back */
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+body.album .library .card-body { padding: 0.6rem 0.7rem 0.7rem; }
+body.album .library .t {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.3;
+}
+body.album .library .meta {
+  display: block;
+  margin-top: 0.3rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+/* Episodes whose exhibit page is not built yet still go somewhere useful. */
+body.album .library a[data-external] .meta::after {
+  content: " \2197 youtube";
+  opacity: 0.7;
+}
