@@ -1,205 +1,170 @@
-/* COLLECTORATE — per-album theme for the two sibling exhibit pages.
+/* COLLECTORATE — per-album theme for the album exhibit pages.
  *
- * This is the same role larastelle.css plays: site.css + sub-pages.css +
- * showcase.css supply the structure (sticky .pair.links anchor bar, the
- * row-reverse .music-story with .player left and .story right, the #bg art
- * bed), and this file only re-skins it. Nothing here invents layout.
+ * Same role larastelle.css plays: site.css + sub-pages.css + showcase.css
+ * supply the structure, and this only re-skins it per record.
  *
- * The two records share every rule below and diverge on the token block:
- * body.promise is white, body.collectorate is black.
+ * The rule that matters here: the art is UNDER everything, and several parts
+ * of the template blend against it rather than sit on top of it —
+ *   site.css           #title-stroke   mix-blend-mode: luminosity
+ *   showcase.css       .links .active  mix-blend-mode: hard-light
+ *   accessibility.css  #dark           an animated radial gradient
+ * so none of those may be given an opaque plate. Text that lands on the art
+ * earns its legibility from --stroke (a shadow, or the title's stroke halo),
+ * never from a filled pill. Only the reading panel is backed, and translucently
+ * at that, exactly as the template already does it.
+ *
+ * Each record sets the token block; nothing below it is per-album.
  */
-
-/* The Pica Hole faces are pixel-block display fonts. larastelle uses them as
-   texture — a chapter timeline of blocks — which is the only thing they are
-   good for; set as type they render as a solid bar. artefak is a real display
-   face and takes the titles. */
-@font-face {
-  font-family: DisplayFont;
-  src: url('../fonts/artefak-typeface.clean-typeface.otf') format('opentype');
-}
 
 /* ------------------------------------------------------------- tokens -- */
 
+/* --bg1/--bg2 feed site.css's body radial-gradient, so the page keeps a lit
+ * ground for the art and the blends to work against instead of a flat fill.
+ * --art-size is a fixed pixel size, the way larastelle pins its bed at
+ * 3000x3000: the viewport crops into the art, it never scales it down into a
+ * hero. Square records stay square. */
+
 body.collectorate {
-  --stroke: #1a0d08e3;
-  --art: url('../img/collectorate-wide.webp');
-  --panel-bg: #140d16d5;      /* stands in for larastelle's #27364fd5 */
-  --panel-line: #2a1a2e;
-  --veil: #0a070ca5;          /* stands in for #2F2933a5 on #showcase   */
-  --ground: #0a070c;
+  --bg1: oklch(0.19 0.02 30);
+  --bg2: oklch(0.28 0.06 40);
+  --stroke: #1a0d08;
+  --art: url('../img/collectorate-square.webp');
+  --art-size: 1600px 1600px;
+  --panel: #17101acc;
+  --panel-line: #3a2a3e;
+  --veil: #0a070c8c;
   --ink: #f4f0ea;
-  --ink-soft: #b9a89e;
+  --ink-soft: #c6b5aa;
   --accent: #ff7a3d;
   --accent-2: #ff3d5a;
-  --rail: #ffffff21;
-  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --rail: #ffffff26;
 }
 
 body.promise {
-  --stroke: #2a0f2ee3;
+  --bg1: oklch(0.93 0.01 320);
+  --bg2: oklch(0.97 0.03 330);
+  --stroke: #f4eef6;
   --art: url('../img/promise-wide.webp');
-  --panel-bg: #fbf7fbdb;
+  --art-size: 1920px 1072px;
+  --panel: #fdfafdd9;
   --panel-line: #d8c9dd;
-  --veil: #f6f3f78c;
-  --ground: #f6f3f7;
+  --veil: #f6f3f76b;
   --ink: #1a1420;
-  --ink-soft: #6a6072;
+  --ink-soft: #5d5366;
   --accent: #c8103f;
   --accent-2: #7b2ff7;
-  --rail: #2814321f;
-  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --rail: #28143226;
 }
 
-/* Standalone record — no sibling arrows. Dark, desaturated, painterly; the
-   accent is the iridescent clef on the cover. */
 body.nanofilament {
-  --stroke: #0d0b12e3;
-  --art: url('../img/nanofilament-wide.webp');
-  --panel-bg: #14121ad5;
-  --panel-line: #2b2736;
-  --veil: #0b0910b0;
-  --ground: #0b0910;
+  --bg1: oklch(0.17 0.02 300);
+  --bg2: oklch(0.25 0.04 300);
+  --stroke: #0d0b12;
+  --art: url('../img/nanofilament-square.webp');
+  --art-size: 1600px 1600px;
+  --panel: #16141ecc;
+  --panel-line: #332e40;
+  --veil: #0b09108c;
   --ink: #ece7f0;
-  --ink-soft: #a49ab0;
+  --ink-soft: #b0a6bc;
   --accent: #d8a7c4;
   --accent-2: #8fb8d8;
-  --rail: #ffffff1c;
-  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --rail: #ffffff26;
 }
 
-/* Standalone. Warm cream ground, hot-pink pixel type, NES blue. */
 body.bitflip {
-  --stroke: #4a2b3ce3;
-  --art: url('../img/bitflip-wide.webp');
-  --panel-bg: #fdf6efe0;
+  --bg1: oklch(0.94 0.02 70);
+  --bg2: oklch(0.97 0.04 60);
+  --stroke: #fbf3ea;
+  --art: url('../img/bitflip-square.webp');
+  --art-size: 1024px 1024px;
+  --panel: #fefaf5d9;
   --panel-line: #e3cfc4;
-  --veil: #f7ece092;
-  --ground: #f7ece0;
+  --veil: #f7ece06b;
   --ink: #2b1c26;
-  --ink-soft: #7c6470;
+  --ink-soft: #6d5764;
   --accent: #e8317f;
   --accent-2: #3f5ec4;
-  --rail: #2b1c261f;
-  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --rail: #2b1c2626;
 }
 
-/* Standalone, instrumental. Pastel sky over near-black surround. */
 body.lockthemirror {
-  --stroke: #0a0d14e3;
+  --bg1: oklch(0.16 0.02 250);
+  --bg2: oklch(0.24 0.04 240);
+  --stroke: #0a0d14;
   --art: url('../img/lockthemirror-wide.webp');
-  --panel-bg: #0f141ed5;
-  --panel-line: #26303f;
-  --veil: #070a10ad;
-  --ground: #070a10;
+  --art-size: 1920px 1080px;
+  --panel: #101620cc;
+  --panel-line: #2b3646;
+  --veil: #070a108c;
   --ink: #eaf0f4;
-  --ink-soft: #9aacb8;
+  --ink-soft: #a4b4c0;
   --accent: #7fd4c8;
   --accent-2: #e0a6c4;
-  --rail: #ffffff1c;
+  --rail: #ffffff26;
+}
+
+body.album {
+  --serif: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
 /* ---------------------------------------------------------------- bed -- */
 
-/* The art is a background, not a hero: it sits under the whole column and the
-   panels are translucent over it. That is where the glass comes from — there
-   is something real underneath to blur and tint. */
-body.showcase.album { background: var(--ground); }
-
+/* No background declaration on body: site.css's radial-gradient stays, tinted
+   by --bg1/--bg2 above, so there is always something lit underneath. */
 body.album #bg {
   background-image: var(--art);
-  background-size: 100% auto;
+  background-size: var(--art-size);
   background-position: 50% 0;
   background-repeat: no-repeat;
 }
 
 body.album #showcase { background-color: var(--veil); }
 
-/* #dark is the template's darkening plate; LIGHTSHOW animates its filter. */
-body.album #dark {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-body.album.dark #dark { background: #0006; }
-
 /* --------------------------------------------------------------- head -- */
 
-/* site.css puts BOTH #title and #title-stroke in position:absolute and
-   reserves their room with padding on #title-stack, so anything that follows
-   them in the markup lands at the same static position. Owning the title size
-   here means the clearance below it can be computed rather than guessed. */
-body.album { --title-size: clamp(2rem, 5.5vw, 3.6rem); }
-
+/* The title's legibility comes from the template's own stroke halo, which is
+   luminosity-blended against the art. Only the width and the colour token
+   change here; the blend is left alone. */
 body.album #title,
 body.album #title-stroke {
-  font-family: DisplayFont, serif;
-  font-size: var(--title-size);
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 4.4vw, 3.1rem);
   font-weight: normal;
   text-align: center;
   margin: 0.15em 0 0;
-  line-height: 1.1;
-  color: var(--ink);
-  text-shadow: none;
+  line-height: 1.15;
+  -webkit-text-stroke-width: 11px;
 }
-/* The stroke layer sits behind and only widens the letterform, so the title
-   stays legible wherever the art happens to be busy underneath it. */
-body.album #title-stroke {
-  position: absolute;
-  width: 100%;
-  color: transparent;
-  -webkit-text-stroke: 6px var(--stroke);
-  paint-order: stroke fill;
-}
+body.album #title { color: var(--ink); }
 
-/* An album's own line, sitting under the title in the header. Deliberately
-   small — it is a caption the record makes about itself, not a headline — but
-   it still gets a plate, because it lands on top of the art. One long line on
-   desktop; it wraps rather than shrinks below that. */
+/* An album's own line. Small — a caption the record makes about itself, not a
+   headline — and shadowed rather than plated so the art still reads through. */
 body.album .album-line {
-  margin: calc(var(--title-size) * 1.1 + 0.7rem) auto 0;
-  max-width: max-content;
-  padding: 0.3em 0.9em;
-  border-radius: 999px;
+  margin: calc(clamp(1.7rem, 4.4vw, 3.1rem) * 1.15 + 0.6rem) auto 0;
+  max-width: 34rem;
+  padding: 0 1rem;
   font-family: var(--mono);
   font-size: 0.78rem;
-  letter-spacing: 0.02em;
   line-height: 1.5;
   text-align: center;
-  color: var(--ink-soft);
-  background: var(--panel-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-@media (max-width: 645px) {
-  body.album .album-line {
-    font-size: 0.72rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    max-width: none;
-  }
-}
-
-/* These two labels sit directly on the art, so they get a plate of their own
-   rather than relying on a text shadow to survive whatever is behind them. */
-body.album #bg > .pair h2 {
   color: var(--ink);
-  text-shadow: none;
-  font-size: 1.25rem;
-  padding: 0.15em 0.7em;
-  border-radius: 999px;
-  background: var(--panel-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  width: auto !important;
-  max-width: max-content;
+  text-shadow: 0 1px 2px var(--stroke), 0 0 8px var(--stroke);
+  /* #title-stack sets white-space: nowrap for the title; a sentence-length
+     line has to be allowed to wrap out of that. */
+  white-space: normal;
 }
-body.album #bg > .pair:not(.links) { gap: 0.6rem; align-items: center; }
-body.album #bg > .pair > :first-child { margin-left: 80px; }
-body.album #bg > .pair > :last-child { margin-right: 80px; }
 
-/* The album-to-album jump. Far sides of the header space, clear of the
-   chapter pager inside the anchor bar so the two never fight. */
+/* These sit directly on the art. Shadow, not a pill. */
+body.album #bg > .pair h2 {
+  font-family: inherit;
+  font-size: 1.15rem;
+  color: var(--ink);
+  text-shadow: 0 1px 2px var(--stroke), 0 0 10px var(--stroke);
+}
+
+/* The album-to-album jump, on the far edges of the header space. */
 .record-nav {
   position: absolute;
   top: calc(0.25rem + env(safe-area-inset-top, 0px));
@@ -208,21 +173,16 @@ body.album #bg > .pair > :last-child { margin-right: 80px; }
   align-items: center;
   gap: 0.4rem;
   padding: 0.45rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  color: var(--ink-soft);
+  color: var(--ink);
   text-decoration: none;
   font-family: var(--mono);
   font-size: 0.78rem;
   letter-spacing: 0.06em;
-  background: transparent;
-  transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+  text-shadow: 0 1px 2px var(--stroke), 0 0 8px var(--stroke);
+  opacity: 0.75;
+  transition: opacity 0.15s;
 }
-.record-nav:hover {
-  color: var(--ink);
-  border-color: var(--panel-line);
-  background: var(--panel-bg);
-}
+.record-nav:hover { opacity: 1; }
 .record-previous { left: 0.6rem; }
 .record-next { right: 0.6rem; }
 .record-nav .arrow { font-size: 1.15rem; line-height: 1; }
@@ -235,19 +195,9 @@ body.album #bg > .pair > :last-child { margin-right: 80px; }
 
 /* --------------------------------------------------- anchor bar strips -- */
 
-/* The template's .pair.links is sticky and must never move — it is how you
-   navigate inside an exhibit and how you get out. The section chips live in
-   its .tabs slot, grouped: one strip per track, gaps where the record groups.
-   PROMISE reads 01-03 | 04 | 05 without a word of explanation. */
-/* The bar is the exhibit's anchor, so it gets its own plate and never depends
-   on whatever art happens to be scrolling underneath it. */
-body.album .pair.links {
-  background: var(--panel-bg);
-  border-bottom: 1px solid var(--panel-line);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
+/* The bar is sticky and must never move. It is NOT plated: showcase.css
+   hard-light blends the active service button against whatever art is behind
+   it, and a fill here would leave that blend with nothing to work on. */
 body.album #chapters-control .tabs {
   gap: 0.1rem;
   align-items: center;
@@ -257,6 +207,7 @@ body.album #chapters-control .tabs {
 body.album .strip {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.1rem;
 }
 body.album .strip + .strip::before {
@@ -264,17 +215,19 @@ body.album .strip + .strip::before {
   align-self: stretch;
   width: 1px;
   margin: 0.2rem 0.45rem;
-  background: var(--panel-line);
+  background: var(--ink-soft);
+  opacity: 0.4;
 }
 
 body.album .strip-tag {
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0.06em;
-  color: var(--ink-soft);
-  opacity: 0.8;
+  color: var(--ink);
+  opacity: 0.7;
   margin-right: 0.25rem;
   user-select: none;
+  text-shadow: 0 1px 2px var(--stroke);
 }
 
 body.album .chip {
@@ -283,34 +236,25 @@ body.album .chip {
   border: 1px solid transparent;
   border-radius: 4px;
   background: transparent;
-  color: var(--ink-soft);
+  color: var(--ink);
   font-family: var(--mono);
   font-size: 0.8rem;
   cursor: pointer;
-  text-shadow: 0 2px var(--stroke);
+  text-shadow: 0 1px 2px var(--stroke), 0 0 6px var(--stroke);
+  opacity: 0.72;
 }
-body.album .chip:hover {
-  color: var(--ink);
-  background: var(--panel-bg);
-}
+body.album .chip:hover { opacity: 1; }
 body.album .chip.active {
-  color: var(--ink);
+  opacity: 1;
   border-color: var(--accent);
-  background: var(--panel-bg);
 }
-
-/* Service picker keeps the template's own affordances. */
-body.album #music-control .active { background-color: var(--panel-bg); }
-body.promise #music-control img { filter: invert(1) brightness(0.4); }
 
 /* -------------------------------------------------------- story panels -- */
 
-/* .story is the right-hand column: the pages you flip. Content is one
-   sequential vertical run — every section always present, gapped where the
-   button groups are — so the section count never has to explain itself
-   against the track count. */
 /* site.css gives .content the base navy panel, which larastelle happens to
-   match. These records do not, so the whole column is re-skinned here. */
+   match. These records do not, so the column is re-skinned — translucently,
+   the way the template already backs its reading panel, so the art still
+   shows through it. */
 body.album .story .content {
   background-color: transparent;
   border: 0;
@@ -319,12 +263,10 @@ body.album .story .content {
 
 body.album [role="document"],
 body.album #footer {
-  background-color: var(--panel-bg);
+  background-color: var(--panel);
   border: 2px solid var(--panel-line);
   border-radius: 5px;
   color: var(--ink);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 body.album [role="document"] {
   border-bottom: none;
@@ -336,22 +278,19 @@ body.album #footer {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-/* The template's float shadow is a hardcoded navy; neutralise it so each
-   album's own panel colour is what you see. */
-body.album .content .float { filter: none; }
-body.album .story .drop { filter: none; }
 
 body.album .story h3 {
-  font-family: DisplayFont, serif;
-  font-size: 1.5rem;
+  font-family: var(--serif);
+  font-size: 1.4rem;
   color: var(--ink);
-  text-shadow: 1px 2px var(--stroke);
+  text-shadow: none;
 }
-
 body.album .content .float {
-  background: var(--panel-bg);
-  border-bottom-color: var(--panel-line);
+  background: var(--panel);
+  border-bottom: 2px solid var(--panel-line);
+  filter: none;
 }
+body.album .story .drop { filter: none; }
 
 body.album .track-lyrics { margin: 0 0 2.5rem; }
 body.album .track-lyrics > h4 {
@@ -377,6 +316,15 @@ body.album .part {
 body.album .part + .part { margin-top: 0.35rem; }
 body.album .part.in-view { border-left-color: var(--accent); }
 
+/* A panel whose prose is not written yet. The placeholder lives in CSS, so
+   pasting the text in later means deleting nothing. */
+body.album .part:empty { min-height: 2.5rem; }
+body.album .part:empty::before {
+  content: "\2026";
+  color: var(--ink-soft);
+  opacity: 0.45;
+}
+
 /* Machine voice / transmission, the way larastelle fences a dream. */
 body.album .part .cue {
   display: block;
@@ -384,17 +332,13 @@ body.album .part .cue {
   padding: 0.55rem 0.9rem;
   border-top: 1px solid var(--panel-line);
   border-bottom: 1px solid var(--panel-line);
-  background: #00000024;
   font-family: var(--mono);
   font-size: 0.86rem;
   color: var(--ink-soft);
 }
-body.promise .part .cue { background: #2814320f; }
 
 /* -------------------------------------------------------------- player -- */
 
-/* .player is the left-hand column. Same iframe-swap contract as larastelle:
-   one child per service, #music-control shows one at a time. */
 body.album .player { flex-direction: column; }
 
 body.album #youtube {
@@ -404,10 +348,8 @@ body.album #youtube {
   margin-left: 80px;
   padding: 0.9rem;
   border-radius: 5px;
-  background-color: var(--panel-bg);
+  background-color: var(--panel);
   border: 2px solid var(--panel-line);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 body.album #yt_screen {
@@ -415,8 +357,7 @@ body.album #yt_screen {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: 12px;
-  border: 1px solid var(--panel-line);
+  border-radius: 4px;
   background: #000;
 }
 body.album #yt_player,
@@ -428,9 +369,8 @@ body.album #yt_player iframe {
   border: 0;
 }
 
-/* Small player means YouTube serves a small rendition — quality follows the
-   element's pixel size and setPlaybackQuality has been a no-op since 2019.
-   We cannot set it, so we say so and point at full screen. */
+/* Quality follows the player's pixel size and setPlaybackQuality has been a
+   no-op since 2019, so we cannot set it — only say so. */
 body.album .quality-note {
   display: none;
   margin: 0.5rem 0 0;
@@ -468,7 +408,7 @@ body.album #youtube-chapters .track-go {
   text-align: left;
   cursor: pointer;
 }
-body.album #youtube-chapters .track-go:hover { background: var(--panel-bg); }
+body.album #youtube-chapters .track-go:hover { background: var(--rail); }
 body.album #youtube-chapters .n {
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -488,8 +428,7 @@ body.album #youtube-chapters .track.active .n,
 body.album #youtube-chapters .track.active .t { color: var(--accent); }
 
 /* One slider per track over the single underlying video, so the column reads
-   as one continuous bar cut at the boundaries — which is the argument a
-   gapless record is making anyway. */
+   as one continuous bar cut at the boundaries. */
 body.album .track-bar {
   position: relative;
   height: 0.36rem;
@@ -526,8 +465,31 @@ body.album .playlist-head {
   color: var(--ink-soft);
 }
 
-/* No published render yet: the service picker still works, the YouTube tab
-   simply says so instead of booting an empty player. */
+/* Explicit uploads are age-restricted, and age-restricted video cannot play in
+   an embed at all (the API reports it as 101/150). Rather than leave YouTube's
+   error card in the column, the player gives way to a hand-off: the track list
+   stays and each row deep-links to the right second. */
+body.album .embed-note {
+  display: none;
+  margin: 0 0 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+body.album .embed-note a { color: var(--accent); }
+body.album.embed-blocked .embed-note { display: block; }
+body.album.embed-blocked #yt_screen,
+body.album.embed-blocked .quality-note,
+body.album.embed-blocked .track-bar,
+body.album.embed-blocked .playlist-head .elapsed { display: none; }
+body.album.embed-blocked .track-go::after {
+  content: "\2197";
+  margin-left: 0.4rem;
+  color: var(--ink-soft);
+}
+
+/* No published render yet. */
 body.album.no-video #yt_screen,
 body.album.no-video #youtube-chapters .track-bar,
 body.album.no-video .playlist-head .elapsed { display: none; }
@@ -548,47 +510,14 @@ body.album.no-video .no-video-note { display: block; }
   body.album #youtube {
     margin: 20px;
     max-width: none;
+    width: auto;
   }
-  /* The template collapses .music-story to column-reverse and pins the player
-     to a fixed height; the chapter list needs to scroll inside that. */
   body.album .music-story .player[data-source="youtube"] {
     height: auto;
     max-height: 60vh;
     overflow-y: auto;
   }
   body.album .part { scroll-margin-top: 16rem; }
-}
-
-/* A panel whose prose has not been written yet. Styling the empty element
-   means the placeholder lives in CSS, so pasting the text in later requires
-   deleting nothing. */
-body.album .part:empty { min-height: 2.5rem; }
-body.album .part:empty::before {
-  content: "\2026";
-  color: var(--ink-soft);
-  opacity: 0.45;
-}
-
-/* Explicit uploads are age-restricted, and age-restricted video cannot play in
-   an embed at all (the API reports it as error 101/150). Rather than leave
-   YouTube's own error card sitting in the column, the player is replaced by a
-   hand-off: the track list stays, and each row deep-links to the right second. */
-body.album .embed-note {
-  display: none;
-  margin: 0 0 0.6rem;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-body.album .embed-note a { color: var(--accent); }
-body.album.embed-blocked .embed-note { display: block; }
-body.album.embed-blocked #yt_screen,
-body.album.embed-blocked .quality-note,
-body.album.embed-blocked .track-bar,
-body.album.embed-blocked .playlist-head .elapsed { display: none; }
-body.album.embed-blocked .track-go::after {
-  content: "\2197";
-  margin-left: 0.4rem;
-  color: var(--ink-soft);
+  body.album #title,
+  body.album #title-stroke { -webkit-text-stroke-width: 7px; }
 }
