@@ -1,0 +1,418 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>The Collectorate</title>
+  <link rel="stylesheet" href="css/site.css?v=20260821">
+  <link rel="stylesheet" href="css/sub-pages.css?v=20260821">
+  <link rel="stylesheet" href="css/showcase.css?v=20260821">
+  <link rel="stylesheet" href="css/collectorate.css?v=20260821">
+  <link rel="stylesheet" href="css/accessibility.css?v=20260821">
+  <meta name="viewport" content="width=device-width, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="icon" type="image/png" href="img/favicon.128.png" sizes="128x128">
+  <link rel="apple-touch-icon" sizes="128x128" href="img/favicon.128.png">
+  <script src="js/collectorate.js?v=20260821"></script>
+  <script src="js/accessibility.js?v=20260821"></script>
+  <script src="js/copyright.js?v=20260821"></script>
+  <script>
+    COLLECTORATE.videoId = '-lZ_mIG2W_s';
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!COLLECTORATE.videoId) document.body.classList.add('no-video');
+    });
+  </script>
+</head>
+<body class="showcase album collectorate">
+  <div id="bg">
+    <div id="dark"></div>
+
+    <div id="title-stack" role="banner" aria-label="Project title">
+      <a class="record-nav record-next" href="promise.html"
+         aria-label="Next record: PROMISE"
+        ><span class="label">PROMISE</span
+        ><span class="arrow" aria-hidden="true">&#8250;</span></a>
+      <div id="home-link">
+        <a href="./" class="brand-font" aria-label="Home link and logo">discovery Written</a>
+      </div>
+      <h1 id="title-stroke" inert>The Collectorate</h1>
+      <h1 id="title" aria-describe="Title:">The Collectorate</h1>
+    </div>
+
+    <div id="access" class="pair">
+      <div>
+        <button
+          id="filter-toggle"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="filter-panel"
+        ><img src="img/access.png" width="24" title="Accessibility options icon" /></button>
+        <form id="filter-panel" class="filter-panel" role="region" aria-labelledby="filter-toggle" hidden>
+          <label for="access_focus"><input id="access_focus" type="checkbox" name="focus" onchange="ACCESSIBILITY.access.focus(this.checked)">Auto-focus text</label>
+          <label for="access_animation"><input checked id="access_animation" type="checkbox" name="access-animation" onchange="ACCESSIBILITY.access.animation(this.checked)">Animations</label>
+          <label for="access_dark"><input id="access_dark" type="checkbox" name="access-dark" onchange="ACCESSIBILITY.access.dark(this.checked)">Darken</label>
+        </form>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="pair">
+      <h2 class="brand-font h-text-version" role="form" aria-label="Current section"
+        onclick="return ACCESSIBILITY.focus.text()"
+      >Begin Again</h2>
+      <h2 class="brand-font h-audio-version" role="presentation">Spotify</h2>
+    </div>
+
+    <!-- The anchor bar. Sticky, fixed height off the top, never moves: it is
+         how you navigate inside the exhibit and how you get out. -->
+    <div class="pair links media">
+      <nav id="chapters-control" aria-label="Sections">
+        <div class="tabs" role="list" aria-label="Sections"></div>
+      </nav>
+      <div id="music-control" class="group-label" role="list" aria-label="Music providers">
+        <button role="list-item" onclick="return source(this)"
+          id="pick-apple" data-iframe="apple" aria-controls="view-apple"
+          title="Prefer Apple Music"><img alt="Apple Music logo" src="img/applemusic.png" width="45" />
+        </button>
+        <button role="list-item" onclick="return source(this)"
+          id="pick-spotify" data-iframe="spotify" aria-controls="view-spotify"
+          aria-selected="true" class="active" title="Prefer Spotify"><img alt="Spotify logo" src="img/spotify.png" width="45" />
+        </button>
+        <button role="list-item" onclick="return source(this)"
+          id="pick-amazon" data-iframe="amazon" aria-controls="view-amazon"
+          title="Prefer Amazon Music"><img alt="Amazon Music logo" src="img/amazon.png" width="45" />
+        </button>
+        <button role="list-item" onclick="return source(this)"
+          id="pick-youtube" data-iframe="youtube" aria-controls="view-youtube"
+          title="Prefer YouTube"><img alt="YouTube logo" src="img/youtube.png" width="45" />
+        </button>
+      </div>
+    </div>
+
+    <div id="scroll-top"></div>
+
+    <div id="showcase">
+      <div class="music-story">
+
+        <div class="story">
+          <div class="content">
+            <div class="panels">
+              <div role="document" aria-label="Lyrics" tabindex="0">
+                <div class="float"><div class="drop"><h3>The Collectorate</h3></div></div>
+                <hr />
+
+                <!-- Section boundaries are a first pass read off
+                     `full lyrics.txt`, which runs continuously with no track
+                     markers. Track starts are verified against the audio; the
+                     divisions inside a track are a reading, not a fact. -->
+                <div class="track-lyrics" data-track="1" data-group="1" data-title="Begin Again">
+                  <h4><span class="n">01</span>Begin Again</h4>
+                  <div class="part" data-label="i">Pretty One, we're setting sail to Earth again
+It's been such a long time
+There's something that I need to do
+Before their system goes Kardashev Type-II
+
+Relax, this thing's on autopilot hyperdrive
+Dream about pushing this button
+if there's anything you need
+Close your pretty eyes babe and go to cryo sleep</div>
+                  <div class="part" data-label="ii">The solar system's gone to shit
+Their sun ain't even fully lit
+He says it can begin again
+Let's do it even better
+if he says it then I believe it
+I believe it
+I believe it
+Oh I believe it</div>
+                  <div class="part" data-label="iii">The thrumming of a black hole in my chest
+teaches me a lesson about being distressed
+I'm sick of fast forward while the galaxy spins
+Precious few times when the faith sets in
+The thrumming of a black hole in my chest
+teaches me a lesson about being distressed
+I'm sick of fast forward while the galaxy spins
+Precious few times when the faith sets in</div>
+                  <div class="part" data-label="iv">Pretty Two, I'm unsettled by the things you dream
+You're right, the Oort Cloud is a little far
+We should move a little closer
+if we wanna put the pressure on
+and fry em with their own star
+
+Ah ah ah ah
+Ah ah ah ah
+
+Relax, dream a multiverse of paths to ruin
+Put your back into it, girl Direct their solar mirrors,
+wipe away their whole world The solar system's gone to shit
+Their sun ain't even fully lit He says it can begin again
+Let's do it even better
+if he says it I believe it
+I believe it
+I believe it
+I believe it</div>
+                </div>
+
+                <div class="track-lyrics" data-track="2" data-group="2" data-title="Sennacherib">
+                  <h4><span class="n">02</span>Sennacherib</h4>
+                  <div class="part" data-label="i"><span class="cue">Princess! The king of Mars is hailing us.
+&#8220;Weeoouuyynn!&#8221;</span>Hello you, I heard you need a tutor.
+Do you have history books
+or is your Grand Library mostly for looks?</div>
+                  <div class="part" data-label="ii">What to do with a little bitch king like you
+You orchestrate lotta nothin while u sit and wait
+I show up
+you had a lotta warning
+But here you are not even preparing
+and a little adoring
+not even preparing
+and a little adoring</div>
+                  <div class="part" data-label="iii">Mister King man, what is your plan?
+So far I've only seen you stick your head in the sand
+
+Mister king sir, would you like to see mine?
+Not long before we're aligned with a river of sunlight
+
+So much war from a little bitch world like yours
+The Red Planet? Like embers through my hatchet
+Send up your flares while your friends act scarce
+Yeah
+
+Mister King man but threaten all you will
+it could go down in Oblivi-Anne</div>
+                  <div class="part" data-label="iv">Yeah it's all a real blur for you
+but we've been taking a lotta notes for true
+The gossip is you have no grip on planets Red or Blue
+
+Mister King Man
+Real Bitch One's here we'll do some wrangling
+You like? You have to earn something
+Pay to win, but Plead Nothing
+For more, For less, For cheap, For rain
+For real there's kind of a lot more to lose than gain
+More and big and cheap, obtuse
+Bloated business is too big to notice the clues</div>
+                </div>
+
+                <div class="track-lyrics" data-track="3" data-group="3" data-title="Style Check">
+                  <h4><span class="n">03</span>Style Check</h4>
+                  <div class="part" data-label="i">Pretty 2's Compliment is more negative at first
+When I swell up, oh damn
+Delicious problem go boom
+1's Compliment has the tendency to leave two zeroes on the board
+Sometimes we all just wanna settle up
+We tried to settle down but now we're really daddy's horde</div>
+                  <div class="part" data-label="ii">We'll keep to the night
+Why? That's our rule...
+Look around you everywhere and...
+What does you see?
+Lotta people chained to some
+What does it mean?
+'Really shoulda thought about all upstream
+What does it mean?
+
+Boom Boom.
+
+For more, For less, For cheap, For us
+For more, For less, For cheap, For rain
+For more, For less, For cheap, For rain</div>
+                  <div class="part" data-label="iii"><span class="cue">&#8220;Oh, so you DO have some fight in you, now you found God?&#8221;</span>Lock me in, little dove
+Here I am, little cuz
+You think I'm blowing bluff
+Mars's King is actin tough
+You know well enough.
+How would you ever show up big enough?
+
+We were in it air tight
+for the rest of the night
+They seeing how it is
+while we're cooking on our business
+
+Everybody disappointed, they don't get to hear
+Everybody syncopated when you get to whisper in my ear
+
+For more, For less, For cheap, For rain</div>
+                  <div class="part" data-label="iv">Don't you just tell me what I want to hear
+Time is adding up
+Tell me something I ain't ever heard before
+Before I'm done cleaning you up
+
+You're up to what works the best on all your sluts
+You can get a picture of me
+Stalling while a timer reaches slowly for an end&#8212;Yikes!</div>
+                  <div class="part" data-label="v">Style Check, Bravest son
+Here I am, another Mum
+Really do you with your sun
+Mars's King is washing up (mhm)
+You know well enough.
+How would you ever show up big enough?
+
+Everybody disappointed they don't get to hear
+Everybody's inebriated when you get to whisper in my ear
+
+Everybody complicates it and they don't get to hear
+The way you thought to pound it in
+when you get to whisper in my ear
+
+Baggy now, shitty sleep, Here I am, being me
+Style Check
+
+Gravesite, since I said, Here I am, Collectorate
+It's been over since I said
+Mars's King is mega dead
+You know well enough.
+
+Style Check</div>
+                </div>
+
+                <div class="track-lyrics" data-track="4" data-group="4"
+                     data-title="Hatches Still Not Battened">
+                  <h4><span class="n">04</span>Hatches Still Not Battened</h4>
+                  <div class="part" data-label="i">Great beyond, everything you see
+could fit inside a thimble, hun
+if only it were little enough
+
+Ready? It's me looking expectantly, escape is free
+if you hide inside a thimble, hun
+You'll be little but still big and buff</div>
+                  <div class="part" data-label="ii">I'll fit you in. Whatever, it's cool
+Aging like a wine swish of Eternity Fuel
+Below deck with your hat on while there's hatches still not battened
+With an itty bitty flick of my intangibly good wrist
+I'll skip us over heaven and anywhere else with a list
+For you
+
+(I won't, I won't)
+I'm ridiculously glad to meet you doin you, boo</div>
+                  <div class="part" data-label="iii"><span class="cue">This inn't the hole you should be in if you ever wanna see ur friends again!
+
+This is literally your last warning until the cooking is done</span>I've meticulously penned and plotted the light cone for your geodesic
+My event horizon's here to squeeze it (Tada!)
+
+Your last warning, now calculations are done.
+It's ostensibly all why we come here
+Trillions went our own way
+All arrive to a crowded vaycay</div>
+                  <div class="part" data-label="iv">I'll fit you in. Whatever, it's cool.
+Aging like a wine swish of Eternity Fuel
+Below deck with your hat on while there's hatches still not battened.
+With an itty bitty flick of my intangibly good wrist
+I'll skip us over heaven and anywhere else with a list
+For you
+
+When we last said words, remember those too?
+(I do, I do)
+In public you can hear people say what they don't, do you?
+(I won't, I won't)
+
+An itty bitty flick of my intangibly good wrist
+I'll skip us over heaven and anywhere with a list
+For you</div>
+                </div>
+
+                <div class="track-lyrics" data-track="5" data-group="5" data-title="The Collectorate">
+                  <h4><span class="n">05</span>The Collectorate</h4>
+                  <div class="part" data-label="i">Out here, you're on
+any path that light can take you
+You're on
+I gotta act just to see you
+and we're at the airport
+on a journey to evade la mort
+I thought I'd just see you again
+I'll drop in sometime if you build us a star-fort</div>
+                  <div class="part" data-label="ii">Yeah I'll sit with you for a little while and think...
+Why does this date stink?
+
+Look if you don't want the company you're welcome to scramble it
+What's your face right now?
+Why's it doing that?
+No groveling needed but you're welcome to mumble it
+At least now your really met
+The Collectorate!</div>
+                </div>
+
+              </div>
+            </div>
+
+            <div id="footer" role="contentinfo" aria-label="Copyright">
+              <hr style="margin: 1.5em 0" />
+              <div><img alt="Discovery Written small logo" src="img/favicon.128.png" width="64" /></div>
+              <div>&copy; <span class="copyright-year">2026</span> Discovery Written, LLC</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="player" role="complementary" aria-label="Media service frame">
+          <!-- TODO: real embed ids for the self-titled release. -->
+          <iframe id="spotify"
+            style="display: none; border-radius:12px;"
+            src="https://open.spotify.com/embed/album/2P9ORAAJ8CTRFa532qKqD3?utm_source=generator"
+            width="100%" height="700" loading="lazy" frameBorder="0"
+            title="Spotify Embed Player" allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe id="apple"
+            allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+            frameborder="0" loading="lazy" height="450" title="Apple Music Embed Player"
+            style="display: none;width:100%;max-width:500px;overflow:hidden;border-radius:12px;"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src="https://embed.music.apple.com/us/album/the-collectorate-ep/1888599739"></iframe>
+          <iframe id="amazon"
+            src="https://music.amazon.com/embed/B0GV4829N4/?id=&marketplaceId=ATVPDKIKX0DER&musicTerritory=US"
+            width="100%" height="700px" frameBorder="0" loading="lazy"
+            title="Amazon Music Embed Player"
+            style="display: none; border-radius:20px;max-width:500px"></iframe>
+
+          <div id="youtube" style="display: none;" role="tabpanel">
+            <div id="yt_screen"><div id="yt_player"></div></div>
+            <p class="embed-note">This one is marked explicit, so YouTube will not
+              play it inside an embed. <a href="#" target="_blank" rel="noopener">Watch it on
+              YouTube</a> &#8212; the track list below still jumps to the right moment.</p>
+            <p class="quality-note">Small player, small rendition &#8212; try full screen.</p>
+            <p class="no-video-note">The Collectorate video is not linked yet.</p>
+            <div class="playlist-head">
+              <span>Tracks</span>
+              <span class="elapsed">0:00</span>
+            </div>
+            <ol id="youtube-chapters">
+              <li class="track" data-ts="0">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">01</span><span class="t">Begin Again</span><span class="d">4:09</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within Begin Again"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-ts="249">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">02</span><span class="t">Sennacherib</span><span class="d">4:47</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within Sennacherib"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-ts="536">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">03</span><span class="t">Style Check</span><span class="d">4:42</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within Style Check"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-ts="819">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">04</span><span class="t">Hatches Still Not Battened</span><span class="d">3:44</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0"
+                     aria-label="Seek within Hatches Still Not Battened"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-ts="1044" data-dur="209">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">05</span><span class="t">The Collectorate</span><span class="d">3:29</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within The Collectorate"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+            </ol>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
