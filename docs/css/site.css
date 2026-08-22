@@ -265,3 +265,16 @@ a:hover {
   white-space: nowrap;
   border: 0;
 }
+
+/* Album minis in the menu. Baked at 144px so they stay sharp on 3x displays
+   while rendering at the same size as the other link icons; the width
+   attribute and the existing responsive rules keep them in step. */
+.links img.mini {
+  border-radius: 4px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.links .act {
+  margin-left: 5px;
+  align-self: center;
+}
