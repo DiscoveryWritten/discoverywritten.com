@@ -1,126 +1,136 @@
-/* Project pages — the constellation's design system, wearing our layout.
+/* Project pages — this site's exhibit shape, wearing the constellation's
+ * palette and type.
  *
- * These pages hand their appearance over to assets/ds outright. Paper ground,
- * ink text, hard black rules, sharp corners, Playfair over-large with Space
- * Mono underneath. site.css is deliberately not loaded: the splatter ground
- * and the wordmark plate belong to the index and nowhere else, and overriding
- * them here would be a fight rather than a decision.
+ * The layout is ours and is identical from project to project: the title
+ * stack, the sticky links bar across the middle, one centred panel, and a
+ * footer that sits at the end of the content rather than pinned to the
+ * viewport. Only the words and the accent change.
  *
- * What stays ours is the shape: a masthead, one mark, a little to read, and
- * the door out. And the footer, where the system's own persistent slate
- * lockup bar carries our name back to us.
+ * assets/ds supplies colour and type and nothing else. It ships no classes --
+ * every file in it declares only :root custom properties and @font-face -- so
+ * there is nothing to inherit structurally even if we wanted to. That is the
+ * right shape for this: a palette to adopt, not a page to copy.
  *
- * Each subject keeps one accent, which is how the system already works --
- * lilac is described in colors.css as "the one accent, the mark's chip". Here
- * the chip is whichever mark the page is about.
+ * The one place the system is worn plainly is the panel. Its own colours.css
+ * calls itself "black ink on white paper"; the panel is that paper, sitting
+ * inside this site's dark frame.
  */
 
-/* Our mark only, for the lockup. Everything else speaks the system's voice. */
-@font-face {
-  font-family: BrandFont;
-  src: url('../fonts/Angelic Serif.ttf') format('truetype');
-}
-
 body.project {
-  margin: 0;
-  background: var(--surface);
-  color: var(--text-body);
-  font-family: var(--font-mono);
-  font-size: var(--mono-body);
-  line-height: var(--leading-body);
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  --chip: var(--lilac);
+  --chip-ink: var(--ink);
 }
-
 body.project.anecdote { --chip: var(--lilac); --chip-ink: var(--ink); }
 body.project.nccv     { --chip: var(--slate); --chip-ink: var(--cream); }
 body.project.fcpm     { --chip: #ffc61a;      --chip-ink: #101010; }
 
-/* ---------------------------------------------------------------- sheet -- */
+/* No album art behind these, and the index keeps the splatter to itself. */
+body.project #bg { background-image: none; }
 
-.sheet {
-  flex: 1 0 auto;
-  width: 100%;
-  max-width: 46rem;
-  margin: 0 auto;
-  padding: var(--space-9) var(--gutter) var(--space-8);
+/* --------------------------------------------------------------- head -- */
+
+body.project #title,
+body.project #title-stroke {
   box-sizing: border-box;
-}
-
-/* The system doubles down on the little it puts on the page, so the name is
-   allowed to be the largest thing here by a wide margin. */
-.masthead h1 {
-  margin: 0;
   font-family: var(--font-display);
-  font-size: var(--display-1);
+  font-size: var(--display-2);
   font-weight: var(--weight-display);
-  line-height: var(--leading-tight);
+  line-height: var(--leading-snug);
   letter-spacing: var(--tracking-display);
-  color: var(--text-strong);
-  text-shadow: var(--shadow-display);
+  margin: 0.15em 0 0;
+  -webkit-text-stroke-width: 10px;
 }
+body.project #title { color: var(--cream); }
+/* site.css keeps #title-stack on one line for the wordmark; a project name
+   is not a wordmark. */
+body.project #title-stack { white-space: normal; }
 
-/* The canonical heavy underline. */
-.masthead::after {
-  content: "";
-  display: block;
-  height: var(--rule);
-  background: var(--border);
-  margin: var(--space-5) 0 var(--space-6);
-}
-
-.eyebrow {
-  margin: 0 0 var(--space-3);
-  font-size: var(--text-eyebrow);
+body.project #bg > .pair h2 {
+  font-family: var(--font-mono);
+  font-size: var(--mono-small);
   letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--cream-dim);
+  text-shadow: none;
 }
 
-/* The mark sits on its own chip, the one soft-cornered thing the system
-   allows, in the subject's colour rather than the system's lilac. */
-.chip {
-  display: inline-flex;
+/* ---------------------------------------------------------------- bar -- */
+
+/* The same anchor bar the exhibits use. The right half holds the way out;
+   the left is deliberately empty for whatever wants to live there later. */
+body.project #chapters-control .tabs { min-height: 45px; }
+
+body.project #music-control a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--cream);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: var(--mono-small);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+body.project #music-control img { border-radius: var(--radius-sm); }
+
+/* -------------------------------------------------------------- panel -- */
+
+/* Two traps here, both from the surrounding template. showcase.css styles
+   `#showcase .content`, which outranks a plain `.content` rule and was adding
+   20px side margins to a 100%-wide box -- 450 against a 430 viewport. And
+   auto side margins would not help: on a flex item they shrink it to fit its
+   text instead of centring a full-width box. So the width does the gutter and
+   align-self does the centring, with no auto margin anywhere. */
+body.project #showcase .content {
+  box-sizing: border-box;
+  width: min(44rem, 100% - 2.5rem);
+  align-self: center;
+  margin: var(--space-7) 0 var(--space-8);
+  background-color: var(--surface);
+  border: var(--rule) solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-6) var(--space-6) var(--space-5);
+  color: var(--text-body);
+  font-family: var(--font-mono);
+  font-size: var(--mono-body);
+  line-height: var(--leading-body);
+}
+
+body.project .feature {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-5);
+}
+body.project .feature img {
+  width: 88px;
+  height: 88px;
   padding: var(--space-3);
   border-radius: var(--radius-chip);
   background: var(--chip);
   box-shadow: var(--shadow-card);
-  margin-bottom: var(--space-5);
-}
-.chip img {
-  display: block;
-  width: 72px;
-  height: 72px;
-  border-radius: var(--radius-sm);
 }
 
-.tagline {
-  margin: 0 0 var(--space-6);
+body.project .tagline {
+  margin: 0 0 var(--space-5);
   font-family: var(--font-display);
   font-size: var(--display-3);
   line-height: var(--leading-snug);
   color: var(--text-strong);
-  max-width: 28ch;
+  text-align: center;
 }
 
-.note {
-  margin: 0 0 var(--space-6);
-  max-width: var(--measure);
-}
+body.project .note { margin: 0 0 var(--space-5); }
 /* Written later; the placeholder lives in css so filling it in deletes
    nothing. */
-.note:empty { display: block; min-height: 4rem; }
-.note:empty::before { content: "\2026"; color: var(--text-muted); }
+body.project .note:empty { display: block; min-height: 4rem; }
+body.project .note:empty::before { content: "\2026"; color: var(--text-muted); }
 
-/* Hard-edged, the way the system draws everything except the chip. */
-.visit a {
+body.project .visit { margin: 0; text-align: center; }
+body.project .visit a {
   display: inline-block;
   padding: var(--space-3) var(--space-5);
   border: var(--rule) solid var(--border);
   border-radius: var(--radius-none);
-  background: var(--surface);
   color: var(--text-strong);
   text-decoration: none;
   font-size: var(--mono-small);
@@ -128,50 +138,22 @@ body.project.fcpm     { --chip: #ffc61a;      --chip-ink: #101010; }
   text-transform: uppercase;
   transition: background-color 0.15s, color 0.15s;
 }
-.visit a:hover { background: var(--chip); color: var(--chip-ink); }
-.visit .host {
+body.project .visit a:hover { background: var(--chip); color: var(--chip-ink); }
+body.project .visit .host {
   display: block;
   margin-top: var(--space-3);
   font-size: var(--mono-caption);
   color: var(--text-muted);
 }
 
-/* --------------------------------------------------------------- lockup -- */
-
-/* The system's persistent slate bar. It is the one place these pages speak as
-   us rather than as the subject, so it carries our mark and the way back. */
-.lockup {
-  flex: 0 0 auto;
-  min-height: var(--footer-h);
-  background: var(--surface-inverse);
-  color: var(--text-on-inverse);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-5);
-  padding: var(--space-5) var(--gutter);
-  box-sizing: border-box;
-}
-.lockup a {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
-  color: var(--text-on-inverse);
-  text-decoration: none;
-  font-family: BrandFont, Georgia, serif;
-  font-size: 1.4rem;
-}
-.lockup a img { width: 40px; height: 40px; border-radius: var(--radius-sm); }
-.lockup a:hover { color: var(--accent); }
-.lockup .rights {
+/* Ends the content, the way this site's footers do. Not pinned anywhere. */
+body.project #footer {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-faint);
+  text-align: center;
+  color: var(--text-muted);
   font-size: var(--mono-caption);
   letter-spacing: var(--tracking-caps);
-  color: var(--text-on-inverse-dim);
-  text-align: right;
 }
-
-@media (max-width: 640px) {
-  .sheet { padding-top: var(--space-7); }
-  .lockup { flex-direction: column; align-items: flex-start; }
-  .lockup .rights { text-align: left; }
-}
+body.project #footer img { border-radius: var(--radius-sm); }
