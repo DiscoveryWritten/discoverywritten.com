@@ -346,6 +346,7 @@ body.album .part .cue {
 body.album .player { flex-direction: column; }
 
 body.album #youtube {
+  box-sizing: border-box;
   width: 100%;
   max-width: 500px;
   margin: 20px;
@@ -398,6 +399,7 @@ body.album #youtube-chapters {
 body.album #youtube-chapters .track { padding: 0.1rem 0; }
 
 body.album #youtube-chapters .track-go {
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 1.9rem 1fr auto;
   align-items: baseline;
@@ -549,7 +551,12 @@ body.abridged {
   --rail: #ffffff26;
 }
 
+/* width:100% plus padding on a content-box page adds instead of insetting, so
+   the element ends up wider than its container and the document runs past the
+   viewport -- the bare strip down the right of #bg is body gradient showing
+   through. Every rule here that combines the two states box-sizing. */
 body.album .onboarding {
+  box-sizing: border-box;
   width: 100%;
   max-width: 40rem;
   margin: 0 auto 2.5rem;
@@ -568,6 +575,7 @@ body.album .onboarding .lede {
 }
 
 body.album .shelf {
+  box-sizing: border-box;
   width: 100%;
   max-width: 72rem;
   margin: 0 auto 2.5rem;
