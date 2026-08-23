@@ -1,0 +1,122 @@
+/* Project pages — somewhere to say a little about something before sending
+ * the reader to it.
+ *
+ * These are not exhibits. They borrow the landing page's centred .content
+ * panel rather than the showcase layout, because there is no media to present:
+ * a mark, a sentence or two, and the door out.
+ *
+ * The voice is the constellation's. assets/ds is the anecdote design system,
+ * mirrored per its own MIRROR.md -- "any node that adopts them can take this
+ * directory whole" -- so these pages set type and rhythm from its tokens
+ * rather than from anything invented here. Two voices, no third: Playfair
+ * says the loud thing, Space Mono says everything else.
+ *
+ * What stays this site's: the splatter ground, the title stack, the layout.
+ * What is the subject's: its mark, and one accent drawn from it. Borrowing a
+ * design system is not the same as wearing an identity.
+ */
+
+body.project {
+  --accent: var(--lilac);
+  --accent-ink: var(--ink);
+}
+
+/* NCCV's mark grounds to #3F4F50, which is this design system's --slate
+   exactly; it is on the same system. FC Public Media is not, so its accent is
+   sampled from its own mark. */
+body.project.anecdote { --accent: var(--lilac);  --accent-ink: var(--ink); }
+body.project.nccv     { --accent: #7f9a9b;       --accent-ink: var(--ink); }
+body.project.fcpm     { --accent: #ffc61a;       --accent-ink: #101010;    }
+
+/* site.css sets #title-stack to nowrap for the wordmark, and index.html gives
+   its h1 a colour via .brand-font. Neither holds for a project name that is
+   five words long and carries no such class. */
+body.project #title-stack { white-space: normal; }
+
+body.project #title { color: var(--cream); }
+
+body.project #title,
+body.project #title-stroke {
+  padding: 0 var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--display-2);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-display);
+  margin: 0.15em 0 0;
+  -webkit-text-stroke-width: 10px;
+}
+
+/* The panel keeps this site's surface; only its edge carries the subject. */
+body.project .content {
+  border-color: var(--accent);
+  border-top-color: color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: var(--radius);
+  margin-top: var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--mono-body);
+  line-height: var(--leading-body);
+}
+
+body.project .feature {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-2) 0 var(--space-1);
+}
+body.project .feature img {
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-sm);
+}
+
+/* The line under the headline, in the size the system reserves for it. */
+body.project .tagline {
+  margin: var(--space-1) 0 var(--space-4);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--display-3);
+  line-height: var(--leading-snug);
+  color: var(--accent);
+}
+
+body.project .note { margin: 0 0 var(--space-3); }
+
+/* Written later. Styling the empty element means pasting the words in needs
+   no markup deleted first. */
+body.project .note:empty { display: block; min-height: 3.5rem; }
+body.project .note:empty::before { content: "\2026"; opacity: 0.4; }
+
+body.project .visit {
+  margin: var(--space-5) 0 var(--space-2);
+  text-align: center;
+}
+body.project .visit a {
+  display: inline-block;
+  padding: 0.55rem 1.2rem;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  font-size: var(--mono-small);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  transition: background-color 0.15s, color 0.15s;
+}
+body.project .visit a:hover {
+  background-color: var(--accent);
+  color: var(--accent-ink);
+}
+body.project .visit .host {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--mono-caption);
+  letter-spacing: var(--tracking-mono);
+  opacity: 0.55;
+}
+
+body.project #footer {
+  margin-top: var(--space-5);
+  font-size: var(--mono-caption);
+  letter-spacing: var(--tracking-caps);
+}
