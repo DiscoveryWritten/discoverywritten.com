@@ -293,6 +293,10 @@ body.album .content .float {
 body.album .story .drop { filter: none; }
 
 body.album .track-lyrics { margin: 0 0 2.5rem; }
+/* [role="document"] has no bottom border, so the last block's bottom margin
+   collapses straight out of it and opens a 2.5rem hole between the reading
+   panel and the footer -- which are meant to read as one continuous tray. */
+body.album .track-lyrics:last-child { margin-bottom: 0; }
 body.album .track-lyrics > h4 {
   margin: 0 0 0.6rem;
   font-family: var(--mono);
