@@ -37,6 +37,11 @@ body.project #title { color: var(--cream); }
 
 body.project #title,
 body.project #title-stroke {
+  /* site.css gives these width:100% and the page is content-box, so padding
+     here adds to the width instead of insetting -- 430 + 32 = 462 on a phone,
+     which pushes the document past the viewport and shows bare body gradient
+     down the right of #bg. */
+  box-sizing: border-box;
   padding: 0 var(--space-4);
   font-family: var(--font-display);
   font-size: var(--display-2);
