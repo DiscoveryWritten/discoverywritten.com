@@ -239,11 +239,17 @@ a:hover {
   border-top: 2px solid #4f274f40;
   background-color: #4f274fd5;
 }
+/* The projects row. .pro is #27364f and .media is #4f274f -- the same two
+   channel values permuted -- so the third band keeps that weight and drops the
+   hue instead of reaching for another colour. A strong tint here starts
+   reading as a status message, and the splatter behind it is already carrying
+   plenty of colour. Slightly violet so it still belongs to the splatter,
+   neutral enough not to blur into the navy directly above it. */
 .journal {
   border: 0;
-  border-bottom: 2px solid oklch(0.3526 0.0414 241.4);
-  border-top: 2px solid oklch(0.3526 0.0414 241.4 / 25%);
-  background-color: oklch(0.3526 0.0414 241.4 / 83.53%);
+  border-bottom: 2px solid #4a4654;
+  border-top: 2px solid #4a465440;
+  background-color: #3a3742d5;
 }
 :root[data-dark="false"] .journal {
   border: 0;
