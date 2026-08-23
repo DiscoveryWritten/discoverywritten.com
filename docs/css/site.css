@@ -284,3 +284,15 @@ a:hover {
   margin-left: 5px;
   align-self: center;
 }
+
+/* A label long enough to wrap fights the row's centring: .links is
+   text-align:center, so the wrapped text centres inside a span that now spans
+   most of the row while the icon stays pinned at flex-start, and the icon
+   reads as ejected. Breaking it deliberately into two balanced lines, left
+   aligned so it stays beside its icon, and a size down so two lines occupy
+   about the height of one label elsewhere. */
+.links .stacked {
+  font-size: 0.78em;
+  line-height: 1.15;
+  text-align: left;
+}
