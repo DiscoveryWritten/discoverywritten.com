@@ -1,0 +1,23 @@
+{
+  "_comment": "Synthetic registry pinning anecdote's `was:` contract, so the consumer side can be tested before the field reaches the published sites.json. Shape per FCCN-ANTIBODY PR #205: `was` is a repeatable host, parsed to a list, carried on the entry, and never removed once set.",
+  "apex": "anecdote.channel",
+  "root": "colorado.anecdote.channel",
+  "places": ["fort-collins.colorado.anecdote.channel"],
+  "sites": [
+    {
+      "host": "north.voices.fort-collins.colorado.anecdote.channel",
+      "served": true, "label": "Northern Colorado Community Voices",
+      "was": ["voices.north.colorado.anecdote.channel"]
+    },
+    {
+      "host": "third.media.fort-collins.colorado.anecdote.channel",
+      "served": true, "label": "Moved Twice",
+      "was": ["first.media.fort-collins.colorado.anecdote.channel",
+              "second.media.fort-collins.colorado.anecdote.channel"]
+    },
+    {
+      "host": "pointer.media.fort-collins.colorado.anecdote.channel",
+      "served": false, "label": "Pointer", "href": "https://example.org/"
+    }
+  ]
+}

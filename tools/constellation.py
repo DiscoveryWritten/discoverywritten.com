@@ -6,7 +6,9 @@ readable without a browser. This reads it and answers three questions:
 
     ./constellation.py --sites      what the registry currently holds
     ./constellation.py --links      do this repo's outbound links still work
+    ./constellation.py --moves      renames the registry remembers
     ./constellation.py --coverage   what TLS names the registry implies
+    ./constellation.py --selftest   check the rename reader against a fixture
 
 A content tool, not part of the site. docs/ has no build step and this does
 not change that.
@@ -30,7 +32,10 @@ What it cannot do yet
     and the real list is anecdote's own config/san-list.txt. Read this output
     as a shape, not a number.
   * `claimStatus` is reported as the registry states it. This does not verify a
-    claim independently.
+    claim independently. Note sites.json is only ever as fresh as anecdote's last
+    deploy, so a node that starts declaring /NAME between deploys reads as
+    unclaimed until the next one. Where a live probe and the registry disagree,
+    the registry is the stale side by construction.
   * A 403 from a live check is reported as reachable-but-refusing, because
     several hosts block scripted requests while being perfectly fine in a
     browser. A 000 is a real failure to resolve or connect.
@@ -81,6 +86,44 @@ def outbound_hosts():
     return found
 
 
+def rename_map(reg):
+    """Every host a site used to answer to, mapped to what it is now.
+
+    `was` is cumulative rather than a single previous name, so a node that has
+    moved twice resolves both of its old hosts to its current one. A set is used
+    per key so that a name claimed by two entries surfaces as ambiguous instead
+    of silently resolving to whichever was parsed last.
+    """
+    moves = {}
+    for s in reg["sites"]:
+        for old in s.get("was") or []:
+            moves.setdefault(old, set()).add(s["host"])
+    return moves
+
+
+def cmd_moves(reg):
+    moves = rename_map(reg)
+    if not moves:
+        print("The registry records no renames yet.")
+        print("(anecdote writes these as `was:<host>`; they appear at its next deploy.)")
+        return 0
+    live_hosts = {s["host"] for s in reg["sites"]}
+    print("%-54s %s" % ("was", "is now"))
+    problems = 0
+    for old in sorted(moves):
+        now = sorted(moves[old])
+        flag = ""
+        if len(now) > 1:
+            flag = "  AMBIGUOUS - claimed by %d entries" % len(now)
+            problems += 1
+        elif old in live_hosts:
+            flag = "  REUSED - also a current host"
+            problems += 1
+        print("%-54s %s%s" % (old[:54], ", ".join(now), flag))
+    print("\n%d rename(s), %d problem(s)." % (len(moves), problems))
+    return 1 if problems else 0
+
+
 def cmd_sites(reg):
     sites = sorted(reg["sites"], key=lambda s: s["host"])
     print("apex %s   root %s   places %d   sites %d\n"
@@ -109,19 +152,32 @@ def cmd_links(reg):
             host = re.sub(r"^https?://", "", s["href"]).split("/")[0]
             targets[host] = (s["host"], bool(s.get("served")))
 
+    moves = rename_map(reg)
+
     problems = 0
     print("%-52s %-6s %s" % ("host linked from docs/", "http", "note"))
     for host, pages in sorted(outbound_hosts().items()):
         status = live(host)
         note = []
+        renamed = sorted(moves.get(host, ()))
+        bad = False
         if status == 0:
-            note.append("DEAD - does not answer")
-            problems += 1
+            if renamed:
+                note.append("RENAMED to %s - update the link" % ", ".join(renamed))
+            else:
+                note.append("DEAD - does not answer")
+            bad = True
+        elif renamed:
+            # answering, but under a name the registry has superseded
+            note.append("stale name, still answering; canonical is %s" % ", ".join(renamed))
+            bad = True
         elif status == 403:
             note.append("403, blocks scripts; fine in a browser")
-        if host.endswith("anecdote.channel") and host not in known:
+        # only worth saying when nothing above already explained the absence
+        if not renamed and host.endswith("anecdote.channel") and host not in known:
             note.append("not in the registry - renamed or retired?")
-            problems += 1
+            bad = True
+        problems += 1 if bad else 0
         if host in targets:
             cons, served = targets[host]
             note.append("registry name %s%s"
@@ -162,15 +218,55 @@ def cmd_coverage(reg):
     return 0
 
 
+def selftest():
+    """Pin the `was:` contract against a fixture.
+
+    The field ships in anecdote's config before it reaches the published
+    registry, so this side needs somewhere to verify the reader that does not
+    depend on a deploy having happened.
+    """
+    path = os.path.join(HERE, "fixtures", "sites-was.json")
+    reg = json.load(open(path, encoding="utf-8"))
+    moves = rename_map(reg)
+    fails = []
+
+    def check(label, got, want):
+        ok = got == want
+        print("  %-58s %s" % (label, "ok" if ok else "FAIL got %r want %r" % (got, want)))
+        if not ok:
+            fails.append(label)
+
+    check("a single rename resolves",
+          sorted(moves.get("voices.north.colorado.anecdote.channel", ())),
+          ["north.voices.fort-collins.colorado.anecdote.channel"])
+    check("both hops of a double rename resolve to the current host",
+          sorted(moves.get("first.media.fort-collins.colorado.anecdote.channel", ()))
+          + sorted(moves.get("second.media.fort-collins.colorado.anecdote.channel", ())),
+          ["third.media.fort-collins.colorado.anecdote.channel"] * 2)
+    check("a host that never moved is absent",
+          "pointer.media.fort-collins.colorado.anecdote.channel" in moves, False)
+    check("an entry without `was` is tolerated", len(moves), 3)
+    check("missing `was` is not an error", rename_map({"sites": [{"host": "x"}]}), {})
+
+    print("\n%s" % ("selftest passed" if not fails
+                     else "%d check(s) FAILED" % len(fails)))
+    return 1 if fails else 0
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--sites", action="store_true", help="what the registry holds")
     p.add_argument("--links", action="store_true", help="check this site's outbound links")
+    p.add_argument("--moves", action="store_true", help="renames the registry remembers")
     p.add_argument("--coverage", action="store_true", help="TLS names the registry implies")
+    p.add_argument("--selftest", action="store_true",
+                   help="check the rename reader against tools/fixtures/sites-was.json")
     p.add_argument("--registry", default=REGISTRY, help="override the registry url")
     a = p.parse_args()
-    if not (a.sites or a.links or a.coverage):
+    if a.selftest:
+        return selftest()
+    if not (a.sites or a.links or a.moves or a.coverage):
         p.print_help()
         return 2
     reg = fetch_registry(a.registry)
@@ -181,8 +277,12 @@ def main():
         if a.sites:
             print()
         rc |= cmd_links(reg)
-    if a.coverage:
+    if a.moves:
         if a.sites or a.links:
+            print()
+        rc |= cmd_moves(reg)
+    if a.coverage:
+        if a.sites or a.links or a.moves:
             print()
         rc |= cmd_coverage(reg)
     return rc

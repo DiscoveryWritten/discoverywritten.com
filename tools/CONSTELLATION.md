@@ -94,6 +94,11 @@ targets directly for exactly that reason.
 redirect to wherever the node currently lives. Then a node can move as often as it likes and
 nothing downstream notices — which is the actual product.
 
+That is blocked on DNS records only Autumn can create; `reconcile-redirects.sh` exists on
+the anecdote side and has nothing to attach to, which is why `dig` finds no record. Until
+then, linking targets directly is the correct call here, and `was:` is what makes the
+resulting breakage repairable rather than merely visible.
+
 ## What renaming would have to do
 
 1. accept the new name and check it is free, well-formed, and inside covered parents
@@ -107,18 +112,34 @@ nothing downstream notices — which is the actual product.
 6. give downstream sites something to check — a machine-readable "this moved" is what turns
    a silent break into a fixable one
 
-Step 6 is the one this repo can already use: an alias carried into `sites.json` would let
-`constellation.py --links` say *"this was renamed, here is the new name"* instead of merely
-*"dead"*. Since the registry is generated, that has to originate in `config/sites.txt` —
-a `was:host` flag alongside `repo:` and `to:` would do it. Shape is anecdote's call; this
-side consumes whatever it is.
+Step 6 **now exists.** anecdote records renames as a repeatable `was:<host>` in
+`config/sites.txt`, parsed to `was: []` and carried into `sites.json` on the entry, never
+removed once set. The first one recorded is the move that broke this site:
+
+    north.voices.fort-collins.colorado.anecdote.channel
+      was: ["voices.north.colorado.anecdote.channel"]
+
+`constellation.py --links` reads it, so a superseded name now reports *renamed to X, update
+the link* rather than *dead* — the difference between a break someone has to diagnose and
+one a consumer can repair. `--moves` lists every rename the registry remembers.
+
+Two things a consumer has to handle, which `--moves` flags rather than resolves silently:
+one old host claimed by more than one entry is **ambiguous**, and an old host that is also
+a current host means a vacated name was **reused**. Neither should happen; both are
+cheaper to notice than to debug.
+
+The field is not in the published registry yet — `sites.json` is generated at deploy, so it
+arrives when anecdote's own PR merges. `tools/fixtures/sites-was.json` pins the contract in
+the meantime and `--selftest` checks the reader against it.
 
 ## What `constellation.py` does today
 
 - `--sites` — read the registry
 - `--links` — every outbound host in `docs/`, live-checked, flagged when it is dead or when
   an `anecdote.channel` host is absent from the registry
+- `--moves` — every rename the registry remembers, flagging ambiguous or reused names
 - `--coverage` — the wildcard analysis above
+- `--selftest` — checks the rename reader against the committed fixture
 
 Its limits are listed in its own docstring: it reads and never writes, it cannot see DNS or
 the issued certificate, and it takes `claimStatus` at the registry's word.
