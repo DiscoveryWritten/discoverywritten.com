@@ -123,10 +123,22 @@ removed once set. The first one recorded is the move that broke this site:
 the link* rather than *dead* — the difference between a break someone has to diagnose and
 one a consumer can repair. `--moves` lists every rename the registry remembers.
 
-Two things a consumer has to handle, which `--moves` flags rather than resolves silently:
-one old host claimed by more than one entry is **ambiguous**, and an old host that is also
-a current host means a vacated name was **reused**. Neither should happen; both are
-cheaper to notice than to debug.
+Two states that should never occur — one old host claimed by two entries (**ambiguous**),
+and a vacated name that is also somebody's current host (**reused**) — are now rejected at
+sync time on the anecdote side, so a registry it generated cannot contain either. `--moves`
+still flags them, as a consumer-side check: this reads a url, and a url is not always the
+pipeline you think it is. An entry naming itself is ignored rather than reported as a
+rename that never happened.
+
+The reused case is the one with teeth, and worth stating plainly: a stale link to a reused
+name resolves to the **wrong site** rather than breaking, and quietly landing a reader
+somewhere else is worse than a dead link they can see.
+
+A superseded host that answers means one of two opposite things, so `--links` separates
+them. Redirecting to the canonical host is the good end state — the move became a
+non-event, and it is not reported as a problem. Serving content under a name the registry
+says was given up means the old DNS came back, and that is reported loudly. Telling those
+apart needs the redirect itself, so the live check deliberately does not follow 3xx.
 
 The field is not in the published registry yet — `sites.json` is generated at deploy, so it
 arrives when anecdote's own PR merges. `tools/fixtures/sites-was.json` pins the contract in

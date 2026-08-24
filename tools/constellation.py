@@ -61,17 +61,31 @@ def fetch_registry(url=REGISTRY):
         return json.loads(r.read().decode("utf-8"))
 
 
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    """Report a redirect instead of following it.
+
+    urlopen follows 3xx by default, which would make a vacated host that
+    redirects correctly indistinguishable from one that has started serving
+    content again under a name it gave up. Those mean opposite things.
+    """
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+_opener = urllib.request.build_opener(_NoRedirect)
+
+
 def live(host, timeout=12):
-    """Return an HTTP status, or 0 when the host does not answer at all."""
+    """Return (status, location). Status 0 means the host did not answer."""
     req = urllib.request.Request("https://" + host, headers={"User-Agent": UA},
                                  method="HEAD")
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:
-            return r.status
+        with _opener.open(req, timeout=timeout) as r:
+            return r.status, r.headers.get("Location", "")
     except urllib.error.HTTPError as e:
-        return e.code
+        return e.code, e.headers.get("Location", "") if e.headers else ""
     except Exception:
-        return 0
+        return 0, ""
 
 
 def outbound_hosts():
@@ -97,11 +111,19 @@ def rename_map(reg):
     moves = {}
     for s in reg["sites"]:
         for old in s.get("was") or []:
+            if old == s["host"]:
+                continue  # an entry naming itself is not a rename
             moves.setdefault(old, set()).add(s["host"])
     return moves
 
 
 def cmd_moves(reg):
+    """List renames, flagging the two states that should be impossible.
+
+    anecdote rejects reused and ambiguous aliases at sync time, so a registry it
+    generated cannot contain either. These stay as a consumer-side check: this
+    reads a url, and a url is not always the pipeline you think it is.
+    """
     moves = rename_map(reg)
     if not moves:
         print("The registry records no renames yet.")
@@ -157,7 +179,7 @@ def cmd_links(reg):
     problems = 0
     print("%-52s %-6s %s" % ("host linked from docs/", "http", "note"))
     for host, pages in sorted(outbound_hosts().items()):
-        status = live(host)
+        status, location = live(host)
         note = []
         renamed = sorted(moves.get(host, ()))
         bad = False
@@ -168,9 +190,17 @@ def cmd_links(reg):
                 note.append("DEAD - does not answer")
             bad = True
         elif renamed:
-            # answering, but under a name the registry has superseded
-            note.append("stale name, still answering; canonical is %s" % ", ".join(renamed))
-            bad = True
+            # A superseded host that answers means one of two opposite things.
+            # Redirecting is the good end state -- the move became a non-event.
+            # Serving content under a name the registry says was given up means
+            # the old DNS is back, and a stale link now lands a reader on the
+            # wrong site instead of visibly breaking.
+            if 300 <= status < 400 and location:
+                note.append("superseded but redirecting -> %s" % location)
+            else:
+                note.append("ANSWERING under a vacated name (canonical is %s) - "
+                            "old DNS may have returned" % ", ".join(renamed))
+                bad = True
         elif status == 403:
             note.append("403, blocks scripts; fine in a browser")
         # only worth saying when nothing above already explained the absence
@@ -246,6 +276,8 @@ def selftest():
     check("a host that never moved is absent",
           "pointer.media.fort-collins.colorado.anecdote.channel" in moves, False)
     check("an entry without `was` is tolerated", len(moves), 3)
+    check("an entry naming itself is not a rename",
+          "selfref.media.fort-collins.colorado.anecdote.channel" in moves, False)
     check("missing `was` is not an error", rename_map({"sites": [{"host": "x"}]}), {})
 
     print("\n%s" % ("selftest passed" if not fails
