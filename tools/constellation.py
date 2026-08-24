@@ -23,10 +23,12 @@ What it cannot do yet
 ---------------------
   * It reads the registry; it cannot write to it. Renaming a node is still a
     manual act at the anecdote end.
-  * It has no view of DNS records or of the certificate's actual SAN list. The
-    --coverage output is what the registry *implies* is needed, not what is
-    currently issued. Comparing the two would need the cert, which this does
-    not fetch.
+  * --coverage UNDERCOUNTS, and is not authoritative. It derives parents from
+    the published sites.json, so drafts and system-only hosts are invisible to
+    it, and it knows nothing of certificate packs or their 50-host limit. The
+    real cost is one wildcard per place plus one per (place, category) in use,
+    and the real list is anecdote's own config/san-list.txt. Read this output
+    as a shape, not a number.
   * `claimStatus` is reported as the registry states it. This does not verify a
     claim independently.
   * A 403 from a live check is reported as reachable-but-refusing, because
@@ -154,7 +156,9 @@ def cmd_coverage(reg):
             print("       %s" % h)
     print("\n%d wildcard(s) for %d name(s)." % (len(parents), len(hosts)))
     print("\nA new node under an existing parent needs no certificate change.")
-    print("A new place or topic creates a new parent, and does.")
+    print("A new place, or a new category in use, creates a parent and does.")
+    print("Undercounts: drafts and system-only hosts are not in sites.json,")
+    print("and anecdote's config/san-list.txt is the authoritative list.")
     return 0
 
 

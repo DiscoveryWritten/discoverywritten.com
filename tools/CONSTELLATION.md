@@ -23,19 +23,45 @@ registry recording agreement or disagreement, is already the shape of self-servi
 asserts, the registry reconciles. What is missing is what happens when the assertion
 *changes*.
 
+## Corrections from the anecdote side
+
+Written first from the outside, then corrected by the session that owns
+anecdote.channel. Recording what was wrong, because the wrong version is the one
+a reader would otherwise reconstruct.
+
+* **The chain is six parts**, `<moniker>.<category>.<place>.<state>.anecdote.channel`.
+  The five-part slot is **civic nodes only** — a node that speaks *for* a place.
+  Everything else lives inside a category at six. `public` is the canonical moniker
+  for public media, the way `police` would be for a department.
+* **The SAN cost is per place plus per (place, category) in use** — multiplicative,
+  not one-per-parent as computed below. The real list is `config/san-list.txt`,
+  currently 12 of 50, with roughly nine more places fitting. Sharding across packs
+  is documented and unbuilt. `--coverage` here derives parents from the published
+  `sites.json` only, so drafts and system-only hosts are invisible to it: treat its
+  number as a strict undercount and the san-list as truth.
+* **`sites.json` is generated at deploy** by `scripts/sync-sites.mjs` from
+  `config/sites.txt`. Nothing can be added to the published registry directly; a
+  new field has to originate in that config.
+* **Roles and claims are already answered by probe, not by form.** A site declares
+  roles by serving `/journal.yml`, `/tell.yml`, `/atlas.yml`, `/antidote.yml`, and
+  asserts its own address at `/NAME`. Verified from here: `/NAME` on antibody and on
+  north.voices both return their own host.
+* **The reserved category vocabulary does not exist yet.** Category words have to be
+  unregistrable as monikers or someone squats `media` and shadows the listing. That
+  is the gap before registration can open, and it belongs where names are minted.
+
 ## Two different events, often confused
 
-**Registration** — a new place or a new topic inside one. Rare, provisioning-flavoured,
-and it forces a certificate change. Autumn's framing: a thing you do when propping up new
-areas, not a repeated event.
+**Registration** — a new place, or a new category in use inside one. Rare,
+provisioning-flavoured, and it forces a certificate change. Autumn's framing: a thing you
+do when propping up new areas, not a repeated event.
 
 **Renaming** — an existing node changing its address. Repeatable, and the one worth making
 self-service.
 
 The line between them is not editorial, it is a property of TLS. **A wildcard matches
-exactly one label**: `*.a.b` covers `x.a.b` and never `x.y.a.b`. Run
-`./constellation.py --coverage` for the current picture — today 7 wildcards for 16 names,
-because each topic tier (`media`, `voices`, `trade`) creates its own parent.
+exactly one label**: `*.a.b` covers `x.a.b` and never `x.y.a.b`. `./constellation.py --coverage` shows the shape of this from the published registry, but
+see the corrections above: it undercounts, and `config/san-list.txt` is the real list.
 
 So:
 
@@ -81,9 +107,11 @@ nothing downstream notices — which is the actual product.
 6. give downstream sites something to check — a machine-readable "this moved" is what turns
    a silent break into a fixable one
 
-Step 6 is the one this repo can already use: an alias field in `sites.json` would let
+Step 6 is the one this repo can already use: an alias carried into `sites.json` would let
 `constellation.py --links` say *"this was renamed, here is the new name"* instead of merely
-*"dead"*.
+*"dead"*. Since the registry is generated, that has to originate in `config/sites.txt` —
+a `was:host` flag alongside `repo:` and `to:` would do it. Shape is anecdote's call; this
+side consumes whatever it is.
 
 ## What `constellation.py` does today
 
