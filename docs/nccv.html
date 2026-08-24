@@ -2,6 +2,9 @@
 <head>
   <meta charset="utf-8" />
   <title>Northern Colorado Community Voices</title>
+  <link rel="stylesheet" href="css/site.css?v=20260823">
+  <link rel="stylesheet" href="css/sub-pages.css?v=20260823">
+  <link rel="stylesheet" href="css/showcase.css?v=20260823">
   <link rel="stylesheet" href="assets/ds/colors.css?v=20260823">
   <link rel="stylesheet" href="assets/ds/typography.css?v=20260823">
   <link rel="stylesheet" href="assets/ds/spacing.css?v=20260823">
@@ -13,35 +16,62 @@
   <link rel="apple-touch-icon" href="img/favicon.128.png" sizes="128x128">
   <script src="js/copyright.js?v=20260823"></script>
 </head>
-<body class="project nccv">
+<body class="showcase project nccv">
+  <div id="bg">
+    <div id="dark"></div>
 
-  <main class="sheet">
-    <header class="masthead">
-      <p class="eyebrow">A project</p>
-      <h1>Northern Colorado Community Voices</h1>
-    </header>
+    <div id="title-stack" role="banner" aria-label="Project title">
+      <div id="home-link">
+        <a href="./" class="brand-font" aria-label="Home link and logo">discovery Written</a>
+      </div>
+      <h1 id="title-stroke" inert>Northern Colorado Community Voices</h1>
+      <h1 id="title" aria-describe="Title:">Northern Colorado Community Voices</h1>
+    </div>
 
-    <div class="chip"><img src="img/mini-nccv.webp" width="72" height="72" alt="Northern Colorado Community Voices mark" /></div>
-    <p class="tagline">A monthly issue of letters from residents of Northern Colorado, addressed to their neighbours, under their own names.</p>
+    <div class="pair">
+      <h2 class="brand-font h-text-version">A project</h2>
+      <h2 class="brand-font h-audio-version"></h2>
+    </div>
 
-    <!-- Words go here. The paragraph is intentionally empty until then; it
-         renders a faint placeholder from css, so nothing has to be deleted
-         to fill it in. -->
-    <p class="note"></p>
+    <!-- The exhibits' anchor bar. The left half is deliberately empty for
+         whatever wants to live there later; the right holds the way out. -->
+    <div class="pair links media">
+      <nav id="chapters-control" aria-label="Sections">
+        <div class="tabs" role="list" aria-label="Sections"></div>
+      </nav>
+      <div id="music-control" class="group-label" role="list" aria-label="Elsewhere">
+        <a role="list-item" href="https://voices.north.colorado.anecdote.channel" rel="noopener" title="Visit Northern Colorado Community Voices">
+          <img alt="Northern Colorado Community Voices mark" src="img/mini-nccv.webp" width="45" />
+          <span>Visit</span>
+        </a>
+      </div>
+    </div>
 
-    <p class="visit">
-      <a href="https://voices.north.colorado.anecdote.channel" rel="noopener">Visit</a>
-      <span class="host">voices.north.colorado.anecdote.channel</span>
-    </p>
-  </main>
+    <div id="scroll-top"></div>
 
-  <footer class="lockup">
-    <a href="./" aria-label="Discovery Written home">
-      <img src="img/favicon.128.png" width="40" height="40" alt="" />
-      discovery Written
-    </a>
-    <span class="rights">&copy; <span class="copyright-year">2026</span> Discovery Written, LLC</span>
-  </footer>
+    <div id="showcase">
+      <div id="content" class="content">
+        <div class="feature">
+          <img src="img/mini-nccv.webp" width="88" height="88" alt="Northern Colorado Community Voices mark" />
+        </div>
+        <p class="tagline">A monthly issue of letters from residents of Northern Colorado, addressed to their neighbours, under their own names.</p>
 
+        <!-- Words go here. The paragraph is intentionally empty until then; it
+             renders a faint placeholder from css, so nothing has to be deleted
+             to fill it in. -->
+        <p class="note"></p>
+
+        <p class="visit">
+          <a href="https://voices.north.colorado.anecdote.channel" rel="noopener">Visit</a>
+          <span class="host">voices.north.colorado.anecdote.channel</span>
+        </p>
+
+        <div id="footer" role="contentinfo" aria-label="Copyright">
+          <div><img src="img/favicon.128.png" width="48" alt="Discovery Written" /></div>
+          <div>&copy; <span class="copyright-year">2026</span> Discovery Written, LLC</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
