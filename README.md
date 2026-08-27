@@ -1,4 +1,4 @@
-# Discovery Written LLC
+![Discovery Written](docs/img/brand-word.png)
 
 I'm Autumn Valenta and I don't know why I do anything but I know when I'm having fun.
 
