@@ -1,0 +1,7 @@
+# GitHub's Linguist treats a top-level docs/ folder as documentation and leaves it
+# out of the language stats. The whole site lives there, so without this the repo
+# reports as 100% Python on the strength of one script in tools/.
+docs/** linguist-documentation=false
+
+# tools/ is a local scratch script, not part of the site. Don't count it.
+tools/** linguist-detectable=false
