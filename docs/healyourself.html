@@ -1,0 +1,821 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Heal Yourself</title>
+  <link rel="stylesheet" href="css/site.css?v=20260822">
+  <link rel="stylesheet" href="css/sub-pages.css?v=20260822">
+  <link rel="stylesheet" href="css/showcase.css?v=20260822">
+  <link rel="stylesheet" href="css/collectorate.css?v=20260822">
+  <link rel="stylesheet" href="css/accessibility.css?v=20260822">
+  <meta name="viewport" content="width=device-width, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="icon" type="image/png" href="img/favicon.128.png" sizes="128x128">
+  <link rel="apple-touch-icon" sizes="128x128" href="img/favicon.128.png">
+  <script src="js/healyourself.js?v=20260822"></script>
+  <script src="js/accessibility.js?v=20260822"></script>
+  <script src="js/copyright.js?v=20260822"></script>
+</head>
+<body class="showcase album healyourself">
+  <div id="bg">
+    <div id="dark"></div>
+
+    <!-- Standalone record: no record-nav. -->
+    <div id="title-stack" role="banner" aria-label="Project title">
+      <div id="home-link">
+        <a href="./" class="brand-font" aria-label="Home link and logo">discovery Written</a>
+      </div>
+      <h1 id="title-stroke" inert>Heal Yourself</h1>
+      <h1 id="title" aria-describe="Title:">Heal Yourself</h1>
+      <p class="album-line">Autobiographical &#183; 10 tracks &#183; 45:43</p>
+    </div>
+
+    <div id="access" class="pair">
+      <div>
+        <button
+          id="filter-toggle"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="filter-panel"
+        ><img src="img/access.png" width="24" title="Accessibility options icon" /></button>
+        <form id="filter-panel" class="filter-panel" role="region" aria-labelledby="filter-toggle" hidden>
+          <label for="access_focus"><input id="access_focus" type="checkbox" name="focus" onchange="ACCESSIBILITY.access.focus(this.checked)">Auto-focus text</label>
+          <label for="access_animation"><input checked id="access_animation" type="checkbox" name="access-animation" onchange="ACCESSIBILITY.access.animation(this.checked)">Animations</label>
+          <label for="access_dark"><input id="access_dark" type="checkbox" name="access-dark" onchange="ACCESSIBILITY.access.dark(this.checked)">Darken</label>
+        </form>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="pair">
+      <h2 class="brand-font h-text-version" role="form" aria-label="Current track"
+        onclick="return ACCESSIBILITY.focus.text()"
+      >New Kentucky Home</h2>
+      <h2 class="brand-font h-audio-version" role="presentation">YouTube</h2>
+    </div>
+
+    <div class="pair links media">
+      <nav id="chapters-control" aria-label="Tracks">
+        <div class="tabs" role="list" aria-label="Tracks"></div>
+      </nav>
+      <div id="music-control" class="group-label" role="list" aria-label="Music providers">
+        <button role="list-item" onclick="return source(this)"
+          id="pick-youtube" data-iframe="youtube" aria-controls="view-youtube" aria-selected="true" class="active"
+          title="Prefer YouTube"><img alt="YouTube logo" src="img/youtube.png" width="45" />
+        </button>
+      </div>
+    </div>
+
+    <div id="scroll-top"></div>
+
+    <div id="showcase">
+      <div class="music-story">
+
+        <div class="story">
+          <div class="content">
+            <div class="panels">
+              <div role="tabpanel" id="tr1" aria-label="New Kentucky Home">
+                <div role="document" aria-label="Lyrics" tabindex="0">
+                  <div class="float"><div class="drop"><h3>Heal Yourself</h3></div></div>
+                  <p class="record-note">This is an autobiographical album about healing yourself.
+                    It was never released to the stores &#8212; every track lives as its own video,
+                    so the player on this page moves between them the way a record would.</p>
+                  <hr />
+                  <div class="track-lyrics" data-track="1" data-group="1" data-title="New Kentucky Home">
+                    <h4><span class="n">01</span>New Kentucky Home</h4>
+                  <p class="track-note">This is a story about leaving things before you'll know their worth, and how we perpetuate our flawed conclusions to others.</p>
+                    <div class="part" data-label="01"><span class="tag">verse</span>Years before I had half a mind to stay,
+I only wanted to go away
+Very far away
+<span class="tag">verse</span>Years before I could write a phrase
+that could make someone cry
+who wasn't already high for days
+<span class="tag">chorus</span>I left my home, I left my life
+Left that time behind and wouldn't look back
+Cool girls don't look at explosions, right?
+That's what I did to you,
+I didn't look back
+Not even to say goodbye to the bluegrass
+<span class="tag">bridge</span>I left my fight, I brought my light elsewhere
+I broke their rules and then I broke mine, too
+I got rid of structure
+I got rid of you
+I started every sentence with Me
+because you'd made me think
+I was worth less and I didn't believe it
+I didn't believe you
+I had a son and was sure
+I was doing something new
+<span class="tag">verse</span>Years ago now, I saw the Milky Way
+It made me want to unmake
+something I had done
+<span class="tag">breakdown</span>But, which one
+Sorry my son, but I barely recall where I came from
+Sorry my son, but when we'd begun
+the world was already turning
+That's what I did to you
+I said bluegrass isn't really blue
+<span class="tag">chorus</span>I left my home, I left my life
+I made instruments my voice
+Cool girls make explosions, right?
+That's what I did to you,
+and I didn't look back
+Not even to say goodbye to the bluegrass
+<span class="tag">chorus</span>I left my home, I left my life
+I only wrote words that made me cry
+Cool girls do a lot of things right
+I can still do that to you,
+I can come back
+I can even say hello to the bluegrass
+<span class="tag">end</span>Even now, I'm not quite sure how
+We all have days we hate our face
+Sorry my son, but we all have days
+when blue just doesn't look so blue</div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr2" aria-label="Ephemeral" style="display: none;">
+                <div role="document" aria-label="Lyrics" tabindex="0">
+                  <div class="track-lyrics" data-track="2" data-group="1" data-title="Ephemeral">
+                    <h4><span class="n">02</span>Ephemeral</h4>
+                  <p class="track-note">You can't really put lightning in a bottle for later, but you can remember trying.</p>
+                    <div class="part" data-label="02"><span class="tag">verse</span>A campfire at the edge of Tennessee
+brought 18 kids to one place
+One guitar, and two unpracticed hands
+made 17 watch her concentration face
+<span class="tag">prechorus</span>She didn't play right
+She didn't sing right
+but the sky bore witness
+<span class="tag">verse</span>18 kids put pen to paper to guarantee
+that they'd remember that time and place,
+what they saw behind their own eyes,
+so maybe they'd feel it again in the morning
+<span class="tag">prechorus</span>She didn't play right
+but she arrested us with those sounds
+She didn't sing right
+but taught us that some things
+just can't be written down
+<span class="tag">chorus</span>I want to know what I'd find
+behind that face,
+if only she could remove it for a moment
+<span class="tag">chorus</span>I crave one glimpse behind the eyes
+of the one who made
+such beautiful music
+who made us feel ephemeral
+<span class="tag">chorus</span>Who do I ask? Ask the stars?
+"What did you see?"
+Petition the forest
+to give us back a memory, ephemeral
+<span class="tag">verse</span>Wood burned low as the last long notes rang out
+We were drawn back to cold mundanity,
+touched by something gone away but persistent
+<span class="tag">prechorus</span>She didn't play right
+She didn't sing right
+but we felt her spooky action at a distance
+and the ground bore witness
+<span class="tag">chorus</span>I want to know what I'd find
+behind that face,
+if only I remove it for a moment
+<span class="tag">chorus</span>Can I have another glimpse behind the eyes
+of the one who made
+such beautiful music
+who made us feel ephemeral?
+<span class="tag">chorus</span>Who do I ask? Ask the stars?
+"What did you see?"
+Petition the forest
+to give us back a memory, ephemeral
+<span class="tag">end</span>I want to know what I'd find
+behind that face,
+if only she could remove it for a moment</div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr3" aria-label="What’s It Called" style="display: none;">
+                <div role="document" aria-label="Lyrics" tabindex="0">
+                  <div class="track-lyrics" data-track="3" data-group="1" data-title="What&#8217;s It Called">
+                    <h4><span class="n">03</span>What&#8217;s It Called</h4>
+                  <p class="track-note">Rabbit holes led to ferry tales.</p>
+                    <div class="part" data-label="03"><span class="tag">verse</span>Does a heart ever choose
+or is that just called compulsion?
+Is the "natural man" really an enemy of God,
+or does He smile when
+I get led across an ocean?
+<span class="tag">pre-chorus</span>I don't always know where I'll end up,
+but I can go,
+so long as I'm brave enough to start
+<span class="tag">chorus</span>What's it called when someone else's photograph
+puts a future memory in my head?
+Is that a premonition, or a rabbit hole?
+<span class="tag">bridge</span>And how do I feel so very late
+to a date with a town I've never met?
+<span class="tag">verse</span>I sat watch upon
+an observation deck of old Matanuska,
+who took its name from a glacier
+She protected me for days while I wrote
+to detox me of my ill nature
+<span class="tag">pre chorus</span>I don't always know where I'll end up,
+but I can go,
+so long as I'm brave enough to start
+<span class="tag">chorus</span>What's it called when someone else's photograph
+puts a future memory in my head?
+Is that a premonition, or a rabbit hole?
+<span class="tag">verse</span>I didn't drive all that far
+when I met old Destruction Bay
+I had to stop the car and behold it
+and more empty places,
+made for me to witness that day
+<span class="tag">chorus</span>What's it called
+when your son first crawls
+in a hotel room you'll never be back to?
+What's it called
+when he squints at an ice run
+and neither of us knows the name for that?
+
+What's it called
+when the sunlight falls out of the sky
+and lands on a hill all alone
+and puts a new story in my head?
+What's it mean when, just like me
+the sun never quite goes down at night?
+
+What's it say,
+when I'm so far away?
+What's it do,
+when I make that memory true?
+Was that a premonition or a rabbit hole?
+
+And how does it feel so very late
+but right on time?</div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr4" aria-label="Mais Si" style="display: none;">
+                <div role="document" aria-label="Lyrics" tabindex="0">
+                  <div class="track-lyrics" data-track="4" data-group="1" data-title="Mais Si">
+                    <h4><span class="n">04</span>Mais Si</h4>
+                  <p class="track-note">About that moment you think the humane thing to do was to quit much sooner.</p>
+                    <div class="part" data-label="04"><span class="tag">chorus x2</span>Mais si
+je déteste quand elle n’as pas besoin de moi
+Parfois je parle sans fin pour essayer de digérer ça
+Je me sens invisible quand elle n’a pas envie de moi
+<span class="tag">chorus x2</span>Mais si
+je lui suis dès qu’elle ne me réclame plus
+Je parle sans fin pour essayer de digérer ça
+Je me sens glacé depuis qu’elle ne me cherche plus non plus
+<span class="tag">bridge</span><span class="cue"><i>disappointed</i> "...You keep coming in at second, for me too"</span><span class="cue"><i>bored</i> "BUT WHATEVAAA~"</span><span class="cue"><i>trippy</i> "WEAVE into that big tapestry"</span><span class="cue"><i>rational</i> "It is what it is"</span><span class="tag">verse</span>When I try
+to impress you it's when you're tuned out expressly
+That's when I felt wasted
+Which one of us ends it, when we both notice the open secret
+
+That we
+avoid each other during our best moments
+We're both being wasted
+Who is braver? Say the honest thing without any "buts"
+<span class="tag">chorus</span>Mais si
+je déteste quand elle n’a pas besoin de moi
+Parfois je parle sans fin pour essayer de digérer ça
+Je me sens invisible quand elle n’a pas envie de moi
+
+Mais si
+je lui suis dès qu’elle ne me réclame plus
+Je parle sans fin pour essayer de digérer ça
+Je me sens glacé depuis qu’elle ne me cherche plus non plus
+<span class="tag">sample</span>Let's see.
+If I could say it about anyone else too,
+am I really in love with you?
+Who is meaner to deflate the balloon we're both hitched to?
+<span class="tag">chorus x3</span>Mais si
+je déteste quand elle n’a pas besoin de moi
+Parfois je parle sans fin pour essayer de digérer ça
+Je me sens lucide quand elle n’a pas envie de moi
+<span class="cue"><i>therapist</i> We'll keep this short, so you can repeat that</span></div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr5" aria-label="TTL" style="display: none;">
+                <div role="document" aria-label="Lyrics" tabindex="0">
+                  <div class="track-lyrics" data-track="5" data-group="1" data-title="TTL">
+                    <h4><span class="n">05</span>TTL</h4>
+                  <p class="track-note">Time To Live. Is that a threat or a promise?</p>
+                    <div class="part" data-label="05"><span class="tag">verse</span>Asleep by 1
+Knowing I’ll wake up to the sun
+Alarm still blaring, gotta run
+This breakfast sandwich has two bottom buns
+<span class="tag">chorus</span>I’m living one hop from the sheets
+Cross the street, move my feet
+By noon I wanna treat
+Nuh-uh
+
+Just livin’ in a one hop paradigm
+It’s stupid that I rhyme
+But I look backwards all the time
+Echo Reply
+Yuh-huh, yuh-huh
+<span class="tag">verse</span>Work is done and I’m smilin’, already vibin'
+I’ll be bumpin’ up and down on a clown in deep downtown
+Phoenix ain’t no promised land
+Too damn far, just a Canyon Grand
+Hops can’t be that large and planned
+We work our way there or we go pound sand
+<span class="tag">chorus</span>I'm living fast from rest to desk
+COVID webcams, still half dressed
+By noon I'm done taking requests
+Nuh-uh
+
+IPv6 says hop limit
+But I'm all about that time to live
+I get work done in just 8 bits
+Yuh-huh, Yuh-huh
+<span class="tag">verse</span>Bump that body, work is done
+Bartender is screamin’ what
+I’ll be snoozin’ long after the sun
+Girlfriend says she likes my strut
+I can’t stop thinking ‘bout her stuff
+Divorce is simple to forget
+When people like my shade of red
+
+Why does everybody say
+go to Flagstaff for everything
+At least Sedona's got red rocks in force
+I saw much more after I divorced
+Just dumb enough to lose my support
+Smart enough to try once more
+<span class="tag">chorus</span>I’m living one hop from the sheets
+Cross the street, move my feet
+By noon I wanna treat
+Nuh-uh
+
+One hop paradigm
+It’s stupid that I rhyme
+But I look backwards all the time
+Echo Reply
+Yuh-huh, yuh-huh
+
+I'm living fast from rest to desk
+COVID webcams, still half dressed
+By noon I'm done taking requests
+Nuh-uh
+
+IPv6 says hop limit
+But I'm all about that time to live
+I get work done in just 8 bits
+TTL babe, number 6
+
+One hop paradigm
+It’s stupid that I rhyme
+But I look backwards all the time
+TTL babe, we're down to 5
+
+Sometimes we're rich, sometimes we're poor
+But I love seein' you come in that door
+I'll kiss your face, be brave even more
+TTL babe, down to 4
+
+I’m living one hop from the sheets
+Cross the street, move my feet
+By noon I wanna treat
+TTL babe, down to 3
+
+Do a twirl, girl, in those shoes
+You're the only one I have to lose
+When you call me up, chaos ensues
+TTL babe, number 2
+
+This sandwich's got two bottom buns
+I can worry about it or just have fun
+When I hold you, hearts beat like one
+TTL babe, we're number 1
+
+CONTROL MESSAGE
+Type 11: time exceeded</div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr6" aria-label="That Mushroom Made Me Talk to Me" style="display: none;">
+                <div role="document" aria-label="Lyrics" tabindex="0">
+                  <div class="track-lyrics" data-track="6" data-group="1" data-title="That Mushroom Made Me Talk to Me">
+                    <h4><span class="n">06</span>That Mushroom Made Me Talk to Me</h4>
+                  <p class="track-note">I remember now, that some things can't be written down. Dancing is not science.</p>
+                  <p class="track-note caveat">These lyrics are just inputs, and are frequently not respected in the gibberish I made.</p>
+                    <div class="part" data-label="06">It is what it is
+<span class="tag">chorus, 🧘‍♀️</span><span class="tag">verse, 💁‍♀️</span>The last time I saw myself
+driven solely by my impulses
+was just ten seconds ago,
+But never—~
+<span class="tag">chorus, 🧘‍♀️🧘‍♀️</span><span class="tag">verse, 💁‍♀️</span>Sorry’s just a word you use
+when you interrupt my self-abuse
+join me on the beach at night
+we're drinking colors so we might
+get osmosis from chartreuse
+Sorry's what you say when you're confused
+<span class="tag">chorus 🧘‍♀️🧘‍♀️🧘‍♀️</span><span class="tag">verse 💁‍♀️</span>Mais si je suis ivre...
+Mais mon français sera plus juste quand je serai éméché
+That is, why is every time I find a line it’s coming in with doubles
+Weave it big in that tapestry, it is what it is
+<span class="tag">verse, 💁‍♀️</span>The last time I saw myself
+driven solely by my impulses
+was just ten seconds ago,
+But never—~
+<span class="tag">chorus, 🧘‍♀️🧘‍♀️🧘‍♀️🧘‍♀️</span><span class="tag">drop</span><span class="tag">marriage 👰‍♀️🛼👡👠👢🥿🩴</span>Mais si, je déteste quand elle n’a pas besoin de moi
+Parfois je parle sans fin pour essayer de digérer ça
+Je me sens invisible quand elle n’a pas envie de moi
+Parfois je parle sans fin pour essayer de digérer non-quoi
+<span class="tag">breakdown ✨😵‍💫✨😵‍💫✨</span>Mais si, je déteste quand elle n’a pas besoin de moi
+Parfois je parle sans fin pour essayer de digérer ça
+Je me sens invisible quand elle n’a pas envie de moi
+Parfois je parle sans fin pour essayer de digérer non-quoi
+<span class="cue"><i>panicked</i> what's happening to me? what's happening to everyone...</span><span class="cue"><i>portal glados voice</i> Dancing is NOT science</span><span class="cue"><i>soothed</i> Just move like this. Act out some bliss. For once</span><span class="cue"><i>therapist</i> Stuck at 40%? Just ROLL with it. 40%, until the end. 40% off, 40% in. 40% can still win.</span><span class="tag">chorus, ⚙️</span><span class="cue"><i>surprised</i> i forgot how to laugh until just now</span><span class="tag">chorus, 🐛, i'm so stuck</span>Mais si, je déteste quand elle n’a pas besoin de moi
+Parfois je parle sans fin pour essayer de digérer ça
+Je me sens invisible quand elle n’a pas envie de moi
+Parfois je parle sans fin pour essayer de digérer non-quoi
+Mais si, je déteste quand elle n’a pas besoin de moi
+Parfois je parle sans fin pour essayer de digérer ça
+Je me sens invisible quand elle n’a pas envie de moi
+Parfois je parle sans fin pour essayer de digérer non-quoi
+<span class="tag">chorus, 🦋, what the fuck</span><span class="cue">what if, i made you hate me by asking you to marry me?</span><span class="cue">what... that's stupid</span><span class="cue">yeah, it really is</span><span class="tag">😵‍💫</span><span class="tag">👰‍♀️</span><span class="tag">😵‍💫</span><span class="cue">but i was happy there. for a little while.</span><span class="cue">i think it was worth it.</span><span class="cue">for a minute, anyway.</span><span class="tag">😵‍💫👰‍♀️😵‍💫</span><span class="tag">chorus, ⚙️</span><span class="tag">breakdown 🦋</span></div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr7" aria-label="The Compersion Diversion" style="display: none;">
+                <div role="document" aria-label="Lyrics" tabindex="0">
+                  <div class="track-lyrics" data-track="7" data-group="1" data-title="The Compersion Diversion">
+                    <h4><span class="n">07</span>The Compersion Diversion</h4>
+                  <p class="track-note">Freeze, it's the MPDG! Come willingly.</p>
+                    <div class="part" data-label="07"><span class="tag">verse</span>You're hard to forget, although I like a good regret
+You like being alone and never wanna hear me moan,
+what you didn't get done when you were just dishing fun
+
+Trying to sing your tune buzzin busy as a bee
+You act like you're alone like it ain't about who won
+when you were just dishing fun
+<span class="tag">chorus</span>I know you very well, I'm real familiar with this spell
+<span class="tag">breakdown in a minimalism style</span><span class="tag">߷ verse</span>I suddenly don't know you well, but I'm thrilled to taste potions and spells
+Keeping up a pace with you is a real hell so I take a shot or two to get the swelling down
+I love—
+Get worked up with someone new
+I think I do that too, I think I do that too
+I love watching you testing out new runes
+I struggle with your tune but it's fun to follow you
+<span class="tag">verse</span>You're hard to forget, although I like a good regret
+You like being alone and never wanna hear me moan,
+what you didn't get done when you were just dishing fun
+<span class="tag">chorus</span>I know you very well, I'm real familiar with this spell
+<span class="tag">breakdown in a minimalism style</span><span class="tag">߷ verse</span>I suddenly don't know you babe, but I think that's the intended way
+You can have me all day long, so take two more shots or three and cut loose and dive like nothing's wrong
+I maybe don't know you so well, and I'm stoked to taste potions and spells
+Keeping up a pace with you is a real hell so I take a shot or two to get the swelling down
+I love watching you get worked up with someone new
+I think I do that too~
+I think I do that too, I think I do that too
+I love checking you smiling something new
+I can't carry a tune but I'm hearing one from you
+I love watching you testing out new runes
+I struggle with your blues but it's fun to follow clues
+<span class="tag">verse</span>You're hard to forget, although I like a good regret
+You like being alone and never wanna hear me moan
+what you didn't get done when you were just dishing fun
+<span class="tag">chorus</span>I know you very well, I'm real familiar with this spell
+<span class="tag">extended breakdown in a minimalism style; fucking, let them have it, they didn't understand how to groove until you made this move</span>
+I know you very well, I'm real familiar with this spell
+<span class="tag">߷</span>I'm standing in the shower fully aware that this'll end but I keep washing my hair
+Humming tunes that
+nobody but you can
+carry true like you do, Slap
+that alchemy, tap
+my glass and see it's whack
+that three's company, For that,
+I'll come out and see bats
+straight outta therapy, rats
+tokenizing charity, That's
+because they're weaponizing compassion and that's not really my game but I'm into make believe
+<span class="tag">chorus</span>I know you very well, I'm real familiar with this spell
+I know you very well, I'm real familiar with this spell
+<span class="tag">߷</span>I'm standing in my power fully aware that this'll end but I keep washing my hair
+There are things, that
+just don't lay flat
+when they're sayings, tattoos
+and piercings, stacks
+of sketchings, black
+dread unspeaking, I sat
+up watching, It racks
+me that I lost a ring, That's
+when I was chasing, that's
+because I was an Annie playing house at the hotel, I warned you, I'm into make believe, Belle
+<span class="tag">chorus</span>I know you very well, I'm real familiar with this spell
+I know you very well, I'm real familiar with this spell</div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr8" aria-label="learnin’ ’bout her Want-To" style="display: none;">
+                <div role="document" aria-label="Lyrics" tabindex="0">
+                  <div class="track-lyrics" data-track="8" data-group="1" data-title="learnin&#8217; &#8217;bout her Want-To">
+                    <h4><span class="n">08</span>learnin&#8217; &#8217;bout her Want-To</h4>
+                  <p class="track-note">About experiencing wanting after loss.</p>
+                    <div class="part" data-label="08"><span class="tag">chorus</span>some times bein' alone's
+not so bad though, i kinda like
+just walking where i want to~
+just going where i want to~
+~be
+<span class="tag">verse</span>i kind of like the snow in my hair
+i kind of appreciate this air (right now)
+i can stay longer because i want to
+<span class="tag">pre-chorus</span>don't have to choose
+between a good time
+and a bad night
+<span class="tag">chorus</span>some times bein' alone's
+not so bad though, i kinda like
+just walking where i want to~
+just going where i want to~
+~be
+<span class="tag">break</span><span class="tag">verse</span>i kind of like the wall of sound
+it makes me feel electrified, all alone
+i can stay longer because i want to
+don't have to text when i'll be home to
+<span class="tag">alt verse</span>i kind of like the sound of empty
+it makes me feel like i may have plenty
+i can stay longer because i want to
+i didn't plan on it in these shoes
+someone else has been on my tongue
+but if you help me, i'll let you be the only one
+<span class="tag">chorus</span>just walking where i want to~
+just talking to who i want to~
+just staying where i want to~
+~be
+
+just talk to who i want to~
+just staying where i want to~
+just shopping where i want to~
+just sleeping when i want to~
+let's say it if we want to~
+let's say it if we want to~</div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr9" aria-label="Love is a Risk" style="display: none;">
+                <div role="document" aria-label="Lyrics" tabindex="0">
+                  <div class="track-lyrics" data-track="9" data-group="1" data-title="Love is a Risk">
+                    <h4><span class="n">09</span>Love is a Risk</h4>
+                  <p class="track-note">Love is more like long range hitchhiking. How many dimensions have you been through?</p>
+                    <div class="part" data-label="09"><span class="tag">verse</span>I'm up too late, but wait...
+There's no one to look upon
+but my trinkets and automatons
+<span class="tag">prechorus</span>Wake up, baby
+Come see what I made
+Put on your robe,
+I know it's dark but I just hope
+<span class="tag">✨ chorus</span>That you can see it in the dim porch light
+It could use some more work, but like,
+would you board my rocket ship?
+We could give the world the slip
+
+Things are really far in space,
+but we could suffer it in case
+We can do things spur of,
+moments before we fall out of love
+<span class="tag">verse</span>Brand New said, love is a risk, but wait...
+There's no one to look upon
+but my trinkets and automatons
+<span class="tag">prechorus</span>Wake up, baby
+Imagine if we made
+a choice, us both
+I know it's dark but I just hope
+<span class="tag">✨ chorus</span>That you can see it in the dim porch light
+It could use some more work, but like,
+would you board my rocket ship?
+Spend eternity with this?
+<span class="tag">꠩ poetry verses</span>this galaxy has a really big sprawl
+and i know some corners, but not nearly all
+the most terrible truth i can say
+is that I break sometimes when I don't play
+
+the most tremendous thing i know how to do
+is make a dream out of cardboard and glue
+the most romantic act i know about
+is driving you the rest of the way around
+<span class="tag">✨ chorus</span>i know you like it when you see me in the dim starlight
+We could use some more work, but we're alright
+Come aboard my rocket ship
+I'll be the one looking after your lips
+
+I'll say it again, but things are really far in space
+We will have to suffer all, just in case
+We can do things spur of,
+and try forever not to fall out of love
+<span class="tag">꠪ poetry verses</span>the universe has more dimensions than me
+why settle for less than infinity?
+could you actually see that in me?
+spend an eternity happy
+
+you can see it in the dim porch light,
+it could use some more work, but like,
+would you board my rocket ship?
+spend eternity with this?
+
+if we get time dilation, they'll all go die thinking
+we ran away forever, while we were just blinking at each other
+"What are you capable of," she said,
+"when everyone else is dead?"
+<span class="tag">✨ chorus</span>let's use our lights to sparkle up each other's darkness
+We will have to suffer all, even heartlessness
+We can do things spur of,
+and try forever not to fall out of love
+
+When you see me in the dim starlight
+We could use some more work, but we're alright
+Come aboard my rocket ship
+I'll be the one looking after your lips
+
+I'll say it again, but things are really far in space
+We will have to suffer all, just in case
+We can do things spur of,
+and try forever not to fall out of love</div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr10" aria-label="Doing Better Than the Last Time" style="display: none;">
+                <div role="document" aria-label="Lyrics" tabindex="0">
+                  <div class="track-lyrics" data-track="10" data-group="1" data-title="Doing Better Than the Last Time">
+                    <h4><span class="n">10</span>Doing Better Than the Last Time</h4>
+                  <p class="track-note">Gaspar willing, we can do it ALL right.</p>
+                    <div class="part" data-label="10"><span class="tag">verse</span>Should we know what stayin married takes
+before we know where we belong?
+If it's anything like my pancakes
+The first one maybe comes out wrong
+<span class="tag">🤚 chorus</span>I want there to be more
+I wanna see what evens that score
+Can we say you're like fine wine?
+You're weird and you pair right
+<span class="tag">⽕</span>We're movin too fast, I don't ~know me yet~
+—you know I used to be a church girl, right?
+it's not that I don't want you
+i want you for longer than just this one
+people can ask away, i wanna smile and say
+you're mine and i drop it every day
+there's change in the air, whether or not you care
+i'm staring at the wall remembering the ball we had
+<span class="tag">verse</span>Why do we flee our communities so fast?
+Would you read The Seven Paths again with me?
+Sometimes with me I can't tell until I lined it up like Scrabble
+The message is becoming clear, I feel vul-ner-able
+
+—wat, got alotta points though...
+<span class="tag">verse</span>Why we gettin married young
+when we can't even use our tongues?
+Can we say it's like french toast?
+The first one's sloppy fun going down, mostly
+<span class="tag">🤚 chorus</span>I want there to be more
+I wanna see what evens that score
+Can we say you're like fine wine?
+You're weird but you pair right
+<span class="tag">bridge</span>We say you're like fine wine
+you're weird but you pair right
+We say you're like fine wine
+you're weird but you pair right
+<span class="tag">⽕</span>knowing that I can walk away means, stand back, i might do it again
+stand back! she might do it again
+regrets are really entry level
+think about your next hand while it's uneventful
+—wait, how many hands are you planning?
+—am i in all of them?
+—oh, good
+listen just because i bombed, it's not like i dunno what's going on
+stand back! she might do it again
+it's like DnD where you just roll it and see
+i run a tight character sheet
+and importantly, i know how not to cheat
+do you wanna play some high level games with me?
+<span class="tag">🤚 chorus</span>I want there to be more
+I wanna see what evens that score
+Can we say you're like fine wine?
+You're weird but you pair right
+
+We all wanna be more
+of what they're not carrying at stores
+We're doing better than the last time
+We can do it if we muster right
+
+I want there to be more
+I wanna see what evens that score
+Can we say you're like fine wine?
+You're weird but you pair right
+
+We all wanna be more
+of what they're not carrying at stores
+We're doing better than the last time
+Don't go looking for the ley lines
+<span class="tag">bridge</span>We say you're like fine wine
+You're weird but you pair right
+We say you're like fine wine
+You're weird but you pair right
+<span class="tag">outro</span>We all wanna be so
+puffed up and mighty though
+Will you stay until time ends?
+Get magic and then fight for friends</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="footer" role="contentinfo" aria-label="Copyright">
+              <hr hidden />
+              <div><img alt="Discovery Written small logo" src="img/favicon.128.png" width="64" /></div>
+              <div>&copy; <span class="copyright-year">2026</span> Discovery Written, LLC</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="player" role="complementary" aria-label="Media service frame">
+
+          <div id="youtube" style="display: none;" role="tabpanel">
+            <div id="yt_screen"><div id="yt_player"></div></div>
+            <p class="embed-note">YouTube will not play this one inside an embed.
+              <a href="#" target="_blank" rel="noopener">Watch it on YouTube</a> &#8212;
+              the track list below still opens the right video.</p>
+            <p class="quality-note">Small player, small rendition &#8212; try full screen.</p>
+            <div class="playlist-head">
+              <span>Tracks</span>
+              <span class="elapsed">0:00</span>
+            </div>
+            <ol id="youtube-chapters">
+              <li class="track" data-video="i_koYE-1NeM" data-dur="254">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">01</span><span class="t">New Kentucky Home</span><span class="d">4:13</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within New Kentucky Home"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-video="LFxIvqQzjJ8" data-dur="283">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">02</span><span class="t">Ephemeral</span><span class="d">4:43</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within Ephemeral"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-video="9gs-ikx9hGU" data-dur="321">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">03</span><span class="t">What&#8217;s It Called</span><span class="d">5:20</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within What's It Called"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-video="maUzfh-7vSY" data-dur="160">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">04</span><span class="t">Mais Si</span><span class="d">2:40</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within Mais Si"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-video="DnhdKms5aCE" data-dur="281">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">05</span><span class="t">TTL</span><span class="d">4:40</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within TTL"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-video="mwd81OhIyaQ" data-dur="351">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">06</span><span class="t">That Mushroom Made Me Talk to Me</span><span class="d">5:51</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within That Mushroom Made Me Talk to Me"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-video="huznJqWuMMw" data-dur="337">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">07</span><span class="t">The Compersion Diversion</span><span class="d">5:37</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within The Compersion Diversion"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-video="4zytJdQrpik" data-dur="233">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">08</span><span class="t">learnin&#8217; &#8217;bout her Want-To</span><span class="d">3:53</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within learnin' 'bout her Want-To"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-video="6eonm2vX4b8" data-dur="274">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">09</span><span class="t">Love is a Risk</span><span class="d">4:33</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within Love is a Risk"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-video="5cQNGIWdLAY" data-dur="253">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n">10</span><span class="t">Doing Better Than the Last Time</span><span class="d">4:13</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Seek within Doing Better Than the Last Time"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+            </ol>
+            <p class="playlist-foot">
+              <a class="watch-out" href="https://www.youtube.com/playlist?list=PLZj5yUgYN70CtSVUN-SUHbKmc7LHyRX7-"
+                 target="_blank" rel="noopener">The whole record as a YouTube playlist</a>
+            </p>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

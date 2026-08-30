@@ -104,6 +104,22 @@ body.lockthemirror {
   --rail: #ffffff26;
 }
 
+body.healyourself {
+  --bg1: oklch(0.18 0.03 310);
+  --bg2: oklch(0.28 0.07 340);
+  --stroke: #14102a;
+  --art: url('../img/healyourself-square.webp');
+  --art-size: 1536px 1536px;
+  --panel: #161227cc;
+  --panel-line: #3b2f4d;
+  --veil: #0b09188c;
+  --ink: #f6eef2;
+  --ink-soft: #c3aebd;
+  --accent: #f2916b;
+  --accent-2: #b54f6c;
+  --rail: #ffffff26;
+}
+
 body.album {
   --serif: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
@@ -643,3 +659,61 @@ body.album .library a[data-external] .meta::after {
   content: " \2197 youtube";
   opacity: 0.7;
 }
+
+
+/* ------------------------------------------------- heal yourself only -- */
+
+/* This record is the first one whose lyric source is kept verbatim, brackets
+   and all: the Udio structure markers are part of how it was written, and one
+   track is almost entirely markers, so stripping them would leave holes rather
+   than clean up. They are set down out of the way instead of removed, and the
+   spoken lines keep the .cue treatment the template already had for dialogue.
+   Everything here is scoped to this record; nothing above it changes. */
+
+body.healyourself .record-note {
+  margin: 0 0 1.2rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* The one-line framing each track was published with, and — where it exists —
+   the author's own caveat about the lyrics being inputs rather than a record
+   of what got sung. */
+body.healyourself .track-note {
+  margin: 0 0 0.6rem;
+  padding-left: 0.9rem;
+  border-left: 2px solid transparent;
+  color: var(--ink-soft);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+body.healyourself .track-note.caveat {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  opacity: 0.75;
+}
+
+/* A structure marker. Quiet enough to skim past, present enough that a track
+   built out of them still has a shape. */
+body.healyourself .part .tag {
+  display: block;
+  margin: 0.9rem 0 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--ink-soft);
+  opacity: 0.55;
+}
+
+body.healyourself .part .tag:first-child { margin-top: 0; }
+
+body.healyourself .playlist-foot {
+  margin: 0.9rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.84rem;
+}
+
+body.healyourself .playlist-foot a { color: var(--accent); }
