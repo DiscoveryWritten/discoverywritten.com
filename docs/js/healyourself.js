@@ -28,6 +28,7 @@ let hy_pending = null;    // {index, seconds, play} requested before the player 
 let hy_tracks = [];
 let hy_sections = [];
 let hy_current = 0;       // index of the track whose video is loaded
+let hy_showing = 0;       // index of the lyrics panel on screen
 const hy_frames = new Map();
 
 const HEALYOURSELF = {
@@ -59,7 +60,7 @@ var LARASTELLE = {
 document.addEventListener('DOMContentLoaded', () => {
   buildTracks();
   buildStrips();
-  spySections();
+  showTrack(0, /* soft */ true);
   bindKeys();
   // Matches the other records: let the frames settle, then swap in the chosen
   // source so every iframe starts detached and cached.
@@ -76,7 +77,10 @@ function init() {
 
   // ?t=N deep-links a track. 1-based in the URL because the track list is.
   const wantTrack = parseInt(params.get(_.params.track), 10);
-  if (!isNaN(wantTrack) && hy_tracks[wantTrack - 1]) hy_current = wantTrack - 1;
+  if (!isNaN(wantTrack) && hy_tracks[wantTrack - 1]) {
+    hy_current = wantTrack - 1;
+    showTrack(hy_current, /* soft */ true);
+  }
   refreshWatchLinks();
 
   player.querySelectorAll(':scope > [id]').forEach((frame) => {
@@ -318,6 +322,7 @@ function goTo(index, seconds, andPlay) {
   }
 
   refreshWatchLinks();
+  if (hy_showing !== index) showTrack(index);
   paint(seconds || 0);
 }
 
@@ -461,7 +466,8 @@ function buildStrips() {
       b.textContent = part.getAttribute('data-label') || '•';
       const owner = part.closest('.track-lyrics')?.getAttribute('data-title') || '';
       b.title = `${owner} — ${part.getAttribute('data-label') || ''}`.trim();
-      b.addEventListener('click', () => scrollToSection(part.id));
+      b.addEventListener('click', () => showTrack(
+        parseInt(part.closest('.track-lyrics')?.getAttribute('data-track'), 10) - 1));
       part._chip = b;
       strip.appendChild(b);
     });
@@ -470,42 +476,45 @@ function buildStrips() {
   });
 }
 
-function scrollToSection(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+/* One track per panel. The record is ten separate songs with their own
+ * lyrics, so a single document that scrolls through all of them reads as one
+ * endless page rather than ten tracks; the chip row is the pager. */
+function showTrack(index, soft = false) {
+  const panels = [...document.querySelectorAll('.panels > [role="tabpanel"]')];
+  if (!panels.length || !panels[index]) return false;
+  hy_showing = index;
+
+  panels.forEach((panel, i) => {
+    const on = i === index;
+    panel.style.display = on ? 'block' : 'none';
+    if (on) panel.removeAttribute('inert');
+    else panel.setAttribute('inert', 'true');
+  });
+
+  hy_sections.forEach((part) => {
+    const owner = parseInt(part.closest('.track-lyrics')?.getAttribute('data-track'), 10) - 1;
+    const on = owner === index;
+    part.classList.toggle('in-view', on);
+    if (part._chip) {
+      part._chip.classList.toggle('active', on);
+      part._chip.setAttribute('aria-current', on ? 'true' : 'false');
+    }
+  });
+
+  const head = document.querySelector('.h-text-version');
+  const title = panels[index].getAttribute('aria-label');
+  if (head && title) head.textContent = title;
+
+  // Paging should bring you back to the top of the new track — but not on the
+  // first call, which runs at load and would scroll the banner off screen
+  // before the viewer has done anything.
+  if (!soft) {
+    const top = document.querySelector('#scroll-top');
+    if (top) top.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
   return false;
 }
 
-function spySections() {
-  if (!hy_sections.length || !window.IntersectionObserver) return;
-  const seen = new Set();
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) seen.add(entry.target);
-      else seen.delete(entry.target);
-    });
-    let best = null;
-    seen.forEach((el) => {
-      if (!best || el.getBoundingClientRect().top < best.getBoundingClientRect().top) {
-        best = el;
-      }
-    });
-    hy_sections.forEach((el) => {
-      const on = el === best;
-      el.classList.toggle('in-view', on);
-      if (el._chip) {
-        el._chip.classList.toggle('active', on);
-        el._chip.setAttribute('aria-current', on ? 'true' : 'false');
-      }
-    });
-    const head = document.querySelector('.h-text-version');
-    if (head && best) {
-      const owner = best.closest('.track-lyrics')?.getAttribute('data-title') || '';
-      head.textContent = owner;
-    }
-  }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
-  hy_sections.forEach((el) => io.observe(el));
-}
 
 /* ---------------------------------------------------------------- keys -- */
 
@@ -517,11 +526,11 @@ function bindKeys() {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
 
     if (e.key === 'ArrowLeft') {
-      const prev = document.querySelector('.record-previous');
-      if (prev) { e.preventDefault(); prev.click(); }
+      e.preventDefault();
+      showTrack(Math.max(0, hy_showing - 1));
     } else if (e.key === 'ArrowRight') {
-      const next = document.querySelector('.record-next');
-      if (next) { e.preventDefault(); next.click(); }
+      e.preventDefault();
+      showTrack(Math.min(hy_tracks.length - 1, hy_showing + 1));
     }
   });
 }
