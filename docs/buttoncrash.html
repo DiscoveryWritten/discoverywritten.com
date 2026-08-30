@@ -1,0 +1,204 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Button Crash</title>
+  <link rel="stylesheet" href="css/site.css?v=20260822">
+  <link rel="stylesheet" href="css/sub-pages.css?v=20260822">
+  <link rel="stylesheet" href="css/showcase.css?v=20260822">
+  <link rel="stylesheet" href="css/collectorate.css?v=20260822">
+  <link rel="stylesheet" href="css/accessibility.css?v=20260822">
+  <meta name="viewport" content="width=device-width, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="icon" type="image/png" href="img/favicon.128.png" sizes="128x128">
+  <link rel="apple-touch-icon" sizes="128x128" href="img/favicon.128.png">
+  <script src="https://w.soundcloud.com/player/api.js"></script>
+  <script src="js/buttoncrash.js?v=20260822"></script>
+  <script src="js/accessibility.js?v=20260822"></script>
+  <script src="js/copyright.js?v=20260822"></script>
+</head>
+<body class="showcase album buttoncrash">
+  <div id="bg">
+    <div id="dark"></div>
+
+    <div id="title-stack" role="banner" aria-label="Project title">
+      <div id="home-link">
+        <a href="./" class="brand-font" aria-label="Home link and logo">discovery Written</a>
+      </div>
+      <h1 id="title-stroke" inert>Button <span class="crash-font">Crash</span></h1>
+      <h1 id="title" aria-describe="Title:">Button <span class="crash-font">Crash</span></h1>
+      <p class="album-line">DAW experiment &#183; 5 tracks &#183; 13:08</p>
+    </div>
+
+    <div id="access" class="pair">
+      <div>
+        <button
+          id="filter-toggle"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="filter-panel"
+        ><img src="img/access.png" width="24" title="Accessibility options icon" /></button>
+        <form id="filter-panel" class="filter-panel" role="region" aria-labelledby="filter-toggle" hidden>
+          <label for="access_focus"><input id="access_focus" type="checkbox" name="focus" onchange="ACCESSIBILITY.access.focus(this.checked)">Auto-focus text</label>
+          <label for="access_animation"><input checked id="access_animation" type="checkbox" name="access-animation" onchange="ACCESSIBILITY.access.animation(this.checked)">Animations</label>
+          <label for="access_dark"><input id="access_dark" type="checkbox" name="access-dark" onchange="ACCESSIBILITY.access.dark(this.checked)">Darken</label>
+        </form>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="pair">
+      <h2 class="brand-font h-text-version" role="form" aria-label="Current track"
+        onclick="return ACCESSIBILITY.focus.text()"
+      >Catatonic Was Nicer</h2>
+      <h2 class="brand-font h-audio-version" role="presentation">SoundCloud</h2>
+    </div>
+
+    <div class="pair links media">
+      <nav id="chapters-control" aria-label="Tracks">
+        <div class="tabs" role="list" aria-label="Tracks"></div>
+      </nav>
+      <div id="music-control" class="group-label" role="list" aria-label="Music providers">
+        <a role="list-item" href="https://soundcloud.com/tiliv/sets/button-crash" target="_blank" rel="noopener"
+          id="pick-soundcloud" class="active" aria-selected="true"
+          title="Open on SoundCloud"><span class="sc-mark">SoundCloud</span>
+        </a>
+      </div>
+    </div>
+
+    <div id="scroll-top"></div>
+
+    <div id="showcase">
+      <div class="music-story">
+
+        <div class="story">
+          <div class="content">
+            <div class="panels">
+              <div role="tabpanel" id="tr1" aria-label="Catatonic Was Nicer">
+                <div role="document" aria-label="Track notes" tabindex="0">
+                  <div class="float"><div class="drop"><h3>Button <span class="crash-font">Crash</span></h3></div></div>
+                  <p class="record-note">A creativity experiment I outlined for myself: the tracks would
+                    predominately feature the chip-tuney and piano sounds. There would be five tracks,
+                    named for the letters in &#8220;CRASH&#8221;. I would name the tracks before lifting a
+                    finger. I would try to do one track per day and then move to the next.</p>
+                  <p class="record-note">I decided to allow myself to refine the names as I went, but
+                    concept-wise they would stay the same.</p>
+                  <hr />
+                  <div class="track-lyrics" data-track="1" data-title="Catatonic Was Nicer">
+                    <h4><span class="n crash-font">C</span>Catatonic Was Nicer</h4>
+                    <img class="track-art" src="img/bc-01.webp" width="500" height="500" loading="lazy" alt="Catatonic Was Nicer artwork" />
+                    <p class="track-note">Working name: <em>Catatonic Feels Nicer</em></p>
+                    <p class="track-note caveat">Image credit: someone called fc02. The DeviantArt profile is deleted.</p>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr2" aria-label="Runway’s Ablaze" style="display: none;">
+                <div role="document" aria-label="Track notes" tabindex="0">
+                  <div class="track-lyrics" data-track="2" data-title="Runway&#8217;s Ablaze">
+                    <h4><span class="n crash-font">R</span>Runway&#8217;s Ablaze</h4>
+                    <img class="track-art" src="img/bc-02.webp" width="500" height="500" loading="lazy" alt="Runway’s Ablaze artwork" />
+                    <p class="track-note">Working name: <em>Runway at Midnight</em></p>
+                    <p class="track-note caveat">Image credit: <a href="http://www.shannonassociates.com/artist/pascalcampion" target="_blank" rel="noopener">Pascal Campion</a>.</p>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr3" aria-label="Annabelle Slept" style="display: none;">
+                <div role="document" aria-label="Track notes" tabindex="0">
+                  <div class="track-lyrics" data-track="3" data-title="Annabelle Slept">
+                    <h4><span class="n crash-font">A</span>Annabelle Slept</h4>
+                    <img class="track-art" src="img/bc-03.webp" width="500" height="500" loading="lazy" alt="Annabelle Slept artwork" />
+                    <p class="track-note">The one name that never changed.</p>
+                    <p class="track-note caveat">Image credit: &#38632;&#20154; via <a href="http://www.pixiv.net/member_illust.php?illust_id=37856593&#38;mode=medium" target="_blank" rel="noopener">pixiv</a>.</p>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr4" aria-label="Second Chances" style="display: none;">
+                <div role="document" aria-label="Track notes" tabindex="0">
+                  <div class="track-lyrics" data-track="4" data-title="Second Chances">
+                    <h4><span class="n crash-font">S</span>Second Chances</h4>
+                    <p class="track-note">Working name: <em>Slowly Crank the Clasps</em></p>
+                    <p class="track-note gap">Not on SoundCloud. The letter still belongs to it &#8212; the record is five tracks whether or not this one streams.</p>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" id="tr5" aria-label="Had I The Time" style="display: none;">
+                <div role="document" aria-label="Track notes" tabindex="0">
+                  <div class="track-lyrics" data-track="5" data-title="Had I The Time">
+                    <h4><span class="n crash-font">H</span>Had I The Time</h4>
+                    <img class="track-art" src="img/bc-05.webp" width="500" height="500" loading="lazy" alt="Had I The Time artwork" />
+                    <p class="track-note">Working name: <em>Have You, Now?</em></p>
+                    <p class="track-note caveat">Image credit lost.</p>
+                    <p class="track-note gap">It is short, and that is the joke: had I had
+                      the time, I would have done more. The rule of the exercise was one
+                      sitting per track, with the title chosen before anything was made.
+                      SoundCloud still calls its upload a preview.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="footer" role="contentinfo" aria-label="Copyright">
+              <hr hidden />
+              <div><img alt="Discovery Written small logo" src="img/favicon.128.png" width="64" /></div>
+              <div>&copy; <span class="copyright-year">2026</span> Discovery Written, LLC</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="player" role="complementary" aria-label="Media service frame">
+          <div id="soundcloud" role="tabpanel">
+            <iframe id="sc_player" width="100%" height="166" scrolling="no" frameborder="no"
+              allow="autoplay" title="SoundCloud player"
+              src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/298451126&amp;color=%23c0356f&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false"></iframe>
+            <div class="playlist-head">
+              <span>Tracks</span>
+              <span class="elapsed">0:00</span>
+            </div>
+            <ol id="sc-tracks">
+              <li class="track" data-letter="C" data-dur="194" data-sc="298451126">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n crash-font">C</span><span class="t">Catatonic Was Nicer</span><span class="d">3:14</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Progress within Catatonic Was Nicer"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-letter="R" data-dur="134" data-sc="298558152">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n crash-font">R</span><span class="t">Runway&#8217;s Ablaze</span><span class="d">2:14</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Progress within Runway’s Ablaze"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-letter="A" data-dur="208" data-sc="298773384">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n crash-font">A</span><span class="t">Annabelle Slept</span><span class="d">3:28</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Progress within Annabelle Slept"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-letter="S" data-dur="184">
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n crash-font">S</span><span class="t">Second Chances</span><span class="d">3:04</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Progress within Second Chances"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+              <li class="track" data-letter="H" data-dur="68" data-sc="348397201" data-short>
+                <button class="track-go" onclick="return playTrack(this)">
+                  <span class="n crash-font">H</span><span class="t">Had I The Time</span><span class="d">1:08</span>
+                </button>
+                <div class="track-bar" role="slider" tabindex="0" aria-label="Progress within Had I The Time"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="track-fill"></div></div>
+              </li>
+            </ol>
+            <p class="playlist-foot">
+              <a class="playlist-link" href="https://soundcloud.com/tiliv/sets/button-crash"
+                 target="_blank" rel="noopener">The whole record on SoundCloud</a>
+            </p>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

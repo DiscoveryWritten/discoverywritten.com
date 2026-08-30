@@ -120,6 +120,23 @@ body.healyourself {
   --rail: #ffffff26;
 }
 
+body.buttoncrash {
+  --bg1: oklch(0.93 0.012 330);
+  --bg2: oklch(0.97 0.025 340);
+  --stroke: #f7f2f5;
+  --art: url('../img/buttoncrash-square.webp');
+  --art-size: 1500px 1500px;
+  --panel: #fdfbfcd9;
+  --panel-line: #ddccd6;
+  --veil: #f7f2f56b;
+  --ink: #201924;
+  --ink-soft: #6b5c66;
+  --accent: #c0356f;
+  --accent-2: #905976;
+  --rail: #20192426;
+}
+
+
 body.album {
   --serif: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
@@ -717,6 +734,7 @@ body.healyourself .playlist-foot {
 }
 
 body.healyourself .playlist-foot a { color: var(--accent); }
+
 /* --------------------------------------------- lock the mirror only -- */
 
 /* This record's art already carries its own title — "lock the mirror" to the
@@ -741,3 +759,191 @@ body.healyourself .playlist-foot a { color: var(--accent); }
     user-select: none;
   }
 }
+
+/* ---------------------------------------------------- button crash only -- */
+
+/* CRASH is set in the PICA face LARASTELLE already loads as ChapterFont —
+   solid ground with the letterforms knocked OUT of it as dark squares, which
+   is the same treatment BITFLIP's cover gives the word BIT. The other two PICA
+   cuts are wrong for this: PICAHMS_ (LarastelleFont) is sparse dots with gaps
+   and stops reading as letters at a word's size, and PICHSIM_ (PenroseFont) is
+   a symbol grid. Only the R cut spells.
+
+   The record is named for its letters — one track per letter of CRASH, in
+   order — so the same face carries the track picker, small. Clicking a letter
+   is meant to feel like the point. */
+@font-face {
+  font-family: CrashFont;
+  src: url('../fonts/PICAHMR_.ttf') format('truetype');
+}
+
+body.buttoncrash .crash-font {
+  font-family: CrashFont;
+  /* A pixel-grid face whose counters are one cell wide. Greyscale
+     antialiasing fills those cells in and the glyph goes to mush, so the
+     smoothing is turned off and the cutouts stay open. */
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+  /* The cut has no descenders and sits high in its em box; the nudge puts it
+     back on the baseline of whatever it is set beside. */
+  letter-spacing: 0.06em;
+  font-weight: normal;
+}
+
+/* The title pairs a normal "Button" with the marquee "Crash". The knocked-out
+   face already reads as a filled block, so it needs none of the stroke the
+   template gives the heading — that would fill the cutouts back in. */
+body.buttoncrash #title .crash-font,
+body.buttoncrash #title-stroke .crash-font {
+  -webkit-text-stroke-width: 0;
+  font-size: 0.78em;
+  color: var(--accent);
+}
+body.buttoncrash #title-stroke .crash-font { color: transparent; }
+
+body.buttoncrash .story h3 .crash-font { color: var(--accent); }
+
+/* Letter chips. Wider than the numeral chips they replace, because a knocked
+   out glyph needs its ground to stay legible. */
+body.buttoncrash .chip.letter {
+  font-family: CrashFont;
+  /* The cutouts are one pixel of the glyph grid wide; below roughly 30px they
+     stop resolving and the letter collapses into a solid block. */
+  font-size: 2.4rem;
+  line-height: 1;
+  padding: 0.2rem 0.4rem;
+  letter-spacing: 0.05em;
+}
+body.buttoncrash .chip.letter.active { color: var(--accent); }
+
+/* A letter whose track does not stream anywhere yet. Still clickable — it
+   still has a panel — just not promising audio it cannot deliver. */
+body.buttoncrash .chip.letter.silent { opacity: 0.45; }
+body.buttoncrash .chip.letter.silent.active { opacity: 0.85; }
+
+body.buttoncrash .track .n.crash-font,
+body.buttoncrash .story h4 .n.crash-font {
+  font-family: CrashFont;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--accent-2);
+}
+
+body.buttoncrash #sc_player {
+  display: block;
+  width: 100%;
+  border: 0;
+  margin-bottom: 0.6rem;
+}
+
+/* The SoundCloud tile is a wordmark rather than a logo file; the site ships no
+   SoundCloud image and this avoids hotlinking one. */
+body.buttoncrash .sc-mark {
+  display: inline-block;
+  padding: 0.4rem 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  border: 1px solid var(--panel-line);
+  border-radius: 4px;
+  background: var(--panel);
+}
+
+body.buttoncrash .track-art {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin: 0 0 0.9rem;
+  border: 1px solid var(--panel-line);
+  border-radius: 4px;
+}
+
+body.buttoncrash .record-note {
+  margin: 0 0 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+body.buttoncrash .track-note {
+  margin: 0 0 0.5rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+body.buttoncrash .track-note a { color: var(--accent); }
+
+body.buttoncrash .track-note.caveat {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* Says the quiet part: the record is five tracks whether or not all five
+   stream. */
+body.buttoncrash .track-note.gap {
+  padding: 0.5rem 0.7rem;
+  border-left: 2px solid var(--accent-2);
+  background: #9059761a;
+  font-size: 0.9rem;
+}
+
+body.buttoncrash .playlist-foot {
+  margin: 0.9rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.84rem;
+}
+body.buttoncrash .playlist-foot a { color: var(--accent); }
+
+
+/* The track list is #sc-tracks, not #youtube-chapters, because this record has
+   no video anywhere near it. The geometry rules above are keyed to that id, so
+   they are restated here rather than having the shared selectors widened —
+   same trade the controller makes, and for the same reason: five published
+   pages hang off those rules and none of them should have to care that this
+   record exists. .track-bar, .track-fill and .playlist-head are already keyed
+   to body.album alone and are inherited as-is. */
+body.buttoncrash #sc-tracks {
+  background-color: transparent;
+  list-style: none;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+body.buttoncrash #sc-tracks .track { padding: 0.1rem 0; }
+
+body.buttoncrash #sc-tracks .track-go {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 2.9rem 1fr auto;
+  align-items: baseline;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.32rem 0.3rem 0.24rem;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+body.buttoncrash #sc-tracks .track-go:hover { background: var(--rail); }
+body.buttoncrash #sc-tracks .d {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+body.buttoncrash #sc-tracks .track.active .t { color: var(--accent); }
+body.buttoncrash #sc-tracks .track.active .n.crash-font { color: var(--accent); }
+
+/* A row with nothing to stream should not offer a progress bar it can never
+   fill, nor a hover state that promises playback. */
+body.buttoncrash #sc-tracks .track:not([data-sc]) .track-bar { visibility: hidden; }
+body.buttoncrash #sc-tracks .track:not([data-sc]) .track-go { cursor: default; opacity: 0.72; }
+/* Had I The Time runs 1:08 on purpose — the exercise was one sitting per
+   track, and the punchline is that had there been more time there would be
+   more track. It is finished, so the row does not brand it a fragment; the
+   panel tells the joke instead. */
+body.buttoncrash #sc-tracks .track[data-short] .d { color: var(--accent-2); }
