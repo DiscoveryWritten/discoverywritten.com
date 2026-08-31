@@ -137,6 +137,22 @@ body.buttoncrash {
 }
 
 
+body.luckysevens {
+  --bg1: oklch(0.87 0.02 80);
+  --bg2: oklch(0.93 0.035 85);
+  --stroke: #efe9dd;
+  --art: url('../img/luckysevens-square.webp');
+  --art-size: 1560px 1558px;
+  --panel: #f6f1e6d9;
+  --panel-line: #cdbfa4;
+  --veil: #efe8d86b;
+  --ink: #1d1a14;
+  --ink-soft: #6b6250;
+  --accent: #9a5343;
+  --accent-2: #4e7c88;
+  --rail: #1d1a1426;
+}
+
 body.album {
   --serif: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
@@ -947,3 +963,129 @@ body.buttoncrash #sc-tracks .track:not([data-sc]) .track-go { cursor: default; o
    more track. It is finished, so the row does not brand it a fragment; the
    panel tells the joke instead. */
 body.buttoncrash #sc-tracks .track[data-short] .d { color: var(--accent-2); }
+
+/* ---------------------------------------------------- lucky sevens only -- */
+
+/* This record transmits. The story column welds each cited work to the stanza
+   that argues it, and the player column carries the optical apparatus: one
+   ordinary bootstrap QR (the only URL in the scene — it opens the receiver),
+   then a rail of emitter slots where the signed bottles will loop. The slots
+   are honest placeholders until the channel ships its embeddable emitter
+   (civic-node proto-issue: bottle-broadcast-catch); nothing here pretends to
+   broadcast yet. Everything scoped to this record. */
+
+body.luckysevens .content-warning {
+  margin: 0 0 0.9rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--accent);
+  border-left-width: 4px;
+  border-radius: 4px;
+  color: var(--ink);
+  background: #9a534315;
+  font-family: var(--mono);
+  font-size: 0.88rem;
+}
+
+body.luckysevens .record-note {
+  margin: 0 0 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+body.luckysevens .part .tag {
+  display: block;
+  margin: 0.9rem 0 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  opacity: 0.6;
+}
+body.luckysevens .part .tag:first-child { margin-top: 0; }
+body.luckysevens .part .tag.divider {
+  text-align: center;
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin: 1.4rem 0;
+}
+
+/* A welded citation: the door the stanza argues for, kept physically on it. */
+body.luckysevens .stanza-link {
+  display: block;
+  width: fit-content;
+  margin: 0 0 0.45rem;
+  padding: 0.14rem 0.55rem;
+  border: 1px solid var(--panel-line);
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--panel);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+body.luckysevens .stanza-link:hover {
+  border-color: var(--accent);
+}
+
+/* ------------------------------------------------- the optical apparatus -- */
+
+/* The apparatus is taller than the template's 700px player window, so this
+   record's panel scrolls internally instead of spilling over the banner. */
+body.luckysevens .music-story .player { max-height: calc(100vh - 6rem); }
+body.luckysevens #youtube {
+  overflow-y: auto;
+  max-height: calc(100vh - 7rem);
+}
+
+/* The bootstrap sticks inside that scroll: whatever the rail is showing, any
+   time a camera comes up this is the first thing it should be able to see. */
+body.luckysevens .bootstrap-card {
+  position: sticky;
+  top: 0.3rem;
+  z-index: 2;
+  margin: 1.1rem 0;
+  padding: 0.8rem;
+  border: 2px solid var(--panel-line);
+  border-radius: 6px;
+  background: var(--panel);
+  text-align: center;
+}
+body.luckysevens .bootstrap-qr {
+  display: block;
+  margin: 0 auto 0.6rem;
+  width: min(228px, 100%);
+  height: auto;
+  border-radius: 3px;
+}
+body.luckysevens .bootstrap-note {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  text-align: left;
+}
+body.luckysevens .bootstrap-note strong { color: var(--ink); }
+
+body.luckysevens .qr-rail {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+}
+body.luckysevens .qr-slot {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0 0.5rem;
+  align-items: baseline;
+  padding: 0.55rem 0.4rem;
+  border-top: 1px solid var(--rail);
+}
+body.luckysevens .slot-marker { font-size: 1.05rem; }
+body.luckysevens .slot-name { color: var(--ink); }
+body.luckysevens .slot-bottle,
+body.luckysevens .slot-state {
+  grid-column: 2;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+body.luckysevens .slot-state { opacity: 0.7; font-style: italic; }
