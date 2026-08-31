@@ -1,0 +1,38 @@
+# Deploys docs/ to Cloudflare Pages on every push to main.
+#
+# This replaces the machine-bound pipeline: the site used to go live via
+# `wrangler pages deploy` from a laptop, whose OAuth token expired silently on
+# 2026-08-27 — after which two days of merges built nothing. A workflow token
+# lives in repo secrets, is scoped to Pages only, and dies loudly (a red X on
+# the commit) instead of quietly.
+#
+# Needs three values, all set from the GitHub UI (works from a phone):
+#   secrets.CLOUDFLARE_API_TOKEN   — dash.cloudflare.com → profile → API Tokens
+#                                    → custom token, permission: Account →
+#                                    Cloudflare Pages → Edit
+#   secrets.CLOUDFLARE_ACCOUNT_ID  — dash.cloudflare.com → account home, in the
+#                                    right-hand sidebar (or the dashboard URL)
+#   vars.CLOUDFLARE_PAGES_PROJECT  — the Pages project's name, from the Pages
+#                                    section of the dash (repo Settings →
+#                                    Secrets and variables → Actions → Variables)
+name: Deploy site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish docs/ to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy docs --project-name=${{ vars.CLOUDFLARE_PAGES_PROJECT }}
