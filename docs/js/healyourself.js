@@ -271,6 +271,8 @@ function buildTracks() {
     dur: parseFloat(row.getAttribute('data-dur')) || 0,
     bar: row.querySelector('.track-bar'),
     fill: row.querySelector('.track-fill'),
+    clock: row.querySelector('.d'),
+    durText: row.querySelector('.d')?.textContent || '',
   }));
   hy_tracks.forEach((t) => { if (t.bar) bindScrub(t); });
 }
@@ -322,7 +324,10 @@ function goTo(index, seconds, andPlay) {
   }
 
   refreshWatchLinks();
-  if (hy_showing !== index) showTrack(index);
+  // Soft: the player turning the page (a row press, or the record running on
+  // to the next track) must not yank the viewport out from under the reader.
+  // Only the chips scroll, and they call showTrack themselves.
+  if (hy_showing !== index) showTrack(index, /* soft */ true);
   paint(seconds || 0);
 }
 
@@ -395,14 +400,32 @@ function paint(forced) {
     // is the truth: no other video has been started.
     if (!on) drawRow(t, 0);
     else drawRow(t, t.dur > 0 ? Math.min(1, Math.max(0, now / t.dur)) : 0);
+    const was = t.row.classList.contains('active');
     t.row.classList.toggle('active', on);
     if (on) t.row.setAttribute('aria-current', 'true');
     else t.row.removeAttribute('aria-current');
+    // The row wears its own clock while it plays, so a list cut down to one
+    // visible row (the phone layout) still says where the playhead is.
+    if (t.clock) {
+      const playing = document.body.classList.contains('is-playing');
+      t.clock.textContent = (on && playing) ? clock(now) : t.durText;
+    }
+    if (on && !was) revealRow(t);
   });
 
   document.querySelectorAll('.elapsed').forEach((el) => {
     el.textContent = clock(now);
   });
+}
+
+// Bring the loaded row into the list's window. The list only scrolls on the
+// phone layout, where it is one row tall; elsewhere this is a no-op. Never
+// scrollIntoView here -- that would also scroll the page, out from under
+// whoever is reading.
+function revealRow(t) {
+  const list = t.row.parentElement;
+  if (!list || list.scrollHeight <= list.clientHeight) return;
+  list.scrollTop = t.row.offsetTop - list.offsetTop;
 }
 
 function drawRow(t, frac) {

@@ -97,7 +97,35 @@ const ACCESSIBILITY = {
     new IntersectionObserver(([entry]) => {
       body.classList.toggle('is-floating', !entry.isIntersecting);
     }).observe(sentinel);
+
+    measureStack();
   });
+
+  // The sticky stack -- anchor bar, then the player, then the nameplate -- is
+  // three separate sticky elements, and each one's `top` is the height of
+  // what sits above it. Those heights were hard-coded (60px, 170px) and were
+  // wrong the moment the bar wrapped or a player was taller than the guess,
+  // which left a gap the story text scrolled through. So they are measured:
+  // the bar and the player report their rendered height into two custom
+  // properties on <html>, and the stylesheets add those up instead.
+  function measureStack() {
+    const root = document.documentElement;
+    const bar = document.querySelector('.pair.links');
+    const player = document.querySelector('.music-story .player');
+    if (!bar || !window.ResizeObserver) return;
+    const write = (name, el) => {
+      if (!el) return;
+      root.style.setProperty(name, `${Math.ceil(el.getBoundingClientRect().height)}px`);
+    };
+    const ro = new ResizeObserver(() => {
+      write('--bar-h', bar);
+      write('--player-h', player);
+    });
+    ro.observe(bar);
+    if (player) ro.observe(player);
+    write('--bar-h', bar);
+    write('--player-h', player);
+  }
 
   function showAccessibility(button) {
     return () => {

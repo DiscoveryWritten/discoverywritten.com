@@ -63,8 +63,12 @@ body.showcase {
   justify-content: space-around;
   place-items: 0 center;
 }
+/* The sticky stack. Each layer's `top` is the height of the layers above it,
+   and those heights are measured by accessibility.js into --bar-h and
+   --player-h on <html>; the numbers here are only the fallbacks for a page
+   that has not measured yet. */
 .music-story .player {
-  top: calc(60px + env(safe-area-inset-top, 0px));
+  top: calc(var(--bar-h, 60px) + env(safe-area-inset-top, 0px));
   position: sticky;
   width: 50%;
   max-height: 700px;
@@ -124,15 +128,32 @@ body.showcase {
 }
 
 @media (max-width: 645px) {
-  /* #bg > .pair:not(.links) {
-    position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
-  } */
-  .pair.links {
-    position: initial !important;
+  /* Phone layout is one column: the anchor bar, the player, the nameplate,
+     all sticky in that order, and the story scrolling under the three of
+     them. The bar used to stop being sticky here and the player was pinned
+     at a guessed 60px, so once the banner scrolled off there was a bar-sized
+     gap above the player that the text showed through. */
+  /* body-qualified so this outranks the desktop .pair.links rule further
+     down (z-index 2), which is otherwise later in the cascade. */
+  body .pair.links {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 7;
+    background-color: #4f274f;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.5rem;
   }
   .pair.links > * {
-    width: 50% !important;
+    width: auto !important;
+    max-width: none;
+    margin: 0 !important;
   }
+  /* The section/track picker gets the room; the service tiles take what
+     they need. (row-reverse puts the picker on the right.) */
+  .pair.links > :first-child { flex: 1 1 auto; min-width: 0; }
+  .pair.links > :last-child { flex: 0 0 auto; }
   #showcase .content {
     padding: 0;
     margin-left: 20px;
@@ -159,26 +180,31 @@ body.showcase {
     align-items: center;
     flex: 1;
   }
+  /* Every service is held to the same short window. The store embeds do not
+     size down on their own, so they are cropped on purpose -- Apple's is the
+     reference -- and the ones that scroll inside keep their lower controls
+     reachable. */
   .music-story .player {
     width: 100%;
     height: 170px;
     max-width: none;
+    max-height: none;
+    z-index: 6;
+    overflow: hidden;
   }
   .music-story .player iframe {
     width: 100%;
-    margin-right: 20px;
+    margin: 0;
     height: 100%;
   }
   .music-story .player[data-source="spotify"] {
     height: 170px;
     overflow-y: hidden;
   }
-  .music-story .player[data-source="apple"] {
+  .music-story .player[data-source="apple"],
+  .music-story .player[data-source="amazon"] {
     height: 170px;
     overflow-y: scroll;
-  }
-  .music-story .player[data-source="amazon"] {
-    height: 320px;
   }
   .music-story .player iframe#spotify,
   .music-story .player iframe#amazon {
@@ -191,8 +217,12 @@ body.showcase {
   #chapters-control, #music-control {
     margin: 0 !important;
   }
+  #chapters-control .tabs {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
   .story .float {
-    top: calc(170px + env(safe-area-inset-top, 0px)) !important;
+    top: calc(var(--bar-h, 60px) + var(--player-h, 170px) + env(safe-area-inset-top, 0px)) !important;
   }
   body.is-floating .float h3 {
     font-size: 1.3rem;
@@ -257,7 +287,7 @@ body.dark #bg > .pair h2 {
   padding-top: 0.5em;
   position: sticky;
   z-index: 5;
-  top: calc(65px + env(safe-area-inset-top, 0px));
+  top: calc(var(--bar-h, 60px) + 5px + env(safe-area-inset-top, 0px));
   background: #27364fd5;
   border-bottom: 2px solid #27364f;
   filter: drop-shadow(0 3px 3px #00000080);
