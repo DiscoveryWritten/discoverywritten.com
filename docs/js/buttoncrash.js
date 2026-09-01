@@ -10,9 +10,11 @@
  *
  * 1. It is on SOUNDCLOUD, so there is no YouTube iframe API here at all.
  *    SoundCloud ships its own widget API, which is a different object with a
- *    different contract: SC.Widget(iframe).load(url, opts) swaps the track,
- *    and position/duration arrive through events rather than being polled off
- *    a player handle.
+ *    different contract. The widget is pointed at the SET, not a track, so it
+ *    runs the record on by itself the way the store embeds do; our rows drive
+ *    it with skip(index) and follow it through its events, and the mapping
+ *    between our rows and the set's order is read off the widget at READY
+ *    rather than assumed.
  *
  * 2. The pager is the word CRASH. Every track is named for its letter, in
  *    order, so the chips are letters and the letter IS the track number. The
@@ -28,9 +30,10 @@
 
 let bc_widget = null;
 let bc_ready = false;
-let bc_current = -1;      // index of the track loaded in the widget, -1 = none
+let bc_current = -1;      // index of the track the widget is on, -1 = none
 let bc_showing = 0;       // index of the panel on screen
 let bc_tracks = [];
+const bc_setIndex = new Map();   // SoundCloud track id -> position in the set
 
 const BUTTONCRASH = {
   areaPlayer: '.player',
@@ -81,6 +84,8 @@ function buildTracks() {
     dur: parseFloat(row.getAttribute('data-dur')) || 0,
     bar: row.querySelector('.track-bar'),
     fill: row.querySelector('.track-fill'),
+    clock: row.querySelector('.d'),
+    durText: row.querySelector('.d')?.textContent || '',
   }));
 }
 
@@ -90,53 +95,70 @@ function prepWidget() {
   const frame = document.getElementById('sc_player');
   if (!frame || !window.SC || !window.SC.Widget) return;
   bc_widget = window.SC.Widget(frame);
+  const E = window.SC.Widget.Events;
 
-  bc_widget.bind(window.SC.Widget.Events.READY, () => {
+  bc_widget.bind(E.READY, () => {
     bc_ready = true;
-    // The iframe is authored pointing at the first streamable track, so that
-    // is what is loaded before anyone clicks anything.
-    if (bc_current < 0) bc_current = bc_tracks.findIndex((t) => t.scId);
-    paint(0);
+    // The set's order is SoundCloud's business; the rows only know their ids.
+    bc_widget.getSounds((sounds) => {
+      (sounds || []).forEach((sound, i) => {
+        if (sound && sound.id != null) bc_setIndex.set(String(sound.id), i);
+      });
+    });
+    syncCurrent(() => paint(0));
   });
 
-  bc_widget.bind(window.SC.Widget.Events.PLAY_PROGRESS, (e) => {
+  // Whatever started playing is the current track, whether a row asked for it
+  // or the set ran on to it.
+  bc_widget.bind(E.PLAY, () => {
+    document.body.classList.add('is-playing');
+    syncCurrent(() => paint());
+  });
+
+  bc_widget.bind(E.PLAY_PROGRESS, (e) => {
     paint((e && e.currentPosition ? e.currentPosition : 0) / 1000);
   });
 
-  bc_widget.bind(window.SC.Widget.Events.PLAY, () => {
-    document.body.classList.add('is-playing');
+  bc_widget.bind(E.PAUSE, () => {
+    document.body.classList.remove('is-playing');
+    paint();
   });
 
-  bc_widget.bind(window.SC.Widget.Events.PAUSE, () => {
+  bc_widget.bind(E.FINISH, () => {
     document.body.classList.remove('is-playing');
-  });
-
-  // Run the record on: the next streamable track, skipping the gaps.
-  bc_widget.bind(window.SC.Widget.Events.FINISH, () => {
-    document.body.classList.remove('is-playing');
-    const next = bc_tracks.find((t) => t.index > bc_current && t.scId);
-    if (next) playIndex(next.index, true);
   });
 }
 
-/* Load a track into the widget. Only meaningful for a row that has one. */
+/* Ask the widget which sound it is on and point bc_current at that row. */
+function syncCurrent(then) {
+  if (!bc_widget) return;
+  bc_widget.getCurrentSound((sound) => {
+    const id = sound && sound.id != null ? String(sound.id) : null;
+    const t = id ? bc_tracks.find((x) => x.scId === id) : null;
+    if (t && t.index !== bc_current) {
+      bc_current = t.index;
+      revealRow(t);
+      if (bc_showing !== t.index) showTrack(t.index, /* soft */ true);
+    }
+    if (then) then();
+  });
+}
+
+/* Put the widget on a track. Only meaningful for a row that is in the set. */
 function playIndex(index, andPlay) {
   const t = bc_tracks[index];
   if (!t) return false;
-  showTrack(index);
+  showTrack(index, /* soft */ true);
   if (!t.scId) return false;                  // nothing to stream; panel still moves
   if (!bc_widget || !bc_ready) return false;
 
-  if (index !== bc_current) {
+  const at = bc_setIndex.get(t.scId);
+  if (index !== bc_current && at !== undefined) {
     bc_current = index;
-    bc_widget.load(`https://api.soundcloud.com/tracks/${t.scId}`, {
-      auto_play: !!andPlay,
-      show_comments: false,
-      hide_related: true,
-      show_reposts: false,
-      show_teaser: false,
-      color: 'c0356f',
-    });
+    bc_widget.skip(at);
+    if (andPlay) bc_widget.play();
+    else bc_widget.pause();
+    paint(0);
   } else if (andPlay) {
     bc_widget.seekTo(0);
     bc_widget.play();
@@ -148,7 +170,7 @@ function playTrack(el) {
   const row = el.closest('.track');
   const t = bc_tracks.find((x) => x.row === row);
   if (!t) return false;
-  if (!t.scId) { showTrack(t.index); return false; }
+  if (!t.scId) { showTrack(t.index, /* soft */ true); return false; }
   return playIndex(t.index, true);
 }
 
@@ -213,7 +235,12 @@ function showTrack(index, soft = false) {
 
 /* --------------------------------------------------------------- paint -- */
 
+let bc_last = 0;          // last position reported, for paints between events
+
 function paint(seconds) {
+  if (seconds === undefined) seconds = bc_last;
+  bc_last = seconds;
+  const playing = document.body.classList.contains('is-playing');
   bc_tracks.forEach((t) => {
     const on = t.index === bc_current;
     const frac = (on && t.dur > 0) ? Math.min(1, Math.max(0, seconds / t.dur)) : 0;
@@ -222,10 +249,23 @@ function paint(seconds) {
     t.row.classList.toggle('active', on);
     if (on) t.row.setAttribute('aria-current', 'true');
     else t.row.removeAttribute('aria-current');
+    // The row wears its own clock while it plays, so a list cut down to one
+    // visible row (the phone layout) still says where the playhead is.
+    if (t.clock) t.clock.textContent = (on && playing) ? clock(seconds) : t.durText;
   });
   document.querySelectorAll('.elapsed').forEach((el) => {
     el.textContent = clock(seconds);
   });
+}
+
+// Bring the current row into the list's window. The list only scrolls on the
+// phone layout, where it is one row tall; elsewhere this is a no-op. Never
+// scrollIntoView here -- that would also scroll the page, out from under
+// whoever is reading.
+function revealRow(t) {
+  const list = t.row.parentElement;
+  if (!list || list.scrollHeight <= list.clientHeight) return;
+  list.scrollTop = t.row.offsetTop - list.offsetTop;
 }
 
 function clock(seconds) {

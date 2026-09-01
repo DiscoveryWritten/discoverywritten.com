@@ -21,6 +21,8 @@ let ct_autoplay = false;
 let ct_duration = 0;
 let ct_tracks = [];
 let ct_sections = [];
+let ct_panels = [];       // one lyrics panel per track when the record pages
+let ct_active = -1;       // index of the track the playhead is in
 const ct_frames = new Map();
 
 const COLLECTORATE = {
@@ -57,7 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     a.href = watchUrl(0);
   });
   buildTracks();
+  buildPanels();
   buildStrips();
+  if (ct_panels.length) showTrack(0, /* soft */ true);   // chips exist now
   spySections();
   bindKeys();
   // Matches larastelle: let the frames settle, then swap in the chosen source
@@ -244,6 +248,8 @@ function buildTracks() {
     dur: parseFloat(row.getAttribute('data-dur')) || 0,
     bar: row.querySelector('.track-bar'),
     fill: row.querySelector('.track-fill'),
+    clock: row.querySelector('.d'),
+    durText: row.querySelector('.d')?.textContent || '',
   }));
 
   // data-dur keeps the bars live before the player loads; the next row's start
@@ -359,11 +365,32 @@ function paint(forced) {
     t.row.classList.toggle('active', active);
     if (active) t.row.setAttribute('aria-current', 'true');
     else t.row.removeAttribute('aria-current');
+    // The row wears its own clock while it plays, so a list cut down to one
+    // visible row (the phone layout) still says where the playhead is.
+    if (t.clock) {
+      const playing = document.body.classList.contains('is-playing');
+      t.clock.textContent = (active && playing) ? clock(now - t.start) : t.durText;
+    }
+    if (active && ct_active !== t.index) {
+      ct_active = t.index;
+      revealRow(t);
+      if (ct_panels.length) showTrack(t.index, /* soft */ true);
+    }
   });
 
   document.querySelectorAll('.elapsed').forEach((el) => {
     el.textContent = clock(now);
   });
+}
+
+// Bring the active row into the list's window. The list only scrolls on the
+// phone layout, where it is one row tall; elsewhere this is a no-op. Never
+// scrollIntoView here -- that would also scroll the page, out from under
+// whoever is reading.
+function revealRow(t) {
+  const list = t.row.parentElement;
+  if (!list || list.scrollHeight <= list.clientHeight) return;
+  list.scrollTop = t.row.offsetTop - list.offsetTop;
 }
 
 function drawRow(t, frac) {
@@ -428,10 +455,19 @@ function buildStrips() {
       b.className = 'chip';
       b.setAttribute('role', 'listitem');
       b.setAttribute('aria-controls', part.id);
-      b.textContent = part.getAttribute('data-label') || '•';
+      const label = part.getAttribute('data-label') || '';
+      const glyph = part.getAttribute('data-chip');
+      b.textContent = glyph || label || '•';
+      if (glyph) b.classList.add('dot');
       const owner = part.closest('.track-lyrics')?.getAttribute('data-title') || '';
-      b.title = `${owner} — ${part.getAttribute('data-label') || ''}`.trim();
-      b.addEventListener('click', () => scrollToSection(part.id));
+      b.title = `${owner} — ${label}`.trim();
+      if (glyph) b.setAttribute('aria-label', b.title);
+      if (ct_panels.length) {
+        const n = parseInt(part.closest('.track-lyrics')?.getAttribute('data-track'), 10);
+        b.addEventListener('click', () => showTrack(n - 1));
+      } else {
+        b.addEventListener('click', () => scrollToSection(part.id));
+      }
       part._chip = b;
       strip.appendChild(b);
     });
@@ -447,7 +483,7 @@ function scrollToSection(id) {
 }
 
 function spySections() {
-  if (!ct_sections.length || !window.IntersectionObserver) return;
+  if (ct_panels.length || !ct_sections.length || !window.IntersectionObserver) return;
   const seen = new Set();
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -477,7 +513,55 @@ function spySections() {
   ct_sections.forEach((el) => io.observe(el));
 }
 
+/* --------------------------------------------------------------- pager -- */
+
+/* A record may page instead of scroll: one [role="tabpanel"] per track under
+ * .panels, the way HEALYOURSELF lays its lyrics out. Nothing opts in but the
+ * markup -- a page with a single document keeps the scroll-spy above. */
+function buildPanels() {
+  ct_panels = [...document.querySelectorAll('.panels > [role="tabpanel"]')];
+  if (ct_panels.length < 2) { ct_panels = []; return; }
+}
+
+function showTrack(index, soft = false) {
+  if (!ct_panels[index]) return false;
+
+  ct_panels.forEach((panel, i) => {
+    const on = i === index;
+    panel.style.display = on ? 'block' : 'none';
+    if (on) panel.removeAttribute('inert');
+    else panel.setAttribute('inert', 'true');
+  });
+
+  ct_sections.forEach((part) => {
+    const owner = parseInt(part.closest('.track-lyrics')?.getAttribute('data-track'), 10) - 1;
+    const on = owner === index;
+    part.classList.toggle('in-view', on);
+    if (part._chip) {
+      part._chip.classList.toggle('active', on);
+      part._chip.setAttribute('aria-current', on ? 'true' : 'false');
+    }
+  });
+
+  const head = document.querySelector('.h-text-version');
+  const title = ct_panels[index].getAttribute('aria-label');
+  if (head && title) head.textContent = title;
+
+  // Paging brings you to the top of the new track -- except when the page
+  // itself turned (load, or the playhead crossing into the next track), when
+  // pulling the viewport out from under the reader would be the wrong move.
+  if (!soft) {
+    const top = document.querySelector('#scroll-top');
+    if (top) top.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  return false;
+}
+
 /* ---------------------------------------------------------------- keys -- */
+
+function showing() {
+  return Math.max(0, ct_panels.findIndex((p) => p.style.display !== 'none'));
+}
 
 function bindKeys() {
   document.addEventListener('keydown', (e) => {
@@ -489,9 +573,11 @@ function bindKeys() {
     if (e.key === 'ArrowLeft') {
       const prev = document.querySelector('.record-previous');
       if (prev) { e.preventDefault(); prev.click(); }
+      else if (ct_panels.length) { e.preventDefault(); showTrack(Math.max(0, showing() - 1)); }
     } else if (e.key === 'ArrowRight') {
       const next = document.querySelector('.record-next');
       if (next) { e.preventDefault(); next.click(); }
+      else if (ct_panels.length) { e.preventDefault(); showTrack(Math.min(ct_panels.length - 1, showing() + 1)); }
     }
   });
 }

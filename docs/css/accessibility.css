@@ -8,8 +8,9 @@
 }
 @media(max-width: 645px) {
   #access.pair {
-    /* top: 181px; */
-    top: calc(226px + env(safe-area-inset-top, 0px));
+    /* Sits on the nameplate line: under the measured bar and player (see
+       showcase.css, the sticky stack). */
+    top: calc(var(--bar-h, 60px) + var(--player-h, 170px) + env(safe-area-inset-top, 0px));
     margin-right: 1em;
   }
   body.is-floating #access {

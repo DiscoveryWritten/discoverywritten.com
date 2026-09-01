@@ -297,6 +297,16 @@ body.album .chip.active {
   opacity: 1;
   border-color: var(--accent);
 }
+/* A record whose sections need no naming -- seven instrumentals, one part
+   each -- asks for seven things to press, not seven numerals. data-chip on
+   the part swaps the glyph; the label still names the section for the
+   tooltip and the accessibility tree. */
+body.album .chip.dot {
+  min-width: 0;
+  padding: 0.22rem 0.3rem;
+  font-size: 1.05rem;
+  line-height: 1;
+}
 
 /* -------------------------------------------------------- story panels -- */
 
@@ -394,7 +404,8 @@ body.album .part .cue {
 
 body.album .player { flex-direction: column; }
 
-body.album #youtube {
+body.album #youtube,
+body.buttoncrash #soundcloud {
   box-sizing: border-box;
   width: 100%;
   max-width: 500px;
@@ -561,20 +572,122 @@ body.album.no-video .no-video-note { display: block; }
 
 /* -------------------------------------------------------------- mobile -- */
 
+/* On a phone the player is a sticky layer between the anchor bar and the
+   nameplate (showcase.css, the sticky stack), so every pixel it takes is a
+   pixel the story never gets. The store embeds are cropped to 170px; the
+   panels this file owns are cut to about the same: a short screen, then the
+   track list as a ONE-ROW window that snaps between rows. The active row is
+   what shows -- the controller keeps it there -- and a flick on the title
+   reveals the others. The head (TRACKS / elapsed) goes: the row itself
+   carries the elapsed time while it plays. */
 @media (max-width: 645px) {
-  body.album #youtube {
-    margin: 20px;
+  body.album #youtube,
+  body.buttoncrash #soundcloud {
+    box-sizing: border-box;
+    width: 100%;
     max-width: none;
-    width: auto;
+    margin: 0;
+    padding: 0.35rem 0.6rem 0.3rem;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    /* The panel is a sticky layer over the lyrics here, so its usual
+       translucency has to go: the record's tint laid over its own line
+       colour comes out opaque and still in the record's palette. */
+    background-color: var(--panel-line);
+    background-image: linear-gradient(var(--panel), var(--panel));
   }
-  body.album .music-story .player[data-source="youtube"] {
+  body.album .music-story .player[data-source="youtube"],
+  body.album .music-story .player[data-source="soundcloud"] {
     height: auto;
-    max-height: 60vh;
-    overflow-y: auto;
+    max-height: none;
+    overflow: visible;
   }
-  body.album .part { scroll-margin-top: 16rem; }
+
+  /* The screen is letterboxed into a fixed short window rather than kept at
+     16:9 -- YouTube fits the picture inside whatever box it is given. */
+  body.album #yt_screen {
+    aspect-ratio: auto;
+    height: 136px;
+  }
+
+  body.album .playlist-head,
+  body.album .quality-note,
+  body.album .playlist-foot,
+  body.album #youtube-chapters .ft { display: none; }
+
+  body.album .player #youtube-chapters,
+  body.buttoncrash .player #sc-tracks {
+    margin: 0.25rem 0 0;
+    height: 2.75rem;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+  }
+  body.album #youtube-chapters::-webkit-scrollbar,
+  body.buttoncrash #sc-tracks::-webkit-scrollbar { display: none; }
+
+  body.album .player #youtube-chapters .track,
+  body.buttoncrash .player #sc-tracks .track {
+    box-sizing: border-box;
+    height: 2.75rem;
+    padding: 0.15rem 0 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  body.album .player #youtube-chapters .track-go,
+  body.buttoncrash .player #sc-tracks .track-go {
+    padding: 0.25rem 0.3rem 0.2rem;
+    align-items: center;
+  }
+  body.album #youtube-chapters .t,
+  body.buttoncrash #sc-tracks .t {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  body.buttoncrash #sc-tracks .n.crash-font { font-size: 1.35rem; }
+
+  /* The bar is the one surface that swallows touch (touch-action: none, so
+     it can scrub). It is kept thin and inset so a flick meant for the list
+     lands on the title row beside it, not on the bar. */
+  body.album .track-bar {
+    height: 0.3rem;
+    margin: 0.2rem 1.4rem 0;
+  }
+
+  body.album .part {
+    scroll-margin-top: calc(var(--bar-h, 60px) + var(--player-h, 170px) + 3.5rem);
+  }
   body.album #title,
   body.album #title-stroke { -webkit-text-stroke-width: 7px; }
+
+  /* Chips: one row. The numerals lose their padding so a seven- or ten-track
+     strip fits beside the service tiles without wrapping and stretching the
+     bar. */
+  body.album #chapters-control { min-width: 0; }
+  /* A record with more chips than a phone row holds (The Collectorate's
+     sectioned strips) scrolls the row sideways instead of stacking it: the
+     bar stays one row tall, which is what the sticky stack below is sized
+     against. */
+  body.album #chapters-control .tabs {
+    padding: 0.2rem 0;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.album #chapters-control .tabs::-webkit-scrollbar { display: none; }
+  body.album .strip { flex: 0 0 auto; flex-wrap: nowrap; }
+  body.album .chip {
+    min-width: 1.4rem;
+    padding: 0.18rem 0.28rem;
+    font-size: 0.78rem;
+  }
+  body.album .strip-tag { display: none; }
 }
 
 /* ------------------------------------------------------- series index -- */
@@ -845,25 +958,29 @@ body.buttoncrash .story h4 .n.crash-font {
   color: var(--accent-2);
 }
 
+/* The widget is pointed at the whole set, so it runs the record on by itself;
+   166px is the classic player's own height -- artwork, title, waveform -- with
+   its track list left to our rows below. Sized explicitly because the
+   template's phone rule gives every player iframe height:100%, and that
+   resolves against nothing here. */
 body.buttoncrash #sc_player {
   display: block;
   width: 100%;
+  height: 166px;
   border: 0;
   margin-bottom: 0.6rem;
 }
 
-/* The SoundCloud tile is a wordmark rather than a logo file; the site ships no
-   SoundCloud image and this avoids hotlinking one. */
-body.buttoncrash .sc-mark {
-  display: inline-block;
-  padding: 0.4rem 0.7rem;
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  color: var(--ink);
-  border: 1px solid var(--panel-line);
-  border-radius: 4px;
-  background: var(--panel);
+/* The chips are letters on both sizes; on a phone they come down to the
+   smallest size the knocked-out face still resolves at, so C-R-A-S-H stays on
+   one line beside the SoundCloud tile instead of wrapping and stretching the
+   bar. */
+@media (max-width: 645px) {
+  body.buttoncrash .chip.letter {
+    font-size: 1.7rem;
+    padding: 0.12rem 0.28rem;
+  }
+  body.buttoncrash .music-story .player iframe#sc_player { height: 166px; margin-bottom: 0; }
 }
 
 body.buttoncrash .track-art {
@@ -1035,6 +1152,11 @@ body.luckysevens .music-story .player { max-height: calc(100vh - 6rem); }
 body.luckysevens #youtube {
   overflow-y: auto;
   max-height: calc(100vh - 7rem);
+}
+/* On a phone the apparatus is a sticky layer over the story, so it gets half
+   the screen at most and scrolls inside that. */
+@media (max-width: 645px) {
+  body.luckysevens #youtube { max-height: 50vh; }
 }
 
 /* The bootstrap sticks inside that scroll: whatever the rail is showing, any
