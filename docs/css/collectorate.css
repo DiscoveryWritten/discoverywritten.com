@@ -270,7 +270,7 @@ body.album .strip + .strip::before {
 
 body.album .strip-tag {
   font-family: var(--mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   letter-spacing: 0.06em;
   color: var(--ink);
   opacity: 0.7;
@@ -687,7 +687,17 @@ body.album.no-video .no-video-note { display: block; }
     padding: 0.18rem 0.28rem;
     font-size: 0.78rem;
   }
-  body.album .strip-tag { display: none; }
+  /* The bracketed strip name stays. On a record whose sections are acts
+     inside a song it is the only place those acts are attributed, which
+     outranks the chips beside it. */
+  body.album .strip-tag {
+    font-size: 0.6rem;
+    margin-right: 0.15rem;
+  }
+  /* One source tile should not float alone at the far left while the marks
+     sit at the far right. The nav keeps to its own half and hugs the edge it
+     belongs to, the way LARASTELLE's does. */
+  body.album #chapters-control .tabs { justify-content: flex-end; }
 }
 
 /* ------------------------------------------------------- series index -- */

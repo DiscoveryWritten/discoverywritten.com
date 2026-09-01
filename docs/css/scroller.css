@@ -1,0 +1,107 @@
+/* SCROLLER — the Larastelle chapter row, canonized.
+ *
+ * The rules of the original, kept:
+ *
+ *   - The marks are packed with NO margin and NO padding. This is not a
+ *     comfortable tap target and is not trying to be. A mark is a character;
+ *     the character is the button. Tight packing is what let LARASTELLE set
+ *     glyphs of a connected face beside each other and have them read as one
+ *     continuous line rather than a toolbar.
+ *   - Previous / next are the mechanism. The marks in the middle are the
+ *     convenience -- which is why the row may hide its far ends and still be
+ *     completely usable.
+ *   - The active mark shows a slice of one gradient laid along the whole row,
+ *     so the colour reports position instead of decorating a button. Each
+ *     record may re-tint it: override --scroller-band.
+ *   - .distance-N (set by scroller.js, N = steps from the current mark) is how
+ *     the row fits an arbitrary number of items: narrower screens hide the
+ *     further ones rather than wrapping to a second line, because a second
+ *     line changes the height of the sticky bar everything else is measured
+ *     against.
+ */
+
+:root {
+  --scroller-band: linear-gradient(to right,
+    hsl(270, 60%, 70%), hsl(289, 60%, 70%), hsl(308, 60%, 70%),
+    hsl(327, 60%, 70%), hsl(346, 60%, 70%), hsl(5, 60%, 70%),
+    hsl(24, 60%, 70%), hsl(43, 60%, 70%), hsl(62, 60%, 70%),
+    hsl(81, 60%, 70%), hsl(100, 60%, 70%), hsl(119, 60%, 70%),
+    hsl(138, 60%, 70%), hsl(157, 60%, 70%), hsl(176, 60%, 70%),
+    hsl(195, 60%, 70%), hsl(214, 60%, 70%), hsl(233, 60%, 70%),
+    hsl(252, 60%, 70%));
+}
+
+#chapters-control .tabs.scroller {
+  gap: 0;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+#chapters-control .tabs.scroller a {
+  margin: 0;
+  padding: 0;
+  background: none;
+  line-height: 1;
+  cursor: pointer;
+}
+#chapters-control .tabs.scroller a > span {
+  display: block;
+  padding: 0 0.06em;
+  line-height: 1;
+}
+#chapters-control .tabs.scroller span[role="presentation"] {
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.45;
+}
+
+#chapters-control .tabs.scroller a.active {
+  background-repeat: no-repeat;
+  background-image: var(--scroller-band);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 1px 1px #000);
+}
+
+/* Previous / next. The chevrons carry the whole row when everything between
+   them is hidden, so they keep their own hit area. */
+#chapters-control > .nav-previous,
+#chapters-control > .nav-next {
+  display: flex;
+  align-items: center;
+  padding: 0 0.25em;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.06em;
+  transition: text-underline-offset 0.1s ease-out, opacity 0.1s ease-in;
+}
+#chapters-control > .nav-previous::before { content: "\00AB"; }
+#chapters-control > .nav-next::before { content: "\00BB"; }
+#chapters-control > .nav-previous:hover,
+#chapters-control > .nav-next:hover { text-underline-offset: 0.16em; }
+#chapters-control > .nav-previous.at-end,
+#chapters-control > .nav-next.at-end { opacity: 0.25; pointer-events: none; }
+
+/* The window. Same ladder as LARASTELLE: the smaller the screen, the fewer
+   steps from the current mark survive. Hidden marks are removed from the flow
+   (not just transparent) so the row keeps its height at one line. */
+@media (max-width: 1200px) {
+  .tabs.scroller .distance-9, .tabs.scroller .distance-10,
+  .tabs.scroller .distance-11, .tabs.scroller .distance-12,
+  .tabs.scroller .distance-13, .tabs.scroller .distance-14,
+  .tabs.scroller .distance-15, .tabs.scroller .distance-16,
+  .tabs.scroller .distance-17, .tabs.scroller .distance-18,
+  .tabs.scroller .distance-19, .tabs.scroller .distance-20 { display: none; }
+}
+@media (max-width: 800px) {
+  .tabs.scroller .distance-6, .tabs.scroller .distance-7,
+  .tabs.scroller .distance-8 { display: none; }
+}
+@media (max-width: 500px) {
+  .tabs.scroller .distance-5 { display: none; }
+}
+@media (max-width: 380px) {
+  .tabs.scroller .distance-4 { display: none; }
+}

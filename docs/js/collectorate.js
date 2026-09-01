@@ -23,6 +23,7 @@ let ct_tracks = [];
 let ct_sections = [];
 let ct_panels = [];       // one lyrics panel per track when the record pages
 let ct_active = -1;       // index of the track the playhead is in
+let ct_scroller = null;   // the LARASTELLE scroller, when a record uses one
 const ct_frames = new Map();
 
 const COLLECTORATE = {
@@ -413,6 +414,26 @@ function buildStrips() {
   if (!tabs) return;
 
   ct_sections = [...document.querySelectorAll('.panels .part')];
+
+  // A record whose sections carry no name of their own -- one part per track,
+  // every part marked data-chip -- gets the LARASTELLE scroller instead of
+  // chips: previous/next as the mechanism, tightly packed marks between them,
+  // and a window that narrows rather than wrapping to a second row.
+  if (ct_panels.length && window.SCROLLER
+      && ct_sections.length === ct_panels.length
+      && ct_sections.every((p) => p.hasAttribute('data-chip'))) {
+    const nav = document.querySelector('#chapters-control');
+    ct_scroller = SCROLLER.build(nav, ct_sections.map((part, i) => {
+      if (!part.id) part.id = `part-${i}`;
+      const block = part.closest('.track-lyrics');
+      return {
+        id: ct_panels[i]?.id || part.id,
+        label: block?.getAttribute('data-title') || part.getAttribute('data-label') || `${i + 1}`,
+        glyph: part.getAttribute('data-chip') || undefined,
+      };
+    }), { pick: (i) => showTrack(i) });
+    return;
+  }
   const groups = new Map();
   ct_sections.forEach((part) => {
     const block = part.closest('.track-lyrics');
@@ -435,17 +456,17 @@ function buildStrips() {
     // numerals still says where you are. A record whose sections map 1:1 onto
     // its tracks has only one strip and no grouping to explain, so it is left
     // unlabelled rather than tagged with its own full range.
-    const nums = parts
-      .map((p) => parseInt(p.closest('.track-lyrics')?.getAttribute('data-track'), 10))
-      .filter((n) => !isNaN(n));
-    if (nums.length && groups.size > 1) {
-      const pad = (n) => String(n).padStart(2, '0');
-      const lo = Math.min(...nums);
-      const hi = Math.max(...nums);
+    // The tag NAMES the strip rather than numbering it. On a record whose
+    // sections are acts inside a song, the strip's bracketed name is the only
+    // place those acts are attributed -- which song you are inside is more
+    // useful here than which track number it is.
+    const name = block?.getAttribute('data-group-label')
+      || block?.getAttribute('data-title') || '';
+    if (name && groups.size > 1) {
       const tag = document.createElement('span');
       tag.className = 'strip-tag';
       tag.setAttribute('aria-hidden', 'true');
-      tag.textContent = lo === hi ? pad(lo) : `${pad(lo)}–${pad(hi)}`;
+      tag.textContent = `[${name}]`;
       strip.appendChild(tag);
     }
 
@@ -542,6 +563,8 @@ function showTrack(index, soft = false) {
       part._chip.setAttribute('aria-current', on ? 'true' : 'false');
     }
   });
+
+  if (ct_scroller) ct_scroller.select(index);
 
   const head = document.querySelector('.h-text-version');
   const title = ct_panels[index].getAttribute('aria-label');
