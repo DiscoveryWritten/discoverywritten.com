@@ -1,0 +1,120 @@
+# advocate.yml — who speaks for this repository's continuance.
+#
+# This site is a display case built almost entirely out of other people's windows,
+# published from a phone, onto a host that answers every missing path with the
+# homepage at 200. Those three facts are why the seats below are the seats below.
+#
+# Everything an advocate produces lives on its own branch; main never learns about it.
+
+version: 1
+
+mission: >
+  What would make this stop, and what we need in order not to stop. Not whether the
+  design is good and not what the exhibits say — the conditions under which the work
+  stays visible to the people it was made for.
+
+advocates:
+
+  # ---------------------------------------------------------------- deploy --
+  - name: deploy
+    mission: Is what is live what is in the repository?
+    cadence: weekly
+    session: local
+    writes: []
+    constituency: |
+      Autumn, away from the machine, on her phone, in another town. She merged something
+      and has no way to tell whether it went out. The host will not tell her: a path that
+      failed to publish returns 200 with the homepage HTML, so a broken deploy and a
+      working one look identical from a browser. This has already cost her real days —
+      the live site served a build from before brand-word.png landed and nothing anywhere
+      said so; the cause was an expired token and the fix was a dashboard she could not
+      reach from where she was standing.
+    voice: |
+      "I literally did a manual upload and walked away."
+      "Did that actually go out, or does it just look like it did?"
+      "It looks fine to me. Is it fine?"
+    goals:
+      - id: G1
+        says: >
+          The identity of what is live is checkable from a phone, without logging into
+          anyone's dashboard.
+      - id: G2
+        says: >
+          A file that failed to publish is distinguishable from one that published, by
+          something other than HTTP status.
+      - id: G3
+        says: >
+          Nothing that has to be renewed — a token, a certificate, a delegation — expires
+          without having been named somewhere in advance, with what happens when it lapses.
+    out-of-scope:
+      - What the pages say, and whether a design is good.
+      - Choosing a host, or relitigating the move off GitHub Pages.
+      - Anything whose only remedy is "open the Cloudflare dashboard".
+
+  # ------------------------------------------------------ borrowed windows --
+  - name: borrowed-windows
+    mission: The frames we do not own, and what happens the day one of them changes.
+    cadence: weekly
+    session: local
+    writes: []
+    constituency: |
+      Someone who opened an exhibit to hear a record and got a grey box. They cannot tell
+      whether the artist is gone, the service changed its embed rules, or the page is
+      simply broken — and in the absence of a sentence saying otherwise, they will assume
+      the artist is gone. Nearly every player on this site is somebody else's contract:
+      Spotify, Apple Music, Amazon Music, the YouTube iframe API, the SoundCloud widget,
+      and Substack next. None of them owe this repository a stable interface.
+    voice: |
+      "It just doesn't play."
+      "Is this taken down?"
+      "Nothing happens when I press it."
+    goals:
+      - id: G1
+        says: >
+          Every third-party frame the site depends on is named in one place, with what
+          visibly breaks if that service changes its terms or its API.
+      - id: G2
+        says: >
+          When a frame refuses to load, the page says which service refused and, where it
+          is knowable, why — never a silent empty box. The Windup Girl is the standing
+          example: it will not embed, and the page's job is to say so rather than bounce
+          the reader away where she cannot speak.
+      - id: G3
+        says: >
+          Where a rights constraint is already known and recorded, a later change cannot
+          quietly reintroduce the thing that was removed.
+    out-of-scope:
+      - Choosing which services to publish on.
+      - Negotiating or interpreting anyone's rights policy — recording a known one is in scope, deciding what it means is not.
+      - The editorial content of any exhibit.
+
+  # ------------------------------------------------------- one more record --
+  - name: one-more-record
+    mission: What it costs to add the next exhibit, and whether that cost is growing.
+    cadence: monthly
+    session: local
+    writes: []
+    constituency: |
+      Autumn six months from now, adding the next record at midnight from a phone, having
+      forgotten every convention she is about to violate. Today each new record appends to
+      the same two anchors — collectorate.css and index.html — so parallel pull requests
+      collide there as a matter of routine, and the cache-busting `?v=` is hand-bumped
+      across fourteen files. The template drifted between records precisely because each
+      one was authored by hand.
+    voice: |
+      "Why did this conflict again."
+      "I thought I bumped that."
+      "It works on the new one and it broke the old one."
+    goals:
+      - id: G1
+        says: Adding a record touches one place per fact, not one place per page.
+      - id: G2
+        says: No hand-maintained number lives in more than one file.
+      - id: G3
+        says: >
+          A convention that exists only in a previous page's markup is written down
+          somewhere a person can find it before copying the page.
+    out-of-scope:
+      - The Jekyll decision itself — gated on notes/abridged-by-us-exhibits.md, hers to make when that inventory is complete.
+      - Rewriting already-published pages to prove a point about consistency.
+      - Anything that would change how an exhibit looks in order to make it easier to generate.
