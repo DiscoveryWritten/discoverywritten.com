@@ -127,13 +127,12 @@ advocates:
   # directive that earns its own attention can be split out into its own seat on
   # its own branch without disturbing anything here.
   #
-  # KNOWN FRICTION WITH THE ENGINE, recorded rather than worked around:
-  # METHOD.md ends a session when the commit range is empty, and says so for a
-  # good reason — "an advocate that manufactures opinion because a schedule fired
-  # has done the one thing that would make it worth switching off." But perpetual
-  # enrichment is exactly work that wants to happen when nothing moved. As the
-  # engine stands, this seat is paced by activity rather than by the clock. That
-  # is a question for the engine's own design, not something to fake here.
+  # This seat cannot run yet. METHOD.md ends a session on an empty range, and
+  # enrichment is precisely the work that wants to happen when nothing moved.
+  # That is a question about the engine rather than about us, so it has been
+  # filed as a petition instead of argued here:
+  #   advocates/advocate.anecdote.channel/corpus-seats-cannot-speak.md
+  # Seats stay on our own concerns; the constellation is where the meta lives.
   - name: enrich
     mission: The ideas we put in early, before we could see what was downstream.
     cadence: monthly
