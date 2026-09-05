@@ -1,49 +1,35 @@
-Add docs/library/ with the Lucky Sevens QR loops, re-baked
+Sync the acrostic tracks and the trimmed lyrics.json from the working drive
 
-You asked where the videos were and where to put them. They are here, and they
-are rebuilt rather than just moved — the first bake was refused by vizzy, and
-finding out why turned up three real format faults plus a reason to redo the
-renders themselves.
+Found while looking for the Heal Yourself videos: notes/lucky-sevens/lyrics.json
+in this repo is behind your working copy on the Demosthenes drive, and the
+acrostic assets are not here at all.
 
-Placed at docs/library/lucky-sevens/ so they are served, which makes them
-URL-importable into a browser tool. If you meant a repo-root library/ instead
-(source assets, not published), it is one `git mv` — say the word.
+The repo copy runs to 550.838 and carries the closing acrostic as ordinary lyric
+lines. Yours stops at 502.723 and hands the last 48.1 seconds to twelve separate
+per-letter tracks, each starting on its own line and running to the end of the
+song — so the letters appear one at a time and STAY, stacking into the two
+columns. That is the ending as the production notes describe it, and it cannot be
+expressed as a lyric line, because a lyric line ends.
 
-**Why vizzy refused the old ones.** I could not read their format list (the FAQ
-is JS-rendered and search turned up nothing), so rather than guess at which fault
-it was, these fix all of them:
+    WDYNWTBF-1.1-W   502.723 -> 550.838   "W"
+    WDYNWTBF-1.2-D   505.607 -> 550.838   "D"
+    WDYNWTBF-1.3-Y   507.791 -> 550.838   "Y"
+    WDYNWTBF-1.4-N   511.499 -> 550.838   "N"
+    WDYNWTBF-1.5-q   515.536 -> 550.838   "¿"
+    WDYNWTBF-2.1-W   527.101 -> 550.838   "W"   ... and so on for T, B, F, ¿
 
-1. moov atom sat AFTER mdat — no faststart, so a tool that parses progressively
-   cannot read the metadata without pulling the whole file. Prime suspect.
-2. 4 fps. Legal, wildly outside what a timeline expects.
-3. No audio track, which some importers treat as "not a video".
+I checked before assuming: I first read the shorter file as a truncation, since
+it is newer by mtime and missing the whole ending. It is not — the per-letter
+files account for exactly the span it drops, and every entry in your copy also
+exists in the repo copy, so nothing was lost, only moved.
 
-Also moved High@2.2 to Main@4.0 and tagged the colour. If it still refuses,
-_format-probe/ has the smallest loop as 30fps, 24fps, 30fps-with-silent-audio,
-webm and gif, so you can find the acceptable shape yourself in one sitting
-instead of waiting on me for a re-export.
+So this takes your lyrics.json as the source of truth and adds the twelve
+acrostic tracks under notes/lucky-sevens/acrostic/. spans.json and links.json
+already matched byte for byte and are untouched.
 
-**They are genuinely better, not re-wrapped.** EC L instead of M (61 modules
-instead of 65, so bigger modules at the same size — per-frame error correction
-was partly redundant, since the fountain IS the error correction across frames),
-and 2.5x overhead instead of 1.5x, which drops the decode rate a stream needs
-from 80% to 48%. Every one passed a 40% simulated-miss catch test, up from 25%.
-Verified through the real decoder: EliseAI catches at 1.57s, UMG at 5.87s, both
-landing exactly on 1.2*K/fps.
+Not copied: the file named "WDYN WTBF" with no extension. It holds the same ten
+spans as WDYNWTBF-1.json but differs in content, and I would rather you tell me
+which one is the keeper than guess and enshrine the wrong one.
 
-**One correction that matters for placement.** I previously told you the floor
-was 146px delivered. That was OpenCV. Against the decoder that actually ships it
-is 3.2 px/module = 221px — measured on these exact files, 100% at 220px and 0% at
-165px. So in a 1920 master: 221px for a 1080p viewer, 331px at 720p, 496px at
-480p, 662px at 360p. The consequence is sharper than before: nine small tiles at
-once only works at 720p and up.
-
-4.3MB of mp4 committed, no LFS. Flagging that rather than assuming — it is small
-now but this folder will grow, and if you would rather binaries never land in
-this repo I will move them to a release or a bucket instead.
-
-audio-seal.mp4 is in here too: 353 bytes, a 0.9s loop, catchable in under half a
-second. It names the audio master by sha256 rather than carrying it.
-
-Still demo-signed, so these are different bottles from the first bake — do not
-mix the two sets in one video.
+Unrelated: tools/wayback-standalone is sitting untracked in the working tree. Not
+mine and not touched here, but you may want it committed or ignored.
