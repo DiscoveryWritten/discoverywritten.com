@@ -9,19 +9,13 @@ Generated 2026-09-05 by `.advocate-engine/bin/digest.mjs`. Do not edit it — ed
 | --- | --- | --- | --- | --- | --- |
 | [`deploy`](deploy.md) | 2026-09-05 | 1 | 3 | 0 | up to date |
 | [`borrowed-windows`](borrowed-windows.md) | 2026-09-05 | 1 | 7 | 0 | up to date |
-| `one-more-record` | — | — | — | — | not seated yet |
+| [`one-more-record`](one-more-record.md) | 2026-09-05 | 1 | 6 | 0 | up to date |
+| [`enrich`](enrich.md) | 2026-09-05 | 1 | 3 | 0 | up to date |
 
 ## Asking to graduate
 
 Nothing is `ready`. That is a normal reading and not a stall — `draft` is where thinking is
 supposed to sit until it ripens, and a seat is not owed a promotion for having run.
-
-## Declared but never run
-
-Entries in `advocate.yml` with no branch behind them yet. A seat exists once it has spoken;
-until then it is an intention.
-
-- `one-more-record` → `advocate/one-more-record`
 
 ## What a seat is
 
