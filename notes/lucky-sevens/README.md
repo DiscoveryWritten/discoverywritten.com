@@ -39,33 +39,48 @@ Add a row, rerun, and the timeline re-derives around it. Applied so far:
 | Been saying since 2003 | — | **135.0** |
 | The corpos centralized *(the screed)* | **160.3** | **197.8** |
 | They don't fear us now | **216.9** | **220.2** |
+| We were here all along *(break)* | — | **264.9** |
+| The sanctioned Artists *(break)* | — | **315.4** |
+| We already have the tools | **327.4** | **329.1** |
+| Tick Tock should mean waking up | — | **363.0** |
+| These Aye-Is *(break)* | **452.8** | **464.5** |
 
-The last one is a **mid-stanza dramatic pause inside `[💸]`**, not a seam — no
-estimate would have found it, since the export's own duration for that line was
-only 4.5s. The script now accepts a gap anywhere, not just at section starts.
+Two of these made the model give ground, and both changes are now general:
 
-Where a corrected gap start sits within 0.35s of the previous line's end, the end
-is moved to meet it rather than leave an unplayable sliver (both numbers are
-inside the ±0.25s tolerance). That happened twice: `Bitch, you should be paying
-ME` → 160.300, `but we let them wall us in` → 216.900.
+- **A corrected `gap_start` always sets the previous line's end.** The silence
+  opening and the line before it closing are one event, so one number sets both
+  edges. That is how `good for me` came to end at 452.800 instead of 452.071 — a
+  0.73s move, too large for the tolerance-sized snap this replaced, and right
+  anyway. There is an assert if a gap start lands more than 2s from the previous
+  end, since at that distance it is likelier a typo than a correction.
+- **`END_FIX` holds a line out over the music.** Ends were otherwise the
+  export's and trusted, but `Biological I.` needed to run to 363.0 with `Tick
+  Tock` starting exactly there and *no* gap between — which no gap-shaped
+  correction can express. It also removed a 2.15s gap the estimator had inferred
+  there, which was wrong.
+
+`They don't fear us now` and `We already have the tools` are **mid-stanza pauses**
+with no seam to hang on: the export's own durations for those lines were 4.5s and
+4.3s, so no estimate would have found either. Gaps can now open anywhere.
 
 ### Still estimated
 
-Structural, and most likely to be off:
+The long ones, most likely to be off:
 
 | gap | length | before |
 | ---: | ---: | --- |
 | 7.551 → 21.091 | 13.54s | I drove my Ford EXP |
-| 248.422 → 265.025 | 16.60s | We were here all along *(break)* |
-| 301.586 → 314.618 | 13.03s | The sanctioned Artists *(break)* |
-| 452.071 → 463.226 | 11.15s | These Aye-Is *(break)* |
 | 515.536 → 526.201 | 10.67s | ¿? |
 | 541.235 → 549.938 | 8.70s | ¿? |
 
 Plus eleven short gaps of 1.3–3.7s inferred from delivery rate (before *Piano
-teacher*, *So we quit showin' em*, *Same, bitch. Holy fuck. Same.*, and others).
-**Those are the ones I would most expect to be over-eager** — they come from a
-1.2s excess threshold (`GAP_MIN`), and raising it drops them all at once.
+teacher*, *So we quit showin' em*, *Same, bitch. Holy fuck. Same.*, *You should
+understand how to train*, and others). **Those are the ones I would most expect
+to be over-eager** — they come from a 1.2s excess threshold (`GAP_MIN`), and
+raising it drops them all at once.
+
+**Every `[break]` and the screed are now confirmed by ear**, so the structural
+skeleton is settled; what is left is breath-level.
 
 The two `¿?` gaps are a judgment call: `¿?` is treated as a short vocal with the
 silence in front of it. `🎶` is treated the opposite way — it keeps its whole
@@ -84,10 +99,10 @@ measurements in `FCCN-ANTIBODY/renders/lucky-sevens/_degradation-study/`:
 | 💸 Network State | 12.9s | 49s | 341s | OK |
 | 🤖 Impact of AI | 12.5s | **212s** | 328s | OK |
 | 🎰 Brookfield | 12.9s | 76s | 315s | OK |
-| 🤠 Credibility | 12.0s | 52s | 286s | OK |
+| 🤠 Credibility | 12.1s | 52s | 286s | OK |
 | 🪭 ParkMobile | 10.6s | 50s | 274s | OK |
 | 💻 Verra | 13.9s | 18s | 263s | OK |
-| ⛓️‍💥 UMG | 12.9s | 38s | 236s | OK |
+| ⛓️‍💥 UMG | 12.1s | 38s | 235s | OK |
 | 💰 Personalized Plus | 13.6s | 45s | 175s | OK |
 
 **"The old ones keep playing" is load-bearing, not decorative.** Every one clears

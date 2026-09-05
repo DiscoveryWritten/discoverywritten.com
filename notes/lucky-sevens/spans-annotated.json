@@ -98,12 +98,12 @@
  },
  {
   "start": 248.422,
-  "end": 265.025,
+  "end": 264.9,
   "text": "[break]",
   "kind": "break"
  },
  {
-  "start": 265.025,
+  "start": 264.9,
   "end": 277.049,
   "text": "[🤠]",
   "kind": "weld",
@@ -125,19 +125,19 @@
  },
  {
   "start": 301.586,
-  "end": 314.618,
+  "end": 315.4,
   "text": "[break]",
   "kind": "break"
  },
  {
-  "start": 314.618,
+  "start": 315.4,
   "end": 327.474,
   "text": "[⛓️‍💥]",
   "kind": "weld",
   "bottle": "cite-autumn-ryan-universal-music-group"
  },
  {
-  "start": 327.474,
+  "start": 329.1,
   "end": 340.474,
   "text": "[📱]",
   "kind": "link",
@@ -145,12 +145,12 @@
  },
  {
   "start": 340.474,
-  "end": 360.433,
+  "end": 363.0,
   "text": "[🫙 !important]",
   "kind": "section"
  },
  {
-  "start": 362.586,
+  "start": 363.0,
   "end": 375.483,
   "text": "[⛬⏰]",
   "kind": "section"
@@ -193,13 +193,13 @@
   "kind": "untitled"
  },
  {
-  "start": 452.071,
-  "end": 463.226,
+  "start": 452.8,
+  "end": 464.5,
   "text": "[break]",
   "kind": "break"
  },
  {
-  "start": 463.226,
+  "start": 464.5,
   "end": 477.015,
   "text": "",
   "kind": "untitled"

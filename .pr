@@ -19,12 +19,17 @@ As asked: [break] takes the seam and reports as an empty string, the [✨] repea
 is inserted and reads [radio screed] in the spans, and These Aye-Ayes is now
 These Aye-Is.
 
-Your four corrections are applied and live in one CORRECTIONS table at the top
-of build-timings.py — add a row, rerun, the timeline re-derives. The 216.9/220.2
+Your nine corrections (two rounds) are applied and live in one CORRECTIONS table
+at the top of build-timings.py — add a row, rerun, the timeline re-derives. The 216.9/220.2
 one is a mid-stanza pause with no seam to hang on, so the script now takes a gap
-anywhere, not only at section starts. Twice a corrected gap start landed within
-0.35s of the previous line's end and I moved the end to meet it rather than
-leave an unplayable sliver; both numbers are inside your tolerance.
+anywhere, not only at section starts. A corrected gap start now ALWAYS
+sets the previous line's end, since the silence opening and the line before it
+closing are one event — that is how "good for me" ends at 452.800 rather than
+452.071, a 0.73s move. And END_FIX was added to hold a line out over music with
+no gap after it, which is what "Biological I." to 363.0 needed and which no
+gap-shaped correction can express; it also deleted a 2.15s gap the estimator had
+wrongly inferred before "Tick Tock". Every [break] and the screed are now
+confirmed by ear, so the structural skeleton is settled.
 
 Two things the spans turned up that change the video, not just the file:
 

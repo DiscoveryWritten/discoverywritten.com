@@ -82,8 +82,21 @@ CORRECTIONS = {
     "Been saying since 2003":                      (None, 135.0),
     "The corpos centralized everything in sight":  (160.3, 197.8),
     "They don't fear us now":                      (216.9, 220.2),
+    "We were here all along":                      (None, 264.9),
+    "The sanctioned Artists can go on with their Slop": (None, 315.4),
+    "We already have the tools, and they were always right here": (327.4, 329.1),
+    "Tick Tock should mean waking up to what and w-why":          (None, 363.0),
+    # keyed on the EXPORT's text, before the Aye-Ayes → Aye-Is fix is applied
+    "These Aye-Ayes should represent themselves, not us or Double-UMG": (452.8, 464.5),
 }
-SNAP = 0.35  # if a corrected gap start sits this close to the previous end, move the end to meet it
+
+# A corrected gap_start ALWAYS becomes the previous line's end: the silence
+# opening and the line before it closing are the same event, so one number sets
+# both. END_FIX is the other case — holding a line out over the music with no
+# gap after it, where the export cut it short.
+END_FIX = {
+    "And No One Is Stopping You because you have Biological I.": 363.0,
+}
 
 lines = json.loads(SRC.read_text())
 assert len(lines) == sum(n for _, n in SECTIONS), \
@@ -129,12 +142,13 @@ for si, (title, n) in enumerate(SECTIONS):
 
     for k, l in enumerate(chunk):
         gap_start, true_start = resolve(l)
-        # A corrected gap start just shy of the previous end: move the end to meet
-        # it, rather than leave an unplayable sliver. Both are inside tolerance.
-        if gap_start is not None and out and 0 < gap_start - cursor < SNAP:
+        # The gap opening IS the previous line ending. One number, both edges.
+        if gap_start is not None and out:
+            assert abs(gap_start - cursor) < 2.0, \
+                f"gap start {gap_start} is {gap_start-cursor:+.2f}s off the previous end — typo?"
             out[-1]["end"] = round(gap_start, 3)
             cursor = gap_start
-        open_at = cursor if gap_start is None else max(cursor, gap_start)
+        open_at = cursor
 
         if true_start > open_at + 0.05:
             emit_gap(open_at, true_start, pending_break if k == 0 else None)
@@ -145,8 +159,9 @@ for si, (title, n) in enumerate(SECTIONS):
             section_start = true_start
 
         text = TEXT_FIXES.get(l["text"], l["text"])
-        out.append({"start": round(true_start, 3), "end": round(l["end"], 3), "text": text})
-        cursor = l["end"]
+        end = END_FIX.get(l["text"], l["end"])
+        out.append({"start": round(true_start, 3), "end": round(end, 3), "text": text})
+        cursor = end
 
     span = {"start": round(section_start, 3), "end": round(cursor, 3), "text": title,
             "kind": "weld" if si in BOTTLES else ("link" if si in LINKS else
