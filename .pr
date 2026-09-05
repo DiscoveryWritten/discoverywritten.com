@@ -1,0 +1,57 @@
+Lucky Sevens: rebuild the lyric timings, add the section-span track
+
+The gapless export lost its instrumentals. It turns out to be recoverable, and
+this is the rebuild plus the parallel span track you asked for.
+
+**Why it was recoverable:** the export set each line's start to the previous
+line's end, which is lossy in one direction only — ends are intact, starts are
+derived. So every swallowed instrumental is still visible as an inflated
+duration on the line *after* it. Estimating what each line needs (median 14.27
+chars/sec) and giving the rest back recovers all of them, and all four [break]s
+and the [✨] screed fell out exactly where your lyric sheet says they should be.
+That agreement is the check that the method is right.
+
+Files: lyrics.json (contiguous 0 -> 550.838, empty strings where the music plays
+alone), spans.json (section titles, plain {start,end,text} to match), and
+spans-annotated.json (adds kind + which bottle each weld names).
+
+As asked: [break] takes the seam and reports as an empty string, the [✨] repeat
+is inserted and reads [radio screed] in the spans, and These Aye-Ayes is now
+These Aye-Is.
+
+Your four corrections are applied and live in one CORRECTIONS table at the top
+of build-timings.py — add a row, rerun, the timeline re-derives. The 216.9/220.2
+one is a mid-stanza pause with no seam to hang on, so the script now takes a gap
+anywhere, not only at section starts. Twice a corrected gap start landed within
+0.35s of the previous line's end and I moved the end to meet it rather than
+leave an unplayable sliver; both numbers are inside your tolerance.
+
+Two things the spans turned up that change the video, not just the file:
+
+- Each weld holds the stage only 10.6-13.9s, but catching a bottle needs
+  1.2*K/4fps — Impact of AI needs 3m32s. Every bottle clears its budget ONLY
+  because it stays up after its stanza passes. "The old ones keep playing" is
+  load-bearing, not decorative.
+- A loop dies below 2.0 px/module = 146px delivered. In a 1920 master that means
+  tiles >= 328px to survive a 480p viewer and >= 438px for 360p. The outro's
+  nine-up grid at 330px dies at 360p. If the outro is meant to be scannable, the
+  nine cannot all be small at once.
+
+On bottling the audio: sealing and QR-rendering come apart here. As a loop it is
+impossible — 18.6MB is K=145,799, a 15.2-hour loop needing 12.1 hours of
+filming, 79x too big even for the whole runtime, and compression does not close
+that. As a seal it is easy and is what you actually want on screen: a 353-byte
+receipt naming the audio by sha256 with version/supersedes fields, rendered at
+renders/lucky-sevens/audio-seal/ as a 7-second loop catchable in 2.1s. Prior and
+new masters seal to different receipts that can name each other, so re-sealing a
+new version costs one re-render of that one small loop.
+
+Still yours: the six long estimated starts (listed in the README), whether
+GAP_MIN should rise to drop the eleven short inferred gaps, whether the screed
+shows the chorus words or stays wordless, and the two ¿? spans, which I guessed
+one way and 🎶 the other.
+
+Not in this PR: the mock and the renders live in the FCCN-ANTIBODY workspace,
+which is not a repo. The mock now carries the real cue times and has a "force
+outro" checkbox, since the outro runs past the end of the audio and playback
+cannot otherwise reach it.
