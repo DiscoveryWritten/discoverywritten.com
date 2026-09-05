@@ -1,49 +1,80 @@
-Add docs/library/ with the Lucky Sevens QR loops, re-baked
+Archive the three BandAMP forum citations as standalone pages
 
-You asked where the videos were and where to put them. They are here, and they
-are rebuilt rather than just moved — the first bake was refused by vizzy, and
-finding out why turned up three real format faults plus a reason to redo the
-renders themselves.
+`docs/luckysevens.html` cites three threads on `forum.bandamp.com`. The forum is
+being revamped and those URLs no longer resolve, so as of now the exhibit's three
+sourced claims point at nothing. The posts are Autumn's own, from ~2005 — the age
+is the point of the citation, not an incidental detail — so the fix is to hold a
+renderable copy rather than to soften the claim or drop the link.
 
-Placed at docs/library/lucky-sevens/ so they are served, which makes them
-URL-importable into a browser tool. If you meant a repo-root library/ instead
-(source assets, not published), it is one `git mv` — say the word.
+## What this adds
 
-**Why vizzy refused the old ones.** I could not read their format list (the FAQ
-is JS-rendered and search turned up nothing), so rather than guess at which fault
-it was, these fix all of them:
+`tools/wayback-standalone` — pulls a page out of the Internet Archive *with its
+stylesheets and images* and rewrites every asset reference to a relative path, so
+the result renders offline out of one folder with no network and no dependence on
+archive.org staying up.
 
-1. moov atom sat AFTER mdat — no faststart, so a tool that parses progressively
-   cannot read the metadata without pulling the whole file. Prime suspect.
-2. 4 fps. Legal, wildly outside what a timeline expects.
-3. No audio track, which some importers treat as "not a video".
+`docs/library/lucky-sevens/citations/<slug>/` — one folder per cited thread:
+`index.html`, `assets/`, and `provenance.json`.
 
-Also moved High@2.2 to Main@4.0 and tagged the colour. If it still refuses,
-_format-probe/ has the smallest loop as 30fps, 24fps, 30fps-with-silent-audio,
-webm and gif, so you can find the acceptable shape yourself in one sitting
-instead of waiting on me for a re-export.
+## What makes it a citation rather than a screenshot
 
-**They are genuinely better, not re-wrapped.** EC L instead of M (61 modules
-instead of 65, so bigger modules at the same size — per-frame error correction
-was partly redundant, since the fountain IS the error correction across frames),
-and 2.5x overhead instead of 1.5x, which drops the decode rate a stream needs
-from 80% to 48%. Every one passed a 40% simulated-miss catch test, up from 25%.
-Verified through the real decoder: EliseAI catches at 1.57s, UMG at 5.87s, both
-landing exactly on 1.2*K/fps.
+- Fetched through the archive's `id_` modifier, which returns the **original
+  bytes** the server sent — no Wayback toolbar, no rewritten URLs.
+- Assets are fetched **at the page's own capture timestamp**, so a 2008 page gets
+  the 2008 stylesheet rather than whatever the archive holds from 2019.
+- **The document body is not edited.** Asset references are repointed and nothing
+  else. Provenance lives in an HTML comment and `provenance.json` — source URL,
+  capture timestamp, retrieval time, every capture the archive holds, and an
+  explicit list of assets it could not supply. A citation that silently rewrites
+  its source is not a citation.
+- `<a href>` links are deliberately **left pointing at the original addresses**.
+  Those addresses are part of what is being cited.
+- `#id40623` on the Audio_Review link is a fragment, resolved client-side, so it
+  survives untouched.
 
-**One correction that matters for placement.** I previously told you the floor
-was 146px delivered. That was OpenCV. Against the decoder that actually ships it
-is 3.2 px/module = 221px — measured on these exact files, 100% at 220px and 0% at
-165px. So in a 1920 master: 221px for a 1080p viewer, 331px at 720p, 496px at
-480p, 662px at 360p. The consequence is sharper than before: nine small tiles at
-once only works at 720p and up.
+## Captures used
 
-4.3MB of mp4 committed, no LFS. Flagging that rather than assuming — it is small
-now but this folder will grow, and if you would rather binaries never land in
-this repo I will move them to a release or a bucket instead.
+TODO: fill in after the run — timestamp chosen per page, assets recovered, assets missing.
 
-audio-seal.mp4 is in here too: 353 bytes, a 0.9s loop, catchable in under half a
-second. It names the audio master by sha256 rather than carrying it.
+Available captures, from the archive's CDX index:
 
-Still demo-signed, so these are different bottles from the first bake — do not
-mix the two sets in one video.
+| thread | captures |
+| --- | --- |
+| `The_Pit/14556.html` | 2019-07-22, 2019-11-14, 2021-04-20, **2025-07-15** |
+| `Feedback/5186.html` | 2007-10-17, **2008-07-06** |
+| `Audio_Review/3861.html` | 2007-01-10, 2007-10-16, 2008-07-20, 2009-10-10, 2019-12-10, 2020-09-26, **2024-04-18** |
+
+Default is the newest capture: the site was healthiest most recently and later
+captures carry more of the thread. `Feedback/5186` has only two, both from the
+2000s. If an earlier skin reads better as period evidence, `--timestamp` takes any
+row above and the tool will rebuild that one instead — it is one command per page,
+not a re-derivation.
+
+## The archive fights back, and the tool is built for it
+
+The playback endpoint returns 429 for **twenty-plus minutes at a stretch**, while
+the CDX index answers normally throughout — so a run looks broken when it is only
+throttled. `fetch()` paces every request, backs off exponentially to ten minutes,
+and retries twenty times. Pages already on disk are skipped unless `--force`, so an
+interrupted run resumes instead of starting over, and one page failing no longer
+takes the other two down with it. Expect minutes, not seconds.
+
+## Deliberately not done
+
+- **`docs/luckysevens.html` is untouched.** Repointing the three `href`s at the
+  local copies would fix the dead links, but that edits the exhibit and was not
+  asked for. Say the word and it is a three-line follow-up. My suggestion if you
+  want it: keep the visible text naming the original URL — that is the citation —
+  and point the `href` at the archived copy, which is the convention for citing
+  something that has gone offline.
+- Nothing decides whether these should be **publicly served**. They land under
+  `docs/`, which GitHub Pages publishes, so merging this makes them reachable.
+  That is probably what you want for a citation, but it is your call and it is
+  reversible.
+- Local browser caches were checked first and are a dead end: Chrome and Firefox
+  hold nothing, Arc has only tab-state records of the forum root and the
+  Audio_Review index (last opened 2024-08-28), never the three threads. Safari's
+  `History.db` is unreadable without Full Disk Access — worth granting if you want
+  the visit record, though history holds URLs, not page bodies.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
