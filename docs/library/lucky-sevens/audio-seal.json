@@ -1,0 +1,22 @@
+{
+ "label": "audio-seal",
+ "sprite": "audio-seal.png",
+ "frames": 28,
+ "cols": 6,
+ "rows": 5,
+ "cell": 69,
+ "modules": 61,
+ "quietModules": 4,
+ "K": 7,
+ "payloadBytes": 353,
+ "ecLevel": "L",
+ "qrVersion": 11,
+ "framesToCatch": 8,
+ "minRenderPx": 221,
+ "signer": {
+  "DEMO": true,
+  "note": "fresh identity minted for this render; use --signed with a gesture-signed envelope for the final bake",
+  "publicKey": "sOFRmHmm/fdFXpygXBAFMzvtZvhadj5yJtvHHLlhyTs=",
+  "fingerprint": "key:sha256:5c333b0678daea3f9815776103f41da163dfab94da3e29e3b1c4beeda6fc3128"
+ }
+}

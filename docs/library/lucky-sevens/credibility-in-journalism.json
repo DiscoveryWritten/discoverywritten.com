@@ -1,0 +1,22 @@
+{
+ "label": "credibility-in-journalism",
+ "sprite": "credibility-in-journalism.png",
+ "frames": 435,
+ "cols": 21,
+ "rows": 21,
+ "cell": 69,
+ "modules": 61,
+ "quietModules": 4,
+ "K": 174,
+ "payloadBytes": 16358,
+ "ecLevel": "L",
+ "qrVersion": 11,
+ "framesToCatch": 209,
+ "minRenderPx": 221,
+ "signer": {
+  "DEMO": true,
+  "note": "fresh identity minted for this render; use --signed with a gesture-signed envelope for the final bake",
+  "publicKey": "dpitkUP+WqaeyHOR0bDfbCRQzz3UM+CZWkNxkICnMhI=",
+  "fingerprint": "key:sha256:48c000256530456726b65fa08f97e526f2b92bc0e27bf5f243b37dcaf28f3c5a"
+ }
+}

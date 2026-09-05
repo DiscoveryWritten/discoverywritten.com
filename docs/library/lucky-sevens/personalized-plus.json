@@ -1,0 +1,22 @@
+{
+ "label": "personalized-plus",
+ "sprite": "personalized-plus.png",
+ "frames": 373,
+ "cols": 20,
+ "rows": 19,
+ "cell": 69,
+ "modules": 61,
+ "quietModules": 4,
+ "K": 149,
+ "payloadBytes": 13964,
+ "ecLevel": "L",
+ "qrVersion": 11,
+ "framesToCatch": 179,
+ "minRenderPx": 221,
+ "signer": {
+  "DEMO": true,
+  "note": "fresh identity minted for this render; use --signed with a gesture-signed envelope for the final bake",
+  "publicKey": "/rNY+JbQquSq0XZs1liD1ElvSJ/pOT0G/MZlcmGZsq4=",
+  "fingerprint": "key:sha256:d4d95e0a7672a9a2c9e3e356acb958a6be7255b1170a9447223a470aece06544"
+ }
+}

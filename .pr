@@ -1,49 +1,53 @@
-Add docs/library/ with the Lucky Sevens QR loops, re-baked
+Sprite sheets are the source; the exhibit page actually plays them now
 
-You asked where the videos were and where to put them. They are here, and they
-are rebuilt rather than just moved — the first bake was refused by vizzy, and
-finding out why turned up three real format faults plus a reason to redo the
-renders themselves.
+Two things to say first, because they change what you were expecting.
 
-Placed at docs/library/lucky-sevens/ so they are served, which makes them
-URL-importable into a browser tool. If you meant a repo-root library/ instead
-(source assets, not published), it is one `git mv` — say the word.
+**The exhibit page has never played anything.** I went looking for the frame
+player you hoped predated the mp4s and there isn't one — the nine .qr-slot
+entries were static text reading "emitter pending, the loop will play here", and
+no JavaScript anywhere touched them. Only the static bootstrap QR in the header
+was ever real. So this isn't a rewiring, it's the first time.
 
-**Why vizzy refused the old ones.** I could not read their format list (the FAQ
-is JS-rendered and search turned up nothing), so rather than guess at which fault
-it was, these fix all of them:
+**The mp4s were never a good source and neither were the 552px frames.** A QR
+frame is 69 modules across. The rendered PNGs bake 8 pixels per module, which is
+64x more pixels than the code carries. So the canonical form here is one pixel
+per module, every frame packed into a single sheet: the whole EliseAI loop is a
+552x552 PNG at 54KB, smaller than its own mp4, with no frame rate baked in.
+3.7MB for all ten, against 4.3MB of mp4.
 
-1. moov atom sat AFTER mdat — no faststart, so a tool that parses progressively
-   cannot read the metadata without pulling the whole file. Prime suspect.
-2. 4 fps. Legal, wildly outside what a timeline expects.
-3. No audio track, which some importers treat as "not a video".
+Proven, not assumed: verify-sprite.mjs slices a sheet the way a player would,
+reads every cell with anecdote.channel's own decoder, and reassembles through
+carrierSession. 100% of cells decode, payloads come back byte-exact with valid
+signatures, and the cell counts land on the predicted 1.2*K. The sheet needs no
+other artifact.
 
-Also moved High@2.2 to Main@4.0 and tagged the colour. If it still refuses,
-_format-probe/ has the smallest loop as 30fps, 24fps, 30fps-with-silent-audio,
-webm and gif, so you can find the acceptable shape yourself in one sitting
-instead of waiting on me for a re-export.
+mp4s moved to _intermediates/ with _format-probe/, and the README says plainly
+why they are not library material.
 
-**They are genuinely better, not re-wrapped.** EC L instead of M (61 modules
-instead of 65, so bigger modules at the same size — per-frame error correction
-was partly redundant, since the fountain IS the error correction across frames),
-and 2.5x overhead instead of 1.5x, which drops the decode rate a stream needs
-from 80% to 48%. Every one passed a 40% simulated-miss catch test, up from 25%.
-Verified through the real decoder: EliseAI catches at 1.57s, UMG at 5.87s, both
-landing exactly on 1.2*K/fps.
+**Every slot names its own source in the markup**, which is what you asked for:
 
-**One correction that matters for placement.** I previously told you the floor
-was 146px delivered. That was OpenCV. Against the decoder that actually ships it
-is 3.2 px/module = 221px — measured on these exact files, 100% at 220px and 0% at
-165px. So in a 1920 master: 221px for a 1080p viewer, 331px at 720p, 496px at
-480p, 662px at 360p. The consequence is sharper than before: nine small tiles at
-once only works at 720p and up.
+    <li class="qr-slot" id="slot-cite-autumn-ryan-verra-mobility"
+        data-sprite="library/lucky-sevens/verra-mobility.png"
+        data-frames="148" data-cols="13" data-cell="69" data-fps="15">
 
-4.3MB of mp4 committed, no LFS. Flagging that rather than assuming — it is small
-now but this folder will grow, and if you would rather binaries never land in
-this repo I will move them to a release or a bucket instead.
+No manifest fetch, no indirection — read the HTML and you know what is on screen.
+Change data-fps and it changes speed. Scaling is nearest-neighbour everywhere
+(image-rendering: pixelated, imageSmoothingEnabled false), because a smoothly
+resampled QR stops reading.
 
-audio-seal.mp4 is in here too: 353 bytes, a 0.9s loop, catchable in under half a
-second. It names the audio master by sha256 rather than carrying it.
+The emitter also measures itself: below 3.2 device px per module — 221px at 69
+modules, the floor measured against the real decoder — it adds .too-small-to-scan
+and shows a red outline rather than quietly serving a code no camera can read.
+That guard caught a real bug while I built this: the canvas had landed in the
+2rem marker column of the slot grid and was rendering at 40px. Fixed, and the
+guard is why I noticed.
 
-Still demo-signed, so these are different bottles from the first bake — do not
-mix the two sets in one video.
+Also updated COLLECTORATE.videoId to nw_kLlOEvA4 for the unlisted demo.
+
+Two things I noticed and did not touch:
+- notes/lucky-sevens/links.json has 29 spans of cosmetic link text, and nothing
+  on the page consumes it yet. Happy to wire it to the lyric pager next if that
+  is where it is meant to go.
+- The live site was serving a stale Cloudflare Pages build as of last week. If
+  these don't appear after merge, that is why, and it needs the Pages dashboard
+  rather than anything in this repo.

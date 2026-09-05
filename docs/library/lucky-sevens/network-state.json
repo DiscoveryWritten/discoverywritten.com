@@ -1,0 +1,22 @@
+{
+ "label": "network-state",
+ "sprite": "network-state.png",
+ "frames": 410,
+ "cols": 21,
+ "rows": 20,
+ "cell": 69,
+ "modules": 61,
+ "quietModules": 4,
+ "K": 164,
+ "payloadBytes": 15355,
+ "ecLevel": "L",
+ "qrVersion": 11,
+ "framesToCatch": 197,
+ "minRenderPx": 221,
+ "signer": {
+  "DEMO": true,
+  "note": "fresh identity minted for this render; use --signed with a gesture-signed envelope for the final bake",
+  "publicKey": "NRtJ09CzWPX9AAt/7Cl8FRZTrBvtVaz8WgATPyyWqSk=",
+  "fingerprint": "key:sha256:8d30dea93d88c7f84a2a870fd370432fc32a84dd855d4b1816def3ea9e3a848c"
+ }
+}
