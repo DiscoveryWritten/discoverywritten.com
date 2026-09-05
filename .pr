@@ -1,0 +1,49 @@
+Add docs/library/ with the Lucky Sevens QR loops, re-baked
+
+You asked where the videos were and where to put them. They are here, and they
+are rebuilt rather than just moved — the first bake was refused by vizzy, and
+finding out why turned up three real format faults plus a reason to redo the
+renders themselves.
+
+Placed at docs/library/lucky-sevens/ so they are served, which makes them
+URL-importable into a browser tool. If you meant a repo-root library/ instead
+(source assets, not published), it is one `git mv` — say the word.
+
+**Why vizzy refused the old ones.** I could not read their format list (the FAQ
+is JS-rendered and search turned up nothing), so rather than guess at which fault
+it was, these fix all of them:
+
+1. moov atom sat AFTER mdat — no faststart, so a tool that parses progressively
+   cannot read the metadata without pulling the whole file. Prime suspect.
+2. 4 fps. Legal, wildly outside what a timeline expects.
+3. No audio track, which some importers treat as "not a video".
+
+Also moved High@2.2 to Main@4.0 and tagged the colour. If it still refuses,
+_format-probe/ has the smallest loop as 30fps, 24fps, 30fps-with-silent-audio,
+webm and gif, so you can find the acceptable shape yourself in one sitting
+instead of waiting on me for a re-export.
+
+**They are genuinely better, not re-wrapped.** EC L instead of M (61 modules
+instead of 65, so bigger modules at the same size — per-frame error correction
+was partly redundant, since the fountain IS the error correction across frames),
+and 2.5x overhead instead of 1.5x, which drops the decode rate a stream needs
+from 80% to 48%. Every one passed a 40% simulated-miss catch test, up from 25%.
+Verified through the real decoder: EliseAI catches at 1.57s, UMG at 5.87s, both
+landing exactly on 1.2*K/fps.
+
+**One correction that matters for placement.** I previously told you the floor
+was 146px delivered. That was OpenCV. Against the decoder that actually ships it
+is 3.2 px/module = 221px — measured on these exact files, 100% at 220px and 0% at
+165px. So in a 1920 master: 221px for a 1080p viewer, 331px at 720p, 496px at
+480p, 662px at 360p. The consequence is sharper than before: nine small tiles at
+once only works at 720p and up.
+
+4.3MB of mp4 committed, no LFS. Flagging that rather than assuming — it is small
+now but this folder will grow, and if you would rather binaries never land in
+this repo I will move them to a release or a bucket instead.
+
+audio-seal.mp4 is in here too: 353 bytes, a 0.9s loop, catchable in under half a
+second. It names the audio master by sha256 rather than carrying it.
+
+Still demo-signed, so these are different bottles from the first bake — do not
+mix the two sets in one video.
