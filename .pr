@@ -34,7 +34,20 @@ archive.org staying up.
 
 ## Captures used
 
-TODO: fill in after the run — timestamp chosen per page, assets recovered, assets missing.
+| thread | capture | page | assets | missing |
+| --- | --- | ---: | ---: | ---: |
+| `The_Pit/14556.html` | 2025-07-15 13:26 UTC | 46 KB | 44 | 1 |
+| `Feedback/5186.html` | 2008-07-06 06:18 UTC | 6.6 KB | 33 | 0 |
+| `Audio_Review/3861.html` | 2024-04-18 03:38 UTC | 29 KB | 53 | 4 |
+
+All three render offline with their period stylesheets. Zero references to
+`web.archive.org` survive in any of the three documents, and `#id40623` on the
+Audio_Review page is intact. The five missing assets are 404s in the archive
+itself — Google Analytics' `urchin.js` and a handful of user avatars that were
+already gone when the capture was taken; the tool records each one by URL in
+`provenance.json` rather than silently rendering a broken page.
+
+1.3 MB, 136 files.
 
 Available captures, from the archive's CDX index:
 
@@ -52,9 +65,18 @@ not a re-derivation.
 
 ## The archive fights back, and the tool is built for it
 
-The playback endpoint returns 429 for **twenty-plus minutes at a stretch**, while
-the CDX index answers normally throughout — so a run looks broken when it is only
-throttled. `fetch()` paces every request, backs off exponentially to ten minutes,
+The playback endpoint banned this IP for **roughly three hours** on the first
+attempt, while the CDX index answered instantly throughout — so a run looks
+broken when it is only throttled, and the throttle is far longer than any
+reasonable first guess. The ban is path-scoped: `/web/` is refused, `/cdx/` is
+not. It also compounds, so the cheapest way to avoid it is to not probe
+impatiently before the real run, which is exactly what happened here.
+
+Two escape routes were tested and are closed. `archive.today` requires a CAPTCHA.
+The CDX API can in principle return the WARC `filename`/`offset`/`length` for a
+capture, which would let you pull the bytes from `archive.org/download` — a
+different host with a different rate limiter — but those fields are now redacted
+to `-` for unprivileged callers. `fetch()` paces every request, backs off exponentially to ten minutes,
 and retries twenty times. Pages already on disk are skipped unless `--force`, so an
 interrupted run resumes instead of starting over, and one page failing no longer
 takes the other two down with it. Expect minutes, not seconds.

@@ -1,0 +1,114 @@
+{
+  "url": "http://forum.bandamp.com/Audio_Review/3861.html",
+  "ts": "20240418033808",
+  "ts_pretty": "2024-04-18 03:38 UTC",
+  "retrieved": "2026-09-05 23:47 UTC",
+  "n_assets": 53,
+  "n_failed": 4,
+  "wayback_url": "https://web.archive.org/web/20240418033808/http://forum.bandamp.com/Audio_Review/3861.html",
+  "all_captures": [
+    {
+      "timestamp": "20070110032200",
+      "status": "200",
+      "mime": "text/html",
+      "length": "5295"
+    },
+    {
+      "timestamp": "20071016165730",
+      "status": "200",
+      "mime": "text/html",
+      "length": "5726"
+    },
+    {
+      "timestamp": "20080720151833",
+      "status": "200",
+      "mime": "text/html",
+      "length": "5931"
+    },
+    {
+      "timestamp": "20091010222521",
+      "status": "200",
+      "mime": "text/html",
+      "length": "5740"
+    },
+    {
+      "timestamp": "20191210235135",
+      "status": "200",
+      "mime": "text/html",
+      "length": "7050"
+    },
+    {
+      "timestamp": "20200926142233",
+      "status": "200",
+      "mime": "text/html",
+      "length": "7053"
+    },
+    {
+      "timestamp": "20240418033808",
+      "status": "200",
+      "mime": "text/html",
+      "length": "7056"
+    }
+  ],
+  "assets": {
+    "http://www.bandamp.com/favicon.ico": "assets/favicon-b9708304.ico",
+    "http://www.bandamp.com/css/main.css": "assets/main-aebcd1c6.css",
+    "http://www.bandamp.com/images/background/bg.jpg": "assets/bg-57ac977d.jpg",
+    "http://www.bandamp.com/images/header-bg.png": "assets/header-bg-abf159b6.png",
+    "http://www.bandamp.com/images/login-bg.gif": "assets/login-bg-b237feac.gif",
+    "http://www.bandamp.com/images/treeBG.gif": "assets/treeBG-54ea66fa.gif",
+    "http://www.bandamp.com/images/stars_bw.gif": "assets/stars_bw-9bd2d80e.gif",
+    "http://www.bandamp.com/images/stars_color.gif": "assets/stars_color-afb48df9.gif",
+    "http://www.bandamp.com/images/tableftG.gif": "assets/tableftG-721f3dcc.gif",
+    "http://www.bandamp.com/images/tabrightG.gif": "assets/tabrightG-41bb0023.gif",
+    "http://www.bandamp.com/images/bg_top.gif": "assets/bg_top-6dd615e7.gif",
+    "http://www.bandamp.com/images/gradient.gif": "assets/gradient-a0cedec5.gif",
+    "http://www.bandamp.com/images/bg_blue_bar.gif": "assets/bg_blue_bar-d4269b03.gif",
+    "http://www.bandamp.com/images/bg_head_grey.gif": "assets/bg_head_grey-f6a1fc1a.gif",
+    "http://www.bandamp.com/images/bg_row.gif": "assets/bg_row-dc738abd.gif",
+    "http://www.bandamp.com/css/forge.css": "assets/forge-13bbb458.css",
+    "http://www.bandamp.com/images/bg_grey_top.jpg": "assets/bg_grey_top-53b0d205.jpg",
+    "http://www.bandamp.com/images/menuicon.gif": "assets/menuicon-fd8074e1.gif",
+    "http://www.bandamp.com/images/bg_quote_content.gif": "assets/bg_quote_content-2e5e7e1b.gif",
+    "http://www.bandamp.com/images/bg_quote_header.gif": "assets/bg_quote_header-96b99c94.gif",
+    "http://www.bandamp.com/css/forum.css": "assets/forum-3d9a673a.css",
+    "http://www.bandamp.com/images/skeleton-forum-bg-shadow.png": "assets/skeleton-forum-bg-shadow-06e008f9.png",
+    "http://www.bandamp.com/images/alt_star.gif": "assets/alt_star-647d7851.gif",
+    "http://www.bandamp.com/images/loudspeaker.png": "assets/loudspeaker-9232dd92.png",
+    "http://www.bandamp.com/images/bg_note_view.jpg": "assets/bg_note_view-89310358.jpg",
+    "http://www.bandamp.com/css/editor.css": "assets/editor-de9e6229.css",
+    "http://www.bandamp.com/scripts/main.js": "assets/main-1b207cbd.js",
+    "http://www.bandamp.com/images/login.gif": "assets/login-e94b5480.gif",
+    "http://www.bandamp.com/images/logo.gif": "assets/logo-4324d390.gif",
+    "http://www.bandamp.com/images/top-corners.gif": "assets/top-corners-5070e28d.gif",
+    "http://www.bandamp.com/images/control_play_blue.gif": "assets/control_play_blue-762fbc44.gif",
+    "http://www.bandamp.com/user/album/4159/48x48.jpg": "assets/48x48-25b194fc.jpg",
+    "http://www.bandamp.com/images/country/UK.gif": "assets/UK-faf9b712.gif",
+    "http://www.bandamp.com/images/add_16.gif": "assets/add_16-d68b9992.gif",
+    "http://www.bandamp.com/images/stats_16.gif": "assets/stats_16-a19da416.gif",
+    "https://apis.google.com/js/plusone.js": "assets/plusone-92d87191.js",
+    "http://www.bandamp.com/user/album/3776/48x48.jpg": "assets/48x48-6824fa5d.jpg",
+    "http://www.bandamp.com/images/male.gif": "assets/male-e671015e.gif",
+    "http://www.bandamp.com/images/country/CA.gif": "assets/CA-304c23f2.gif",
+    "http://www.bandamp.com/user/album/5349/48x48.jpg": "assets/48x48-1af698e7.jpg",
+    "http://www.bandamp.com/images/country/IE.gif": "assets/IE-80e2f9c2.gif",
+    "http://www.bandamp.com/user/album/6242/48x48.jpg": "assets/48x48-c4c6d310.jpg",
+    "http://www.bandamp.com/images/country/NL.gif": "assets/NL-5357d433.gif",
+    "http://www.bandamp.com/user/album/10275/48x48.jpg": "assets/48x48-92b62f8d.jpg",
+    "http://www.bandamp.com/images/country/NP.gif": "assets/NP-3d7a174c.gif",
+    "http://www.bandamp.com/user/album/5674/48x48.jpg": "assets/48x48-ecff2c1c.jpg",
+    "http://www.bandamp.com/images/country/DE.gif": "assets/DE-fd13bb72.gif",
+    "http://www.bandamp.com/user/album/6657/48x48.jpg": "assets/48x48-85092ddb.jpg",
+    "http://www.bandamp.com/images/country/US.gif": "assets/US-6380b534.gif",
+    "http://www.bandamp.com/user/album/4058/48x48.jpg": "assets/48x48-f5b78b56.jpg",
+    "http://www.dev.bandamp.com/images/smilies/smile.gif": "assets/smile-6caf34ca.gif",
+    "http://www.dev.bandamp.com/images/smilies/biggrin.gif": "assets/biggrin-51856e59.gif",
+    "http://www.google-analytics.com/urchin.js": "assets/urchin-bb5cc09e.js"
+  },
+  "unavailable": {
+    "http://www.bandamp.com/images/female.gif": "HTTP Error 500: INTERNAL SERVER ERROR",
+    "http://forum.bandamp.com/scripts/wimpy/wimpy.swf?wimpyApp=http://forum.bandamp.com/Audio_Review/3861.xml&wimpySkin=/scripts/wimpy/skins/skin_mini.xml&wW=333&wH=58&defaultVisualExt=jpg&theVolume=100&bufferAudio=0&infoDisplayTime=3&iTextStyle=scroller&startPlayingOnload=no&autoAdvance=no&serveMP3=yes": "HTTP Error 404: NOT FOUND",
+    "http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fforum.bandamp.com%2FAudio_Review%2F3861.html&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21": "HTTP Error 404: NOT FOUND",
+    "http://www.bandamp.com/user/album/10462/48x48.jpg": "HTTP Error 404: NOT FOUND"
+  }
+}
