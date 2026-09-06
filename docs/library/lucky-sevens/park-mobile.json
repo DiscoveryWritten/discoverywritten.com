@@ -1,0 +1,22 @@
+{
+ "label": "park-mobile",
+ "sprite": "park-mobile.png",
+ "frames": 418,
+ "cols": 21,
+ "rows": 20,
+ "cell": 69,
+ "modules": 61,
+ "quietModules": 4,
+ "K": 167,
+ "payloadBytes": 15700,
+ "ecLevel": "L",
+ "qrVersion": 11,
+ "framesToCatch": 200,
+ "minRenderPx": 221,
+ "signer": {
+  "DEMO": true,
+  "note": "fresh identity minted for this render; use --signed with a gesture-signed envelope for the final bake",
+  "publicKey": "k4OX0sFm/Rroqlya9FmrUG2yfqd7h0xqL5zBspXQtzg=",
+  "fingerprint": "key:sha256:f32323e281d4a9cc9b96825c2f4eedabc1701ebbc06d9f59cb27a8c1a2f4bb11"
+ }
+}

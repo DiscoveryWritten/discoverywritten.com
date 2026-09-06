@@ -1,0 +1,22 @@
+{
+ "label": "eliseai-hierarchy-of-needs",
+ "sprite": "eliseai-hierarchy-of-needs.png",
+ "frames": 63,
+ "cols": 8,
+ "rows": 8,
+ "cell": 69,
+ "modules": 61,
+ "quietModules": 4,
+ "K": 25,
+ "payloadBytes": 2020,
+ "ecLevel": "L",
+ "qrVersion": 11,
+ "framesToCatch": 30,
+ "minRenderPx": 221,
+ "signer": {
+  "DEMO": true,
+  "note": "fresh identity minted for this render; use --signed with a gesture-signed envelope for the final bake",
+  "publicKey": "cmOP6keRm+MQd9/vZGvXsYhE6TkoXm42JJNbyUPKefo=",
+  "fingerprint": "key:sha256:1fc0b761ea7a41108ea4d036a2c360d39f2d70e7042ec8c89d4d037f477dca3a"
+ }
+}

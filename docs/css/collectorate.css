@@ -1221,3 +1221,24 @@ body.luckysevens .slot-state {
   color: var(--ink-soft);
 }
 body.luckysevens .slot-state { opacity: 0.7; font-style: italic; }
+
+/* --- bottle emitters: the QR loops, played from their sprite sheets --------- */
+body.luckysevens .qr-slot { position: relative; }
+body.luckysevens .slot-emitter {
+  display: block;
+  grid-column: 2;            /* the wide column, beside the marker — not in it */
+  width: 100%;
+  max-width: 320px;          /* 4.6 device px per module — above the 3.2 floor */
+  height: auto;
+  margin: 0.5rem 0 0.35rem;
+  background: #fff;
+  image-rendering: pixelated;            /* never resample a QR smoothly */
+  image-rendering: crisp-edges;
+  border-radius: 2px;
+}
+/* If layout ever squeezes one under the scannable floor, say so rather than
+   quietly serving a code nobody's camera can read. */
+body.luckysevens .qr-slot.too-small-to-scan .slot-emitter { outline: 2px dashed #c00; }
+body.luckysevens .qr-slot.too-small-to-scan .slot-state::after {
+  content: " — too small to scan here"; color: #c00; font-style: normal;
+}

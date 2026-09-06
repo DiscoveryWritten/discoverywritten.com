@@ -1,0 +1,22 @@
+{
+ "label": "universal-music-group",
+ "sprite": "universal-music-group.png",
+ "frames": 320,
+ "cols": 18,
+ "rows": 18,
+ "cell": 69,
+ "modules": 61,
+ "quietModules": 4,
+ "K": 128,
+ "payloadBytes": 11905,
+ "ecLevel": "L",
+ "qrVersion": 11,
+ "framesToCatch": 154,
+ "minRenderPx": 221,
+ "signer": {
+  "DEMO": true,
+  "note": "fresh identity minted for this render; use --signed with a gesture-signed envelope for the final bake",
+  "publicKey": "DZeO8qWQgdprYepYsa6Fmx5j05J65rccpEf817Aljjw=",
+  "fingerprint": "key:sha256:157108a833a0bb10245d38c7fae56dfe5c6461062b08e7c2a3cbfb20c30e756c"
+ }
+}

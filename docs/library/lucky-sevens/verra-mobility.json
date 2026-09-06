@@ -1,0 +1,22 @@
+{
+ "label": "verra-mobility",
+ "sprite": "verra-mobility.png",
+ "frames": 148,
+ "cols": 13,
+ "rows": 12,
+ "cell": 69,
+ "modules": 61,
+ "quietModules": 4,
+ "K": 59,
+ "payloadBytes": 5323,
+ "ecLevel": "L",
+ "qrVersion": 11,
+ "framesToCatch": 71,
+ "minRenderPx": 221,
+ "signer": {
+  "DEMO": true,
+  "note": "fresh identity minted for this render; use --signed with a gesture-signed envelope for the final bake",
+  "publicKey": "NZRgGpaWvwK0NQUTSx08NpS1XeVmZyUVMiwo9pMDoUY=",
+  "fingerprint": "key:sha256:eb9f57def0bcc1810de10963f9846cde01fb7a682db78d91894dc00143099bac"
+ }
+}

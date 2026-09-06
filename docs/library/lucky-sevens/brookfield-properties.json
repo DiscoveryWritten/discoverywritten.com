@@ -1,0 +1,22 @@
+{
+ "label": "brookfield-properties",
+ "sprite": "brookfield-properties.png",
+ "frames": 638,
+ "cols": 26,
+ "rows": 25,
+ "cell": 69,
+ "modules": 61,
+ "quietModules": 4,
+ "K": 255,
+ "payloadBytes": 24078,
+ "ecLevel": "L",
+ "qrVersion": 11,
+ "framesToCatch": 306,
+ "minRenderPx": 221,
+ "signer": {
+  "DEMO": true,
+  "note": "fresh identity minted for this render; use --signed with a gesture-signed envelope for the final bake",
+  "publicKey": "q3HmzdqO5sraaNvhWayHOhZkfa1gH0ebKFEULRs5lOQ=",
+  "fingerprint": "key:sha256:851d83abb94f1b57c0b5b5f9825624c17563a00fd3c20a56432a80ff13c1f0f2"
+ }
+}

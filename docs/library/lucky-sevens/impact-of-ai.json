@@ -1,0 +1,22 @@
+{
+ "label": "impact-of-ai",
+ "sprite": "impact-of-ai.png",
+ "frames": 1768,
+ "cols": 43,
+ "rows": 42,
+ "cell": 69,
+ "modules": 61,
+ "quietModules": 4,
+ "K": 707,
+ "payloadBytes": 67498,
+ "ecLevel": "L",
+ "qrVersion": 11,
+ "framesToCatch": 848,
+ "minRenderPx": 221,
+ "signer": {
+  "DEMO": true,
+  "note": "fresh identity minted for this render; use --signed with a gesture-signed envelope for the final bake",
+  "publicKey": "qzqBFAkJr5qInxg6quGAko+tKgOzL4SikbRA4UfiY8o=",
+  "fingerprint": "key:sha256:0966ff20d5ad236270ff98ce2b8e6fb4a072acb97abdb17b29a09cd76794c403"
+ }
+}
