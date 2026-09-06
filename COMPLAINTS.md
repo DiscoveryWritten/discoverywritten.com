@@ -21,13 +21,15 @@ network all look identical to a visitor: silence. There's no way, from the page 
 
 ## C3 · The Windup Girl still just bounces you to YouTube
 
-`status: draft` · `source: observed` · `first said: 2026-09-05`
+`status: open` · `source: observed` · `first said: 2026-09-05` · `confirmed: 2026-09-06`
 
 This is the seat's own named example, and right now it isn't even wrong in a new way — it's the
 plain old failure mode. `docs/abridged.html` shows it as an outbound link with a thumbnail,
 identical in markup to every other card on the page. The refusal is known (`error 150`, recorded
 in the exhibit notes as almost certainly a rights claim) and it isn't visible anywhere a reader
-would see it before clicking through and getting nothing.
+would see it before clicking through and getting nothing. Re-read at `c205fe1`: unchanged, and
+nothing in the intervening range touched either the page or the note. Two sessions, same finding
+— this stands.
 
 ## C4 · A rights note in a markdown file is not something that can't be un-known
 
