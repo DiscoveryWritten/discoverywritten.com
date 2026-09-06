@@ -1,0 +1,43 @@
+#forge { WIDTH: 100%; BORDER:0; WHITE-SPACE:nowrap; FONT-FAMILY:Verdana, Arial, Helvetica, sans-serif; FONT-SIZE:13px; LINE-HEIGHT:17px; PADDING:0; }
+#forge thead tr { COLOR:#a7a7a7; BACKGROUND:#6d6d6d url(bg_grey_top-53b0d205.jpg); }
+#forge thead th { BORDER-TOP:1px solid #424242; FONT-SIZE:11px; FONT-WEIGHT:400; }
+
+.fhead_a { TEXT-ALIGN:left; PADDING-LEFT:36px; HEIGHT:30px; WIDTH:400px; BORDER-LEFT:1px solid #424242; }
+.fhead_b { TEXT-ALIGN:right; PADDING-RIGHT:35px; }
+.fhead_c { TEXT-ALIGN:left; BORDER-RIGHT:1px solid #424242; }
+
+.fbody_a { TEXT-ALIGN:left; WHITE-SPACE:nowrap; PADDING-LEFT:1px; PADDING-RIGHT: 10px; }
+.fbody_b { TEXT-ALIGN:right; WHITE-SPACE:nowrap; PADDING-RIGHT:35px; FONT-SIZE:11px; LINE-HEIGHT:15px; }
+.fbody_c { TEXT-ALIGN:left; WHITE-SPACE:nowrap; FONT-SIZE:11px; LINE-HEIGHT:15px; PADDING-RIGHT:15px; }
+
+#t { WIDTH:325px; PADDING: 0 0 0 36px; FONT-SIZE:11px; LINE-HEIGHT:15px; }
+
+.theadTitle { FONT-WEIGHT:700; TEXT-DECORATION:none; }
+.theadImg { margin:0 10px; }
+.threadZ { FONT:14px Garamond, "Times New Roman", Courier, serif; }
+
+.p_end,.p_end .p,.p_end li { FONT:14px Garamond, "Times New Roman", Courier, serif; COLOR:#696969; LINE-HEIGHT:1.4em; }
+.p_end .p { MARGIN:10px 0; }
+.p_end a { COLOR:#0D74D3; TEXT-DECORATION:underLINE; }
+.p_end a:hover { COLOR:#EF0000; TEXT-DECORATION:underLINE; }
+.p_end a img { BORDER:solid 1px #0040FF; }
+.p_end ul,.p_end ol { MARGIN-TOP:2px; MARGIN-BOTTOM:4px; }
+.p_end ul { MARGIN-LEFT:0; PADDING-LEFT:20px; }
+.p_end li { PADDING-TOP:2px; }
+.p_end .quote { BORDER-LEFT:solid 2px #606060; MARGIN:3px 0; PADDING:0 0 0 10px; }
+.p_end .quote .quote { BORDER-LEFT:solid 2px #888; }
+.p_end .quote .quote .quote { BORDER-LEFT:solid 2px #B0B0B0; }
+.p_end .qname { FONT:italic 12px Verdana,Arial,sans-serif; COLOR:#A0A000; MARGIN-BOTTOM:4px; }
+.p_end tt,.p_end .code { FONT:12px Andale Mono,Courier New,monospace; }
+.p_end tt { COLOR:#009000; }
+.p_end .code { COLOR:#900000; BACKGROUND:#E5E5E5; MARGIN:3px 0; PADDING:3px 2px; }
+.p_end .eop { BACKGROUND:#FF5; }
+.p_end .ecl { BACKGROUND:#9F9; }
+
+.mud a.toggle { BACKGROUND:url(menuicon-fd8074e1.gif) no-repeat; BACKGROUND-POSITION:0 1px; MARGIN:15px; PADDING-LEFT:20px; }
+.mud blockquote { COLOR:#444; DISPLAY:block; WIDTH:auto; BORDER:solid 1px #D0D0D0; BACKGROUND:#f1f1f1 url(bg_quote_content-2e5e7e1b.gif) BOTTOM RIGHT no-repeat; MARGIN:0 0 10px; PADDING:10px; }
+.mud blockquote h6 { FONT:14px Garamond, "Times New Roman", Courier, serif; COLOR:#696969; BACKGROUND:url(bg_quote_header-96b99c94.gif) TOP LEFT no-repeat; }
+
+.post_date { BACKGROUND:#FFF; COLOR:#848484; BORDER-BOTTOM:1px solid #bebebe; BORDER-LEFT:1px solid #bebebe; BORDER-RIGHT:1px solid #bebebe; MARGIN-BOTTOM:10px; }
+.postshown { DISPLAY:block; BORDER-TOP:1px solid #D0D0D0; PADDING-TOP:7px; MARGIN-TOP:5px; }
+.posthidden { DISPLAY:none; }

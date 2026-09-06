@@ -1,0 +1,66 @@
+#skeleton { background: url(skeleton-forum-bg-51a41c26.gif); }
+div.content { PADDING: 10px 9px 0 9px; }
+
+.chatters { FONT-FAMILY: "Garamond", "Times New Roman", serif; FONT-SIZE: 14px; PADDING-BOTTOM: 10px; }
+
+#forge { WIDTH: 762px; }
+
+#pagiA { PADDING: 0 2px 0 0; }
+#pagiB { PADDING: 0 0 0 2px; }
+
+#rate { PADDING-BOTTOM: 4px; COLOR: #DDD; FONT-SIZE: 12px; }
+#rate span { COLOR: #AAA; }
+
+.star { LIST-STYLE: none; MARGIN: 0 10px 0 0; PADDING: 0; WIDTH: 85px; HEIGHT: 20px; TOP: -5px; LEFT: 10px; POSITION: relative; FLOAT: left; BACKGROUND: url(alt_star-647d7851.gif) top left repeat-x; CURSOR: pointer; }
+.star li { PADDING: 0; MARGIN: 0; FLOAT: left; DISPLAY: block; WIDTH: 85px; HEIGHT: 20px; TEXT-DECORATION: none; Z-INDEX: 20; POSITION: absolute; PADDING: 0; }
+.starCurr { BACKGROUND: url(alt_star-647d7851.gif) 0 25px; }
+.starUser { FLOAT: left; FONT-SIZE: 12px; COLOR: #5098B9;  }
+
+#star2 { TOP: 0; }
+#starUser2 { FONT-SIZE: 14px; PADDING: 5px 11px; }
+
+#m { BACKGROUND: #FFF; WIDTH: 731px; }
+#m object { FLOAT: left; PADDING-RIGHT: 13px; PADDING-BOTTOM: 12px; }
+#m hr,#m br { CLEAR: both; }
+
+#m_amp { FLOAT: left; POSITION: relative; TOP: 35px; PADDING-RIGHT: 10px; TEXT-DECORATION: none; FONT-WEIGHT: bold; FONT-SIZE: 113px; }
+
+#p { BACKGROUND: #FFF url(bg_note_view-89310358.jpg) repeat-x; FONT-SIZE: 13px; WIDTH: 760px; }
+.p_head { FONT-SIZE: 11px; LINE-HEIGHT: 15px; COLOR: #FFF; HEIGHT: 30px; _HEIGHT: 32px; BORDER: 1px solid #424242; }
+.p_head span { CLEAR: both; }
+.p_head div { BORDER-LEFT: 1px solid #6f6f6f; PADDING: 8px 0 0 10px; LETTER-SPACING: 1px; FLOAT: LEFT; }
+.p_head div a { PADDING-RIGHT: 9px; MARGIN-RIGHT: 9px; BORDER-RIGHT: 1px solid #5b5b5b; FONT-SIZE: 12px; FONT-WEIGHT: bold; TEXT-DECORATION: none; COLOR: #FFF; }
+.p_head ul { LIST-STYLE-TYPE: none; PADDING: 0; MARGIN: 0; FONT-SIZE: 11px; MARGIN-TOP: 7px; FLOAT: right; }
+.p_head ul a { COLOR: #FFF; FONT-VARIANT: small-caps; BORDER-RIGHT: 1px solid #707070; BORDER-LEFT: 1px solid #5b5b5b; MARGIN: 0; PADDING: 6px 15px 8px 15px; LETTER-SPACING: 1px; TEXT-DECORATION: none; }
+.p_head ul a:hover { BACKGROUND: #717171; }
+
+.p_content { MARGIN-BOTTOM: 21px; BORDER-BOTTOM: 1px solid #bfbfbf; BORDER-LEFT: 1px solid #bfbfbf; BORDER-RIGHT: 1px solid #bfbfbf; }
+.p_user_div { PADDING: 7px 7px 3px 5px; BORDER-LEFT: 1px solid #EEE; FONT-SIZE: 11px; LINE-HEIGHT: 15px; HEIGHT: 64px; _HEIGHT: 73px; }
+.p_user_div br { CLEAR: both; }
+.p_image { FLOAT: LEFT; BACKGROUND: #FFF; PADDING: 1px; HEIGHT: 50px; }
+.p_image img { HEIGHT: 48px; WIDTH: 48px; BORDER: 1px solid #999; }
+
+.p_user { FLOAT: LEFT; COLOR: #0d2a44; TEXT-ALIGN: left; }
+.p_alias { FONT-SIZE: 18px; PADDING: 0 0 2px 7px; FONT-WEIGHT: normal; COLOR: #FFF; MARGIN-BOTTOM: 3px; BORDER-BOTTOM: 1px solid #bfbfbf; }
+.p_alias img { MARGIN: 0 0 7px 2px; }
+.p_online { DISPLAY: inline; MARGIN-LEFT: 15px; PADDING-TOP: 4px; BORDER-LEFT: 1px solid #bfbfbf; }
+.p_online div { DISPLAY: inline; PADDING: 4px 16px 0 14px; BACKGROUND: #eaeaea; BORDER-RIGHT: 1px solid #bfbfbf; BORDER-LEFT: 1px solid #f6f6f6; }
+.p_online img { MARGIN: 0; PADDING: 0 0 2px 0; }
+.p_stats { FONT-SIZE: 11px; COLOR: #A3A3A3; PADDING-LEFT: 7px; }
+
+.p_flag { FLOAT: right; MARGIN: 3px 3px 0 0; }
+.p_text { COLOR: #999; TEXT-ALIGN: left; }
+.p_subject { PADDING: 0; MARGIN: 0 0 10px 12px; WIDTH: 731px; COLOR: #31659c; FONT: 18px "Garamond", "Times New Roman", serif; }
+.p_subject td { PADDING-TOP: 7px; }
+.p_end { BACKGROUND: #FFF; PADDING: 9px 15px 15px 15px; }
+.p_end hr { PADDING-BOTTOM: 5px; }
+
+
+#stats { COLOR: #a7a7a7; BACKGROUND: #6d6d6d url(bg_grey_top-53b0d205.jpg); BORDER: 1px solid #424242; MARGIN-TOP: 25px; FONT-SIZE: 11px; LINE-HEIGHT: 15px; WIDTH: 762px; TEXT-ALIGN: left; }
+#stats div { PADDING: 8px 0px 7px 36px; }
+
+.stats { BORDER-RIGHT: 1px solid #bfbfbf; BORDER-BOTTOM: 1px solid #bfbfbf; BORDER-LEFT: 1px solid #bfbfbf; FONT-SIZE: 13px; TEXT-ALIGN: left; WIDTH: 100%; FONT-SIZE: 11.5px; WIDTH: 762px; }
+.stats div { PADDING: 5px 5px 5px 35px; MARGIN-BOTTOM: 5px; BORDER-BOTTOM: 1px solid #bfbfbf; BACKGROUND: #dfdfdf; FONT-WEIGHT: bold; FONT-VARIANT: small-caps; }
+.stats table { PADDING-LEFT: 5px; TEXT-ALIGN: left; FONT-SIZE: 11.5px; }
+.stats td { PADDING-BOTTOM: 5px; LINE-HEIGHT: 1.3em; }
+.stats a { TEXT-DECORATION: none; }

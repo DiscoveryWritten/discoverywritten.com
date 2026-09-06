@@ -1,0 +1,59 @@
+{
+  "url": "http://forum.bandamp.com/Feedback/5186.html",
+  "ts": "20080706061833",
+  "ts_pretty": "2008-07-06 06:18 UTC",
+  "retrieved": "2026-09-05 23:36 UTC",
+  "n_assets": 33,
+  "n_failed": 0,
+  "wayback_url": "https://web.archive.org/web/20080706061833/http://forum.bandamp.com/Feedback/5186.html",
+  "all_captures": [
+    {
+      "timestamp": "20071017051915",
+      "status": "200",
+      "mime": "text/html",
+      "length": "6562"
+    },
+    {
+      "timestamp": "20080706061833",
+      "status": "200",
+      "mime": "text/html",
+      "length": "6793"
+    }
+  ],
+  "assets": {
+    "http://www.bandamp.com/favicon.ico": "assets/favicon-b9708304.ico",
+    "http://www.bandamp.com/css/main.css": "assets/main-aebcd1c6.css",
+    "http://www.bandamp.com/images/header-bg.gif": "assets/header-bg-fdb7c5e2.gif",
+    "http://www.bandamp.com/images/login-bg.gif": "assets/login-bg-b237feac.gif",
+    "http://www.bandamp.com/images/treeBG.gif": "assets/treeBG-54ea66fa.gif",
+    "http://www.bandamp.com/images/stars_bw.gif": "assets/stars_bw-9bd2d80e.gif",
+    "http://www.bandamp.com/images/stars_color.gif": "assets/stars_color-afb48df9.gif",
+    "http://www.bandamp.com/images/tableftG.gif": "assets/tableftG-721f3dcc.gif",
+    "http://www.bandamp.com/images/tabrightG.gif": "assets/tabrightG-41bb0023.gif",
+    "http://www.bandamp.com/images/bg_top.gif": "assets/bg_top-6dd615e7.gif",
+    "http://www.bandamp.com/images/gradient.gif": "assets/gradient-a0cedec5.gif",
+    "http://www.bandamp.com/images/bg_blue_bar.gif": "assets/bg_blue_bar-d4269b03.gif",
+    "http://www.bandamp.com/images/bg_head_grey.gif": "assets/bg_head_grey-f6a1fc1a.gif",
+    "http://www.bandamp.com/images/bg_row.gif": "assets/bg_row-dc738abd.gif",
+    "http://www.bandamp.com/css/forge.css": "assets/forge-13bbb458.css",
+    "http://www.bandamp.com/images/bg_grey_top.jpg": "assets/bg_grey_top-53b0d205.jpg",
+    "http://www.bandamp.com/images/menuicon.gif": "assets/menuicon-fd8074e1.gif",
+    "http://www.bandamp.com/bg_quote_content.gif": "assets/bg_quote_content-2010cccc.gif",
+    "http://www.bandamp.com/bg_quote_header.gif": "assets/bg_quote_header-d53b655d.gif",
+    "http://www.bandamp.com/css/forum.css": "assets/forum-3d9a673a.css",
+    "http://www.bandamp.com/images/skeleton-forum-bg.gif": "assets/skeleton-forum-bg-51a41c26.gif",
+    "http://www.bandamp.com/images/alt_star.gif": "assets/alt_star-647d7851.gif",
+    "http://www.bandamp.com/images/bg_note_view.jpg": "assets/bg_note_view-89310358.jpg",
+    "http://www.bandamp.com/css/editor.css": "assets/editor-de9e6229.css",
+    "http://www.bandamp.com/scripts/main.js": "assets/main-1b207cbd.js",
+    "http://www.bandamp.com/images/login.gif": "assets/login-e94b5480.gif",
+    "http://www.bandamp.com/images/logo.gif": "assets/logo-4324d390.gif",
+    "http://www.bandamp.com/images/top-corners.gif": "assets/top-corners-5070e28d.gif",
+    "http://www.bandamp.com/images/control_play_blue.gif": "assets/control_play_blue-762fbc44.gif",
+    "http://www.bandamp.com/images/arrow_right_blue.gif": "assets/arrow_right_blue-95b42801.gif",
+    "http://www.bandamp.com/user/album/4058/48x48.jpg": "assets/48x48-f5b78b56.jpg",
+    "http://www.bandamp.com/images/male.gif": "assets/male-e671015e.gif",
+    "http://www.bandamp.com/images/country/US.gif": "assets/US-6380b534.gif"
+  },
+  "unavailable": {}
+}

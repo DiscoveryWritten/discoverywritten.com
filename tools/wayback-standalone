@@ -1,0 +1,350 @@
+#!/usr/bin/env python3
+"""wayback-standalone — rebuild a dead page as a self-contained local copy.
+
+    tools/wayback-standalone <url> [<url> ...] --out docs/library/.../citations
+    tools/wayback-standalone <url> --timestamp 20080706061833
+    tools/wayback-standalone --list <url>        # just show available captures
+
+Why this exists: three forum.bandamp.com threads are cited by the Lucky Sevens
+exhibit. The forum is being revamped and the URLs no longer resolve, so the
+citation points at nothing. The Internet Archive still holds them. This pulls a
+capture down WITH its stylesheets and images and rewrites every asset reference
+to a relative path, so the result renders offline, forever, out of one folder.
+
+Three things make it faithful rather than approximate:
+
+  * It fetches through the `id_` modifier, which returns the ORIGINAL bytes --
+    no Wayback toolbar, no rewritten URLs. What lands on disk is what the
+    server sent, before we touch it.
+  * Assets are fetched at the capture's own timestamp, so a 2008 page gets the
+    2008 stylesheet, not whatever the archive holds from 2019.
+  * The page body is left alone. Provenance goes in an HTML comment and a
+    sidecar provenance.json -- never in the rendered output. A citation that
+    silently edits its source is not a citation.
+
+Anchors (#id40623) are client-side, so they survive untouched.
+
+Rate limiting: the archive returns 429 freely and without warning. Every
+request goes through fetch(), which paces itself and backs off exponentially.
+A run is expected to take minutes, not seconds. Let it.
+"""
+
+import argparse
+import hashlib
+import json
+import os
+import re
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from datetime import datetime, timezone
+
+UA = "discoverywritten.com citation archiver (+https://discoverywritten.com)"
+CDX = "http://web.archive.org/cdx/search/cdx"
+WEB = "https://web.archive.org/web"
+
+MIN_INTERVAL = 5.0        # seconds between any two requests
+MAX_TRIES = 20            # a playback ban can last 20+ minutes; outlast it
+BASE_DELAY = 60.0
+MAX_DELAY = 600.0
+_last_request = [0.0]
+
+
+def log(msg):
+    print(msg, flush=True)
+
+
+def fetch(url, tries=MAX_TRIES):
+    """GET with pacing and exponential backoff. Returns (bytes, content-type)."""
+    delay = BASE_DELAY
+    for attempt in range(1, tries + 1):
+        gap = MIN_INTERVAL - (time.time() - _last_request[0])
+        if gap > 0:
+            time.sleep(gap)
+        req = urllib.request.Request(url, headers={"User-Agent": UA})
+        try:
+            with urllib.request.urlopen(req, timeout=90) as r:
+                _last_request[0] = time.time()
+                return r.read(), r.headers.get("Content-Type", "")
+        except urllib.error.HTTPError as e:
+            _last_request[0] = time.time()
+            if e.code in (429, 503, 502, 504) and attempt < tries:
+                log("      %s -- waiting %ds (try %d/%d)" % (e.code, delay, attempt, tries))
+                time.sleep(delay)
+                delay = min(delay * 1.6, MAX_DELAY)
+                continue
+            raise
+        except Exception:
+            _last_request[0] = time.time()
+            if attempt < tries:
+                log("      transient error -- waiting %ds" % delay)
+                time.sleep(delay)
+                delay = min(delay * 1.6, MAX_DELAY)
+                continue
+            raise
+    raise RuntimeError("unreachable")
+
+
+def captures(url):
+    """Every distinct 200 capture of `url`, oldest first."""
+    q = urllib.parse.urlencode({
+        "url": url, "output": "text",
+        "fl": "timestamp,statuscode,mimetype,length",
+        "collapse": "digest", "filter": "statuscode:200", "limit": "500",
+    })
+    body, _ = fetch("%s?%s" % (CDX, q))
+    rows = []
+    for line in body.decode("utf-8", "replace").splitlines():
+        parts = line.split()
+        if len(parts) >= 4:
+            rows.append(dict(zip(("timestamp", "status", "mime", "length"), parts)))
+    return rows
+
+
+def pretty_ts(ts):
+    try:
+        return datetime.strptime(ts, "%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M UTC")
+    except ValueError:
+        return ts
+
+
+def slug_for(url):
+    p = urllib.parse.urlparse(url)
+    stem = re.sub(r"\.html?$", "", p.path.strip("/"))
+    return re.sub(r"[^a-z0-9]+", "-", stem.lower()).strip("-") or "page"
+
+
+def local_name(url):
+    """A collision-proof but still readable filename for an asset."""
+    p = urllib.parse.urlparse(url)
+    base = os.path.basename(p.path) or "asset"
+    base = re.sub(r"[^A-Za-z0-9._-]", "_", base)
+    if p.query:
+        base = "%s_%s" % (base, re.sub(r"[^A-Za-z0-9]", "", p.query)[:16])
+    if "." not in base:
+        base += ".bin"
+    digest = hashlib.sha1(url.encode()).hexdigest()[:8]
+    root, ext = os.path.splitext(base)
+    return "%s-%s%s" % (root[:48], digest, ext)
+
+
+# ---- asset discovery -------------------------------------------------------
+# Deliberately narrow. <a href> is NOT rewritten: an outbound link should keep
+# pointing at the original address, which is part of what is being cited.
+
+ATTR_PATTERNS = [
+    (re.compile(r"(<link\b[^>]*?\bhref\s*=\s*)([\"']?)([^\"'\s>]+)\2", re.I),
+     lambda tag: re.search(r"rel\s*=\s*[\"']?[^\"'>]*(stylesheet|icon)", tag, re.I)),
+    (re.compile(r"(<(?:img|script|input|embed|iframe)\b[^>]*?\bsrc\s*=\s*)([\"']?)([^\"'\s>]+)\2", re.I),
+     None),
+    (re.compile(r"(<[a-z]+\b[^>]*?\sbackground\s*=\s*)([\"']?)([^\"'\s>]+)\2", re.I),
+     None),
+]
+CSS_URL = re.compile(r"""(url\s*\(\s*)(['"]?)([^'")]+)\2(\s*\))""", re.I)
+CSS_IMPORT = re.compile(r"""(@import\s+)(['"])([^'"]+)\2""", re.I)
+
+
+def absolutise(base, ref):
+    ref = ref.strip()
+    if not ref or ref.startswith(("#", "data:", "javascript:", "mailto:", "about:")):
+        return None
+    return urllib.parse.urljoin(base, ref)
+
+
+class Job:
+    def __init__(self, timestamp, outdir):
+        self.ts = timestamp
+        self.outdir = outdir
+        self.assets = {}      # original url -> local relative path
+        self.failed = {}
+
+    def asset(self, url, depth=0):
+        """Fetch `url` from the archive at this capture's timestamp; return the
+        path to write into the document, or None if it could not be had."""
+        if url in self.assets:
+            return self.assets[url]
+        if url in self.failed or depth > 3:
+            return None
+        name = local_name(url)
+        rel = "assets/" + name
+        dest = os.path.join(self.outdir, rel)
+        log("    asset  %s" % url[:96])
+        try:
+            body, ctype = fetch("%s/%sid_/%s" % (WEB, self.ts, url))
+        except Exception as e:
+            log("      MISS  %s" % e)
+            self.failed[url] = str(e)
+            return None
+        if b"429 Too Many Requests" in body[:200]:
+            self.failed[url] = "rate limited"
+            return None
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        # Reserve the name before recursing, so an @import cycle terminates.
+        self.assets[url] = rel
+        if "css" in ctype.lower() or url.lower().endswith(".css"):
+            text = body.decode("utf-8", "replace")
+            text = self.rewrite_css(text, url, depth + 1)
+            with open(dest, "w", encoding="utf-8") as fh:
+                fh.write(text)
+        else:
+            with open(dest, "wb") as fh:
+                fh.write(body)
+        return rel
+
+    def rewrite_css(self, text, base, depth):
+        """Pull in url() and @import targets. Paths inside a stylesheet are
+        relative to the stylesheet, and every asset lands in the same assets/
+        directory, so a bare filename is the correct replacement."""
+        def pull(ref):
+            target = absolutise(base, ref)
+            if not target:
+                return None
+            rel = self.asset(target, depth)
+            return os.path.basename(rel) if rel else None
+
+        def on_url(m):
+            flat = pull(m.group(3))
+            if not flat:
+                return m.group(0)
+            return "%s%s%s%s%s" % (m.group(1), m.group(2), flat, m.group(2), m.group(4))
+
+        def on_import(m):
+            flat = pull(m.group(3))
+            if not flat:
+                return m.group(0)
+            return "%s%s%s%s" % (m.group(1), m.group(2), flat, m.group(2))
+
+        return CSS_IMPORT.sub(on_import, CSS_URL.sub(on_url, text))
+
+    def rewrite_html(self, markup, base):
+        for pattern, guard in ATTR_PATTERNS:
+            def one(m):
+                if guard and not guard(m.group(0)):
+                    return m.group(0)
+                target = absolutise(base, m.group(3))
+                if not target:
+                    return m.group(0)
+                rel = self.asset(target)
+                if not rel:
+                    return m.group(0)
+                quote = m.group(2) or '"'
+                return "%s%s%s%s" % (m.group(1), quote, rel, quote)
+            markup = pattern.sub(one, markup)
+
+        # Inline <style> blocks carry url() too.
+        def style_block(m):
+            return m.group(1) + self.rewrite_css(m.group(2), base, 1) + m.group(3)
+        markup = re.sub(r"(<style\b[^>]*>)(.*?)(</style>)", style_block,
+                        markup, flags=re.S | re.I)
+        return markup
+
+
+BANNER = """<!--
+  ARCHIVED CITATION  -- rebuilt as a standalone, self-contained page.
+
+    source     %(url)s
+    capture    %(ts_pretty)s  (Internet Archive %(ts)s)
+    retrieved  %(retrieved)s
+    assets     %(n_assets)d fetched, %(n_failed)d unavailable
+
+  The document below is the original bytes the server sent, with asset
+  references -- and only asset references -- repointed at ./assets/.
+  Outbound <a href> links are untouched and still name the original addresses.
+-->
+"""
+
+
+def do_url(url, outdir, timestamp=None, force=False):
+    log("\n  %s" % url)
+    built = os.path.join(outdir, slug_for(url), "index.html")
+    if os.path.exists(built) and not force:
+        log("    already built -- skipping (pass --force to redo)")
+        return json.load(open(os.path.join(os.path.dirname(built), "provenance.json")))
+    rows = captures(url)
+    if not rows:
+        log("    no 200 captures in the archive -- skipped")
+        return None
+    log("    %d capture(s): %s" % (
+        len(rows), ", ".join(pretty_ts(r["timestamp"])[:10] for r in rows)))
+    if timestamp:
+        row = next((r for r in rows if r["timestamp"] == timestamp), None)
+        if not row:
+            log("    no capture at %s -- skipped" % timestamp)
+            return None
+    else:
+        row = rows[-1]          # newest; the site was healthiest latest
+    ts = row["timestamp"]
+    log("    using %s (%s bytes)" % (pretty_ts(ts), row["length"]))
+
+    slug = slug_for(url)
+    dest = os.path.join(outdir, slug)
+    os.makedirs(dest, exist_ok=True)
+    job = Job(ts, dest)
+
+    body, _ = fetch("%s/%sid_/%s" % (WEB, ts, url))
+    markup = body.decode("utf-8", "replace")
+    markup = job.rewrite_html(markup, url)
+
+    meta = {
+        "url": url, "ts": ts, "ts_pretty": pretty_ts(ts),
+        "retrieved": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+        "n_assets": len(job.assets), "n_failed": len(job.failed),
+    }
+    with open(os.path.join(dest, "index.html"), "w", encoding="utf-8") as fh:
+        fh.write(BANNER % meta)
+        fh.write(markup)
+
+    prov = dict(meta)
+    prov["wayback_url"] = "%s/%s/%s" % (WEB, ts, url)
+    prov["all_captures"] = rows
+    prov["assets"] = job.assets
+    prov["unavailable"] = job.failed
+    with open(os.path.join(dest, "provenance.json"), "w", encoding="utf-8") as fh:
+        json.dump(prov, fh, indent=2)
+        fh.write("\n")
+
+    log("    wrote %s/index.html  (%d assets, %d missing)"
+        % (dest, len(job.assets), len(job.failed)))
+    return prov
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("urls", nargs="+")
+    ap.add_argument("--out", default=".")
+    ap.add_argument("--timestamp", help="use this exact capture (single url only)")
+    ap.add_argument("--force", action="store_true", help="rebuild pages already on disk")
+    ap.add_argument("--warmup", type=float, default=0,
+                    help="idle this many seconds first, to let a playback ban lapse")
+    ap.add_argument("--list", action="store_true", help="show captures and exit")
+    a = ap.parse_args()
+
+    if a.list:
+        for u in a.urls:
+            log("\n  %s" % u)
+            for r in captures(u):
+                log("    %s  %8s B  %s" % (pretty_ts(r["timestamp"]), r["length"], r["mime"]))
+        return
+
+    if a.warmup:
+        log("  warmup: idling %.0fs before first playback request" % a.warmup)
+        time.sleep(a.warmup)
+    os.makedirs(a.out, exist_ok=True)
+    done = []
+    for u in a.urls:
+        try:
+            p = do_url(u, a.out, a.timestamp, a.force)
+        except Exception as e:
+            log("    FAILED  %s" % e)
+            continue
+        if p:
+            done.append(p)
+    log("\n  %d/%d rebuilt into %s" % (len(done), len(a.urls), a.out))
+    if not done:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
