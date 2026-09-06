@@ -10,7 +10,7 @@ Generated 2026-09-06 by `.advocate-engine/bin/digest.mjs`. Do not edit it — ed
 | [`deploy`](deploy.md) | 2026-09-06 | 2 | 1 | 0 | up to date |
 | [`borrowed-windows`](borrowed-windows.md) | 2026-09-06 | 2 | 6 | 0 | up to date |
 | [`one-more-record`](one-more-record.md) | 2026-09-05 | 1 | 6 | 0 | up to date |
-| [`enrich`](enrich.md) | 2026-09-05 | 1 | 3 | 0 | up to date |
+| [`enrich`](enrich.md) | 2026-09-06 | 2 | 1 | 0 | up to date |
 
 ## Asking to graduate
 
