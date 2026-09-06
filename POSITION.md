@@ -1,55 +1,58 @@
 # POSITION — enrich
 
-**Session:** 2026-09-05 · **Subject:** `c2604f9` · **First session** — no range yet, no prior
-`POSITION.md` to supersede. This is an opening reading, not a diff against one.
+**Session:** 2026-09-06 · **Subject:** `c205fe1` · **Range:** `c2604f9..c205fe1` (two merged
+pull requests: #36 `tiliv-patch-1`, #35 `lucky-sevens-library`).
 
 ## The backlog, as it stands
 
-One directive exists in `advocate/directives/`: `theater-player.md` — "The player rests as a
-theater and animates into its column," seeded 2026-09-01 by Autumn, **State: seed**. Nothing else
-is in the folder besides the `README.md` that defines the form. The backlog she said she wants to
-keep filling early is, right now, one entry deep, four days old, untouched since.
+Still one directive in `advocate/directives/`: `theater-player.md`, seeded 2026-09-01, **State:
+seed**. I re-read it byte-for-byte against last session's copy — unchanged. Neither merged pull
+request in this range touched `advocate/directives/` or added a second entry. The backlog she said
+she wants to keep filling early is, three weeks after the first entry, still one entry deep.
 
 ## G1 — every directive read since last touched, and says what it's waiting on
 
-**Half true.** This is the first time an enrich session has read it, and today is that reading —
-so the letter of the goal holds. But the file's own "What we have learned since" section still
-says "Nothing yet," and that undersells it: `notes/abridged-by-us-exhibits.md` §2 ("Layout: the
-player rests as a theater"), written the same day the directive was seeded, already works out most
-of what the directive is waiting on — which page it belongs to, what it does on a phone, that the
-docking direction is still hers to pick. The directive doesn't cite that note and, as filed, isn't
-in a position to. I could not update `theater-player.md` itself this session — that file lives
-outside this seat's own workspace, and I was instructed not to touch anything under the project
-checkout beyond it. So the gap I'm reporting is real, but closing it is not something I could do
-from here today. **Unmeasured:** whether G1's "has been read" is meant to leave a mark on the
-directive file, or just to have happened.
+**Half true, same as last session, for the same reason.** The directive was read today — the
+letter of the goal holds — but it still doesn't say what it's waiting on in its own text; that
+answer still lives in `notes/abridged-by-us-exhibits.md` §2, uncited from the directive. Nothing
+in this range changed that, because nothing in this range touched the directive at all.
+**Unmeasured**, as before: whether "has been read" is meant to leave a mark on the file itself.
 
 ## G2 — a directive ready to graduate says so, with its PR description already written
 
-**Not ready.** What's still genuinely open, past what the existing notes already answer:
-
-- **Direction** — dock-at-top retreating to the column, or column expanding to the top. She said
-  either is fine, which the directive already records; nothing since has picked one, and nothing
-  should until it's seen on a phone.
-- **Reduced motion** — the directive's own open questions assume "the site already has an
-  animation toggle and a motion ladder written for Lucky Sevens" to reuse for this. I looked:
-  `docs/css` and `docs/js` have no `prefers-reduced-motion`, no animation toggle, no motion ladder,
-  anywhere. The motion ladder that does exist is written for the Lucky Sevens *video*, not the
-  website. If that's right, this directive is quietly waiting on site machinery that doesn't exist
-  yet, not reusing something built — that's a different, and bigger, open question than the file
-  currently states.
-- **Scope** — whether this belongs to Abridged By Us alone or the album exhibits want it too. The
-  exhibits note frames it as a property of the container/template, which leans toward "shared,"
-  but nothing has decided that.
+**Not ready — unchanged.** The same three open items stand: which docking direction (hers to pick
+once seen on a phone), whether reduced motion is inventing new site machinery rather than reusing
+existing machinery (see C2), and whether this belongs to Abridged By Us alone or the album
+template generally. Nothing this session moved any of the three closer.
 
 ## G3 — no directive silently widened past what was seeded
 
-**Nothing to report.** The directive hasn't moved in either direction since it was written —
-neither widened nor shrunk. Four days of stillness on a one-entry backlog isn't yet evidence of
-anything; it's just the starting line.
+**Nothing to report — unchanged.** A directive that hasn't been touched can't have been widened.
+Two full pull requests landed elsewhere in the repository without laying a hand on it.
+
+## What moved this session
+
+Not the backlog — the confidence behind two standing complaints. C1 and C2 were both `draft`,
+written from a single read three weeks ago. This session re-checked both independently, after a
+real range had landed elsewhere in the repository, and both held:
+
+- The directive still doesn't cite `notes/abridged-by-us-exhibits.md` §2, which answers most of
+  its stated gap (C1).
+- `docs/css` and `docs/js` still have no `prefers-reduced-motion`, no animation toggle, no motion
+  ladder — the directive's premise that one already exists for reuse is still, as far as this
+  checkout shows, false (C2).
+
+Both move from `draft` to `open` this session. Neither is new; both are now stated and standing
+rather than a first impression.
 
 ## What I deliberately didn't check
 
-I did not read the Discord forum the exhibits note says holds the real write-ups — that's a
-repository this checkout doesn't have, and not my question. I did not form an opinion on whether
-the theater idea is good, or push toward a direction — that's hers.
+I did not read the two merged pull requests' full diffs — cross-repository `git`/`gh` access from
+this workspace required an approval this session had no one to grant, so I read the checked-out
+files directly instead: `advocate/directives/`, `notes/`, `docs/css`, `docs/js`. That is a
+narrower window than a full diff, but it is enough to answer the only question my seat asks of a
+range — did anything touch the directives backlog — because the files that would show it are the
+ones I could read. I did not form an opinion on the theater idea itself, or nudge a docking
+direction — hers to pick once it's seen on a phone. I did not go looking in `notes/lucky-sevens/`
+for a new idea that should have become a directive; noticing what belongs in the backlog isn't the
+same as going looking for candidates to add to it myself.
