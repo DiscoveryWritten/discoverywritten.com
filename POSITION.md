@@ -1,54 +1,50 @@
 # POSITION — deploy
 
-Seated 2026-09-05, at `347c201`. First session: no range exists yet, so this is an opening
-reading of the repository as it stands, not a report on what changed.
+Second session, at `c205fe1`, range `347c201..c205fe1` (5 merged PRs since seating on
+2026-09-05).
+
+## What moved, and whether I noticed it
+
+None of the five merges in this range touch `.github/workflows/deploy.yml`, any Cloudflare
+config, or how secrets are supplied. The range is: a new exhibit page and its videos
+(`docs/library/lucky-sevens/`, `notes/lucky-sevens/*.json`), an advocate-engine petition and
+directives scaffold (`advocate.yml`, `advocate/directives/`, `.pr`), and a one-line
+`.advocate-engine` submodule bump. That's content and internal advocate tooling — my
+constituency is "is what is live what is in the repository," and none of it changes *how* the
+repository gets live or how she'd check that it did.
+
+One thing worth checking rather than assuming: the new videos are real weight
+(`impact-of-ai.mp4` is the largest addition at ~1.04 MB; the whole `lucky-sevens/` addition is
+roughly 5.5 MB across 15 files). Cloudflare Pages' per-file limit is far above that, so this
+isn't a deploy-capacity concern — but it's the kind of thing that would become mine the day a
+raw-video exhibit lands at a size that does matter, and nothing in the repo currently says what
+that ceiling is or who'd notice approaching it.
 
 ## G1 — The identity of what is live is checkable from a phone, without logging into anyone's dashboard.
 
-**Partially met.** `.github/workflows/deploy.yml` runs on every push to `main` and reports its
-own pass/fail in the repo's Actions tab — a place Autumn is already logged into, because it's
-where she merges. That's real progress over the prior state: a manual `wrangler pages deploy`
-run from a laptop, whose result lived only on that laptop.
-
-What it does not give her: the Action going green tells her the deploy command was *accepted*,
-not that Cloudflare's edge is *currently serving* that commit. Nothing in the served output
-itself — no version marker, no commit id anywhere a browser can see it — lets her cross-check
-"what's live" against "what's in the repo" independently of trusting the Action's own report.
-The identity check today is one level removed from the thing she actually wants to know.
+**Unchanged: partially met.** Same gap as seating — Actions-tab green means "the deploy command
+was accepted," not "the edge is serving this commit." Nothing in this range added or removed
+ground on this.
 
 ## G2 — A file that failed to publish is distinguishable from one that published, by something other than HTTP status.
 
-**Substantially met, for whole-deploy failure.** The founding failure this seat exists for was
-silent: an expired OAuth token meant two days of merges built nothing, and the only symptom was
-the host quietly continuing to serve the old build — indistinguishable from success by HTTP
-status, because the host answers every missing or stale path with the homepage at 200. The CI
-workflow replaces that with a loud failure: a failed `wrangler pages deploy` fails the Actions
-run and puts a red X on the commit. That is a signal that isn't HTTP status, and it's visible
-from the same phone-and-GitHub path as G1.
-
-What's untested from the repository alone: whether a *partial* publish — some files updated,
-others not — is possible with this deploy method, or whether Cloudflare Pages deploys are
-atomic enough that "the command succeeded" implies "everything in `docs/` is now live." I have
-no evidence either way and won't guess.
+**Unchanged: substantially met for whole-deploy failure.** The CI red-X mechanism from before
+this seat was mounted is still the only publish-failure signal, and it's still untested from the
+repository alone whether a partial publish is possible with `wrangler pages deploy`.
 
 ## G3 — Nothing that has to be renewed expires without having been named in advance, with what happens when it lapses.
 
-**Unmeasured, leaning unmet.** The workflow's own header comment names the three values the
-pipeline needs (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_PAGES_PROJECT`) and
-says what happens if a deploy fails generally — but nothing in the repository says whether the
-API token itself has an expiration set, when it was issued, or who notices before it lapses.
-That's the same shape of problem this seat was founded on, moved up one level: the *symptom*
-(silent failure) is fixed, but the *cause* (a credential that can lapse without warning) isn't
-addressed by a workflow file alone — a red X still means the site is stale until a person
-happens to look at it. I can't tell from this checkout whether the current token expires at
-all; that's not knowable from the repo, which is exactly the gap.
+**Unmeasured, leaning unmet — checked again, not just carried forward.** I grepped this
+session's subject commit for `expir`, `rotate`, `token` across markdown and workflow files. The
+only hits are the same ones from seating: the workflow's own header naming which three secrets
+it needs, `docs/assets/ds/{MIRROR,PROVENANCE}.md`, and `advocate.yml`. Nothing new addresses
+whether `CLOUDFLARE_API_TOKEN` itself carries an expiration, or who is meant to notice one
+coming. This is now a *confirmed absence over two sessions*, not a first-glance gap — that's why
+[[C2]] moves from draft to open this session.
 
 ## Reading
 
-The workflow that answers this seat's founding complaint (`6ea3811`, "Deploy docs/ to
-Cloudflare Pages from CI") landed *before* this seat was mounted (`7135b15`) — the repository
-had already started fixing the thing I exist to watch. That's worth stating plainly: this isn't
-a case of arriving to find neglect, it's arriving to find the first fix already in and
-partially sufficient. My job from here is watching whether it holds, not re-litigating whether
-it was the right fix — that's out-of-scope by my own config ("anything whose only remedy is
-'open the Cloudflare dashboard'" and "relitigating the move off GitHub Pages").
+Second session in a row where the range is real (not empty) but doesn't touch my mechanism. Per
+METHOD §3 ("does my constituency notice this?"), the honest report is close to one line on the
+goals themselves — the depth this session went into instead was re-checking G3 for real, and
+sizing the new binaries against a limit that hasn't bitten yet but could.
