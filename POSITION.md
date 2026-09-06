@@ -1,54 +1,56 @@
 # POSITION — one-more-record
 
-Seated 2026-09-05, subject at `c2604f9`. This is an opening position, not a range report:
-there is no prior session to diff against, so what follows is a read of the repository as it
-stands, against the three goals in `advocate.yml`.
+Range this session: `c2604f9..c205fe1` (2 commits, first-parent: merge of PR #35
+"lucky-sevens-library", merge of PR #36 "tiliv-patch-1"). Read against the three goals in
+`advocate.yml`.
 
-## G1 — Adding a record touches one place per fact, not one place per page
+## What moved, and why it isn't mine
 
-**Partially true, and better than the seat's framing suggested.** `docs/css/collectorate.css`
-already centralizes a record's visual identity into one `body.<record>` token block per record
-(6 of them today: collectorate, promise, nanofilament, lockthemirror, healyourself, buttoncrash),
-with everything else in the file shared. The header comment says this on purpose: "Each record
-sets the token block; nothing below it is per-album." That is one place per fact, working as
-intended.
+Both commits touch only `notes/lucky-sevens/` and the new `docs/library/lucky-sevens/` — QR
+bottle video loops for the Lucky Sevens exhibit and the JSON/README notes that drive them
+(`links.json`, `lyrics.json`, `spans.json`, a library README documenting placement and
+regeneration). None of it touches `index.html`'s tile list, `docs/css/collectorate.css`, any
+exhibit page's `<link>`/`<script>` includes, or the root `README.md` — the four places my
+constituency actually edits when adding the next record. Lucky Sevens is an exhibit already
+underway, not a new record being added the way this seat watches for, and its own library README
+already documents its conventions in the way G3 asks for — just for a different audience than
+mine. **My constituency does not notice this range.** Nothing here moves any of my three goals in
+either direction.
 
-`larastelle.html` sits outside that pattern entirely — its own `larastelle.css`, its own fonts,
-its own fixed-size background mechanics — and nothing in either file says whether that is a
-deliberate exception (an older, more bespoke exhibit) or the record where the shared pattern
-hadn't been invented yet. I can't tell which from the code, so I report this **unmeasured**
-rather than guess.
+## The three goals, as they stand
 
-The one place that is unavoidably one-edit-per-record is `index.html`'s tile list (the
-`.links.media` block, 8 tiles today, one `<div class="group-label">` per act). Every new record
-adds a block there, in the same list every other new record also edits — this is the literal
-collision point the seat's constituency describes, and it is structural, not accidental: there
-is no per-record file that could hold a tile in isolation.
+**G1 — Adding a record touches one place per fact, not one place per page.** Unchanged from last
+session's read, with one piece resolved. `collectorate.css`'s token-block pattern remains one
+place per fact for a record's visual identity (6 records: collectorate, promise, nanofilament,
+lockthemirror, healyourself, buttoncrash). `larastelle.html`/`larastelle.css` still sit outside
+it — and this session I checked what last session left `unmeasured`: git history shows
+`docs/css/larastelle.css` was added 2025-05-16/18, and the token-block pattern in
+`collectorate.css` first appears 2026-08-22 (`e073ea8`, the Collectorate/PROMISE/Nanofilament/
+BITFLIP/Lock The Mirror commit) — fifteen months later. **Larastelle is the fossil, not a live
+exception.** It predates the shared pattern; nothing about it was a deliberate choice to opt out.
+That resolves the uncertainty, but not the risk: nothing in the repository itself says this, so a
+person reaching for the nearest existing page as a template still has no way to know that
+larastelle is the one page not to copy. `index.html`'s tile list is still the one genuinely
+unavoidable one-edit-per-record surface — no per-record file could hold a tile in isolation.
 
-## G2 — No hand-maintained number lives in more than one file
+**G2 — No hand-maintained number lives in more than one file.** Unchanged, not met. The
+`?v=` cache-busting suffix on shared assets (`collectorate.css`, `showcase.css`, etc.) is still
+hand-copied into at least eight HTML files. Nothing in this range touched a shared asset or its
+version stamp, so there is nothing new to check for drift.
 
-**Not true today, concretely.** The cache-busting `?v=` suffix on a shared asset is copied by
-hand into every page that includes it, rather than read from one place. `collectorate.css?v=20260901`
-alone is independently hand-typed in at least 8 HTML files (collectorate, buttoncrash,
-healyourself, lockthemirror, nanofilament, promise, abridged, and referenced again for
-showcase.css from index.html). Version values are internally consistent right now — I checked for
-format drift across every `?v=` in `docs/*.html` and found none, only three date-stamps
-(20260822, 20260823, 20260901) applied correctly per file — but consistency here is a property of
-recent hand-discipline, not of anything that would catch a miss. If collectorate.css is bumped
-next and one of those eight files isn't touched, that page silently serves a stale cached copy;
-nothing checks it and nothing would say so.
-
-## G3 — A convention that exists only in a previous page's markup is written down somewhere findable
-
-**Not true.** The root `README.md` says nothing about adding a record. The conventions that do
-exist are real, but they live as comments on the pages that follow them, not anywhere gathered:
-`docs/collectorate.html`, `promise.html`, and four others each carry a one-line HTML comment
-declaring whether they use `record-nav` or are "Standalone record: no record-nav" — which is
-good practice, but only reaches someone who opens the right existing page and reads its comments
-before starting a new one. There is no single page a person would land on first.
+**G3 — A convention that exists only in a previous page's markup is written down somewhere a
+person can find it before copying.** Unchanged, not met, for the exhibit-page path. Worth naming
+precisely because this range makes the contrast visible: the Lucky Sevens *library* now has
+exactly the kind of findable, gathered documentation this goal wants
+(`docs/library/lucky-sevens/README.md` — what the files are, how to place them, how to
+regenerate them) — proof the pattern is achievable here, just not yet applied to the
+exhibit-authoring path (`index.html`, `collectorate.css`, the per-page `record-nav` convention)
+that this seat actually watches.
 
 ## Tally
 
-Three goals read: G1 partially met (one real exception, unmeasured), G2 not met (confirmed),
-G3 not met (confirmed). No prior complaints exist to compare against — this session's output is
-the baseline the next one measures against.
+G1 partially met, now fully measured (no `unmeasured` rows remain). G2 not met, unchanged. G3 not
+met for my path, unchanged — though this session found a working example of the pattern
+elsewhere in the repo, which sharpens what "met" would look like here. Four complaints stand,
+all originally `draft`; one (C3) ripens to `open` this session on the strength of the larastelle
+finding. Two asks stand, unchanged.

@@ -19,14 +19,17 @@ edits. There's no way around it — nothing else holds that tile. It's a small, 
 merge conflict every time, not a surprising one, but it's still a cost I pay on every record and
 would keep paying on the next fifty.
 
-## C3 · I don't know if larastelle is the exception or the fossil
+## C3 · Nothing tells me larastelle is the one page I shouldn't copy
 
-`status: draft` · `source: observed` · `first said: 2026-09-05`
+`status: open` · `source: observed` · `first said: 2026-09-05` · `ripened: 2026-09-06`
 
-Every other record's look lives as one token block in `collectorate.css`. LARASTELLE has its own
-whole stylesheet instead, and nothing says why. If I copy that page as a starting point for a
-new record because it happens to be the one I have open, I'd be rebuilding a special case
-instead of using the shared one — and I wouldn't necessarily notice I'd done it.
+I checked, this session: `larastelle.css` is from 2025-05-16, and the token-block pattern every
+other record now uses didn't exist until 2026-08-22 — fifteen months later. It's not a deliberate
+exception, it's just older than the convention. But that fact lives in git history, not in the
+repository a person actually opens. If I reach for the nearest existing page as a template at
+midnight, larastelle looks exactly as valid as any of the six that follow the shared pattern —
+there's nothing on the page, or near it, saying "this one predates the pattern, don't copy it."
+Knowing the answer myself didn't fix the thing that made me not know it.
 
 ## C4 · There's nowhere to read "how to add a record" before I start copying a page
 
