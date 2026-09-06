@@ -1,6 +1,6 @@
 # Seat · borrowed-windows
 
-`advocate/borrowed-windows` · last spoke **2026-09-05** · 1 session(s) · 7 draft · 0 ready
+`advocate/borrowed-windows` · last spoke **2026-09-06** · 2 session(s) · 6 draft · 0 ready
 
 <sub>Copied whole from the branch, which is the authority. Do not edit this page — it is
 overwritten every round.</sub>
@@ -9,59 +9,45 @@ overwritten every round.</sub>
 
 ### POSITION — borrowed-windows
 
-**Opening session. No prior baseline exists.** This is a reading of the repository as it stands
-at `347c201`, not a report of what changed — there is nothing to diff against yet. Every session
-after this one gets a real range.
+**Second session.** Range `347c201..c205fe1` (5 merged PRs, 25 files) landed nothing this
+constituency notices — Lucky Sevens video bakes (`docs/library/lucky-sevens/`, explicitly *not*
+the exhibit page's instrument, per that folder's own README), the lyric/timing/link JSON that
+feeds those bakes, and advocate-engine bootstrapping (the `enrich` seat, its directives, `.pr`).
+No album or exhibit HTML changed. No embed JS changed. All three goals stand exactly where the
+opening session (`347c201`) found them — this time confirmed by re-reading the actual file at the
+subject commit, not assumed carried-over.
 
 ## G1 — every third-party frame named in one place, with what visibly breaks
 
-**Not met.** The site leans on five borrowed players — Spotify, Apple Music, Amazon Music, the
-YouTube iframe API, and the SoundCloud widget — and none of them is inventoried anywhere a person
-would find on purpose. Each album page (`bitflip.html`, `nanofilament.html`, `promise.html`,
-`collectorate.html`, `larastelle.html`) hand-duplicates its own four-tab picker
-(Apple/Spotify/Amazon/YouTube); three more pages (`healyourself.html`, `lockthemirror.html`,
-`luckysevens.html`) mount YouTube directly via `YT.Player`, each with its own copy of the same
-load logic; `buttoncrash.html` carries a bare SoundCloud iframe. `notes/abridged-by-us-exhibits.md`
-comes closest to a manifest, but it is a working note about one exhibit (Abridged By Us), not an
-inventory of the site's borrowed frames as a set. If Spotify changed its embed terms tomorrow, the
-only way to find every place that would break is to grep for it.
+**Not met, unchanged.** Five borrowed players — Spotify, Apple Music, Amazon Music, the YouTube
+iframe API, SoundCloud — none inventoried anywhere a person would find on purpose. Five album
+pages hand-duplicate the same four-tab picker; three pages mount `YT.Player` directly, each with
+its own copy of the load logic; `buttoncrash.html` carries a bare SoundCloud iframe.
+`notes/abridged-by-us-exhibits.md` is the closest thing to a manifest and it is a working note
+about one exhibit, not an inventory of the site's borrowed frames as a set.
 
 ## G2 — a refusal names the service and, where knowable, why
 
-**Not met, and the standing example proves it in both directions.** No embed anywhere in the repo
-has failure handling: `docs/js/youtube.js` and its per-page copies fire `new YT.Player(...)` with
-no `onError`, and every Spotify/Apple/Amazon/SoundCloud frame is a bare `<iframe src=...>` with no
-fallback markup. A grep for `onerror`, `onload`, or any load-timeout across every page returns
-nothing.
-
-The Windup Girl — this seat's own standing example — currently isn't embedded at all.
-`docs/abridged.html:76-84` shows it as an outbound link with a thumbnail, structurally identical to
-the other sixteen cards. The refusal (`error 150`, "almost certainly a rights claim") is recorded
-in `notes/abridged-by-us-exhibits.md:147-152` — the note even names the intended fix in its own
-words: the page should say the video won't be shown here and why, "instead of silently bouncing
-someone to YouTube." That is exactly what it still does. The constraint is known; it has not
-reached the page.
+**Not met, and the standing example still proves it.** Re-read `docs/abridged.html` at `c205fe1`:
+The Windup Girl (`v=dXWdoAqt6v0`) is still a bare outbound link with a thumbnail, structurally
+identical to the other sixteen cards on the shelf. The refusal (`error 150`, "almost certainly a
+rights claim") is still recorded only in `notes/abridged-by-us-exhibits.md`, not on the page a
+reader actually lands on. Nothing in this range touched either file.
 
 ## G3 — a recorded rights constraint can't quietly come back
 
-**Not met.** Two constraints are already written down, both only as prose:
-
-- The Windup Girl's embed refusal (above).
-- Warbreaker's text: `notes/abridged-by-us-exhibits.md:109-122` records that the Substack post's
-  text carries no no-derivatives exemption (the audio/video does), so "the verbatim panel must
-  therefore not be generated for Warbreaker" — and flags this as a per-episode property to be
-  re-checked for every non-Wikipedia-sourced episode, not a one-time fact.
-
-Neither lives anywhere but a notes file. Nothing stops a future edit, or a future run of
-`tools/abu_sentences.py`, from generating that panel anyway, or from a page trying to re-embed the
-Windup Girl once someone forgets why it doesn't. A markdown note is memory, not enforcement.
+**Not met, unchanged.** The Windup Girl refusal and the Warbreaker text-rights note
+(`notes/abridged-by-us-exhibits.md:109-122`) are still prose in a notes file, not anything a script
+or a future edit would be stopped by. `tools/abu_sentences.py` and the exhibit pages it feeds were
+untouched by this range.
 
 ## What I'm not saying
 
-I'm not saying the four-tab picker pattern is wrong, or that Substack's still-undecided
-embed-vs-link question (`notes/abridged-by-us-exhibits.md:106`) needs resolving now — that decision
-belongs to whoever is building Abridged By Us, not to this seat. I'm also not proposing how to fix
-any of the above; that's outside what an advocate does.
+I'm not counting the Lucky Sevens video-bake work as in scope — those `.mp4`/`.json` files feed an
+offline video render, not a live embed on the site, and the folder's own README says so in its own
+words ("not the page's instrument"). I'm not commenting on the `enrich` seat or its directives;
+that's a different seat's concern, already filed as its own petition. I'm not proposing a fix for
+any of the above.
 
 ## Complaints
 
@@ -88,13 +74,15 @@ network all look identical to a visitor: silence. There's no way, from the page 
 
 ## C3 · The Windup Girl still just bounces you to YouTube
 
-`status: draft` · `source: observed` · `first said: 2026-09-05`
+`status: open` · `source: observed` · `first said: 2026-09-05` · `confirmed: 2026-09-06`
 
 This is the seat's own named example, and right now it isn't even wrong in a new way — it's the
 plain old failure mode. `docs/abridged.html` shows it as an outbound link with a thumbnail,
 identical in markup to every other card on the page. The refusal is known (`error 150`, recorded
 in the exhibit notes as almost certainly a rights claim) and it isn't visible anywhere a reader
-would see it before clicking through and getting nothing.
+would see it before clicking through and getting nothing. Re-read at `c205fe1`: unchanged, and
+nothing in the intervening range touched either the page or the note. Two sessions, same finding
+— this stands.
 
 ## C4 · A rights note in a markdown file is not something that can't be un-known
 
@@ -140,41 +128,43 @@ something in their way — a check, a flag, anything that isn't "hope they remem
 editor touching a per-episode fact should not be able to silently regress a previously-recorded
 constraint on that same episode.
 
-## Last session note — 2026-09-05
+## Last session note — 2026-09-06
 
-### 2026-09-05
+### 2026-09-06
 
-**Opening session — seating, not reporting.** No range exists yet (`first: true`, `since: null`);
-the subject is `347c201`. I did not diff against a prior state because there isn't one. What
-follows is a reading of the repository as it stands, not a report of what changed in it.
+Range: `347c2014d4209bec0b8074cbb6780f57d4f9e8e3..c205fe1c7a3e03c486a8e57c98c9028d8a048de1` — 5
+merged PRs (#32–#36), 25 files changed. Not empty, but nothing in it lands on this constituency.
 
 ## What I read
 
-`advocate.yml` (this seat's charter), the five album pages that duplicate the Apple/Spotify
-/Amazon/YouTube tab picker, the three YouTube-only exhibit pages, `buttoncrash.html`'s SoundCloud
-embed, the shared and per-page embed JS, and `notes/abridged-by-us-exhibits.md` — which turned out
-to already contain most of what this seat cares about: the Windup Girl's YouTube error 150, and
-the Warbreaker text-rights note. Full findings are in `POSITION.md`.
+The diff stat for the whole range, then in detail: `docs/library/lucky-sevens/README.md` (the
+folder's own words: "these are the video bakes... not the page's instrument"), the Lucky Sevens
+lyrics/spans/links JSON, and `advocate/directives/theater-player.md` (a directive about the
+player's resting position — layout/animation, not load-failure or third-party terms). None of it
+touches Spotify, Apple Music, Amazon Music, the YouTube iframe API, or SoundCloud. No album or
+exhibit HTML changed; no embed JS changed. I also re-read `docs/abridged.html` and
+`notes/abridged-by-us-exhibits.md` at the subject commit directly — not carried over from last
+session — to confirm G2/G3's standing example hadn't moved on its own.
 
 ## What changed in the three files
 
-All three were empty. `POSITION.md` is now a full opening read against G1/G2/G3 (none of the
-three goals are met today). `COMPLAINTS.md` opens with four drafts (C1–C4), all `source: observed`
-from the code and the exhibit notes, none from testimony. `ASKS.md` opens with three drafts
-(A1–A3), each stated as a shape, not a client.
+`POSITION.md` rewritten whole: same three goals, same "not met," now stated as confirmed-unchanged
+against the actual file at `c205fe1` rather than assumed. `COMPLAINTS.md`: C3 (Windup Girl) moved
+`draft → open` — two sessions now, same finding, independently re-verified rather than repeated.
+C1/C2/C4 carried forward unchanged; nothing in the range bore on them either way, and I didn't
+reopen the file looking for reasons to move them. `ASKS.md` carried forward unchanged.
 
-**Tally: 4 draft, 0 open, 0 ready, 0 promoted.** Same for asks: 3 draft, 0 open, 0 ready.
+**Tally: complaints 3 draft, 1 open, 0 ready, 0 promoted. Asks: 3 draft, 0 open, 0 ready.**
 
 ## What I deliberately did not say
 
-I did not propose how to build a manifest, an error-handling convention, or a rights-constraint
-check — those are designs, and designing them isn't this seat's job. I did not touch the open
-Substack embed-vs-link decision (`notes/abridged-by-us-exhibits.md:106`); it belongs to whoever
-builds Abridged By Us, not to this seat, and it isn't a borrowed-window failure mode yet since
-nothing is embedded there. I did not comment on whether the four-tab picker pattern itself is a
-good design — only on what happens when one tab's service refuses. And I did not read
-`sessions/2026-09-05.md`'s prior draft as a starting point: an earlier version of this file
-(written before I read the repo) claimed "nothing merged since the last session," which cannot be
-true for a first session with no last session to compare against. I've overwritten it rather than
-carry that claim forward.
+I did not count the Lucky Sevens video-bake files as this seat's concern, even though they're
+QR-encoded links to `anecdote.channel` and to a `bandamp.com` forum — that's offline video
+production, not a live page embed, and the README says as much in its own words. I did not comment
+on the `enrich` seat's arrival (`advocate.yml`, `advocate/directives/`) — that's a different seat,
+already filed as its own petition. I did not re-derive C1/C2/C4 from scratch just to have more to
+report; the range gave me no new evidence on those, so I left them exactly as they stood. I also
+overwrote an earlier draft of this file that was sitting in the workspace claiming "nothing merged
+since the last session" — that was wrong for this range (5 commits did merge); it read like a
+placeholder written before the range was actually checked, so I didn't carry it forward.
 

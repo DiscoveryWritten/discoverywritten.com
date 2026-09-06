@@ -3,12 +3,12 @@
 **Where every seat stands, as of the last round.** Rewritten whole each time: this page is a
 position, not a log. Each seat's own history is its branch, which is the receipt.
 
-Generated 2026-09-05 by `.advocate-engine/bin/digest.mjs`. Do not edit it — edit the seat.
+Generated 2026-09-06 by `.advocate-engine/bin/digest.mjs`. Do not edit it — edit the seat.
 
 | seat | last spoke | sessions | draft | ready | state |
 | --- | --- | --- | --- | --- | --- |
-| [`deploy`](deploy.md) | 2026-09-05 | 1 | 3 | 0 | up to date |
-| [`borrowed-windows`](borrowed-windows.md) | 2026-09-05 | 1 | 7 | 0 | up to date |
+| [`deploy`](deploy.md) | 2026-09-06 | 2 | 1 | 0 | up to date |
+| [`borrowed-windows`](borrowed-windows.md) | 2026-09-06 | 2 | 6 | 0 | up to date |
 | [`one-more-record`](one-more-record.md) | 2026-09-05 | 1 | 6 | 0 | up to date |
 | [`enrich`](enrich.md) | 2026-09-05 | 1 | 3 | 0 | up to date |
 
