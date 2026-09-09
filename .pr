@@ -1,1 +1,35 @@
-no draft yet - replace this file: line 1 becomes the PR title, the rest the body
+fonts/: commit the proofing set, each font with its license alongside
+
+Three fonts that were sitting untracked in `fonts/`, each committed together with the license
+text that came with it. `fonts/` is the proofing space — this is deliberately not `docs/fonts/`,
+which is the real set.
+
+| font | license alongside |
+|---|---|
+| `BLKCHCRY.TTF` | `BLACKCHA.readme.txt` — Black Chancery, 1991, autotraced from a public-domain bitmap font |
+| `Beyond Wonderland.ttf` | `Beyond Wonderland.readme.txt` — free for commercial use, donation to a koala hospital suggested |
+| `GroutpixFlow-Regular.ttf` | **none present** |
+
+## Why the license files come too
+
+The seven fonts already tracked in `fonts/` have no license text with them. That is the thing
+worth changing here, not the file count: a proofing space accumulates typefaces from many places,
+and the terms are only reconstructable while you still remember where each one came from. Kept
+next to the font, they survive the forgetting.
+
+`GroutpixFlow-Regular.ttf` has no accompanying license file. Committed anyway, because a proofing
+space is exactly where that is tolerable — but it is the one that would need its terms sourced
+before it could graduate to `docs/fonts/`.
+
+## What is deliberately not here
+
+**Adine Kirnberg** — it did not make the cut, so it is not in this commit. Worth recording why it
+would have needed a decision regardless: its license is the 1001Fonts FFC, which is free for
+commercial use but says the font *"may not be sold or published without written permission"* and
+is meant to travel as its original zip. This repository is public. Whether committing counts as
+publishing is a real question, and it is now moot.
+
+The two Kirnberg files are still untracked on disk — removing them is a `rm`, not a revert, so
+they were left alone.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
